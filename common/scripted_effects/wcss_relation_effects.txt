@@ -1,0 +1,171 @@
+﻿wcss_make_lover_or_lover_progress = {
+	if = {
+		limit = { 
+			NOT = { has_relation_lover = $CHARACTER$ }
+		}
+		save_temporary_scope_as = wcss_lover_progress_root
+		$CHARACTER$ = { save_temporary_scope_as = wcss_lover_progress_target }
+		if = {
+			limit = {
+				OR = {
+					root = scope:wcss_lover_progress_root
+					root = scope:wcss_lover_progress_target
+				}
+			}
+			custom_tooltip = wcss_make_lover_or_lover_progress_1st_tt
+		}
+		else = {
+			custom_tooltip = wcss_make_lover_or_lover_progress_3rd_tt
+		}
+		hidden_effect = {
+			random_list = {
+				50 = {
+					min = 5
+					add_character_flag = {
+						flag = wcss_effect_lover_outcome
+						days = 2
+					}
+					opinion_modifier = {
+						who = $CHARACTER$
+						opinion_target = this
+						multiplier = 0.3
+					}
+					compatibility_modifier = {
+						who = $CHARACTER$
+						compatibility_target = this
+						min = -20
+						max = 20
+						multiplier = 1.5
+					}
+					modifier = {
+						$CHARACTER$ = { num_of_relation_lover > 2 }
+						factor = 0.8
+					}
+				}
+				50 = {
+					min = 5
+					if = {
+						limit = {
+							has_relation_potential_lover = $CHARACTER$
+							can_set_relation_lover_trigger = { CHARACTER = $CHARACTER$ }
+						}
+						add_character_flag = {
+							flag = wcss_effect_lover_outcome
+							days = 2
+						}
+					}
+					else_if = {
+						limit = { 
+							can_set_relation_potential_lover_trigger = { CHARACTER = $CHARACTER$ }
+						}
+						add_character_flag = {
+							flag = wcss_effect_potential_lover_outcome
+							days = 2
+						}
+					}
+					else = {
+						add_character_flag = {
+							flag = wcss_effect_romance_outcome
+							days = 2
+						}				
+					}
+					opinion_modifier = {
+						who = $CHARACTER$
+						opinion_target = this
+						multiplier = -0.3
+					}
+					modifier = {
+						add = {
+							value = attraction
+							multiply = -0.3
+						}
+					}
+					modifier = {
+						has_trait = seducer
+						factor = 0
+					}
+				}
+			}
+		}
+	}
+	else = {
+		hidden_effect = {
+			add_character_flag = {
+				flag = wcss_effect_romance_outcome
+				days = 2
+			}
+		}
+	}
+}
+
+wcss_make_lover_or_lover_progress_effect = {
+	if = {
+		limit = { has_character_flag = wcss_effect_lover_outcome }
+		set_relation_lover = $CHARACTER$
+	}
+	else_if = {
+		limit = { has_character_flag = wcss_effect_potential_lover_outcome }
+		set_relation_potential_lover = $CHARACTER$
+		reverse_add_opinion = {
+			target = $CHARACTER$
+			modifier = romance_opinion
+			opinion = 20
+		}		
+	}
+	else_if = {
+		limit = { has_character_flag = wcss_effect_romance_outcome }
+		reverse_add_opinion = {
+			target = $CHARACTER$
+			modifier = romance_opinion
+			opinion = 20
+		}
+	}
+}
+
+wcss_make_friend_or_friend_progress = {
+	if = {
+		limit = { 
+			NOT = { has_relation_friend = $CHARACTER$ }
+		}
+		random_list = {
+			50 = {
+				show_chance = no
+				desc = wcss_make_friend_or_friend_progress.a.tt
+				opinion_modifier = {
+					who = $CHARACTER$
+					opinion_target = this
+					multiplier = 0.5
+				}
+				compatibility_modifier = {
+					who = $CHARACTER$
+					compatibility_target = this
+					min = -20
+					max = 20
+					multiplier = 2
+				}
+				set_relation_friend = $CHARACTER$
+			}
+			50 = {
+				show_chance = no
+				desc = wcss_make_friend_or_friend_progress.b.tt
+				opinion_modifier = {
+					who = $CHARACTER$
+					opinion_target = this
+					multiplier = -0.5
+				}
+				progress_towards_friend_effect = {
+					REASON = wcss_bonded_at_lesbian_orgy
+					CHARACTER = $CHARACTER$
+					OPINION = yes
+				}
+			}
+		}
+	}
+	else = {
+		reverse_add_opinion = {
+			target = $CHARACTER$
+			modifier = friendliness_opinion
+			opinion = 20
+		}
+	}
+}

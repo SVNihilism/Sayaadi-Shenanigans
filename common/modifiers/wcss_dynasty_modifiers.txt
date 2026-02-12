@@ -1,0 +1,4 @@
+﻿wcss_harem_modifier = {
+	icon = wcss_matriarch_positive
+	opinion_of_female_rulers = 10
+}

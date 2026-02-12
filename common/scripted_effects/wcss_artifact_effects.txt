@@ -1,0 +1,28 @@
+﻿create_guldan_skull_artifact_effect = {
+	# Get the character the artifact is being made for.
+	$OWNER$ = { save_scope_as = owner }
+
+	create_artifact = {
+		name = guldan_skull
+		description = guldan_skull_desc
+		template=general_unique_template
+		type = miscellaneous
+		visuals = guldan_skull
+		modifier = guldan_skull_modifier
+		#wealth = scope:wealth
+		#quality = scope:quality
+		rarity=illustrious
+		decaying = no
+		history = {
+			type = created_before_history
+		}
+		save_scope_as = newly_created_artifact
+	}
+	scope:newly_created_artifact = {
+		set_variable=guldan_skull
+		equip_artifact_to_owner = yes
+	}
+}
+
+
+

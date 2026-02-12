@@ -1,0 +1,27 @@
+pdxmesh = {
+	name = "void_robes_mesh"
+	file = "void_robes.mesh"
+
+
+
+
+
+	meshsettings = {
+		name = "void_robesShape"
+		index = 0
+		texture_diffuse = "void_robes_diff.dds"
+		texture_normal = "default_yellow_normal.dds"
+		texture_specular = "dress_properties.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	} 
+}
+
+entity = {
+	name = "void_robes_01_entity"
+	pdxmesh = "void_robes_mesh"
+
+
+
+}
+

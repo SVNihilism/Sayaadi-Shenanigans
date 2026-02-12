@@ -1,0 +1,5 @@
+﻿guldan_skull = {
+	icon = "guldan_skull.dds"
+	asset = ep1_generic_jewelry_01_a_entity
+	pedestal = "short_pillow"
+}

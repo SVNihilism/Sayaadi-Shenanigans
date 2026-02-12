@@ -1,0 +1,96 @@
+﻿namespace = WCSS
+
+#########################################
+#
+#	Sayaadi Shenanigans events - CK3 Edition
+#
+#########################################
+
+# Setup the associated story
+WCSS.1 = {
+	scope = none
+	hidden = yes
+
+	trigger = {
+		current_date >= 583.1.1
+		nazri_start_trigger = no
+	}
+
+	immediate = {
+		add_to_global_variable_list = {
+			name = wc_events_happened
+			target = flag:nazri_start
+		}
+		character:450003 = {
+			create_story = story_sayaadi
+			save_scope_as = story_owner_sayaadi
+		}
+	}
+}
+
+# Starts the Intro
+WCSS.2 = {
+	type = character_event
+	title = WCSS_1_TITLE
+	desc = WCSS_1_DESC
+	theme = war
+	override_background = {
+		reference = wc_background_explosion
+	}
+	left_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_cheer_2
+	}
+	immediate = {
+		hidden_effect = { 
+			spawn_army = {
+			men_at_arms = {
+				type = infernal
+				stacks = 30
+			}
+			location = capital_province
+			origin = capital_province
+		}
+			appoint_court_position = { recipient = character:450004 court_position = second_camp_officer }
+		}
+	}
+	option = {
+		story_1_effect = yes
+		name = {
+			text = {
+				desc = WCSS_1_OPT
+			}
+		}
+	}
+}
+WCSS.3 = {
+	type = character_event
+	title = WCSS_2_TITLE
+	desc = WCSS_2_DESC
+	theme = war
+	override_background = {
+		reference = wc_background_explosion
+	}
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = worry
+	}
+	option = {
+		trigger_event = {
+			id = draka.0001
+			days = 1 }
+		name = {
+			text = {
+				desc = WCSS_2_OPT
+			}
+		}
+	}
+}

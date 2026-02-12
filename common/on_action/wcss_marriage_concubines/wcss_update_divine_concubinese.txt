@@ -1,0 +1,25 @@
+﻿wcss_remove_divine_concubines = {
+	effect = {
+		if = {
+			limit = {
+				is_female = yes
+				has_character_modifier = wcss_lesbian_union_concubines
+				scope:concubine = { is_female = yes }
+			}
+			remove_character_modifier = wcss_lesbian_union_concubines
+		}
+	}
+}
+
+wcss_add_divine_concubines = {
+	effect = {
+		if = {
+			limit = {
+				is_female = yes
+				scope:concubine = { is_female = yes }
+				faith = { has_doctrine_parameter = wcss_lesbian_love_parameter }
+			}
+			add_character_modifier = wcss_lesbian_union_concubines
+		}
+	}
+}

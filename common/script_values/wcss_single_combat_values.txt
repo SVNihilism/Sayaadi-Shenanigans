@@ -1,0 +1,10 @@
+﻿
+
+combat_move_lash_of_pain_value = {
+	value = prowess
+	# Every 2pts of prowess gives a point of dread.
+	divide = 2
+	# Up to a sensible maximum.
+	max = 10
+}
+

@@ -1,0 +1,44 @@
+﻿#Warcraft
+harem_decision = {
+	decision_group_type = major
+	picture = { 
+		reference = "gfx/interface/illustrations/decisions/harem.dds"
+	}
+	desc = harem_decision_desc
+	selection_tooltip = harem_decision_tooltip
+
+	is_shown = {
+		has_character_flag = build_harem
+	}
+
+	cost = { gold = 2000 }
+
+	is_valid = {
+		root.faith = {
+			has_doctrine = wcss_doctrine_sapphic_exaltation
+		}
+	}
+		
+	is_valid_showing_failures_only = {
+
+	}
+
+	effect = {
+		set_variable = harem_building
+		remove_character_flag = build_harem
+		custom_tooltip = harem_creation
+		custom_tooltip = harem_activity 
+		set_variable = {
+			name = harem_cultivator
+			value = character:60002 
+		}
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

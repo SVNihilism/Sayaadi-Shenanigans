@@ -1,0 +1,9 @@
+﻿texticon = {
+	icon = souls_icon
+	iconsize = {
+		texture = "gfx/interface/icons/icon_souls.dds"
+		size = { 25 25 }
+		offset = { 0 6 }
+		fontsize = 16
+	}
+}

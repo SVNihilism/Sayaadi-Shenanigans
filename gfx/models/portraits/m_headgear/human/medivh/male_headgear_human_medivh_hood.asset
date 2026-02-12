@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "male_headgear_human_medivh_hood_mesh"
+	file = "male_headgear_human_medivh_hood.mesh"
+
+	meshsettings = {
+		name = "male_headgear_human_medivh_hoodShape"
+		index = 0
+		texture_diffuse = "medivh_diff.dds"
+		texture_normal = "medivh_norm.dds"
+		texture_specular = "medivh_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "male_headgear_human_medivh_hood_entity"
+	pdxmesh = "male_headgear_human_medivh_hood_mesh"
+	
+}

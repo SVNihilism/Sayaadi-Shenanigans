@@ -1,0 +1,140 @@
+﻿# Beautiful courtesan
+fake_lianne = {
+	age = 40 
+	gender_female_chance = 100
+	dynasty = none
+	random_traits = no
+	faith = this.faith
+	culture = this.faith
+	diplomacy = { min_template_decent_skill max_template_decent_skill }
+	martial = { min_template_low_skill max_template_average_skill }
+	stewardship = { min_template_average_skill max_template_average_skill }
+	intrigue = { min_template_average_skill max_template_decent_skill }
+	learning = { min_template_low_skill max_template_average_skill }
+	prowess = { min_template_low_skill max_template_average_skill }
+	#Genetic
+	
+	after_creation = { # After creation, make them a bit more interesting
+		copy_inheritable_appearance_from = character:60002
+		copy_traits = character:60002
+		change_first_name = Lianne
+	}
+}
+
+# Clever courtesan
+wcss_clever_courtesan = {
+	age = { 200 300 }
+	gender_female_chance = 100
+	dynasty = none
+	random_traits = no
+	faith = this.faith
+	culture = culture:sayaadi
+	diplomacy = { min_template_decent_skill max_template_decent_skill }
+	martial = { min_template_low_skill max_template_average_skill }
+	stewardship = { min_template_average_skill max_template_average_skill }
+	intrigue = { min_template_average_skill max_template_decent_skill }
+	learning = { min_template_average_skill max_template_average_skill }
+	prowess = { min_template_low_skill max_template_average_skill }
+	#Genetic
+	random_traits_list = {
+		count = 1
+		beauty_good_1 = {}
+		beauty_good_2 = {}
+		beauty_good_3 = {}
+	}
+	random_traits_list = {
+		count = { 0 1 }
+		intellect_good_2 = {}
+		intellect_good_1 = {}
+	}
+	random_traits_list = {
+		count = { 1 }
+		being_demon = {}
+	}
+
+	#Personality trait 1 (main)
+	random_traits_list = {
+		count = 1
+		lustful = {}
+	}
+	#Personality trait 2-3
+	random_traits_list = {
+		count = 2
+		gregarious = {}
+		brave = {}
+		craven = {}
+		gluttonous = {}
+		temperate = {}
+		greedy = {}
+		generous = {}
+		lazy = {}
+		diligent = {}
+		wrathful = {}
+		calm = {}
+		patient = {}
+		impatient = {}
+		arbitrary = {}
+		stubborn = {}
+		callous = {}
+	}
+	#Education Trait
+	random_traits_list = {
+		count = 1
+		education_intrigue_3 = {}
+		education_intrigue_4 = {}
+	}
+	#Other Traits
+	random_traits_list = {
+		count = { 0 1 }
+		athletic = {}
+	}
+	random_traits_list = {
+		count = { 0 1 }
+		shrewd = {}
+	}
+	after_creation = { # After creation, make them a bit more interesting
+		trigger_race_giving_no_gene_effect = yes
+		if = {
+			limit = { number_of_personality_traits < personality_trait_standard }
+			if = {
+				limit = {
+					NOT = { has_trait = deceitful }
+				}
+				add_trait = deceitful
+			}
+			else_if = {
+				limit = {
+					NOT = { has_trait = lustful }
+				}
+				add_trait = gregarious
+			}
+			else_if = {
+				limit = {
+					NOT = { has_trait = ambitious }
+				}
+				add_trait = ambitious
+			}
+			else = { add_trait = vengeful }
+		}
+		if = {
+			limit = {
+				NOR = {
+					has_sexuality = bisexual
+					has_sexuality = homosexual
+				}
+			}
+			random_list = {
+				1 = { set_sexuality = bisexual }
+				4 = { set_sexuality = homosexual }
+			}
+		}
+		random = {
+			chance = 10
+			give_deviant_secret_or_trait_effect = yes
+		}
+		random = {
+			chance = 50
+			set_to_lowborn = yes
+		}
+	}
+}

@@ -1,0 +1,262 @@
+﻿wcss_lesbian_marriage_script_value = { # Used to determine attractiveness of candidates for lesbian marriage
+	value = 0
+	
+	if = { # Simplified alliance factors.
+		limit = {
+			NOR = {
+				is_allied_to = scope:wcss_root
+				tier_difference = {
+					target = scope:wcss_root
+					value <= 3
+				}
+			}
+			OR = {
+				AND = {
+					exists = liege
+					yields_alliance = {
+						candidate = scope:wcss_root
+						target = liege
+						target_candidate = this
+					}
+				}
+				yields_alliance = {
+					candidate = scope:wcss_root
+					target = this
+					target_candidate = this
+				}				
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					scope:wcss_root = {
+						ai_diplomacy_stance = {
+							target = prev
+							stance = neutral
+						}
+					}
+					scope:wcss_root = {
+						ai_diplomacy_stance = {
+							target = prev
+							stance = threat
+						}
+					}		
+				}
+			}
+			add = 40
+		}
+		else_if = {
+			limit = {
+				scope:wcss_root = {
+					ai_diplomacy_stance = {
+						target = prev
+						stance = friend
+					}
+				}
+			}
+			add = 100
+		}
+		else_if = {
+			limit = {
+				scope:wcss_root = {
+					ai_diplomacy_stance = {
+						target = prev
+						stance = enemy
+					}
+				}
+			}
+			add = -100
+		}
+		else = { add = 0 }
+	}
+
+	if = { # Tier differences.
+		limit = {
+			is_ruler = yes
+			scope:wcss_root = { is_ruler = yes }
+		}
+		add = {
+			value = this.highest_held_title_tier
+			subtract = scope:wcss_root.highest_held_title_tier
+			multiply = 30
+		}
+	}
+
+	if = { # Opinion modifiers
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value < -20
+				}
+			}
+		}
+		add = -100
+	}
+	else_if = {
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value < 0
+				}
+			}			
+		}
+		subtract = 80
+	}
+	else_if = {
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value >= 100
+				}
+			}			
+		}
+		add = 200
+	}
+	else_if = {
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value > 80
+				}
+			}			
+		}
+		add = 100
+	}
+	else_if = {
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value > 50
+				}
+			}			
+		}
+		add = 50
+	}
+	else_if = {
+		limit = {
+			scope:wcss_root = {
+				opinion = {
+					target = prev
+					value > 20
+				}
+			}			
+		}
+		add = 30
+	}
+
+	if = { # Dynasty prestige concerns
+		limit = { is_lowborn = yes }
+		add = -25
+	}
+	else_if = {
+		limit = { 
+			exists = dynasty
+			NOT = { dynasty = { dynasty_prestige_level = 1 } } #Would equal a value of 0, so we hide it			
+		}
+		add = {
+			value = dynasty.dynasty_prestige_level
+			multiply = 5
+			subtract = 5 #At 0 dynasty prestige level, there should be a penalty
+		}
+	}
+
+	if = { # Faith hostility
+		limit = {
+			faith = {
+				faith_hostility_level = {
+					target = scope:wcss_root.faith
+					value > faith_fully_accepted_level
+				}
+			}
+		}
+		add = {
+			value = -10
+			if = {
+				limit = {
+					faith = {
+						faith_hostility_level = {
+							target = scope:wcss_root.faith
+							value > faith_astray_level
+						}
+					}
+				}
+				subtract = 15
+			}
+		}
+	}
+
+	if = { # Family concerns
+		limit = {
+			NOT = {
+				faith = {
+					faith_allows_marriage_consanguinity_trigger = { CHARACTER_1 = scope:wcss_root CHARACTER_2 = this }
+				}
+			}
+		}
+		add = -1000
+	}
+	else_if = {
+		limit = { 
+			is_close_family_of = scope:wcss_root
+			scope:wcss_root = {
+				faith = { has_doctrine_parameter = divine_marriage_piety_gain_active }
+			}
+		}
+	}
+
+	if = { # Inspiration
+		limit = { 
+			exists = inspiration
+			has_completed_inspiration = no
+		}
+		add = -100
+	}
+
+	if = { # Relations
+		limit = { has_relation_soulmate = scope:wcss_root }
+		add = 200
+	}
+	else_if = {
+		limit = { has_relation_lover = scope:wcss_root }
+		add = 100
+	}
+	if = {
+		limit = { has_relation_best_friend = scope:wcss_root }
+		add = 100
+	}
+	else_if = {
+		limit = { has_relation_friend = scope:wcss_root }
+		add = 50
+	}
+
+	if = { # Less likely to marry own landed vassals
+		limit = {
+			exists = liege
+			is_landed = yes
+			liege = scope:wcss_root
+		}
+		add = -50
+	}
+
+	if = { # Less likely to marry unlanded heirs -- this works better if they get land first
+		limit = {
+			is_landed = no
+			exists = liege
+			player_heir_position = { #0, 1, 2 = the first three player heirs in succession line.
+				value <= 2
+				target = this.liege
+			}
+		}
+		add = -25
+	}
+
+	if = { # Prefer unlanded spouses (multiplier so put this on the end)
+		limit = { is_landed = no }
+		multiply = 1.5
+	}
+}

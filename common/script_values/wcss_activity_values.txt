@@ -1,0 +1,598 @@
+﻿######################
+# harem STUFF
+######################
+wcss_harem_cooldown_time = {
+	value = 5
+	if = {
+		limit = {
+			root.culture = {
+				has_cultural_parameter = more_frequent_feasts
+			}
+		}
+		multiply = 0.5
+	}
+}
+
+wcss_harem_activity_cost = {
+	value = 0
+	add = standard_activity_base_cost
+}
+
+wcss_harem_normal_option_cost = {
+	value = 10
+	#multiply = activity_cost_scale_by_tier
+	#multiply = activity_cost_scale_by_era
+}
+
+wcss_harem_good_option_cost = {
+	value = 35
+	#multiply = activity_cost_scale_by_tier
+	#multiply = activity_cost_scale_by_era
+}
+
+wcss_harem_activity_cost_discount_max = {
+	value = 0.5
+}
+wcss_harem_activity_cost_discount_max_value = {
+	value = wcss_harem_activity_cost_discount_max
+	subtract = 1
+}
+wcss_harem_activity_cost_discount_medium = {
+	value = 0.7
+}
+wcss_harem_activity_cost_discount_medium_value = {
+	value = wcss_harem_activity_cost_discount_medium
+	subtract = 1
+}
+wcss_harem_activity_cost_discount_min = {
+	value = 0.9
+}
+wcss_harem_activity_cost_discount_min_value = {
+	value = wcss_harem_activity_cost_discount_min
+	subtract = 1
+}
+
+## Lifestyle values
+wcss_harem_rank_up_1_threshold = 3
+wcss_harem_rank_up_2_threshold = 5
+wcss_harem_rank_up_3_threshold = 7
+
+## AI Option Weights
+wcss_activity_option_likes_extravagent_luxuries = {
+	# AI Values.
+	## Sociability weights us up a little, to make our guests comfortable.
+	add = {
+		value = ai_sociability
+		multiply = 0.25
+		desc = debug_gui.activity_weight.ai_value.sociability
+	}
+	# Traits.
+	## Personality traits.
+	### Arrogant loves showing off.
+	if = {
+		limit = { has_trait = arrogant }
+		add = {
+			value = 150
+			desc = debug_gui.activity_weight.trait.arrogant
+		}
+	}
+	### Gregarious quite likes showing off.
+	if = {
+		limit = { has_trait = gregarious }
+		add = {
+			value = 50
+			desc = debug_gui.activity_weight.trait.gregarious
+		}
+	}
+	### Shy prefers not to show off.
+	if = {
+		limit = { has_trait = shy }
+		add = {
+			value = -50
+			desc = debug_gui.activity_weight.trait.shy
+		}
+	}
+	### Humble hates showing off.
+	if = {
+		limit = { has_trait = humble }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.humble
+		}
+	}
+	### Lustful likes to be comfortable when lovin'.
+	if = {
+		limit = { has_trait = lustful }
+		add = {
+			value = 50
+			desc = debug_gui.activity_weight.trait.lustful
+		}
+	}	
+	## Stress traits.
+	if = {
+		limit = { has_trait = rakish }
+		add = {
+			value = 100
+		}
+	}
+	if = {
+		limit = { has_trait = reclusive }
+		add = {
+			value = -100
+		}
+	}		
+	## Lifestyle traits.
+	### Reveler loves extravagent parties.
+	if = {
+		limit = { has_trait = lifestyle_reveler }
+		add = {
+			value = 100
+		}
+	}
+	### Debauchess delights in luxury.
+	if = {
+		limit = { has_trait = witch }
+		add = {
+			value = 100
+		}
+	}
+}
+
+wcss_activity_option_likes_fewer_luxuries_option_value = {
+	# AI Values.
+	## None needed here.
+	# Traits.
+	## Personality traits.
+	### Humble hates showing off.
+	if = {
+		limit = { has_trait = humble }
+		add = {
+			value = 150
+			desc = debug_gui.activity_weight.trait.humble
+		}
+	}
+	### Shy prefers not to show off.
+	if = {
+		limit = { has_trait = shy }
+		add = {
+			value = 50
+			desc = debug_gui.activity_weight.trait.shy
+		}
+	}
+	### Gregarious quite likes showing off.
+	if = {
+		limit = { has_trait = gregarious }
+		add = {
+			value = -50
+			desc = debug_gui.activity_weight.trait.gregarious
+		}
+	}
+	### Arrogant loves showing off.
+	if = {
+		limit = { has_trait = arrogant }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.arrogant
+		}
+	}
+	### Lustful likes to be comfortable when lovin'.
+	if = {
+		limit = { has_trait = lustful }
+		add = {
+			value = -50
+			desc = debug_gui.activity_weight.trait.lustful
+		}
+	}
+	## Stress traits.
+	if = {
+		limit = { has_trait = rakish }
+		add = {
+			value = -100
+		}
+	}
+	if = {
+		limit = { has_trait = reclusive }
+		add = {
+			value = 100
+		}
+	}	
+	## Lifestyle traits.
+	### Reveler loves extravagent parties.
+	if = {
+		limit = { has_trait = lifestyle_reveler }
+		add = {
+			value = -100
+		}
+	}
+	### Debauchess delights in luxury.
+	if = {
+		limit = { has_trait = witch }
+		add = {
+			value = -100
+		}
+	}
+}
+
+wcss_activity_option_desires_good_entertainment = {
+	# AI Values.
+	## Sociability weights us up, we want good company.
+	add = {
+		value = ai_sociability
+		multiply = 1
+		desc = debug_gui.activity_weight.ai_value.sociability
+	}
+	## Boldness weights up too, since we can divert attention to our showy entertainment.
+	add = {
+		value = ai_boldness
+		multiply = 1
+		desc = debug_gui.activity_weight.ai_value.boldness
+	}
+	# Traits.
+	## Personality traits.
+	### Gregarious quite likes showing off.
+	if = {
+		limit = { has_trait = gregarious }
+		add = {
+			value = 150
+			desc = debug_gui.activity_weight.trait.gregarious
+		}
+	}
+	### Shy prefers not to show off.
+	if = {
+		limit = { has_trait = shy }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.shy
+		}
+	}
+	### Lustful likes to be comfortable when lovin'.
+	if = {
+		limit = { has_trait = lustful }
+		add = {
+			value = 150
+			desc = debug_gui.activity_weight.trait.lustful
+		}
+	}
+	### Chaste characters would prefer not.
+	if = {
+		limit = { has_trait = chaste }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.chaste
+		}
+	}
+	## Stress traits.
+	### Courtesans are a rakish character's favorite treat.
+	if = {
+		limit = { has_trait = rakish }
+		add = {
+			value = 150
+		}
+	}
+	### Recluses don't want to invite a lot of people.
+	if = {
+		limit = { has_trait = reclusive }
+		add = {
+			value = -150
+		}
+	}		
+	## Lifestyle traits.
+	### Reveler loves more revelers.
+	if = {
+		limit = { has_trait = lifestyle_reveler }
+		add = {
+			value = 100
+		}
+	}
+	### Debauchess loves more lovers.
+	if = {
+		limit = { has_trait = witch }
+		add = {
+			value = 100
+		}
+	}
+}
+
+wcss_activity_option_desires_simple_entertainment = { # Because of the risks of this, we don't want the AI to select it too often.
+	# AI Values.
+	## Sociability weights us up, we want good company.
+	add = {
+		value = ai_sociability
+		multiply = -1
+		desc = debug_gui.activity_weight.ai_value.sociability
+	}
+	## Boldness weights up too, since we can divert attention to our showy entertainment.
+	add = {
+		value = ai_boldness
+		multiply = -1
+		desc = debug_gui.activity_weight.ai_value.boldness
+	}
+	# Skills
+	## Learned characters know about the risk of STD transmission and don't want to cheap out.
+	add = {
+		value = learning
+		multiply = -5 # Learning 20 is -100.
+	}
+	# Traits.
+	## Personality traits.
+	### Gregarious quite likes showing off.
+	if = {
+		limit = { has_trait = gregarious }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.gregarious
+		}
+	}
+	### Shy prefers not to show off.
+	if = {
+		limit = { has_trait = shy }
+		add = {
+			value = 100
+			desc = debug_gui.activity_weight.trait.shy
+		}
+	}
+	### Lustful likes quite likes having courtesans around.
+	if = {
+		limit = { has_trait = lustful }
+		add = {
+			value = -150
+			desc = debug_gui.activity_weight.trait.lustful
+		}
+	}
+	### Chaste characters would prefer not.
+	if = {
+		limit = { has_trait = chaste }
+		add = {
+			value = 150
+			desc = debug_gui.activity_weight.trait.chaste
+		}
+	}
+	## Stress traits.
+	### Courtesans are a rakish character's favorite treat.
+	if = {
+		limit = { has_trait = rakish }
+		add = {
+			value = -150
+		}
+	}
+	### Recluses don't want to invite a lot of people.
+	if = {
+		limit = { has_trait = reclusive }
+		add = {
+			value = 150
+		}
+	}		
+	## Lifestyle traits.
+	### Reveler loves more revelers.
+	if = {
+		limit = { has_trait = lifestyle_reveler }
+		add = {
+			value = -100
+		}
+	}
+	### Debauchess loves more lovers.
+	if = {
+		limit = { has_trait = witch }
+		add = {
+			value = -100
+		}
+	}
+}
+
+# Amenities values
+# These range from 2-10 essentially. Instead of checking only a single court amenity, all of them count for the lesbian orgy.
+wcss_servants_food_value = {
+	value = 0 # Combines court_food_quality and court_servants
+	if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 5 }
+		}
+		add = 5
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 4 }
+		}
+		add = 4		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 3 }
+		}
+		add = 3		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 2 }
+		}
+		add = 2		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 1 }
+		}
+		add = 1		
+	}
+
+	if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_servants value >= 5 }
+		}
+		add = 5
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_servants value >= 4 }
+		}
+		add = 4		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_servants value >= 3 }
+		}
+		add = 3		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_servants value >= 2 }
+		}
+		add = 2		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_servants value >= 1 }
+		}
+		add = 1		
+	}
+}
+
+wcss_lodging_fashion_value = {
+	value = 0 # Combines court_lodging_standards and court_fashion
+	if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_lodging_standards value >= 5 }
+		}
+		add = 5
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_lodging_standards value >= 4 }
+		}
+		add = 4		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_lodging_standards value >= 3 }
+		}
+		add = 3		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_lodging_standards value >= 2 }
+		}
+		add = 2		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_lodging_standards value >= 1 }
+		}
+		add = 1		
+	}
+
+	if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_fashion value >= 5 }
+		}
+		add = 5
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_fashion value >= 4 }
+		}
+		add = 4		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_fashion value >= 3 }
+		}
+		add = 3		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_fashion value >= 2 }
+		}
+		add = 2		
+	}
+	else_if = {
+		limit = { 
+			has_royal_court = yes
+			amenity_level = { type = court_fashion value >= 1 }
+		}
+		add = 1		
+	}
+}
+
+wcss_court_musician_good_bonus_value = { # Needs scope:wcss_harem_court_musician
+	value = 20
+	if = {
+		limit = { 
+			scope:wcss_harem_court_musician.culture = { has_cultural_parameter = characters_are_better_court_musicians }
+		}
+		add = 10
+	}
+	if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 5 }
+		add = 15
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 3 }
+		add = 10
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position < 3 }
+		add = 5
+	}
+}
+
+wcss_court_musician_medium_bonus_value = { # Needs scope:wcss_harem_court_musician
+	value = 15
+	if = {
+		limit = { 
+			scope:wcss_harem_court_musician.culture = { has_cultural_parameter = characters_are_better_court_musicians }
+		}
+		add = 10
+	}
+	if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 5 }
+		add = 15
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 3 }
+		add = 10
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position < 3 }
+		add = 5
+	}
+}
+
+wcss_court_musician_bad_bonus_value = { # Needs scope:wcss_harem_court_musician
+	value = 10
+	if = {
+		limit = { 
+			scope:wcss_harem_court_musician.culture = { has_cultural_parameter = characters_are_better_court_musicians }
+		}
+		add = 10
+	}
+	if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 5 }
+		add = 15
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position >= 3 }
+		add = 10
+	}
+	else_if = {
+		limit = { scope:wcss_harem_court_musician.aptitude:court_musician_court_position < 3 }
+		add = 5
+	}
+}

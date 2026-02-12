@@ -1,0 +1,506 @@
+﻿set_story_characters_effect = {
+	# scopes
+	character:450003 = {
+		save_scope_as = protagonist
+	}
+	character:450004 = {
+		save_scope_as = sister
+	}
+}
+
+set_characters_effect = {
+	character:10020 = {
+		save_scope_as = draka
+	}
+	character:10019 = {
+		save_scope_as = durotan
+	}
+	character:10021 = {
+		save_scope_as = thrall
+	}
+	character:53001 = {
+		save_scope_as = slaver
+	}
+	character:10800 = {
+		save_scope_as = father
+	}
+	character:10801 = {
+		save_scope_as = mother
+	}
+	character:450004 = {
+		save_scope_as = sister
+	}
+	character:48081 = {
+		save_scope_as = jaina
+	}
+	character:60002 = {
+		save_scope_as = lianne
+	}
+	character:63173 = {
+		save_scope_as = fake_lianne
+	}
+	character:60001 = {
+		save_scope_as = king
+	}
+	character:60003 = {
+		save_scope_as = arthas
+	}
+	character:60004 = {
+		save_scope_as = calia
+	}
+}
+
+harem_test_effect = {
+	add_to_variable_list = {
+		name = harem_dragon
+		target = character:62001 #ysera
+	}
+	add_to_variable_list = {
+		name = harem_dragon
+		target = character:62201 #sinthara
+	}
+	add_to_variable_list = {
+		name = harem_dragon
+		target = character:62203 #onyxia
+	}
+	add_to_variable_list = {
+		name = harem_dragon
+		target = character:62400 #alex
+	}
+	add_to_variable_list = {
+		name = harem_royalty
+		target = character:66001 #talanji
+	}
+	add_to_variable_list = {
+		name = harem_royalty
+		target = character:60002 #lianne
+	}
+	add_to_variable_list = {
+		name = harem_mortal
+		target = character:10020 #draka
+	}
+	add_to_variable_list = {
+		name = harem_mortal
+		target = character:48081 #jaina
+	}
+	add_to_variable_list = {
+		name = harem_royalty
+		target = character:60004 #calia
+	}
+	add_to_variable_list = {
+		name = harem_mortal
+		target = character:10620 #garona
+	}
+	set_variable = {
+		name = harem_leader
+		value = character:450003 #nazri
+	}
+	add_to_variable_list = {
+		name = harem_elf
+		target = character:42076 #sylvanas
+	}
+	add_to_variable_list = {
+		name = harem_elf
+		target = character:42086 #allerria
+	}
+	add_to_variable_list = {
+		name = harem_elf
+		target = character:42087 #vereesa
+	}
+	add_to_variable_list = {
+		name = harem_mortal
+		target = character:60572 #whitemane
+	}
+	add_to_variable_list = {
+		name = harem_elf
+		target = character:340003 #tyrande
+	}
+	add_to_variable_list = {
+		name = harem_elf
+		target = character:340021 #maeve
+	}
+}
+
+# intro
+explosion_effect = {
+	scope:protagonist = {
+		trigger_event = WCSS.2
+	}
+}
+
+story_1_effect = {
+	trigger_event = WCSS.3
+	hidden_effect = {
+		character:450003 = { set_relation_twin_sister = character:450004 }
+		character:450004 = { set_relation_twin_sister = character:450003 }
+		add_perk = truth_is_relative_perk
+		add_perk = digging_for_dirt_perk
+		add_perk = kidnapper_perk
+		change_government = tribal_government
+		every_courtier = { 
+			add_character_modifier = charmed
+		} 
+		character:450004 = { remove_character_modifier = charmed }
+	}
+}
+
+story_2_effect = {
+	trigger_event = draka.0001
+}
+
+draka_story_1_effect = {
+	trigger_event = draka.0003
+}
+
+harem_character_effect = {
+	add_character_flag = harem_character 
+	add_character_modifier = heroine
+}
+
+wcss_drain_life_effect = {
+	scope:recipient = { add_character_modifier = { modifier = fel_corruption } }
+	scope:actor = { 
+		change_variable = {
+			name = soulshards
+			add = 1
+		}
+	}
+}
+
+wcss_fel_infusion_effect = {
+
+}
+
+wcss_innovation_1_effect = {
+	root.culture = { get_all_innovations_from = culture:frostwolf }
+}
+
+draka_release_effect = {
+	scope:draka = {
+		release_from_prison = yes
+	}
+}
+
+thrall_slavery_effect = {
+	character:53001 = {
+		imprison = {
+			target = scope:thrall 
+			type = dungeon
+		}
+		add_courtier = scope:thrall
+	}
+	scope:thrall = { 				
+		change_first_name = Thrall
+		set_father = scope:father
+		set_mother = scope:mother
+		every_claim = {
+			explicit = yes
+			limit = {
+				save_temporary_scope_as = temp_claim
+				OR = {
+					holder = scope:thrall
+					AND = {
+						exists = holder
+						NOT = { prev = { target_is_liege_or_above = scope:thrall } }
+						holder = { target_is_liege_or_above = scope:thrall }
+					}
+					scope:thrall = {
+						any_held_title = {
+							is_de_jure_liege_or_above_target = scope:temp_claim
+						}
+					}
+				}
+			}
+			scope:thrall = { remove_claim = prev }
+		}
+		
+	}
+}
+
+draka_complete_effect = {
+	scope:durotan = { 		
+		death = {
+		death_reason = death_duel
+		killer = scope:draka
+		}
+	}
+	root = { marry = scope:draka }
+	add_to_variable_list = {
+		name = harem_mortal
+		target = scope:draka
+	}
+}
+
+calia_complete_effect = {
+	character:60004 = {
+		add_character_modifier = soul_link
+		add_character_modifier = pact_bound	
+	}
+	character:60004 = {
+		break_betrothal = character:58012
+	}
+	marry = character:60004
+	add_courtier = character:60004
+	add_to_variable_list = {
+		name = harem_royalty
+		target = character:60004
+	}
+}
+
+jaina_complete_effect = {
+	character:48081 = {
+		add_character_modifier = soul_link
+		add_character_modifier = pact_bound	
+	}
+	marry = character:48081
+	add_courtier = character:48081
+	add_to_variable_list = {
+		name = harem_mortal
+		target = character:48081
+	}
+	character:48081 = {
+		every_claim = {
+			explicit = yes
+			remove_claim = prev
+		}
+	}
+}
+
+duel_test = {
+	configure_start_single_combat_effect = {
+			SC_INITIATOR = character:450003
+			SC_ATTACKER = character:450003
+			SC_DEFENDER = character:60560
+			FATALITY = always
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = wcss_duel.0001
+			INVALIDATION_EVENT = fp1_tbc.0021
+		}
+}
+
+culture_upgrade_1 = {
+	set_culture = culture:sayaadi_2
+	hidden_effect = {
+		every_living_character = {
+			limit = { has_culture = culture:sayaadi_1 }
+			set_culture = culture:sayaadi_2
+		}
+		every_county_province = {
+			limit = { has_culture = culture:sayaadi_1 }
+			set_culture = culture:sayaadi_2
+		}
+	}
+}
+
+culture_upgrade_2 = {
+	set_culture = culture:sayaadi_3
+	hidden_effect = {
+		every_living_character = {
+			limit = { has_culture = culture:sayaadi_2 }
+			set_culture = culture:sayaadi_3
+		}
+		every_county_province = {
+			limit = { has_culture = culture:sayaadi_2 }
+			set_culture = culture:sayaadi_3
+		}
+	}
+}
+
+
+lianne_complete_effect = {
+	character:60002 = { 
+		every_claim = {
+			explicit = yes
+			remove_claim = prev
+		}
+		divorce = character:60001
+		remove_relation_lover = character:60001
+		remove_relation_ward = character:60004
+		remove_relation_ward = character:60003
+		depose = yes
+	}
+	create_character = {
+		template = fake_lianne
+		location = title:c_solliden.title_province
+		dynasty = none
+		culture = scope:lianne.culture
+		faith = scope:lianne.culture
+		save_scope_as = fake_lianne
+	}
+	
+	scope:king = { marry = scope:fake_lianne }
+	scope:arthas = { set_mother = scope:fake_lianne }
+	scope:calia = { set_mother = scope:fake_lianne }
+	scope:fake_lianne = {
+		death = { death_reason = death_assassinated_by_soldiers }
+	}
+	dynasty = {
+		add_dynasty_modifier = { modifier = wcss_harem_modifier }
+	}
+	add_to_variable_list = {
+		name = harem_royalty
+		target = scope:lianne 
+	}
+	add_courtier = character:60002
+}
+
+lianne_complete_effect_2 = {
+	root = { marry = scope:lianne }
+}
+
+lianne_test_effect = {
+	character:60002 = { 
+		every_claim = {
+			explicit = yes
+			remove_claim = prev
+		}
+		divorce = character:60001
+		depose = yes
+	}
+	marry = character:60002
+}
+
+sayaadi_creation_effect = {
+	save_scope_as = original
+	if = {
+		limit = {
+			has_culture = culture:sayaadi_1
+			NOR = { 
+				has_character_flag = lore_character
+				has_character_flag = exists
+				is_adult = no
+			}
+		}
+		random_list = {
+			100 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_troll
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_troll
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = troll
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:troll 
+				change_first_name = scope:troll
+				add_character_flag = exists
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_culture = culture:sayaadi_2
+			NOR = { 
+				has_character_flag = lore_character
+				has_character_flag = exists
+				is_adult = no
+			}
+		}
+		random_list = {
+			50 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_troll
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_troll
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = troll
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:troll 
+				change_first_name = scope:troll
+				add_character_flag = exists
+
+			}
+			50 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_orc
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_orc
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = orc
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:orc
+				change_first_name = scope:orc
+				add_character_flag = exists
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_culture = culture:sayaadi_3
+			NOR = { 
+				has_character_flag = lore_character
+				has_character_flag = exists
+				is_adult = no
+			}
+		}
+		random_list = {
+			33 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_troll
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_troll
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = troll
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:troll 
+				change_first_name = scope:troll
+				add_character_flag = exists
+
+			}
+			33 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_orc
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_orc
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = orc
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:orc
+				change_first_name = scope:orc
+				add_character_flag = exists
+			}
+			33 = { 
+				remove_trait = creature_sayaadi
+				remove_trait = being_demon
+				add_trait = creature_human
+				random_living_character = {
+					limit = { 
+						gender = scope:original
+						has_trait = creature_human
+						NOT = { has_character_modifier = charmed }
+					}
+					save_scope_as = human
+				}
+				set_age = { 20 30 }
+				copy_inheritable_appearance_from = scope:human
+				change_first_name = scope:human
+				add_character_flag = exists
+			}
+		}
+	}
+}

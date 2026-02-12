@@ -1,0 +1,32 @@
+﻿##############################
+### SAPPHIC DEBAUCHE THEME ###
+##############################
+
+wcss_harem_activity = {
+	icon = {
+		reference = "gfx/interface/icons/event_types/wcss_type_harem.dds" # should go unused, but just in case
+	}
+	sound = {
+		reference = "event:/SFX/Events/Themes/sfx_event_theme_type_seduction"
+	}
+	background = {
+		reference = wcss_outdoor_harem
+	}
+}
+
+quest = {
+	icon = {
+		reference = "gfx/interface/icons/event_types/type_legends.dds"
+	}
+	header_background = {
+		reference = "gfx/interface/window_event/event_header_yellow.dds"
+	}
+	sound = {
+		reference = "event:/DLC/FP4/MUSIC/Stingers/mx_stinger_legends_lvl_04"
+	}
+	background = {
+		reference = ce1_legendary_battlefield
+	}
+
+}
+

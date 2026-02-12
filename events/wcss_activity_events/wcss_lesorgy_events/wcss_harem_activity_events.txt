@@ -1,0 +1,7772 @@
+﻿namespace = wcss_harem
+# All Events used in the Sapphic Debauche activity when the activity is active.
+
+#################
+# MISC EVENTS
+# 1000 - 1999
+#################
+
+wcss_harem.1000 = { # We got an illness that prevents us from participating.
+	type = activity_event
+	title = wcss_harem.1000.t
+	desc = wcss_harem.1000.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:activity.activity_host
+		animation = stress
+	}
+	cooldown = { years = 1 }
+	override_icon = {
+		reference = "gfx/interface/icons/event_types/type_illness.dds"
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = yes
+	}
+
+	option = {
+		name = wcss_harem.1000.a
+	}
+}
+
+#################
+# START EVENTS
+# 2000 - 2999
+#################
+
+wcss_harem.2001 = { # Basic start (for host)
+	type = activity_event
+	title = wcss_harem.2001.t
+	desc = wcss_harem.2001.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:activity.activity_host
+		animation = happiness
+	}
+
+	trigger = { # Host only
+		this = scope:activity.activity_host
+	}
+
+	immediate = {
+		play_music_cue = mx_cue_seduction
+		scope:activity.activity_location = {
+			barony = { save_scope_as = barony }
+		}
+	}
+
+	option = {
+		name = {
+			trigger = { 
+				OR = {
+					has_trait = rakish 
+					has_trait = lustful
+				}
+			}
+			text = wcss_harem.2001.a.lustful
+		}
+		name = {
+			trigger = {
+				NOT = { has_trait = cynical }
+				faith = { has_doctrine_parameter = wcss_harem_piety_gain_or_loss }
+			}
+			text = wcss_harem.2001.a.sacred
+		}
+		name = wcss_harem.2001.a
+	}
+}
+
+wcss_harem.2501 = { # Basic start (for guests)
+	type = activity_event
+	title = wcss_harem.2501.t
+	desc = wcss_harem.2501.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:activity.activity_host
+		animation = flirtation
+	}
+
+	trigger = { # Guests only.
+		NOT = { this = scope:activity.activity_host }
+	}
+
+	immediate = {
+		play_music_cue = mx_cue_seduction
+		scope:activity.activity_location = {
+			barony = { save_scope_as = barony }
+		}
+	}
+
+	option = {
+		name = wcss_harem.2501.a
+	}
+
+	option = {
+		trigger = {
+			opinion = {
+				target = scope:activity.activity_host
+				value < 0
+			}
+		}
+		exclusive = yes
+		name = wcss_harem.2501.b
+	}
+}
+
+wcss_harem.2701 = { # Enter passive state upon arrival
+	type = activity_event
+	title = wcss_harem.2701.t
+	desc = {
+		desc = wcss_harem.2701.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { this = scope:host } 
+					OR = {
+						has_relation_rival = scope:activity.activity_host
+						reverse_opinion = {
+							target = scope:activity.activity_host
+							value < 0
+						}
+					}
+				}
+				desc = wcss_harem.2701.dislikes_host
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { this = scope:host } 
+					OR = {
+						has_relation_rival = scope:activity.activity_host
+						reverse_opinion = {
+							target = scope:activity.activity_host
+							value >= 40
+						}
+					}
+				}
+				desc = wcss_harem.2701.likes_host
+			}
+			desc = wcss_harem.2701.neutral
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					intent_target.location ?= root.location
+				}
+				desc = wcss_harem.2701.intent_arrived
+			}
+			triggered_desc = {
+				trigger = { exists = intent_target }
+				desc = wcss_harem.2701.intent
+			}
+		}
+	}
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = root
+		triggered_animation = {
+			trigger = {
+				NOT = { this = scope:host }
+				opinion = {
+					target = scope:activity.activity_host
+					value < 0
+				}
+			}
+			animation = boredom
+		}
+		animation = happiness
+	}
+	center_portrait = {
+		trigger = { NOT = { root = scope:host } }
+		character = scope:host
+		animation = flirtation
+	}
+	left_portrait = {
+		character = scope:center_portrait
+		animation = admiration
+	}
+
+	trigger = { 
+		NOT = { has_character_flag = wcss_had_2701 }
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_2701
+			years = 1
+		}
+		play_music_cue = mx_cue_seduction
+		if = {
+			limit = {
+				involved_activity = {
+					any_attending_character = {
+						is_adult = yes
+						NOR = {
+							this = root
+							this = scope:host
+						}
+						is_travelling = no
+					}
+				}
+			}
+			involved_activity = {
+				random_attending_character = {
+					limit = {
+						is_adult = yes
+						NOR = {
+							this = root
+							this = scope:host
+						}
+						is_travelling = no
+					}
+					save_scope_as = center_portrait
+				}
+			}
+		}
+	}
+
+	option = {
+		name = {
+			trigger = {
+				opinion = {
+					target = scope:activity.activity_host
+					value < 0
+				}
+			}
+			text = wcss_harem.2701.a.bad
+		}
+		name = {
+			trigger = {
+				opinion = {
+					target = scope:activity.activity_host
+					value >= 0
+				}
+			}
+			text = wcss_harem.2701.a.good
+		}
+		add_prestige = miniscule_prestige_gain
+	}
+}
+
+#################
+# RANDOM EVENTS (DEFAULT GROUP)
+# 3000 - 8999
+#################
+
+wcss_harem.3001 = { # Watching a seductive dancer with a guest
+	type = activity_event
+	title = wcss_harem.3001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:wcss_guest_watcher = { should_be_naked_trigger = yes }
+				}
+				desc = wcss_harem.3001.desc_naked
+			}
+			desc = wcss_harem.3001.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	center_portrait = {
+		character = scope:wcss_guest_watcher
+		animation = admiration
+	}
+	right_portrait = {
+		character = scope:wcss_courtesan_dancer
+		animation = personality_bold
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3001 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+				NOT = { has_trait = chaste }
+			}
+		}
+		is_ai = no #This event will make a NPC, so we don't want it to be spammed
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			OR = {
+				has_trait = lustful
+				has_trait = rakish
+			}
+			add = 0.5
+		}
+		modifier = {
+			has_character_flag = wcss_had_3161
+			factor = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3001
+			months = 6
+		}
+		scope:host = {
+			create_character = {
+				location = scope:activity.activity_location
+				template = wcss_beautiful_young_lady
+				save_scope_as = wcss_courtesan_dancer
+			}
+			hidden_effect = { add_visiting_courtier = scope:wcss_courtesan_dancer	}
+		}
+
+		hidden_effect = {
+			scope:wcss_courtesan_dancer = { 
+				invite_to_activity = scope:activity
+				accept_activity_invite = scope:activity
+				add_character_flag = {
+					flag = wcss_harem_courtesan
+					months = 4
+				}
+			}
+			scope:activity = {
+				random_attending_character = {
+					limit = {
+						wcss_harem_participant_trigger = yes
+						NOR = { 
+							has_trait = chaste 
+							this = scope:wcss_courtesan_dancer
+						}
+					}
+					weight = {
+						base = 1
+						modifier = {
+							has_opinion_modifier = {
+								modifier = wcss_had_sex_at_orgy_opinion
+								target = root
+							}
+							factor = 0.2
+						}		
+						modifier = {
+							root = { has_activity_intent = woo_attendee_intent }
+							this = root.intent_target
+							factor = 3							
+						}
+						modifier = {
+							add = 10
+							is_of_major_interest_to_root_trigger = yes
+						}
+						modifier = {
+							add = 5
+							is_of_minor_interest_to_root_trigger = yes
+						}
+					}
+					save_scope_as = wcss_guest_watcher
+				}
+			}
+			set_variable = {
+				name = wcss_possible_threesome
+				value = 1
+			}
+			wcss_threesome_possible_1character_effect = { CHARACTER = scope:wcss_guest_watcher }
+			if = {
+				limit = { exists = var:wcss_possible_threesome }
+				if = {
+					limit = { var:wcss_possible_threesome > 3 }
+					save_scope_value_as = {
+						name = wcss_3001_threesome_flag
+						value = flag:wcss_yes
+					}
+				}
+			}
+		}
+	}
+
+	option = { #Enjoy the show (nothing happens)
+		name = wcss_harem.3001.a
+		stress_impact = { 
+			base = medium_stress_loss
+			lustful = minor_stress_impact_loss
+			rakish = minor_stress_impact_loss
+			chaste = minor_stress_impact_gain
+		}
+	}
+
+	option = { #Take dancer to my chambers
+		name = wcss_harem.3001.b
+		send_interface_toast = {
+			title = wcss_harem.courtesan_sex_tt
+			left_icon = scope:wcss_courtesan_dancer
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_courtesan_dancer }
+			set_relation_lover = { 
+				reason = wcss_harem_lover_relation_default
+				target = scope:wcss_courtesan_dancer
+				involved_character = scope:activity.activity_host
+				province = scope:activity.activity_location
+			}
+		}
+	}
+
+	option = { # Service the other guest
+		name = wcss_harem.3001.c
+		custom_tooltip = wcss_harem.3001.c.tt
+		show_as_tooltip = {
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+		}
+		trigger_event = {
+			id = wcss_harem.3002
+			days = 3
+		}
+	}
+
+	option = { # Invite dancer to service other guest
+		name = wcss_harem.3001.d
+		show_as_tooltip = {
+			scope:wcss_courtesan_dancer = {
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+			}
+		}
+		trigger_event = {
+			id = wcss_harem.3003
+			days = 3
+		}
+	}
+}
+
+wcss_harem.3002 = { # 3001 Outcome: lay with guest
+	type = activity_event
+	title = wcss_harem.3001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:wcss_guest_watcher = { should_be_naked_trigger = yes }
+				}
+				desc = wcss_harem.3002.desc_naked
+			}
+			desc = wcss_harem.3002.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	right_portrait = {
+		character = scope:wcss_guest_watcher
+		animation = ecstasy
+	}
+
+	trigger = { 
+		wcss_harem_has_serious_illness_trigger = no
+		scope:wcss_guest_watcher = { wcss_harem_participant_trigger = yes } 
+	}
+
+	immediate = {
+		show_as_tooltip = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+		}
+	}
+
+	option = { #Just sex
+		name = wcss_harem.3002.b
+		hidden_effect = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+		}
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOR = { 
+						this = root 
+						this = scope:wcss_guest_watcher
+					} 
+				}
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					modifier = wcss_orgy_public_sex_opinion
+					target = root
+				}
+			}
+		}
+	}
+
+	option = { #Try to make lover
+		name = wcss_harem.3002.a
+		trigger = { 
+			NOT = { has_relation_lover = scope:wcss_guest_watcher }
+		}
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOR = { 
+						this = root 
+						this = scope:wcss_guest_watcher
+					} 
+				}
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					modifier = wcss_orgy_public_sex_opinion
+					target = root
+				}
+			}
+		}
+		custom_tooltip = wcss_harem.3002.a_tt
+		hidden_effect = {
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_guest_watcher
+					}
+					wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_guest_watcher }
+					send_interface_toast = {
+						title = wcss_harem.lover_progress
+						left_icon = scope:wcss_guest_watcher
+						show_as_tooltip = { 
+							wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher } 
+						}
+						wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_guest_watcher }
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_guest_watcher
+					}
+					send_interface_toast = {
+						title = wcss_harem.lover_progress
+						left_icon = scope:wcss_guest_watcher
+						reverse_add_opinion = {
+							target = scope:wcss_guest_watcher
+							modifier = romance_opinion
+							opinion = 20
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #Threesome
+		name = wcss_harem.3002.c
+		trigger = { 
+			exists = scope:wcss_3001_threesome_flag
+			scope:wcss_3001_threesome_flag = flag:wcss_yes 
+		}
+		custom_tooltip = wcss_harem.3001.threesome
+		hidden_effect = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_courtesan_dancer }
+			scope:wcss_guest_watcher = { 
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_courtesan_dancer }
+			}
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_glowing_modifier
+			years = 5
+		}
+		scope:wcss_guest_watcher = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		scope:wcss_courtesan_dancer = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOR = { 
+						this = root 
+						this = scope:wcss_guest_watcher
+					} 
+				}
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					modifier = wcss_orgy_public_sex_opinion
+					target = root
+				}
+			}
+		}
+	}
+}
+
+wcss_harem.3003 = { # 3001 Outcome: dancer services guest
+	type = activity_event
+	title = wcss_harem.3001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					scope:wcss_guest_watcher = { should_be_naked_trigger = yes }
+				}
+				desc = wcss_harem.3003.desc_naked
+			}
+			desc = wcss_harem.3003.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = scope:wcss_courtesan_dancer
+		animation = flirtation
+	}
+	right_portrait = {
+		character = scope:wcss_guest_watcher
+		animation = ecstasy
+	}
+
+	trigger = { 
+		wcss_harem_has_serious_illness_trigger = no
+		scope:wcss_guest_watcher = { wcss_harem_participant_trigger = yes } 
+	}
+
+	option = { #Just watch
+		name = wcss_harem.3003.a
+		scope:wcss_courtesan_dancer = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+		}
+		reverse_add_opinion = {
+			target = scope:wcss_guest_watcher
+			modifier = grateful_opinion
+			opinion = 50
+		}
+	}
+
+	option = { #Threesome
+		name = wcss_harem.3003.b
+		trigger = { 
+			exists = scope:wcss_3001_threesome_flag
+			scope:wcss_3001_threesome_flag = flag:wcss_yes 
+		}
+		custom_tooltip = wcss_harem.3001.threesome
+		hidden_effect = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_watcher }
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_courtesan_dancer }
+			scope:wcss_guest_watcher = { 
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_courtesan_dancer }
+			}
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_glowing_modifier
+			years = 5
+		}
+		scope:wcss_guest_watcher = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		scope:wcss_courtesan_dancer = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOR = { 
+						this = root 
+						this = scope:wcss_guest_watcher
+					} 
+				}
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					modifier = wcss_orgy_public_sex_opinion
+					target = root
+				}
+			}
+		}
+	}
+}
+
+wcss_harem.3011 = { # Just dessert
+	type = activity_event
+	title = wcss_harem.3011.t
+	desc = wcss_harem.3011.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = admiration
+	}
+	right_portrait = {
+		character = scope:wcss_guest_dessert
+		animation = idle
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = feast }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3011 }
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				ai_boldness > 0
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			OR = {
+				has_trait = gluttonous
+				has_trait = comfort_eater
+			}
+			add = 0.5
+		}
+		modifier = {
+			has_character_modifier = wcss_harem_sensual_dessert_modifier
+			factor = 0.1
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 3 }
+			amenity_level = { type = court_food_quality value < 5 }
+			factor = 1.25
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 5 }
+			factor = 1.5
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value < 2 }
+			factor = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3011
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { wcss_harem_participant_trigger = yes }
+				weight = {
+					base = 1
+					modifier = {
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.2
+					}
+					modifier = {
+						add = {
+							value = 0
+							add = ai_boldness
+						}
+					}
+				}
+				save_scope_as = wcss_guest_dessert
+			}
+		}
+	}
+
+	option = { # Toast to honor the dessert
+		name = wcss_harem.3011.a
+		add_prestige = 100
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOT = { this = root }
+					OR = {
+						this = scope:wcss_guest_dessert
+						opinion = {
+							target = scope:wcss_guest_dessert
+							value >= 0
+						}
+					}
+				}
+				custom = wcss_every_guest_respects_dessert_tt
+				add_opinion = {
+					target = root
+					modifier = respect_opinion
+					opinion = 10
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+			opinion_modifier = {
+				opinion_target = scope:wcss_guest_dessert
+				multiplier = 1
+				min = -50
+			}
+			ai_value_modifier = {
+				ai_honor = 0.2
+			}
+			modifier = {
+				factor = 0.2
+				has_trait = arrogant
+			}
+			modifier = {
+				factor = 2
+				has_trait = humble
+			}
+			modifier = {
+				add = 100
+				root.highest_held_title_tier < scope:wcss_guest_dessert.highest_held_title_tier
+			}
+		}
+	}
+
+	option = { # I think I'll partake
+		name = wcss_harem.3011.b
+		add_character_modifier = {
+			modifier = wcss_harem_sensual_dessert_modifier
+			years = 10
+		}
+		stress_impact = {
+			gluttonous = minor_stress_impact_loss
+			comfort_eater = minor_stress_impact_loss
+			inappetetic = minor_stress_impact_gain
+			temperate = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			compare_modifier = {
+				value = attraction
+				target = scope:wcss_guest_dessert
+			}
+			ai_value_modifier = {
+				ai_boldness = 0.5
+			}
+			modifier = {
+				factor = 2
+				has_trait = gluttonous
+			}
+			modifier = {
+				add = 100
+				has_trait = lifestyle_reveler
+			}
+		}
+	}
+}
+
+wcss_harem.3021 = { # Spilled Wine
+	type = activity_event
+	title = wcss_harem.3021.t
+	desc = wcss_harem.3021.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_guest_spilled_wine
+		animation = shock
+	}
+	override_background = { reference = feast }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3021 }
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				should_be_naked_trigger = no # This event is a bit silly if they're naked
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			OR = {
+				has_trait = lifestyle_reveler
+				has_trait = drunkard
+			}
+			add = 0.5
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 3 }
+			amenity_level = { type = court_food_quality value < 5 }
+			factor = 1.25
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 5 }
+			factor = 1.5
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value < 2 }
+			factor = 0.5
+		}		
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3021
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					should_be_naked_trigger = no
+				}
+				weight = {
+					base = 1
+					modifier = {
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.2
+					}
+					modifier = {
+						has_trait = drunkard
+						factor = 1.5
+					}
+					modifier = {
+						has_trait = gluttonous
+						factor = 1.25
+					}
+					modifier = {
+						has_trait = lifestyle_reveler
+						factor = 1.25
+					}
+					modifier = {
+						has_character_flag = is_naked #It's better if they are wearing clothing for this event
+						factor = 0.1
+					}
+				}
+				save_scope_as = wcss_guest_spilled_wine
+			}
+		}
+		if = {
+			limit = { 
+				scope:wcss_guest_spilled_wine = {
+					has_character_modifier = seduce_tailor_gift_modifier 
+				}
+			}
+			scope:wcss_guest_spilled_wine = {
+				remove_character_modifier = seduce_tailor_gift_modifier 
+			}
+		}
+		if = {
+			limit = { 
+				scope:wcss_guest_spilled_wine = {
+					has_character_flag = is_naked 
+				}
+			}
+			scope:wcss_guest_spilled_wine = {
+				remove_character_flag = is_naked 
+			}
+		}
+	}
+
+	option = { # Offer to buy a new dress
+		name = wcss_harem.3021.a
+		remove_short_term_gold = medium_gold_value
+		reverse_add_opinion = {
+			modifier = grateful_opinion
+			target = scope:wcss_guest_spilled_wine
+			opinion = 50
+		}
+		scope:wcss_guest_spilled_wine = {
+			add_character_modifier = {
+				modifier = seduce_tailor_gift_modifier
+				years = 10
+			}
+		}
+		stress_impact = {
+			generous = minor_stress_impact_loss
+			greedy = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_greed = -0.5
+			}
+			modifier = {
+				factor = 0.2
+				short_term_gold < medium_gold_value
+			}
+		}
+	}
+
+	option = { # She can join me while it is cleaned
+		name = wcss_harem.3021.b
+		custom_tooltip = wcss_harem.3021.b.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_guest_spilled_wine 
+					}
+					if = {
+						limit = { 
+							NOT = { has_relation_lover = scope:wcss_guest_spilled_wine }
+						}
+						random_list = {
+							50 = {
+								wcss_harem_willing_to_be_lovers_modifier = { 
+									CHARACTER_1 = root 
+									CHARACTER_2 = scope:wcss_guest_spilled_wine 
+								}
+								wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_guest_spilled_wine }
+								send_interface_toast = {
+									title = wcss_harem.3021_had_sex_success_tt
+									left_icon = scope:wcss_guest_spilled_wine
+									wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_spilled_wine }
+									wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_guest_spilled_wine }
+								}
+							}
+							50 = {
+								wcss_harem_unwilling_to_be_lovers_modifier = { 
+									CHARACTER_1 = root 
+									CHARACTER_2 = scope:wcss_guest_spilled_wine 
+								}
+								send_interface_toast = {
+									title = wcss_harem.3021_had_sex_success_tt
+									left_icon = scope:wcss_guest_spilled_wine
+									wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_spilled_wine }
+									reverse_add_opinion = {
+										modifier = romance_opinion
+										target = scope:wcss_guest_spilled_wine
+										opinion = 20
+									}
+								}
+							}
+						}					
+					}
+					else = {
+						send_interface_toast = {
+							title = wcss_harem.3021_had_sex_success_tt
+							left_icon = scope:wcss_guest_spilled_wine
+							wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_spilled_wine }
+							reverse_add_opinion = {
+								modifier = romance_opinion
+								target = scope:wcss_guest_spilled_wine
+								opinion = 20
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_guest_spilled_wine 
+					}
+					send_interface_toast = {
+						title = wcss_harem.3021_had_sex_failure_tt
+						left_icon = scope:wcss_guest_spilled_wine
+						reverse_add_opinion = {
+							modifier = refusal_opinion
+							target = scope:wcss_guest_spilled_wine
+							opinion = -20
+						}
+					}
+				}
+			}
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			chaste = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			opinion_modifier = {
+				opinion_target = scope:wcss_guest_spilled_wine
+				multiplier = 1
+				min = -50
+			}
+			modifier = {
+				add = 100
+				has_trait = lustful
+			}
+			compare_modifier = {
+				target = scope:wcss_guest_spilled_wine
+				value = attraction
+				min = -49
+			}
+		}
+	}
+
+	option = { # I'll lick it right off her!
+		name = wcss_harem.3021.c
+		trigger = {
+			OR = {
+				has_trait = gluttonous
+				has_trait = lifestyle_reveler
+				has_trait = drunkard
+				has_trait = deviant
+			}
+		}
+		random_list = {
+			50 = {
+				wcss_harem_willing_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_guest_spilled_wine 
+				}
+				hidden_effect = {
+					scope:activity = {
+						every_attending_character = {
+							limit = { 
+								NOR = { 
+									this = root 
+									this = scope:wcss_guest_spilled_wine
+								} 
+							}
+							add_opinion = {
+								modifier = wcss_orgy_public_sex_opinion
+								target = root
+							}
+						}
+					}
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_guest_spilled_wine }
+				}
+				send_interface_toast = {
+					title = wcss_harem.3021_public_sex_success_tt
+					left_icon = scope:wcss_guest_spilled_wine
+					reverse_add_opinion = {
+						modifier = amused_opinion
+						target = scope:wcss_guest_spilled_wine
+						opinion = 50
+					}
+				}
+			}
+			50 = {
+				wcss_harem_unwilling_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_guest_spilled_wine 
+				}
+				send_interface_toast = {
+					title = wcss_harem.3021_public_sex_failure_tt
+					left_icon = scope:wcss_guest_spilled_wine
+					reverse_add_opinion = {
+						modifier = disgusted_opinion
+						target = scope:wcss_guest_spilled_wine
+						opinion = -50
+					}
+				}
+			}
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			drunkard = medium_stress_impact_loss
+			chaste = minor_stress_impact_gain
+			temperate = minor_stress_gain
+		}
+		ai_chance = {
+			base = 200
+			modifier = {
+				factor = 2
+				has_trait = drunkard
+			}
+			modifier = {
+				add = 300
+				has_trait = lifestyle_reveler
+			}
+			modifier = {
+				add = 100
+				has_trait = deviant
+			}
+		}
+	}
+}
+
+scripted_trigger wcss_harem_3031_lover_basic_trigger = {
+	wcss_harem_participant_trigger = yes
+	NOT = { has_trait = chaste }
+	basic_is_available_ai = yes
+	might_cheat_on_every_partner_trigger = yes
+}
+
+wcss_harem.3031 = { #Walk-In (possible threesome)
+	type = activity_event
+	title = wcss_harem.3031.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+					trigger = { root = scope:host }
+					desc = wcss_harem.3031.desc.host
+			}
+			desc = wcss_harem.3031.desc.guest
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = scope:wcss_lover_guest_1
+		animation = disbelief
+	}
+	right_portrait = {
+		character = scope:wcss_lover_guest_2
+		animation = shock
+	}
+	override_background = { reference = sitting_room }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3031 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_3031_lover_basic_trigger = yes
+				save_temporary_scope_as = lover_check
+				scope:activity = {
+					any_attending_character = {
+						NOR = {
+							this = scope:lover_check
+							is_consort_of = scope:lover_check
+						}
+						wcss_harem_3031_lover_basic_trigger = yes
+						OR = { #Can they become lovers, or are they lovers already?
+							AND = {
+								can_set_relation_lover_trigger = { CHARACTER = scope:lover_check }
+								NOT = { any_close_family_member = { this = scope:lover_check } } #No incest if it's not already set as a secret!
+							}
+							any_secret = {
+								secret_type = secret_lover
+								secret_target = scope:lover_check
+							}
+							AND = {
+								has_relation_lover = scope:lover_check
+								faith = { has_doctrine_parameter = adultery_female_accepted }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.5
+		modifier = {
+			add = 0.5
+			scope:activity = {
+				any_attending_character = {
+					wcss_harem_3031_lover_basic_trigger = yes
+					any_secret = {
+						secret_type = secret_lover
+						secret_target = {
+							wcss_harem_3031_lover_basic_trigger = yes
+							save_temporary_scope_as = lover_check
+							scope:activity = { any_attending_character = { this = scope:lover_check } }
+						}
+					}
+				}
+			}
+		}
+		modifier = { # If root already had threesome, make this event less likely
+			has_character_modifier = wcss_harem_glowing_modifier
+			factor = 0.1
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3031
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = {
+					wcss_harem_3031_lover_basic_trigger = yes
+					save_temporary_scope_as = lover_check
+					scope:activity = {
+						any_attending_character = {
+							NOR = {
+								this = scope:lover_check
+								is_consort_of = scope:lover_check
+							}
+							wcss_harem_3031_lover_basic_trigger = yes
+							OR = { #Can they become lovers, or are they lovers already?
+								AND = {
+									can_set_relation_lover_trigger = { CHARACTER = scope:lover_check }
+									NOT = { any_close_family_member = { this = scope:lover_check } } #No incest if it's not already set as a secret!
+								}
+								any_secret = {
+									secret_type = secret_lover
+									secret_target = scope:lover_check
+								}
+							}
+						}
+					}
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = 2
+						has_trait = lustful
+					}
+					modifier = {
+						root = { has_activity_intent = woo_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+					modifier = {
+						add = 10
+						any_secret = {
+							secret_type = secret_lover
+							secret_target = {
+								wcss_harem_3031_lover_basic_trigger = yes
+								save_temporary_scope_as = lover_check
+								scope:activity = { any_attending_character = { this = scope:lover_check } }
+							}
+						}
+					}
+				}
+				save_scope_as = wcss_lover_guest_1
+			}
+			random_attending_character = {
+				limit = {
+					NOR = {
+						this = scope:wcss_lover_guest_1
+						is_consort_of = scope:wcss_lover_guest_1
+					}
+					wcss_harem_3031_lover_basic_trigger = yes
+					any_secret = {
+						secret_type = secret_lover
+						secret_target = scope:wcss_lover_guest_1
+					}
+				}
+				alternative_limit = {
+					NOR = {
+						this = scope:wcss_lover_guest_1
+						is_consort_of = scope:wcss_lover_guest_1
+					}
+					wcss_harem_3031_lover_basic_trigger = yes
+					can_set_relation_lover_trigger = { CHARACTER = scope:wcss_lover_guest_1 }
+					NOT = { any_close_family_member = { this = scope:lover_check } } #No incest if it's not already set as a secret!
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = 2
+						has_trait = lustful
+					}
+					modifier = {
+						root = { has_activity_intent = woo_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_lover_guest_2
+
+				#Set their secret
+				hidden_effect = {
+					if = {
+						limit = {
+							can_set_relation_lover_trigger = { CHARACTER = scope:wcss_lover_guest_1 }
+						}
+						set_relation_lover = { 
+							reason = wcss_harem_lover_relation_default
+							target = scope:wcss_lover_guest_1
+							involved_character = scope:activity.activity_host
+							province = scope:activity.activity_location
+						}
+					}
+				}
+			}
+		}
+		#Is a threesome possible?
+		set_variable = {
+			name = wcss_possible_threesome
+			value = 1
+		}
+		wcss_threesome_possible_1character_effect = { CHARACTER = scope:wcss_lover_guest_1 }
+		wcss_threesome_possible_1character_effect = { CHARACTER = scope:wcss_lover_guest_2 }
+		if = {
+			limit = { exists = var:wcss_possible_threesome }
+			if = {
+				limit = { var:wcss_possible_threesome > 5 }
+				save_scope_value_as = {
+					name = wcss_3031_threesome_flag
+					value = flag:wcss_yes
+				}
+			}
+		}
+	}
+
+	option = { # Leave the lovers be
+		name = wcss_harem.3031.a
+		random = {
+			chance = 50
+			reverse_add_opinion = {
+				modifier = grateful_opinion
+				target = scope:wcss_lover_guest_1
+				opinion = 20
+			}
+			reverse_add_opinion = {
+				modifier = grateful_opinion
+				target = scope:wcss_lover_guest_2
+				opinion = 20
+			}
+		}
+		add_prestige = medium_prestige_loss
+		hidden_effect = {
+			scope:wcss_lover_guest_1 = { 
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_lover_guest_2 }
+			}
+		}
+		ai_chance = {
+			base = 100
+			modifier = {
+				add = 100
+				has_trait = chaste
+			}
+		}
+	}
+
+	option = { # Shoo them out, I need those casks
+		name = wcss_harem.3031.b
+		reverse_add_opinion = {
+			modifier = annoyed_opinion
+			target = scope:wcss_lover_guest_1
+			opinion = -20
+		}
+		reverse_add_opinion = {
+			modifier = annoyed_opinion
+			target = scope:wcss_lover_guest_2
+			opinion = -20
+		}
+		add_prestige = medium_prestige_gain
+		ai_chance = {
+			base = 100
+			modifier = {
+				add = 100
+				has_trait = drunkard
+			}
+			modifier = {
+				add = 100
+				has_trait = lifestyle_reveler
+			}
+		}
+	}
+
+	option = { # Threesome Option
+		name = wcss_harem.3031.c
+		trigger = { 
+			exists = scope:wcss_3031_threesome_flag
+			scope:wcss_3031_threesome_flag = flag:wcss_yes 
+		}
+		custom_tooltip = wcss_harem.3031.c.threesome
+		hidden_effect = {
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_lover_guest_1 }
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_lover_guest_2 }
+			scope:wcss_lover_guest_1 = { 
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_lover_guest_2 }
+			}
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_glowing_modifier
+			years = 5
+		}
+		scope:wcss_lover_guest_1 = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		scope:wcss_lover_guest_2 = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		hidden_effect = { 
+			if = {
+				limit = { 
+					can_set_relation_lover_trigger = { CHARACTER = scope:wcss_lover_guest_1 }
+				}
+				random_list = {
+					50 = {
+						opinion_modifier = {
+							who = scope:wcss_lover_guest_1
+							opinion_target = root
+							multiplier = 0.5
+						}
+						modifier = {
+							OR = {
+								scope:wcss_lover_guest_1 = { has_trait = lustful }
+								scope:wcss_lover_guest_1 = { has_trait = rakish }
+							}
+							add = 25
+						}
+						set_relation_lover = { 
+							reason = wcss_harem_lover_relation_default
+							target = scope:wcss_lover_guest_1
+							involved_character = scope:activity.activity_host
+							province = scope:activity.activity_location
+						}
+					}
+					50 = {				
+						opinion_modifier = {
+							who = scope:wcss_lover_guest_1
+							opinion_target = root
+							multiplier = -0.5
+						}
+						modifier = {
+							OR = {
+								scope:wcss_lover_guest_1 = { has_trait = chaste }
+								scope:wcss_lover_guest_1 = { has_trait = shy }
+							}
+							add = 25
+						}
+						send_interface_toast = {
+							title = wcss_harem.lover_result_failure
+							left_icon = scope:wcss_lover_guest_1
+							reverse_add_opinion = {
+								modifier = romance_opinion
+								target = scope:wcss_lover_guest_1
+								opinion = 20
+							}
+						}
+					}
+				}
+			}		
+			if = {
+				limit = { 
+					can_set_relation_lover_trigger = { CHARACTER = scope:wcss_lover_guest_2 }
+				}
+				random_list = {
+					50 = {
+						opinion_modifier = {
+							who = scope:wcss_lover_guest_2
+							opinion_target = root
+							multiplier = 0.5
+						}
+						modifier = {
+							OR = {
+								scope:wcss_lover_guest_2 = { has_trait = lustful }
+								scope:wcss_lover_guest_2 = { has_trait = rakish }
+							}
+							add = 25
+						}
+						set_relation_lover = { 
+							reason = wcss_harem_lover_relation_default
+							target = scope:wcss_lover_guest_2
+							involved_character = scope:activity.activity_host
+							province = scope:activity.activity_location
+						}
+					}
+					50 = {
+						opinion_modifier = {
+							who = scope:wcss_lover_guest_2
+							opinion_target = root
+							multiplier = -0.5
+						}
+						modifier = {
+							OR = {
+								scope:wcss_lover_guest_2 = { has_trait = chaste }
+								scope:wcss_lover_guest_2 = { has_trait = shy }
+							}
+							add = 25
+						}
+						send_interface_toast = {
+							title = wcss_harem.lover_result_failure
+							left_icon = scope:wcss_lover_guest_2
+							reverse_add_opinion = {
+								modifier = romance_opinion
+								target = scope:wcss_lover_guest_2
+								opinion = 20
+							}
+						}
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 200
+				has_trait = lustful
+			}
+			modifier = {
+				add = 200
+				has_trait = rakish
+			}
+			modifier = {
+				add = 100
+				has_relation_lover = scope:wcss_lover_guest_1
+			}
+			modifier = {
+				add = 100
+				has_relation_lover = scope:wcss_lover_guest_2
+			}
+		}
+	}
+}
+
+wcss_harem.3041 = { # Bathhouse
+	type = activity_event
+	title = wcss_harem.3041.t
+	desc = wcss_harem.3041.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = root
+		animation = personality_rational
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	override_background = { reference = corridor_day }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3041 }
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			scope:activity.activity_location.county = { development_level <= terrible_development_level }
+			factor = 0
+		}
+		modifier = {
+			scope:activity.activity_location.county = { 
+				development_level > terrible_development_level
+				development_level <= bad_development_level 
+			}
+			factor = 0.1
+		}
+		modifier = {
+			scope:activity.activity_location.county = { 
+				development_level > bad_development_level
+				development_level < medium_development_level 
+			}
+			factor = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3041
+			months = 6
+		}
+		scope:activity.activity_location = {
+			barony = { save_scope_as = barony }
+		}
+	}
+
+	option = { # Just relax
+		name = wcss_harem.3041.a
+		add_character_modifier = {
+			modifier = wcss_harem_relaxed_modifier
+			years = 10
+		}
+		stress_impact = { base = medium_stress_loss }
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Full treatment
+		name = wcss_harem.3041.b
+		add_character_modifier = {
+			modifier = wcss_harem_hygiene_treatment_modifier
+			years = 10
+		}
+		remove_short_term_gold = tiny_gold_value
+		stress_impact = { 
+			base = medium_stress_loss
+			greedy = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_greed = -0.25
+			}
+			modifier = {
+				short_term_gold < tiny_gold_value
+				factor = 0
+			}
+		}
+	}
+
+	option = { # Full treatment for everyone!
+		name = wcss_harem.3041.c
+		remove_short_term_gold = medium_gold_value
+		add_prestige = 150
+		add_character_modifier = {
+			modifier = wcss_harem_hygiene_treatment_modifier
+			years = 10
+		}
+		scope:activity = {
+			every_attending_character = {
+				limit = { 
+					NOT = { this = root }
+				}
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					target = root
+					modifier = kindness_opinion
+					opinion = 20
+				}
+				add_character_modifier = {
+					modifier = wcss_harem_hygiene_treatment_modifier
+					years = 10
+				}
+			}
+		}
+		stress_impact = { 
+			base = medium_stress_loss
+			greedy = medium_stress_gain
+			generous = minor_stress_impact_loss
+			lustful = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+wcss_harem.3051 = { # Massage
+	type = activity_event
+	title = wcss_harem.3051.t
+	desc = wcss_harem.3051.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = personality_compassionate
+	}
+	right_portrait = {
+		character = scope:wcss_massage_guest
+		animation = personality_rational
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3051 }
+		scope:activity = {
+			any_attending_character = { wcss_harem_participant_trigger = yes }
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			OR = { 
+				has_trait = lifestyle_physician
+				has_trait = lifestyle_herbalist
+			}
+			factor = 1.5
+		}
+		modifier = {
+			has_focus = learning_medicine_focus
+			add = 0.5
+		}
+		modifier = {
+			add = {
+				value = stress
+				divide = 10
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3051
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = { 
+				limit = { wcss_harem_participant_trigger = yes }
+				weight = {
+					base = 1
+					modifier = {
+						add = {
+							value = stress
+							multiply = 1
+						}
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_massage_guest
+			}
+		}
+	}
+
+	option = { # Suggest we get a massage together
+		name = wcss_harem.3051.a
+		reverse_add_opinion = {
+			target = scope:wcss_massage_guest
+			modifier = friendliness_opinion
+			opinion = 15
+		}
+		add_opinion = {
+			target = scope:wcss_massage_guest
+			modifier = friendliness_opinion
+			opinion = 15
+		}
+		stress_impact = { base = medium_stress_loss }
+		scope:wcss_massage_guest = { 
+			stress_impact = { base = medium_stress_loss } 
+		}
+		ai_chance = {
+			base = 50
+			compare_modifier = {
+				value = stress
+				multiplier = 1
+			}
+			ai_value_modifier = {
+				ai_sociability = 0.2
+			}
+		}
+	}
+
+	option = { # Give guest a massage
+		name = wcss_harem.3051.b
+		random_list = {
+			20 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 1
+				}
+				modifier = {
+					has_focus = learning_medicine_focus
+					add = 35
+				}
+				modifier = {
+					has_trait = athletic
+					add = 25
+				}
+				modifier = {
+					has_trait = lifestyle_herbalist
+					add = 25
+				}
+				modifier = {
+					has_trait = lifestyle_physician
+					add = 25
+				}
+				scope:wcss_massage_guest = { 
+					stress_impact = { base = medium_stress_loss } 
+				}
+				send_interface_toast = {
+					title = wcss_harem.3051.b.success_tt
+					left_icon = scope:wcss_massage_guest
+					reverse_add_opinion = {
+						target = scope:wcss_massage_guest
+						modifier = wcss_gave_good_massage_opinion
+					}
+					wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_massage_guest }
+				}			
+			}
+			20 = {
+				modifier = {
+					has_trait = whole_of_body
+					add = -20
+				}
+				send_interface_toast = {
+					title = wcss_harem.3051.b.failure_tt
+					left_icon = scope:wcss_massage_guest
+					reverse_add_opinion = {
+						target = scope:wcss_massage_guest
+						modifier = disappointed_opinion
+						opinion = -15
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_focus = learning_medicine_focus
+				add = 100
+			}
+			modifier = {
+				has_trait = lifestyle_physician
+				add = 150
+			}
+			ai_value_modifier = {
+				ai_boldness = 0.5
+			}
+		}
+	}
+}
+
+wcss_harem.3061 = { # Dancers
+	type = activity_event
+	title = wcss_harem.3061.t
+	desc = wcss_harem.3061.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = root
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3061 }
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = { 
+			has_character_modifier = wcss_harem_generous_to_dancers_modifier
+			factor = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3061
+			months = 6
+		}
+	}
+
+	option = { # Relax
+		name = wcss_harem.3061.a
+		stress_impact = { base = minor_stress_loss }
+		ai_chance = {
+			base = 100
+			min = 1
+			compare_modifier = {
+				value = stress
+				multiplier = 1
+			}
+			ai_value_modifier = {	
+				ai_greed = 0.5
+				ai_boldness = -0.25
+				ai_energy = -0.25
+			}
+		}
+	}
+
+	option = { # Give them some coins
+		name = wcss_harem.3061.b
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = {
+			modifier = wcss_harem_generous_to_dancers_modifier
+			years = 10
+		}
+		stress_impact = { 
+			greedy = minor_stress_gain
+			generous = minor_stress_loss
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_greed = -0.5
+			}
+		}
+	}
+
+	option = { # Dance
+		name = wcss_harem.3061.c
+		add_prestige = 150
+		
+		if = {
+			limit = { attraction >= medium_positive_attraction }
+			scope:activity = {
+				every_attending_character = {
+					limit = { NOT = { this = root } }
+					custom = wcss_every_guest_scope_tt
+					add_opinion = {
+						target = root
+						modifier = wcss_orgy_public_sex_opinion
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_boldness = 0.25
+				ai_energy = 0.25
+			}
+			modifier = {
+				attraction >= low_positive_attraction
+				factor = 1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3071 = { # Satisfaction
+	type = activity_event
+	title = wcss_harem.3071.t
+	desc = wcss_harem.3071.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = happiness
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_harem_3071_sex_partner
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = bedchamber }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3071 }
+		scope:activity = {
+			any_attending_character = {
+				has_opinion_modifier = {
+					target = root
+					modifier = wcss_had_sex_at_orgy_opinion
+				}
+				wcss_harem_participant_trigger = yes
+				count > 1
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = { #Less likely if already glowing
+			has_character_modifier = wcss_harem_glowing_modifier
+			factor = 0.1
+		}
+		modifier = { 
+			scope:activity = {
+				any_attending_character = {
+					has_opinion_modifier = {
+						target = root
+						modifier = wcss_had_sex_at_orgy_opinion
+					}
+					count > 2
+				}
+			}
+			add = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3071
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes
+					has_opinion_modifier = {
+						target = root
+						modifier = wcss_had_sex_at_orgy_opinion
+					}
+				}
+				weight = {
+					modifier = {
+						has_relation_lover = root
+						factor = 0.1
+					}
+					modifier = {
+						root = { has_activity_intent = woo_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_harem_3071_sex_partner
+			}
+		}
+		show_as_tooltip = {
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3071_sex_partner }
+		}
+	}
+
+	option = { # Default
+		name = wcss_harem.3071.a
+		add_character_modifier = {
+			modifier = wcss_harem_glowing_modifier
+			years = 5
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Take as lover
+		name = wcss_harem.3071.b
+		trigger = {
+			NOT = { has_relation_lover = scope:wcss_harem_3071_sex_partner }
+		}
+		custom_tooltip = wcss_harem.3071.b.tt
+		hidden_effect = { 
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3071_sex_partner
+					}
+					save_scope_value_as = {
+						name = wcss_3071_set_lover
+						value = flag:wcss_yes
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3071_sex_partner
+					}
+					save_scope_value_as = {
+						name = wcss_3071_set_lover
+						value = flag:wcss_no
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { scope:wcss_3071_set_lover = flag:wcss_yes }
+				set_relation_lover = { 
+					reason = wcss_harem_lover_relation_default
+					target = scope:wcss_harem_3071_sex_partner
+					involved_character = scope:activity.activity_host
+					province = scope:activity.activity_location
+				}
+			}
+			else_if = {
+				limit = { scope:wcss_3071_set_lover = flag:wcss_no }
+				send_interface_toast = {
+					title = wcss_harem.lover_result_failure
+					left_icon = scope:wcss_harem_3071_sex_partner
+					reverse_add_opinion = {
+						target = scope:wcss_harem_3071_sex_partner
+						modifier = romance_opinion
+						opinion = 20
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+wcss_harem.3081 = { # Gain a friend or lover
+	type = activity_event
+	title = wcss_harem.3081.t
+	desc = wcss_harem.3081.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:wcss_harem_3081_target
+		animation = ecstasy
+	}
+	override_background = { reference = bedchamber }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3081 }
+		scope:activity = {
+			any_attending_character = {
+				opinion = {
+					target = root
+					value >= 50
+				}
+				reverse_opinion = {
+					target = root
+					value >= 50
+				}
+				NOT = { has_relation_friend = root }
+				wcss_harem_participant_trigger = yes
+				count > 0
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			has_perk = befriend_perk
+			add = 0.5
+		}
+		modifier = {
+			OR = {
+				has_focus = intrigue_temptation_focus
+				has_trait = seducer
+			}
+			add = 0.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3081
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					opinion = {
+						target = root
+						value >= 50
+					}
+					reverse_opinion = {
+						target = root
+						value >= 50
+					}
+					NOT = { has_relation_friend = root }
+					wcss_harem_participant_trigger = yes
+				}
+				weight = {
+					base = 1
+					opinion_modifier = {
+						who = this
+						opinion_target = root
+						multiplier = 1
+					}
+					modifier = {
+						OR = {
+							root = { has_activity_intent = befriend_attendee_intent }
+							root = { has_activity_intent = woo_attendee_intent }
+						}
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_harem_3081_target
+			}
+		}
+		reverse_add_opinion = {
+			target = scope:wcss_harem_3081_target
+			modifier = friendliness_opinion
+			opinion = 20
+		}
+	}
+
+	option = { # Befriend them
+		name = wcss_harem.3081.a
+		custom_tooltip = wcss_harem.3081.a.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					opinion_modifier = {
+						who = scope:wcss_harem_3081_target
+						opinion_target = root
+						multiplier = 0.5
+					}
+					modifier = {
+						has_trait = gregarious
+						add = 25
+					}
+					modifier = {
+						scope:wcss_harem_3081_target = { has_trait = gregarious }
+						add = 25
+					}
+					send_interface_toast = {
+						title = wcss_harem.friend_result_success
+						left_icon = scope:wcss_harem_3081_target
+						set_relation_friend = scope:wcss_harem_3081_target
+					}
+				}
+				50 = {
+					opinion_modifier = {
+						who = scope:wcss_harem_3081_target
+						opinion_target = root
+						multiplier = -0.5
+					}
+					modifier = {
+						scope:wcss_harem_3081_target = { has_trait = shy } 
+						add = 25
+					}
+					modifier = {
+						scope:wcss_harem_3081_target = { has_trait = irritable } 
+						add = 25
+					}
+					send_interface_toast = {
+						title = wcss_harem.friend_result_failure
+						left_icon = scope:wcss_harem_3081_target
+						progress_towards_friend_effect = {
+							REASON = wcss_bonded_at_lesbian_orgy
+							CHARACTER = scope:wcss_harem_3081_target
+							OPINION = 0
+						}
+					}				
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			opinion_modifier = {
+				opinion_target = scope:wcss_harem_3081_target
+				multiplier = 1
+				min = -49
+			}
+			modifier = {
+				add = 50
+				has_trait = chaste
+			}
+		}
+	}
+
+
+	option = { # Have sex
+		name = wcss_harem.3081.b
+		custom_tooltip = wcss_harem.3081.b.tt
+		random_list = {
+			50 = {
+				wcss_harem_willing_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_harem_3081_target
+				}
+				custom_tooltip = wcss_harem.3081_had_sex_success_tt
+				save_scope_value_as = {
+					name = wcss_3081_have_sex
+					value = flag:wcss_yes
+				}
+			}
+			50 = {
+				wcss_harem_unwilling_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_harem_3081_target
+				}
+				custom_tooltip = wcss_harem.3081_had_sex_failure_tt
+				save_scope_value_as = {
+					name = wcss_3081_have_sex
+					value = flag:wcss_no
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { scope:wcss_3081_have_sex = flag:wcss_yes }
+				send_interface_toast = {
+					title = wcss_harem.3081_had_sex_success_tt
+					left_icon = scope:wcss_harem_3081_target
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3081_target }
+				}
+			}
+			else_if = {
+				limit = { scope:wcss_3081_have_sex = flag:wcss_no }
+				send_interface_toast = {
+					title = wcss_harem.3081_had_sex_failure_tt
+					left_icon = scope:wcss_harem_3081_target			
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 100
+				has_trait = lustful
+			}
+			compare_modifier = {
+				target = scope:wcss_harem_3081_target
+				value = attraction
+			}
+		}
+	}
+
+	option = { # Have sex and make lover
+		trigger = { NOT = { has_relation_lover = scope:wcss_harem_3081_target } }
+		name = wcss_harem.3081.c
+		custom_tooltip = wcss_harem.3081.c.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3081_target
+					}
+					random_list = {
+						50 = {
+							wcss_harem_willing_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_harem_3081_target
+							}
+							wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_harem_3081_target }
+							send_interface_toast = {
+								title = wcss_harem.3081_had_sex_success_tt
+								left_icon = scope:wcss_harem_3081_target
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3081_target }
+								wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_harem_3081_target }
+							}
+						}
+						50 = {
+							wcss_harem_unwilling_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_harem_3081_target
+							}
+							send_interface_toast = {
+								title = wcss_harem.3081_had_sex_success_tt
+								left_icon = scope:wcss_harem_3081_target
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3081_target }
+								reverse_add_opinion = {
+									target = scope:wcss_harem_3081_target
+									modifier = romance_opinion
+									opinion = 20
+								}
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3081_target
+					}
+					send_interface_toast = {
+						title = wcss_harem.3081_had_sex_failure_tt
+						left_icon = scope:wcss_harem_3081_target
+						reverse_add_opinion = {
+							target = scope:wcss_harem_3081_target
+							modifier = annoyed_opinion
+							opinion = -20
+						}		
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			opinion_modifier = {
+				opinion_target = scope:wcss_harem_3081_target
+				multiplier = 1
+				min = -99
+			}
+			compare_modifier = {
+				target = scope:wcss_harem_3081_target
+				value = attraction
+			}
+			modifier = {
+				has_trait = lustful
+				add = 50
+			}
+			modifier = {
+				OR = {
+					has_focus = intrigue_temptation_focus
+					has_trait = seducer
+				}
+				factor = 5
+			}
+		}
+	}
+}
+
+wcss_harem.3091 = { # Deviant event
+	type = activity_event
+	title = wcss_harem.3091.t
+	desc = wcss_harem.3091.desc
+	theme = secret
+	right_portrait = {
+		character = scope:wcss_harem_3091_deviant
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = bedchamber }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3091 }
+		scope:activity = {
+			any_attending_character = {
+				is_deviant_trigger = yes
+				wcss_harem_participant_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = { #Less likely (but not impossible) if already deviant
+			is_deviant_trigger = yes
+			factor = 0.3
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3091
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes
+					is_deviant_trigger = yes
+				}
+				weight = {
+					modifier = {
+						has_opinion_modifier = {
+							target = root
+							modifier = wcss_had_sex_at_orgy_opinion
+						}						
+						factor = 0.2 # Less likely if already had sex with this character at the orgy
+					}
+					modifier = {
+						root = { has_activity_intent = woo_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}					
+				}
+				save_scope_as = wcss_harem_3091_deviant
+			}
+		}
+	}
+
+	option = { # What are you doing? Get out!
+		name = wcss_harem.3091.a
+		add_prestige = 75
+		reverse_add_opinion = {
+			target = scope:wcss_harem_3091_deviant
+			modifier = refusal_opinion
+			opinion = -25
+		}
+		ai_chance = {
+			base = 10
+			min = 1
+			ai_value_modifier = {
+				ai_vengefulness = 0.5
+			}
+			opinion_modifier = {
+				who = scope:wcss_harem_3091_deviant
+				opinion_target = root
+				multiplier = -0.5
+			}
+		}
+	}
+
+	option = { # I won't make a fuss
+		name = {
+			trigger = { is_deviant_trigger = yes }
+			text = wcss_harem.3091.b.is_deviant
+		}
+		name = wcss_harem.3091.b
+		if = {
+			limit = { NOT = { has_relation_friend = scope:wcss_harem_3091_deviant } }
+			wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_harem_3091_deviant }
+		}
+		else = {
+			reverse_add_opinion = {
+				target = scope:wcss_harem_3091_deviant
+				modifier = grateful_opinion
+				opinion = 25
+			}
+		}
+		ai_chance = {
+			base = 10
+			min = 1
+			ai_value_modifier = {
+				ai_sociability = 0.5
+			}
+			opinion_modifier = {
+				who = scope:wcss_harem_3091_deviant
+				opinion_target = root
+				multiplier = 0.5
+			}
+			modifier = {
+				is_deviant_trigger = yes
+				add = 100
+			}
+			modifier = {
+				trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = deviant GENDER_CHARACTER = scope:wcss_harem_3091_deviant }
+				factor =  1.5
+			}
+		}
+	}
+
+	option = { # Interesting technique
+		name = wcss_harem.3091.c
+		trigger = { is_deviant_trigger = no }
+		give_deviant_secret_or_trait_effect = yes
+		if = {
+			limit = { NOT = { has_relation_friend = scope:wcss_harem_3091_deviant } }
+			wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_harem_3091_deviant }
+		}
+		ai_chance = {
+			base = 10
+			min = 1
+			ai_value_modifier = {
+				ai_boldness = 0.5
+			}
+			opinion_modifier = {
+				who = scope:wcss_harem_3091_deviant
+				opinion_target = root
+				multiplier = 0.25
+			}
+			modifier = {
+				NOT = { trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = deviant GENDER_CHARACTER = scope:wcss_harem_3091_deviant } }
+				factor =  1.5
+			}
+		}
+	}
+
+	option = { # Let's do it together
+		name = {
+			trigger = { is_deviant_trigger = yes }
+			text = wcss_harem.3091.d.is_deviant
+		}
+		name = wcss_harem.3091.d
+		custom_tooltip = wcss_harem.3091.d.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3091_deviant
+					}
+					if = {
+						limit = { has_relation_lover = scope:wcss_harem_3091_deviant }
+						send_interface_toast = {
+							title = wcss_harem.3091_had_sex_success_tt
+							left_icon = scope:wcss_harem_3091_deviant
+							if = {
+								limit = { is_deviant_trigger = no }
+								hidden_effect = { give_deviant_secret_or_trait_effect = yes }
+							}
+							wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3091_deviant }	
+							reverse_add_opinion = {
+								modifier = pleased_opinion
+								target = scope:wcss_harem_3091_deviant
+								opinion = 20
+							}
+						}
+					}
+					else = {
+						random_list = {
+							50 = {
+								wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_harem_3091_deviant }
+								send_interface_toast = {
+									title = wcss_harem.3091_had_sex_success_tt
+									left_icon = scope:wcss_harem_3091_deviant
+									if = {
+										limit = { is_deviant_trigger = no }
+										hidden_effect = { give_deviant_secret_or_trait_effect = yes }
+									}
+									wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3091_deviant }
+									wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_harem_3091_deviant }
+								}
+							}
+							50 = {
+								send_interface_toast = {
+									title = wcss_harem.3091_had_sex_success_tt
+									left_icon = scope:wcss_harem_3091_deviant
+									if = {
+										limit = { is_deviant_trigger = no }
+										hidden_effect = { give_deviant_secret_or_trait_effect = yes }
+									}
+									wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_3091_deviant }
+									reverse_add_opinion = {
+										modifier = pleased_opinion
+										target = scope:wcss_harem_3091_deviant
+										opinion = 20
+									}
+								}
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_3091_deviant
+					}
+					send_interface_toast = {
+						title = wcss_harem.3091_had_sex_failure_tt
+						left_icon = scope:wcss_harem_3091_deviant
+						reverse_add_opinion = {
+							modifier = annoyed_opinion
+							target = scope:wcss_harem_3091_deviant
+							opinion = -20
+						}		
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 10
+			min = 1
+			compare_modifier = {
+				target = scope:wcss_harem_3091_deviant
+				value = attraction
+			}
+			opinion_modifier = {
+				who = scope:wcss_harem_3091_deviant
+				opinion_target = root
+				multiplier = 0.25
+			}
+			modifier = {
+				is_deviant_trigger = yes
+				add = 100
+			}
+			modifier = {
+				NOT = { trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = deviant GENDER_CHARACTER = scope:wcss_harem_3091_deviant } }
+				factor =  1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3101 = { # Carnal Blessing
+	type = activity_event
+	title = wcss_harem.3101.t
+	desc = wcss_harem.3101.desc
+	theme = faith
+	right_portrait = {
+		character = scope:wcss_harem_clergy_3101
+		animation = personality_zealous
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3101 }
+		faith = { # Must follow a carnal faith
+			OR = {
+				has_doctrine = tenet_carnal_exaltation
+				has_doctrine = wcss_doctrine_sapphic_exaltation
+			}
+		}
+		wcss_lesbian_faith_devotee = yes # Faith must have at least one lesbian belief
+		scope:activity = {
+			any_attending_character = {
+				is_clergy = yes
+				faith = root.faith # Must be same faith as root
+				wcss_harem_participant_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			ai_zeal < -50
+			factor = 0.5
+		}
+		modifier = {
+			ai_zeal > 50
+			factor = 1.25
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3101
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = {
+					is_clergy = yes
+					faith = root.faith
+					wcss_harem_participant_trigger = yes
+				}
+				save_scope_as = wcss_harem_clergy_3101
+			}
+		}
+	}
+
+	option = { # Accept blessing
+		name = wcss_harem.3101.a
+		add_piety = minor_piety_value
+		ai_chance = {
+			base = 100
+			min = 1
+			ai_value_modifier = {
+				ai_zeal = 0.5
+			}
+		}
+	}
+
+	option = { # Make a donation
+		name = wcss_harem.3101.b
+		add_piety = major_piety_value
+		remove_short_term_gold = minor_gold_value
+		reverse_add_opinion = {
+			modifier = pious_opinion
+			target = scope:wcss_harem_clergy_3101
+			opinion = 50
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_greed = -0.5
+				ai_zeal = 0.5
+			}
+			modifier = { # AI shouldn't be too eager to spend gold unless it has a fair amount
+				short_term_gold < medium_gold_value
+				factor = 0.2
+			}
+			modifier = {
+				short_term_gold < minor_gold_value
+				factor = 0
+			}
+		}
+	}
+
+	option = { # Drink instead
+		name = wcss_harem.3101.c
+		reverse_add_opinion = {
+			target = scope:wcss_harem_clergy_3101
+			modifier = impious_opinion
+			opinion = -50
+		}
+		stress_impact = {
+			base = medium_stress_loss
+			zealous = minor_stress_gain
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = {
+					value = stress
+					multiply = 1
+				}
+			}
+			ai_value_modifier = {
+				ai_zeal = -0.5
+			}
+			modifier = {
+				has_trait = zealous
+				factor = 0
+			}
+		}
+	}
+}
+
+scripted_trigger wcss_harem_event_3111_seduce_target_trigger = {
+	wcss_harem_participant_trigger = yes
+	NOR = {
+		has_relation_lover = root
+		has_opinion_modifier = {
+			modifier = wcss_had_sex_at_orgy_opinion
+			target = root
+		}
+	}
+	OR = {
+		any_targeting_scheme = {
+			scheme_owner = root
+			scheme_type = seduce
+		}
+		AND = { 
+			root = { has_activity_intent = woo_attendee_intent }
+			this = root.intent_target
+		}
+	}
+	opinion = {
+		target = root
+		value > 20
+	}
+}
+
+wcss_harem.3111 = { # Seduction target (root seduction target)
+	type = activity_event
+	title = wcss_harem.3111.t
+	desc = wcss_harem.3111.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	right_portrait = {
+		character = scope:wcss_seduction_target_3111
+		animation = admiration
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3111 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_event_3111_seduce_target_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.5 # Reduced chance
+		modifier = { # Default chance with high opinion
+			scope:activity = {
+				any_attending_character = {
+					wcss_harem_event_3111_seduce_target_trigger = yes
+					opinion = {
+						target = root
+						value > 50
+					}
+				}
+			}
+			add = 0.5
+		}
+		modifier = { # Higher chance with very high opinion
+			scope:activity = {
+				any_attending_character = {
+					wcss_harem_event_3111_seduce_target_trigger = yes
+					opinion = {
+						target = root
+						value > 50
+					}
+				}
+			}
+			add = 1.5
+		}
+		modifier = { # Higher change for woo intent
+			has_activity_intent = woo_attendee_intent
+			factor = 2
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3111
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { wcss_harem_event_3111_seduce_target_trigger = yes }
+				save_scope_as = wcss_seduction_target_3111
+			}
+		}
+		random_scheme = {
+			limit = {
+				scheme_type = seduce
+				scheme_target = {
+					this = scope:wcss_seduction_target_3111
+				}
+			}
+			save_scope_as = wcss_scheme_3111
+		}
+	}
+
+	option = { # Make lover
+		name = wcss_harem.3111.a
+		random_list = {
+			50 = {
+				wcss_harem_willing_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_seduction_target_3111
+				}
+				random_list = {
+					50 = {
+						wcss_harem_willing_to_be_lovers_modifier = { 
+							CHARACTER_1 = root 
+							CHARACTER_2 = scope:wcss_seduction_target_3111
+						}
+						wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_seduction_target_3111 }
+						hidden_effect = {
+							send_interface_toast = {
+								title = wcss_harem.3111_success_tt
+								left_icon = scope:wcss_seduction_target_3111
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_seduction_target_3111 }	
+								if = { 
+									limit = { NOT = { has_relation_lover = scope:wcss_seduction_target_3111 } } 
+									wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_seduction_target_3111 }
+								}
+							}
+						}
+					}
+					50 = {
+						wcss_harem_unwilling_to_be_lovers_modifier = { 
+							CHARACTER_1 = root 
+							CHARACTER_2 = scope:wcss_seduction_target_3111
+						}
+						send_interface_toast = {
+							title = wcss_harem.3111_success_tt
+							left_icon = scope:wcss_seduction_target_3111
+							wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_seduction_target_3111 }	
+							reverse_add_opinion = {
+								modifier = romance_opinion
+								target = scope:wcss_seduction_target_3111
+								opinion = 20
+							}
+						}
+					}
+				}
+			}
+			50 = {
+				wcss_harem_unwilling_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_seduction_target_3111
+				}
+				send_interface_toast = {
+					title = wcss_harem.3111_failure_tt
+					left_icon = scope:wcss_seduction_target_3111
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_seduction_target_3111 }	
+					reverse_add_opinion = {
+						modifier = annoyed_opinion
+						target = scope:wcss_seduction_target_3111
+						opinion = -20
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+			modifier = {
+				num_of_relation_lover > 2
+				NOT = { 
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+				}
+				factor = 0.8
+			}
+		}
+	}
+
+	option = { # Just sex
+		name = wcss_harem.3111.b
+		random_list = {
+			50 = {
+				wcss_harem_willing_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_seduction_target_3111
+				}
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_seduction_target_3111 }
+				reverse_add_opinion = {
+					modifier = romance_opinion
+					target = scope:wcss_seduction_target_3111
+					opinion = 20
+				}
+			}
+			50 = {
+				wcss_harem_unwilling_to_have_sex_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_seduction_target_3111
+				}
+				reverse_add_opinion = {
+					modifier = annoyed_opinion
+					target = scope:wcss_seduction_target_3111
+					opinion = -20
+				}
+			}
+		}
+		ai_chance = {
+			base = 0
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_vengefulness = 0.25
+			}
+		}
+	}
+
+	option = { # Don't take action
+		name = wcss_harem.3111.c
+		stress_impact = {
+			base = minor_stress_loss
+		}
+		ai_chance = {
+			base = 10
+			ai_value_modifier = {
+				ai_boldness = -0.1
+			}
+		}
+	}
+}
+
+wcss_harem.3121 = { # Participant seducing or romancing root
+	type = activity_event
+	title = wcss_harem.3121.t
+	desc = {
+		desc = wcss_harem.3121.desc
+		first_valid ={
+			triggered_desc = {
+				trigger = { should_be_naked_trigger = yes }
+				desc = wcss_harem.3121.desc_naked
+			}
+			desc = wcss_harem.3121.desc_clothed
+		}
+	}
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_scheme_owner_3121
+		animation = flirtation
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3121 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+				NOR = {
+					has_relation_lover = root
+					has_opinion_modifier = {
+						modifier = wcss_had_sex_at_orgy_opinion
+						target = root
+					}
+				}
+				OR = {
+					any_scheme = {
+						scheme_type = seduce
+						scheme_target = root
+					}
+					any_scheme = {
+						scheme_type = courting
+						scheme_target = root
+					}
+					AND = {
+						has_activity_intent = woo_attendee_intent
+						root = this.intent_target
+					}
+				}
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3121
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes
+					NOR = {
+						has_relation_lover = root
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+					}
+					OR = {
+						any_scheme = {
+							scheme_type = seduce
+							scheme_target = root
+						}
+						any_scheme = {
+							scheme_type = courting
+							scheme_target = root
+						}
+						AND = {
+							has_activity_intent = woo_attendee_intent
+							root = this.intent_target
+						}
+					}
+				}
+				save_scope_as = wcss_scheme_owner_3121
+			}
+		}
+		scope:wcss_scheme_owner_3121 = {
+			if = {
+				limit = {
+					any_scheme = {
+						scheme_type = seduce
+						scheme_target = root
+					}
+					any_scheme = {
+						scheme_type = courting
+						scheme_target = root
+					}				
+				}
+				random_scheme = {
+					limit = {
+						OR = {
+							scheme_type = seduce
+							scheme_type = courting
+						}
+						scheme_target = root
+					}
+					save_scope_as = wcss_scheme_3121
+				}				
+			}
+		}
+	}
+
+	option = { # Make lover
+		name = wcss_harem.3121.a
+		random_list = {
+			50 = {
+				wcss_harem_willing_to_be_lovers_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_scheme_owner_3121
+				}
+
+				send_interface_toast = {
+					title = wcss_harem.3121_lovers_tt
+					left_icon = scope:wcss_scheme_owner_3121
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_scheme_owner_3121 }
+					set_relation_lover = { 
+						reason = wcss_harem_lover_relation_default
+						target = scope:wcss_scheme_owner_3121
+						involved_character = scope:activity.activity_host
+						province = scope:activity.activity_location
+					}					
+					reverse_add_opinion = {
+						modifier = romance_opinion
+						target = scope:wcss_scheme_owner_3121
+						opinion = 20
+					}
+				}
+			}
+			50 = {
+				wcss_harem_unwilling_to_be_lovers_modifier = { 
+					CHARACTER_1 = root 
+					CHARACTER_2 = scope:wcss_scheme_owner_3121
+				}
+				send_interface_toast = {
+					title = wcss_harem.3121_just_sex_tt
+					left_icon = scope:wcss_scheme_owner_3121
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_scheme_owner_3121 }	
+					reverse_add_opinion = {
+						modifier = romance_opinion
+						target = scope:wcss_scheme_owner_3121
+						opinion = 20
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = scope:wcss_scheme_3121 }
+			scope:wcss_scheme_3121 = { end_scheme = yes }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Just sex
+		name = wcss_harem.3121.b
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_scheme_owner_3121 }
+		reverse_add_opinion = {
+			modifier = romance_opinion
+			target = scope:wcss_scheme_owner_3121
+			opinion = 20
+		}
+		if = {
+			limit = { exists = scope:wcss_scheme_3121 }
+			scope:wcss_scheme_3121 = { end_scheme = yes }
+		}
+		ai_chance = {
+			base = 0
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_vengefulness = 0.25
+			}
+		}
+	}
+
+	option = { # Make soulmate
+		trigger = { 
+			exists = scope:wcss_scheme_3121
+			scope:wcss_scheme_3121 = { scheme_type = courting }
+			any_relation = {
+				type = soulmate
+				count < 1
+			}
+			scope:wcss_scheme_owner_3121 = {
+				any_relation = {
+					type = soulmate
+					count < 1
+				}
+			}
+		}
+		name = wcss_harem.3121.c
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_scheme_owner_3121 }
+		set_relation_soulmate = scope:wcss_scheme_owner_3121
+		reverse_add_opinion = {
+			modifier = romance_opinion
+			target = scope:wcss_scheme_owner_3121
+			opinion = 20
+		}
+		if = {
+			limit = { exists = scope:wcss_scheme_3121 }
+			scope:wcss_scheme_3121 = { end_scheme = yes }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # No thank you
+		name = wcss_harem.3121.d
+		reverse_add_opinion = {
+			modifier = refusal_opinion
+			target = scope:wcss_scheme_owner_3121
+			opinion = -20
+		}
+		if = {
+			limit = { exists = scope:wcss_scheme_3121 }
+			scope:wcss_scheme_3121 = { end_scheme = yes }
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+wcss_harem.3131 = { # Using a toy
+	type = activity_event
+	title = wcss_harem.3131.t
+	desc = {
+		first_valid ={
+			triggered_desc = {
+				trigger = { should_be_naked_trigger = yes }
+				desc = wcss_harem.3131.desc_naked
+			}
+			desc = wcss_harem.3131.desc
+		}
+	}
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_participant_event_3131
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3131 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			is_deviant_trigger = yes
+			factor = 1.5
+		}
+		modifier = {
+			has_character_modifier = wcss_harem_sextoy_modifier
+			factor = 0.3
+		}
+		modifier = { # Since this gives a modifier to another character, let's make it less likely to be triggered by AI characters
+			is_ai = yes
+			factor = 0.1
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3131
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { wcss_harem_participant_trigger = yes }
+				weight = {
+					base = 1
+					modifier = {
+						OR = {
+							has_trait = rakish
+							has_trait = lustful
+						}
+						add = 1
+					}
+					modifier = {
+						OR = {
+							has_focus = intrigue_temptation_focus
+							has_trait = seducer
+						}
+						add = 2
+					}
+					modifier = {
+						is_deviant_trigger = yes
+						NOR = {
+							has_relation_lover = root
+							has_opinion_modifier = {
+								modifier = wcss_had_sex_at_orgy_opinion
+								target = root
+							}
+						}
+						factor = 5
+					}
+					modifier = {
+						root = { has_activity_intent = woo_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+					modifier = {
+						has_relation_lover = root
+						factor = 0.5
+					}
+					modifier = {
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = { 
+							NOT = { has_character_modifier = wcss_harem_sextoy_modifier }
+						}
+						add_character_modifier = {
+							modifier = wcss_harem_sextoy_modifier
+						}
+					}
+				}			
+				save_scope_as = wcss_participant_event_3131
+			}
+		}
+	}
+
+	option = { # Enjoy the Show
+		name = wcss_harem.3131.a
+		stress_impact = {
+			base = medium_stress_loss
+			lustful = minor_stress_impact_gain
+			deviant = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Offer help
+		name = wcss_harem.3131.b
+		if = { 
+			limit = { has_relation_lover = scope:wcss_participant_event_3131 } 
+			custom_tooltip = wcss_harem.3131.already_lover.tt
+		}
+		else = {
+			custom_tooltip = wcss_harem.3131.not_lover.tt
+		}
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_participant_event_3131
+					}
+					random_list = {
+						50 = {
+							wcss_harem_willing_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_participant_event_3131
+							}
+							wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_participant_event_3131 }
+							send_interface_toast = {
+								title = wcss_harem.3131_had_sex_success_tt
+								left_icon = scope:wcss_participant_event_3131
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_participant_event_3131 }	
+								wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_participant_event_3131 }
+							}
+						}
+						50 = {
+							wcss_harem_unwilling_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_participant_event_3131
+							}
+							send_interface_toast = {
+								title = wcss_harem.3131_had_sex_success_tt
+								left_icon = scope:wcss_participant_event_3131
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_participant_event_3131 }	
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_participant_event_3131
+					}
+					send_interface_toast = {
+						title = wcss_harem.3131_had_sex_failure_tt
+						left_icon = scope:wcss_participant_event_3131
+						reverse_add_opinion = {
+							target = scope:wcss_participant_event_3131
+							modifier = annoyed_opinion
+							opinion = -20
+						}	
+					}
+				}
+			}			
+		}
+		ai_chance = {
+			base = 50
+			opinion_modifier = {
+				opinion_target = scope:wcss_participant_event_3131
+				multiplier = 0.5
+			}
+			modifier = {
+				has_trait = lustful
+				add = 25
+			}
+			modifier = {
+				has_focus = intrigue_temptation_focus
+				add = 25
+			}
+		}
+	}
+
+	option = { # I should buy one
+		name = wcss_harem.3131.c
+		trigger = { 
+			NOT = { has_character_modifier = wcss_harem_sextoy_modifier }
+		}
+		remove_short_term_gold = tiny_gold_value
+		add_character_modifier = {
+			modifier = wcss_harem_sextoy_modifier
+		}
+		if = {
+			limit = { is_deviant_trigger = no }
+			random = {
+				chance = 20
+				give_deviant_secret_or_trait_effect = yes
+			}
+		}
+		ai_chance = {
+			base = 100
+			modifier = {
+				short_term_gold < minor_gold_value
+				factor = 0.5
+			}
+			modifier = {
+				short_term_gold < tiny_gold_value
+				factor = 0
+			}
+			modifier = {
+				is_deviant_trigger = yes
+				short_term_gold >= tiny_gold_value
+				factor = 5
+			}
+		}
+	}
+}
+
+wcss_harem.3141 = { # HOST ONLY: Low on wine
+	type = activity_event
+	title = wcss_harem.3141.t
+	desc = wcss_harem.3141.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	override_background = { reference = feast }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3141 }
+		root = scope:activity.activity_host
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			is_deviant_trigger = yes
+			add = 0.5
+		}
+		modifier = { # Well-stocked courts shouldn't receive this event
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 3 }
+			amenity_level = { type = court_food_quality value < 5 }
+			factor = 0.3
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value >= 5 }
+			factor = 0.1
+		}
+		modifier = { # Courts without much food amenities should see this event more often
+			has_royal_court = yes
+			amenity_level = { type = court_food_quality value < 2 }
+			factor = 1.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3141
+			months = 6
+		}
+	}
+
+	option = { # Buy more!
+		name = wcss_harem.3141.a
+		remove_short_term_gold = minor_gold_value
+		add_prestige = 75
+		stress_impact = {
+			greedy = minor_stress_gain
+			generous = minor_stress_loss
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_greed = -0.5
+			}
+			modifier = {
+				OR = {
+					is_deviant_trigger = yes
+					has_trait = lifestyle_reveler
+				}
+				factor = 0.1
+			}
+		}
+	}
+
+	option = { # Take a collection
+		name = wcss_harem.3141.b
+		add_prestige = minor_prestige_loss
+		add_gold = minor_gold_value
+		scope:activity = {
+			every_attending_character = {
+				limit = { wcss_harem_participant_trigger = yes }
+				custom = wcss_every_guest_scope_tt
+				remove_short_term_gold = tiny_gold_value
+				add_opinion = {
+					target = root
+					modifier = respect_opinion
+					opinion = -10
+				}
+			}
+		}
+		stress_impact = {
+			just = medium_stress_impact_gain
+			generous = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_greed = 0.5
+			}
+			modifier = {
+				OR = {
+					is_deviant_trigger = yes
+					has_trait = lifestyle_reveler
+				}
+				factor = 0.1
+			}
+		}
+	}
+
+	option = { # Secret Stash
+		trigger = { has_trait = lifestyle_reveler }
+		name = wcss_harem.3141.c
+		trait = lifestyle_reveler
+		add_prestige = medium_prestige_gain
+		add_character_modifier = {
+			modifier = feast_bought_more_drink_modifier
+			years = 10
+		}
+		stress_impact = {
+			greedy = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 500
+			modifier = { 
+				is_deviant_trigger = yes
+				factor = 0.2
+			}
+		}
+	}
+
+	option = { # Empty bottles...
+		trigger = { is_deviant_trigger = yes }
+		name = wcss_harem.3141.d
+		trait = deviant
+		scope:activity = {
+			every_attending_character = {
+				custom = wcss_every_guest_scope_tt
+				add_opinion = {
+					target = root
+					modifier = wcss_orgy_public_sex_opinion
+				}
+			}
+		}
+		stress_impact = {
+			base = minor_stress_loss
+		}
+		ai_chance = {
+			base = 500
+		}
+	}
+}
+
+scripted_trigger wcss_harem_incest_participant_trigger = { # Alternative trigger, since the default participant trigger excludes family who are not already lovers/concubines
+	is_ai = yes
+	NOT = { this = root }
+	is_alive = yes
+	is_imprisoned = no
+	wcss_harem_has_serious_illness_trigger = no			
+	wcss_harem_is_incest_trigger = yes # This trigger will also exclude lovers and concubines
+	age >= 20 # CK3 doesn't seem to allow incest for characters younger than age 20, so I will also try and enforce this
+}
+
+wcss_harem.3151 = { # Family event
+	type = activity_event
+	title = wcss_harem.3151.t
+	desc = wcss_harem.3151.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_event_target_3151
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3151 }
+		scope:activity = {
+			any_attending_character = { wcss_harem_incest_participant_trigger = yes }
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.4
+		modifier = {
+			OR = {
+				has_perk = subtle_desire_perk
+				is_incestuous_trigger = yes
+				faith = { has_doctrine_parameter = consanguinity_unrestricted_incest }
+			}
+			add = 0.3
+		}
+		modifier = {
+			is_deviant_trigger = yes
+			add = 0.3
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3151
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { wcss_harem_incest_participant_trigger = yes }
+				save_scope_as = wcss_event_target_3151
+			}
+		}
+	}
+
+	option = { # Best to not get involved...
+		name = wcss_harem.3151.a
+		stress_impact = {
+			base = minor_stress_gain
+			shy = medium_stress_loss
+		}
+		ai_chance = { base = 100 }
+	}
+
+	option = { # Friendly conversation
+		name = wcss_harem.3151.b
+		custom_tooltip = wcss_harem.3151.b.tt
+		if = {
+			limit = { has_relation_friend = scope:wcss_event_target_3151 }
+			reverse_add_opinion = {
+				target = scope:wcss_event_target_3151
+				modifier = friendliness_opinion
+				opinion = 20
+			}
+			stress_impact = {
+				base = medium_stress_loss
+				shy = medium_stress_impact_gain
+				gregarious = minor_stress_impact_loss
+			}
+		}
+		else = {
+			wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_event_target_3151 }
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				NOT = { has_relation_friend = scope:wcss_event_target_3151 }
+				add = 99
+			}
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_event_target_3151
+				multiplier = 1
+			}
+			modifier = {
+				relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = scope:wcss_event_target_3151 }
+				NOR = {	
+					is_deviant_trigger = yes
+					is_incestuous_trigger = yes
+					has_perk = subtle_desire_perk
+				}
+				factor = 3
+			}
+		}
+	}
+
+	option = { # Seduction (incest)
+		name = wcss_harem.3151.c
+		custom_tooltip = wcss_harem.3151.c.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_event_target_3151
+					}
+					modifier = {
+						scope:wcss_event_target_3151 = { is_deviant_trigger = yes }
+						add = 25
+					}
+					random_list = {
+						50 = {
+							wcss_harem_willing_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_event_target_3151
+							}
+							wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_event_target_3151 }
+							send_interface_toast = {
+								title = wcss_harem.3151_had_sex_success_tt
+								left_icon = scope:wcss_event_target_3151
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_event_target_3151 }	
+								wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_event_target_3151 }
+							}
+						}
+						50 = {
+							wcss_harem_unwilling_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_event_target_3151
+							}
+							send_interface_toast = {
+								title = wcss_harem.3151_had_sex_success_tt
+								left_icon = scope:wcss_event_target_3151
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_event_target_3151 }
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_event_target_3151
+					}
+					send_interface_toast = {
+						title = wcss_harem.3151_had_sex_failure_tt
+						left_icon = scope:wcss_event_target_3151
+						reverse_add_opinion = {
+							target = scope:wcss_event_target_3151
+							modifier = disgusted_opinion
+							opinion = -50
+						}	
+					}
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				NOR = {
+					faith = { has_doctrine_parameter = consanguinity_unrestricted_incest } 
+					is_deviant_trigger = yes
+					is_incestuous_trigger = yes
+					has_perk = subtle_desire_perk
+				}
+				factor = 0.1
+			}
+			modifier = {
+				has_perk = subtle_desire_perk
+				add = 50
+			}
+		}
+	}
+}
+
+wcss_harem.3161 = { # Clever courtesan event
+	type = activity_event
+	title = wcss_harem.3161.t
+	desc = wcss_harem.3161.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_clever_courtesan_3161
+		animation = war_over_tie
+	}
+	override_background = { reference = bedchamber }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3161 }
+		OR = {
+			scope:activity.activity_host = {
+				any_courtier_or_guest = {
+					wcss_can_join_harem_trigger = yes
+					NOT = { has_relation_lover = root }
+					has_character_flag = wcss_harem_courtesan
+				}
+			}
+			scope:activity = {
+				any_attending_character = { 
+					wcss_harem_participant_trigger = yes 
+					NOT = { has_relation_lover = root }
+					has_character_flag = wcss_harem_courtesan
+				}
+			}
+			is_ai = no # If no courtesans have been generated for this orgy, don't trigger this event for AI, this prevents new character spam
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			has_character_flag = wcss_had_3001
+			factor = 0.5
+		}
+		modifier = {
+			has_focus_intrigue = yes
+			add = 2
+		}
+		modifier = {
+			has_character_modifier = wcss_harem_maidservant_lover_modifier
+			factor = 0.1
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3161
+			months = 6
+		}
+		if = {
+			limit = { # Reuse courtesan if root is AI
+				scope:activity.activity_host = {
+					any_courtier_or_guest = { 
+						wcss_can_join_harem_trigger = yes 
+						NOT = { has_relation_lover = root }
+						has_character_flag = wcss_harem_courtesan
+					}
+				}
+				is_ai = yes
+			}
+			scope:activity.activity_host = {
+				random_courtier_or_guest = {
+					limit = { 
+						wcss_can_join_harem_trigger = yes 
+						NOT = { has_relation_lover = root }
+						has_character_flag = wcss_harem_courtesan
+					}
+					save_scope_as = wcss_clever_courtesan_3161
+				}
+			}
+		}
+		else_if = {
+			limit = { is_ai = no } # If not AI, create new courtesan
+			scope:host = {
+				create_character = {
+					location = scope:activity.activity_location
+					template = wcss_clever_courtesan
+					save_scope_as = wcss_clever_courtesan_3161
+				}
+				hidden_effect = { add_visiting_courtier = scope:wcss_clever_courtesan_3161 }
+			}
+			hidden_effect = { 
+				scope:wcss_clever_courtesan_3161 = { # We can try to invite to the activity, but it might not work.
+					invite_to_activity = scope:activity
+					accept_activity_invite = scope:activity
+					add_character_flag = {
+						flag = wcss_harem_courtesan
+						months = 4
+					}
+				}
+			}
+		}
+	}
+
+	option = { # Take as a mistress
+		name = wcss_harem.3161.a
+		if = { 
+			limit = { 
+				is_ai = no 
+				scope:wcss_clever_courtesan_3161 = { is_pool_guest_of = scope:host } 
+				OR = { # If root is not AI, and the host is either also the root or an AI, recruit the courtesan as long as courtesan is a guest at the host's court
+					this = scope:host
+					scope:host = { is_ai = yes }
+				}
+			}
+			root = { add_courtier = scope:wcss_clever_courtesan_3161 }
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_clever_courtesan_3161 }
+		set_relation_lover = { 
+			reason = wcss_harem_lover_relation_default
+			target = scope:wcss_clever_courtesan_3161
+			involved_character = scope:activity.activity_host
+			province = scope:activity.activity_location
+		}
+		ai_chance = { 
+			base = 100 
+			modifier = {
+				OR = {
+					has_trait = lustful
+					has_trait = rakish
+				}
+				add = 50
+			}
+			modifier = {
+				has_trait = chaste
+				add = -100
+			}
+		}
+	}
+
+	option = { # Serve as spy
+		name = wcss_harem.3161.b
+		trigger = {
+			scope:wcss_clever_courtesan_3161 = {
+				is_landed = no
+				OR = {
+					is_concubine = no
+					is_concubine_of = root
+				}
+				OR = {
+					is_pool_guest_of = scope:host
+					is_courtier_of = root
+				}
+			}
+			NOT = { has_character_modifier = wcss_harem_maidservant_lover_modifier }
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_clever_courtesan_3161 }
+		custom_tooltip = wcss_harem.3161.b.tt
+		if = {
+			limit = {
+				is_ai = no
+			}
+			hidden_effect = {
+				scope:wcss_clever_courtesan_3161 = {
+					death = {
+						death_reason = death_vanished
+					}
+				}
+			}
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_maidservant_lover_modifier
+			years = 30
+		}
+		ai_chance = { 
+			base = 100 
+			modifier = {
+				has_trait = deceitful
+				add = 50
+			}
+			modifier = {
+				has_trait = paranoid
+				add = 100
+			}
+			modifier = {
+				has_trait = arrogant
+				add = -100
+			}
+		}
+	}
+
+	option = { # Tell me more
+		name = wcss_harem.3161.c
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_clever_courtesan_3161 }
+		add_intrigue_lifestyle_xp = massive_lifestyle_xp
+		ai_chance = { 
+			base = 100 
+			modifier = {
+				has_focus_intrigue = yes
+				factor = 3
+			}
+		}
+	}
+}
+
+wcss_harem.3171 = { # reclusive guest
+	type = activity_event
+	title = wcss_harem.3171.t
+	desc = wcss_harem.3171.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_harem_reluctant_3171
+		animation = worry
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_3171 }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+				OR = {
+					has_trait = shy
+					has_trait = chaste
+					has_trait = reclusive
+				}
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			has_trait = gregarious
+			factor = 1.5
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3171
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = {
+					wcss_harem_participant_trigger = yes
+					OR = {
+						has_trait = shy
+						has_trait = chaste
+						has_trait = reclusive
+					}
+				}
+				weight = {
+					base = 1
+					compatibility_modifier = {
+						who = root
+						compatibility_target = this
+						multiplier = 0.2
+					}
+					modifier = {
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+					modifier = {
+						OR = {
+							root = { has_activity_intent = befriend_attendee_intent }
+							root = { has_activity_intent = woo_attendee_intent }
+						}
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_harem_reluctant_3171
+			}
+		}
+	}
+
+	option = { # Let's be friends!
+		name = wcss_harem.3171.a
+		random_list = {
+			50 = {
+				compare_modifier = {
+					value = diplomacy
+					multiplier = 1
+					min = 1
+				}
+				compatibility_modifier = {
+					who = scope:wcss_harem_reluctant_3171
+					compatibility_target = root
+					min = -30
+					max = 30
+					multiplier = 2
+				}
+				modifier = {
+					scope:wcss_harem_reluctant_3171 = {
+						OR = {
+							has_trait = shy
+							has_trait = reclusive
+						}
+					}
+					factor = 0.3
+				}
+				send_interface_toast = {
+					title = wcss_harem.3171.a.success
+					left_icon = scope:wcss_harem_reluctant_3171
+					progress_towards_friend_effect = {
+						REASON = wcss_bonded_at_lesbian_orgy
+						CHARACTER = scope:wcss_harem_reluctant_3171
+						OPINION = 0
+					}
+				}
+			}
+			50 = {
+				compare_modifier = {
+					value = diplomacy
+					multiplier = -1
+					max = -1
+				}
+				send_interface_toast = {
+					title = wcss_harem.3171.a.failure
+					left_icon = scope:wcss_harem_reluctant_3171
+					reverse_add_opinion = {
+						target = scope:wcss_harem_reluctant_3171
+						modifier = annoyed_opinion
+						opinion = -50
+					}
+				}
+			}
+		}
+		stress_impact = {
+			shy = minor_stress_gain
+			gregarious = minor_stress_loss
+		}
+		ai_chance = {
+			base = 100
+			min = 1
+			ai_value_modifier = {
+				ai_sociability = 0.5
+			}
+		}
+	}
+
+	option = { # Let's be more...
+		name = wcss_harem.3171.b
+		trait = seducer
+		custom_tooltip = wcss_harem.3171.b.tt
+		hidden_effect = {
+			random_list = {
+				50 = {
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_reluctant_3171
+					}
+					random_list = {
+						50 = {
+							wcss_harem_willing_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_harem_reluctant_3171
+							}
+							wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_harem_reluctant_3171 }
+							send_interface_toast = {
+								title = wcss_harem.lover_progress
+								left_icon = scope:wcss_harem_reluctant_3171
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_reluctant_3171 }	
+								wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_harem_reluctant_3171 }
+							}
+						}
+						50 = {
+							wcss_harem_unwilling_to_be_lovers_modifier = { 
+								CHARACTER_1 = root 
+								CHARACTER_2 = scope:wcss_harem_reluctant_3171
+							}
+							send_interface_toast = {
+								title = wcss_harem.lover_progress
+								left_icon = scope:wcss_harem_reluctant_3171
+								wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_reluctant_3171 }
+							}
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_reluctant_3171
+					}
+					send_interface_toast = {
+						title = wcss_harem.3171.b.failure
+						left_icon = scope:wcss_harem_reluctant_3171
+						reverse_add_opinion = {
+							target = scope:wcss_harem_reluctant_3171
+							modifier = disgusted_opinion
+							opinion = -50
+						}	
+					}
+				}
+			}
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			chaste = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			modifier = {
+				has_trait = chaste
+				factor = 0.1
+			}
+			modifier = {
+				has_trait = lustful
+				factor = 3
+			}
+		}
+	}
+
+	option = { # Let's have a drink
+		name = wcss_harem.3171.c
+		random_list = {
+			50 = {
+				opinion_modifier = {
+					who = scope:wcss_harem_reluctant_3171
+					opinion_target = root
+					multiplier = 0.5
+				}
+				send_interface_toast = {
+					title = wcss_harem.3171.c.success
+					left_icon = scope:wcss_harem_reluctant_3171
+					reverse_add_opinion = {
+						target = scope:wcss_harem_reluctant_3171
+						modifier = friendliness_opinion
+						opinion = 20
+					}
+				}
+				if = {
+					limit = { 
+						NOT = { has_trait = drunkard }
+					}
+					random = {
+						chance = 5
+						add_trait = drunkard
+					}
+				}
+			}
+			50 = {
+				opinion_modifier = {
+					who = scope:wcss_harem_reluctant_3171
+					opinion_target = root
+					multiplier = -0.5
+				}
+				modifier = {
+					has_trait = lifestyle_reveler
+					factor = 0
+				}
+				send_interface_toast = {
+					title = wcss_harem.3171.c.failure
+					left_icon = scope:wcss_harem_reluctant_3171
+					reverse_add_opinion = {
+						target = scope:wcss_harem_reluctant_3171
+						modifier = annoyed_opinion
+						opinion = 20
+					}
+				}
+			}
+		}
+		stress_impact = {
+			base = minor_stress_loss
+			drunkard = medium_stress_loss
+			lifestyle_reveler = minor_stress_impact_loss
+		}
+		ai_chance = { 
+			base = 0
+			modifier = {
+				has_trait = drunkard
+				add = 50
+			}
+			modifier = {
+				has_trait = lifestyle_reveler
+				add = 50
+			}
+		}
+	}
+
+	option = { # Mind your own business
+		name = wcss_harem.3171.d
+		ai_chance = {
+			base = 10
+			min = 1
+			ai_value_modifier = {
+				ai_sociability = -0.5
+			}
+		}
+	}
+}
+
+scripted_trigger wcss_harem_3181_spouse_trigger = {
+	wcss_harem_participant_trigger = yes
+	faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+	NOT = { has_trait = chaste }
+}
+
+scripted_trigger wcss_harem_3181_partner_trigger = {
+	wcss_harem_participant_trigger = yes
+	faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+	NOR = { 
+		is_consort_of = root 
+		has_trait = chaste
+		any_relation = {
+			type = lover
+			is_spouse_of = root # Not lovers with any of root's spouses
+		}
+	}
+}
+
+wcss_harem.3181 = { # Introduce lover to lesbian wife (polyamory requried)
+	type = activity_event
+	title = wcss_harem.3181.t
+	desc = wcss_harem.3181.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:wcss_harem_spouse_3181
+		animation = personality_bold
+	}
+	lower_center_portrait = scope:wcss_harem_partner_3181
+	override_background = { reference = bedchamber }
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOR = { # These two events are very similar so let's block them from happening at the same activity
+			has_character_flag = wcss_had_3181
+			has_character_flag = wcss_had_3191 
+		}
+		faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+		any_spouse = { wcss_harem_3181_spouse_trigger = yes }
+		any_relation = {
+			type = lover
+			wcss_harem_3181_partner_trigger = yes
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.5
+		modifier = { # More eligable wives is more weight
+			any_spouse = {
+				count > 1
+				wcss_harem_3181_spouse_trigger = yes
+			}
+			add = 0.5
+		}
+		modifier = { # More eligable lovers is more weight
+			any_relation = {
+				type = lover
+				count > 2
+				wcss_harem_3181_partner_trigger = yes
+			}
+			add = 0.5		
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3181
+			months = 6
+		}
+		random_spouse = {
+			limit = { wcss_harem_3181_spouse_trigger = yes }
+			weight = {
+				base = 50
+				min = 1
+				opinion_modifier = {
+					who = root
+					opinion_target = this
+					multiplier = 0.5
+				}
+				modifier = {
+					is_landed = yes
+					factor = 0.5
+				}
+				modifier = {
+					always = yes
+					add = { value = this.ai_boldness }
+				}
+			}
+			save_scope_as = wcss_harem_spouse_3181
+		}
+		if = {
+			limit = { exists = scope:wcss_harem_spouse_3181 }
+			random_relation = {
+				type = lover
+				limit = {
+					wcss_harem_participant_trigger = yes
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					NOR = { 
+						has_trait = chaste
+						is_consort_of = root
+						has_relation_lover = scope:wcss_harem_spouse_3181 
+					}					
+				}
+				weight = {
+					base = 1
+					min = 1
+					opinion_modifier = {
+						who = root
+						opinion_target = this
+						multiplier = 0.5
+					}
+					opinion_modifier = {
+						who = scope:wcss_harem_spouse_3181
+						opinion_target = this
+						multiplier = 0.5
+					}
+					compatibility_modifier = {
+						who = scope:wcss_harem_spouse_3181
+						compatibility_target = this
+						min = -30
+						max = 30
+						multiplier = 2
+					}
+					modifier = {
+						is_landed = no
+						add = 20
+					}
+					modifier = { 
+						OR = {
+							is_courtier_of = root
+							is_courtier_of = scope:wcss_harem_spouse_3181
+						}
+						add = 30
+					}
+				}
+				save_scope_as = wcss_harem_partner_3181
+			}
+		}								
+		if = {
+			limit = {
+				exists = scope:wcss_harem_spouse_3181
+				exists = scope:wcss_harem_partner_3181
+			}
+			trigger_event = wcss_harem.3181
+		}
+		else = { 
+			if = {
+				limit = { this = scope:host }
+				trigger_event = { on_action = wcss_harem_host_event_selection }
+			}
+			else = {
+				trigger_event = { on_action = wcss_harem_event_selection }
+			}
+		}
+		hidden_effect = {
+			every_secret = {
+				limit = {
+					secret_type = secret_lover
+					secret_target = scope:wcss_harem_partner_3181
+				}
+				reveal_to = scope:wcss_harem_spouse_3181
+				disable_exposure_by = scope:wcss_harem_spouse_3181
+			}
+		}
+	}
+
+	option = {
+		name = wcss_harem.3181.a
+		custom_tooltip = wcss_harem.3181.a_tt
+		hidden_effect = {
+			random_list = {
+				50 = { # Sex willingness check
+					wcss_harem_willing_to_have_sex_modifier = { 
+						CHARACTER_1 = scope:wcss_harem_spouse_3181 
+						CHARACTER_2 = scope:wcss_harem_partner_3181
+					}
+					opinion_modifier = {
+						who = scope:wcss_harem_partner_3181
+						opinion_target = root
+						multiplier = 0.15
+					}
+					ai_value_modifier = {
+						who = scope:wcss_harem_partner_3181
+						ai_boldness = 0.5
+					}
+					trigger_event = {
+						id = wcss_harem.3182
+						days = 3
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_have_sex_modifier = { 
+						CHARACTER_1 = scope:wcss_harem_spouse_3181  
+						CHARACTER_2 = scope:wcss_harem_partner_3181
+					}
+					opinion_modifier = {
+						who = scope:wcss_harem_partner_3181
+						opinion_target = root
+						multiplier = -0.15
+					}
+					send_interface_toast = {
+						title = wcss_harem.3181.a.failure
+						left_icon = scope:wcss_harem_partner_3181
+						scope:wcss_harem_spouse_3181 = {
+							reverse_add_opinion = {
+								target = scope:wcss_harem_partner_3181
+								modifier = annoyed_opinion
+								opinion = -20
+							}	
+						}
+						reverse_add_opinion = {
+							target = scope:wcss_harem_spouse_3181
+							modifier = annoyed_opinion
+							opinion = -20
+						}	
+						reverse_add_opinion = {
+							target = scope:wcss_harem_partner_3181
+							modifier = annoyed_opinion
+							opinion = -20
+						}	
+					}
+				}
+			}
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			chaste = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_partner_3181
+				multiplier = 0.2
+			}
+		}
+	}
+
+	option = { # Let's not.
+		name = wcss_harem.3181.b
+		reverse_add_opinion = {
+			target = scope:wcss_harem_spouse_3181
+			modifier = disappointed_opinion
+			opinion = -20
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_gain
+			chaste = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 0
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_partner_3181
+				multiplier = -0.2
+			}
+			modifier = {
+				has_trait = chaste
+				add = 100
+			}
+		}
+	}
+}
+
+wcss_harem.3182 = { # Follow-up to 3181 (success) failure just sends toast
+	type = activity_event
+	title = wcss_harem.3181.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					OR = {
+						should_be_naked_trigger = yes
+						scope:wcss_harem_partner_3181 = { should_be_naked_trigger = yes }
+						scope:wcss_harem_spouse_3181 = { should_be_naked_trigger = yes }
+					}
+				}
+				desc = wcss_harem.3182.desc_naked
+			}
+			desc = wcss_harem.3182.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = scope:wcss_harem_spouse_3181
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	right_portrait = {
+		character = scope:wcss_harem_partner_3181
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}				
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		exists = scope:wcss_harem_partner_3181
+		exists = scope:wcss_harem_spouse_3181
+		scope:wcss_harem_partner_3181 = { wcss_harem_participant_trigger = yes }
+		scope:wcss_harem_spouse_3181 = { wcss_harem_participant_trigger = yes }
+	}
+
+	immediate = {
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_partner_3181 }
+		scope:wcss_harem_spouse_3181 = {
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_partner_3181 }
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_confidence_modifier
+			years = 5
+		}
+		hidden_effect = {
+			scope:wcss_harem_spouse_3181 = { 
+				add_character_modifier = {
+					modifier = wcss_harem_glowing_modifier
+					years = 5
+				}
+			}
+			scope:wcss_harem_partner_3181 = { 
+				add_character_modifier = {
+					modifier = wcss_harem_glowing_modifier
+					years = 5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = wcss_harem.3182.a
+		custom_tooltip = wcss_harem.3182.a_tt
+		hidden_effect = {
+			random_list = {
+				50 = { # Lover willigness check
+					wcss_harem_willing_to_be_lovers_modifier = { 
+						CHARACTER_1 = scope:wcss_harem_spouse_3181 
+						CHARACTER_2 = scope:wcss_harem_partner_3181
+					}
+					opinion_modifier = {
+						who = scope:wcss_harem_partner_3181
+						opinion_target = root
+						multiplier = 0.15
+					}
+					scope:wcss_harem_spouse_3181 = {
+						wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_harem_partner_3181 }
+					}
+					send_interface_toast = {
+						title = wcss_harem.3182.toast
+						left_icon = scope:wcss_harem_spouse_3181
+						right_icon = scope:wcss_harem_partner_3181
+						scope:wcss_harem_spouse_3181 = {
+							wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_harem_partner_3181 }
+						}
+					}
+					scope:wcss_harem_spouse_3181 = {
+						every_secret = {
+							limit = { 
+								secret_type = secret_lover
+								secret_target = scope:wcss_harem_partner_3181
+							}
+							reveal_to = root
+							disable_exposure_by = root
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_partner_3181
+					}
+					opinion_modifier = {
+						who = scope:wcss_harem_partner_3181
+						opinion_target = root
+						multiplier = -0.15
+					}
+					send_interface_toast = {
+						title = wcss_harem.3182.toast
+						left_icon = scope:wcss_harem_spouse_3181
+						right_icon = scope:wcss_harem_partner_3181
+						scope:wcss_harem_spouse_3181 = {
+							reverse_add_opinion = {
+								target = scope:wcss_harem_partner_3181
+								modifier = romance_opinion
+								opinion = 20
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_harem.3191 = { # Propositioned for threesome by lover participant with lesbian wife
+	type = activity_event
+	title = wcss_harem.3191.t
+	desc = wcss_harem.3191.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = scope:wcss_harem_participant_3191
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:wcss_harem_spouse_3191
+		animation = flirtation
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOR = { # These two events are very similar so let's block them from happening at the same activity
+			has_character_flag = wcss_had_3181
+			has_character_flag = wcss_had_3191 
+		}
+		faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+		scope:activity = {
+			any_attending_character = {
+				wcss_harem_participant_trigger = yes
+				faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+				NOT = { has_trait = chaste }
+				has_relation_lover = root
+				any_spouse = {
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					NOT = { has_trait = chaste }
+					wcss_can_join_harem_trigger = yes
+					NOR = {
+						has_relation_lover = root
+						is_consort_of = root
+						this = root
+					}
+				}
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.5
+		modifier = {
+			add = 0.5
+			scope:activity = {
+				any_attending_character = {
+					count > 2
+					wcss_harem_participant_trigger = yes
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					NOT = { has_trait = chaste }
+					any_spouse = {
+						wcss_can_join_harem_trigger = yes
+						faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+						NOT = { has_trait = chaste }
+					}
+				}				
+			}
+		}
+		modifier = {
+			factor = 0.2
+			is_ai = yes # Since this potentially adds additional characters to the activity, we don't want it to trigger for the AI too much.
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_3191
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = {
+					wcss_harem_participant_trigger = yes
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					NOT = { has_trait = chaste }
+					has_relation_lover = root
+					any_spouse = {
+						wcss_can_join_harem_trigger = yes
+						faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+						NOT = { has_trait = chaste }
+						NOR = {
+							has_relation_lover = root
+							is_consort_of = root
+							this = root
+						}
+					}					
+				}
+				weight = {
+					base = 1
+					min = 1
+					opinion_modifier = {
+						who = this
+						opinion_target = root
+						multiplier = 1
+					}
+					compatibility_modifier = {
+						who = this
+						compatibility_target = root
+						min = -30
+						max = 30
+						multiplier = 1
+					}
+					ai_value_modifier = { ai_boldness = 1 }
+					modifier = {
+						has_trait = lustful
+						add = 50
+					}
+				}
+				save_scope_as = wcss_harem_participant_3191
+			}
+		}
+		if = {
+			limit = { exists = scope:wcss_harem_participant_3191 }
+			scope:wcss_harem_participant_3191 = {
+				random_spouse = {
+					limit = {
+						wcss_can_join_harem_trigger = yes
+						faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+						NOT = { has_trait = chaste }
+						NOR = {
+							has_relation_lover = root
+							is_consort_of = root
+							this = root
+						}
+					}
+					weight = {
+						base = 1
+						min = 1
+						opinion_modifier = {
+							who = this
+							opinion_target = root
+							multiplier = 0.5
+						}
+						opinion_modifier = {
+							who = this
+							opinion_target = scope:wcss_harem_participant_3191
+							multiplier = 0.5
+						}
+						compatibility_modifier = {
+							who = this
+							compatibility_target = root
+							min = -30
+							max = 30
+							multiplier = 1
+						}
+						ai_value_modifier = { ai_boldness = 1 }
+						modifier = {
+							has_trait = lustful
+							add = 50
+						}
+						modifier = {
+							this = scope:wcss_harem_participant_3191.primary_spouse
+							factor = 2
+						}
+					}
+					save_scope_as = wcss_harem_spouse_3191
+				}
+			}
+		}
+		if = {
+			limit = { 
+				exists = scope:wcss_harem_participant_3191
+				exists = scope:wcss_harem_spouse_3191
+			}
+			if = {
+				limit = {
+					NOT = { 
+						scope:wcss_harem_spouse_3191 = { is_participant_in_activity = scope:activity }
+					}
+				}
+				hidden_effect = {
+					scope:wcss_harem_spouse_3191 = { 
+						invite_to_activity = scope:activity
+						accept_activity_invite = scope:activity
+					}
+				}
+			}
+		}
+		else_if = { # If we didn't manage to get a viable spouse, let's reroll. We still get the blocker variable so this event won't fire again.
+			limit = {
+				root = scope:activity.activity_host
+			}
+			trigger_event = { on_action = wcss_harem_host_event_selection }
+		}
+		else = { 
+			trigger_event = { on_action = wcss_harem_event_selection }
+		}
+	}
+
+	option = { # Accept their offer.
+		name = wcss_harem.3191.a
+		custom_tooltip = wcss_harem.3191.a_tt
+		trigger_event = {
+			id = wcss_harem.3192
+			days = 3
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			chaste = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 50
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_spouse_3191
+				multiplier = 0.5
+			}
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_participant_3191
+				multiplier = 0.5
+			}
+			modifier = {
+				has_trait = chaste
+				factor = 0.2
+			}
+		}
+	}
+
+	option = { # Decline their offer.
+		name = wcss_harem.3191.b
+		reverse_add_opinion = {
+			target = scope:wcss_harem_participant_3191
+			modifier = disappointed_opinion
+			opinion = -20
+		}
+		reverse_add_opinion = {
+			target = scope:wcss_harem_spouse_3191
+			modifier = disappointed_opinion
+			opinion = -20
+		}
+		stress_impact = {
+			lustful = minor_stress_impact_gain
+			chaste = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 50
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_spouse_3191
+				multiplier = -0.5
+			}
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_participant_3191
+				multiplier = -0.5
+			}
+			modifier = {
+				has_trait = chaste
+				add = 100
+			}
+		}
+	}
+}
+
+wcss_harem.3192 = { # Followup
+	type = activity_event
+	title = wcss_harem.3191.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { should_be_naked_trigger = yes}
+				desc = wcss_harem.3192.desc_naked
+			}
+			desc = wcss_harem.3192.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = scope:wcss_harem_participant_3191
+		animation = flirtation_left
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_harem_spouse_3191
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		exists = scope:wcss_harem_participant_3191
+		exists = scope:wcss_harem_spouse_3191
+		scope:wcss_harem_participant_3191 = { wcss_harem_participant_trigger = yes }
+		scope:wcss_harem_spouse_3191 = { wcss_can_join_harem_trigger = yes }
+	}
+
+	immediate = {
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_spouse_3191 }
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_participant_3191 }
+		scope:wcss_harem_participant_3191 = { 
+			wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_harem_spouse_3191 }
+		}
+		add_character_modifier = {
+			modifier = wcss_harem_confidence_modifier
+			years = 5
+		}
+		hidden_effect = {
+			scope:wcss_harem_spouse_3191 = { 
+				add_character_modifier = {
+					modifier = wcss_harem_glowing_modifier
+					years = 5
+				}
+			}
+			scope:wcss_harem_participant_3191 = { 
+				add_character_modifier = {
+					modifier = wcss_harem_glowing_modifier
+					years = 5
+				}
+			}
+		}
+	}
+
+	option = { # Potentially become lovers
+		name = wcss_harem.3192.a
+		custom_tooltip = wcss_harem.3192.a_tt
+		hidden_effect = {
+			random_list = {
+				50 = { # Lover willigness check
+					wcss_harem_willing_to_be_lovers_modifier = { 
+						CHARACTER_1 = root
+						CHARACTER_2 = scope:wcss_harem_spouse_3191
+					}
+					wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_harem_spouse_3191 }
+					send_interface_toast = {
+						title = wcss_harem.3192.toast
+						left_icon = scope:wcss_harem_spouse_3191
+						wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_harem_spouse_3191 }
+					}
+					every_secret = {
+						limit = { 
+							secret_type = secret_lover
+							secret_target = scope:wcss_harem_spouse_3191
+						}
+						reveal_to = scope:wcss_harem_participant_3191
+						disable_exposure_by = scope:wcss_harem_participant_3191
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_spouse_3191
+					}
+					send_interface_toast = {
+						title = wcss_harem.3192.toast
+						left_icon = scope:wcss_harem_spouse_3191
+						reverse_add_opinion = {
+							target = scope:wcss_harem_spouse_3191
+							modifier = romance_opinion
+							opinion = 20
+						}
+					}
+				}
+			}
+		}
+		ai_chance = { 
+			base = 50
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:wcss_harem_spouse_3191
+				multiplier = 0.5
+			}
+			compatibility_modifier = {
+				who = root
+				compatibility_target = scope:wcss_harem_spouse_3191
+				multiplier = 0.5
+			}
+		}
+	}
+
+	option = {
+		name = wcss_harem.3192.b
+		custom_tooltip = wcss_harem.3192.b_tt
+		hidden_effect = {
+			random_list = {
+				50 = { # Lover willigness check
+					wcss_harem_willing_to_be_lovers_modifier = { 
+						CHARACTER_1 = root
+						CHARACTER_2 = scope:wcss_harem_spouse_3191
+					}
+					send_interface_toast = {
+						title = wcss_harem.3192.toast
+						left_icon = scope:wcss_harem_spouse_3191
+						reverse_add_opinion = {
+							target = scope:wcss_harem_spouse_3191
+							modifier = disappointed_opinion
+							opinion = -20
+						}
+					}
+				}
+				50 = {
+					wcss_harem_unwilling_to_be_lovers_modifier = { 
+						CHARACTER_1 = root 
+						CHARACTER_2 = scope:wcss_harem_spouse_3191
+					}
+				}
+			}
+		}
+		ai_chance = { base = 10 }
+	}
+}
+
+wcss_harem.3201 = { # HOST ONLY: Harassed servants.
+	type = activity_event
+	title = wcss_harem.3201.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { should_be_naked_trigger = yes }
+				desc = wcss_harem.3201.desc_naked
+			}
+			desc = wcss_harem.3201.desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:wcss_harem_lady_3201
+		animation = personality_content		
+	}
+	lower_right_portrait = scope:wcss_court_musician_3201
+	override_background = { reference = corridor_day }
+	cooldown = { months = 6 }
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			has_royal_court = no
+			factor = 0.25
+		}
+		modifier = {
+			has_royal_court = yes
+			amenity_level = { type = court_servants value < 3 }
+			factor = 0.5
+		}
+		modifier = {
+			has_character_modifier = wcss_harem_good_host_modifier
+			factor = 0.1
+		}
+		modifier = {
+			employs_court_position = court_musician_court_position
+			any_court_position_holder = {
+				type = court_musician_court_position
+				wcss_harem_participant_trigger = yes
+				is_participant_in_activity = scope:activity
+			}
+			factor = 1.25			
+		}
+	}
+
+	trigger = {
+		root = scope:activity.activity_host # Host only
+		wcss_harem_has_serious_illness_trigger = no
+		employs_court_position = lady_in_waiting_court_position
+		any_court_position_holder = {
+			type = lady_in_waiting_court_position
+			wcss_harem_participant_trigger = yes
+			is_participant_in_activity = scope:activity
+		}
+	}
+
+	immediate = {
+		random_court_position_holder = {
+			type = lady_in_waiting_court_position
+			limit = {
+				wcss_harem_participant_trigger = yes		
+			}
+			weight = {
+				base = 1
+				min = 1
+				opinion_modifier = {
+					who = root
+					opinion_target = this
+					multiplier = 0.5
+				}
+				modifier = {
+					always = yes
+					add = {
+						value = this.aptitude:lady_in_waiting_court_position
+						multiply = 20
+					}
+				}
+			}
+			save_scope_as = wcss_harem_lady_3201
+		}
+		if = {
+			limit = {
+				employs_court_position = court_musician_court_position
+				any_court_position_holder = {
+					type = court_musician_court_position
+					wcss_harem_participant_trigger = yes
+					is_participant_in_activity = scope:activity
+				}
+			}
+			random_court_position_holder = {
+				type = court_musician_court_position
+				limit = {
+					wcss_harem_participant_trigger = yes
+					is_participant_in_activity = scope:activity		
+				}
+				save_scope_as = wcss_court_musician_3201
+			}
+		}
+	}
+
+	option = { # Hire courtesans
+		name = wcss_harem.3201.a
+		custom_tooltip = wcss_harem.3201.a_tt
+		remove_short_term_gold = activity_minor_gold_value
+		add_character_modifier = {
+			modifier = wcss_harem_hired_courtesans_modifier
+			years = 5
+		}
+		scope:activity = {
+			every_attending_character = {
+				custom = wcss_every_guest_scope_tt
+				limit = {
+					NOR = {
+						this = root
+						this = scope:wcss_harem_lady_3201
+					}
+				}
+				add_opinion = {
+					modifier = pleased_opinion
+					target = scope:activity.activity_host
+					opinion = 10
+				}
+			}
+		}
+		stress_impact = { greedy = medium_stress_impact_gain } 
+		ai_chance = { 
+			base = 50
+			modifier = {
+				short_term_gold < activity_minor_gold_value
+				factor = 0.1
+			}
+			ai_value_modifier = { ai_greed = -0.5 }
+		}
+	}
+
+	option = { # Have the servants please the guests
+		name = wcss_harem.3201.b
+		custom_tooltip = wcss_harem.3201.b_tt
+		random_list = {
+			50 = {
+				max = 99
+				min = 20
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_servants value >= 5 }
+					add = 30
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_servants value = 4 }
+					add = 20
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_servants value = 3 }
+					add = 10
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_servants value <= 1 }
+					add = -20
+				}
+				modifier = {
+					OR = {
+						faith = { has_doctrine = wcss_doctrine_sapphic_exaltation }
+						faith = { has_doctrine = tenet_carnal_exaltation }
+					}
+					add = 10
+				}
+				modifier = {
+					OR = {
+						has_trait = witch
+						scope:wcss_harem_lady_3201 = { has_trait = witch }
+					}
+					add = 15
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level > court_grandeur_minimum_expected_level
+					add = 25
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level > 4
+					add = {
+						value = court_grandeur_current_level
+						subtract = 3
+						multiply = 5
+					}
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.b_toast_success
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = medium_prestige_value
+					add_character_modifier = {
+						modifier = wcss_harem_good_host_modifier
+						years = 10
+					}
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_respected_host_opinion
+								target = scope:activity.activity_host
+								opinion = 25
+							}
+						}
+					}
+				}
+			}
+			50 = {
+				max = 80
+				min = 1
+				modifier = {
+					always = yes
+					add = {
+						value = scope:wcss_harem_lady_3201.aptitude:lady_in_waiting_court_position
+						multiply = -5
+					}
+				}
+				modifier = {
+					debt_level >= 3
+					add = {
+						value = debt_level
+						subtract = 2
+						multiply = 10
+					}
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level < court_grandeur_minimum_expected_level
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.b_toast_failure
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = minor_prestige_loss
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_poor_host_opinion
+								target = scope:activity.activity_host
+								opinion = -20
+							}
+						}
+					}
+				}
+			}
+		}
+		stress_impact = { 
+			lustful = medium_stress_impact_loss 
+			chaste = medium_stress_impact_gain
+		} 
+		ai_chance = {
+			base = 50
+			modifier = {
+				OR = {
+					has_trait = lustful
+					has_trait = witch
+				}
+				add = 50
+			}
+			modifier = {
+				has_royal_court = yes
+				OR = {
+					court_grandeur_current_level > court_grandeur_minimum_expected_level
+					court_grandeur_current_level > 3
+				}
+				add = 50
+			}
+			modifier = {
+				OR = {
+					court_grandeur_current_level < court_grandeur_minimum_expected_level
+					court_grandeur_current_level < 3
+				}
+				factor = 0.2			
+			}
+			modifier = {
+				scope:wcss_harem_lady_3201.aptitude:lady_in_waiting_court_position > 3
+				add = 50
+			}
+		}
+	}
+
+	option = { # Distract them with food
+		name = wcss_harem.3201.c
+		custom_tooltip = wcss_harem.3201.c_tt
+		random_list = {
+			50 = {
+				max = 99
+				min = 20
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_food_quality value >= 5 }
+					add = 30
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_food_quality value = 4 }
+					add = 20
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_food_quality value = 3 }
+					add = 10
+				}
+				modifier = {
+					has_royal_court = yes
+					amenity_level = { type = court_food_quality value <= 1 }
+					add = -20
+				}
+				modifier = {
+					OR = {
+						faith = { has_doctrine_parameter = piety_from_feasts_active }
+						culture = { has_cultural_tradition = tradition_culinary_art }
+						culture = { has_cultural_tradition = tradition_festivities }
+					}
+					add = 10
+				}
+				modifier = {
+					OR = {
+						has_trait = lifestyle_reveler
+						scope:wcss_harem_lady_3201 = { has_trait = lifestyle_reveler }
+					}
+					add = 15
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level > court_grandeur_minimum_expected_level
+					add = 25
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level > 4
+					add = {
+						value = court_grandeur_current_level
+						subtract = 3
+						multiply = 5
+					}
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.c_toast_success
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = medium_prestige_value
+					add_character_modifier = {
+						modifier = wcss_harem_good_host_modifier
+						years = 10
+					}
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_respected_host_opinion
+								target = scope:activity.activity_host
+								opinion = 25
+							}
+						}
+					}
+				}
+			}
+			50 = {
+				max = 80
+				min = 1
+				modifier = {
+					always = yes
+					add = {
+						value = scope:wcss_harem_lady_3201.aptitude:lady_in_waiting_court_position
+						multiply = -5
+					}
+				}
+				modifier = {
+					debt_level >= 3
+					add = {
+						value = debt_level
+						subtract = 2
+						multiply = 10
+					}
+				}
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level < court_grandeur_minimum_expected_level
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.c_toast_failure
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = minor_prestige_loss
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_poor_host_opinion
+								target = scope:activity.activity_host
+								opinion = -20
+							}
+						}
+					}
+				}
+			}
+		}
+		stress_impact = { 
+			lifestyle_reveler = minor_stress_impact_loss
+			gluttonous = medium_stress_impact_loss 
+			temperate= medium_stress_impact_gain
+		} 
+		ai_chance = {
+			base = 50
+			modifier = {
+				OR = {
+					has_trait = gluttonous
+					has_trait = lifestyle_reveler
+				}
+				add = 50
+			}
+			modifier = {
+				has_royal_court = yes
+				OR = {
+					court_grandeur_current_level > court_grandeur_minimum_expected_level
+					court_grandeur_current_level > 3
+				}
+				add = 50
+			}
+			modifier = {
+				has_royal_court = yes
+				OR = {
+					court_grandeur_current_level < court_grandeur_minimum_expected_level
+					court_grandeur_current_level < 3
+				}
+				factor = 0.2			
+			}
+			modifier = {
+				exists = scope:wcss_harem_lady_3201
+				scope:wcss_harem_lady_3201.aptitude:lady_in_waiting_court_position > 3
+				add = 50
+			}
+		}
+	}
+
+	option = { # Have the musician play
+		trigger = { exists = scope:wcss_court_musician_3201 } 
+		add_internal_flag = special
+		highlight_portrait = scope:wcss_court_musician_3201
+		name = wcss_harem.3201.d
+		custom_tooltip = wcss_harem.3201.d_tt
+		random_list = {
+			1 = {
+				modifier = {
+					exists = scope:wcss_harem_lady_3201
+					add = {
+						value = scope:wcss_harem_lady_3201.aptitude:lady_in_waiting_court_position
+						subtract = 2
+						min = 0
+					}
+				}
+				modifier = {
+					exists = scope:wcss_court_musician_3201
+					add = {
+						value = scope:wcss_court_musician_3201.aptitude:court_musician_court_position
+						subtract = 1
+						min = 0
+					}					
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.d_toast_success
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = medium_prestige_value
+					add_character_modifier = {
+						modifier = wcss_harem_good_host_modifier
+						years = 10
+					}
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_respected_host_opinion
+								target = scope:activity.activity_host
+								opinion = 25
+							}
+						}
+					}
+				}
+			}
+			1 = {
+				modifier = {
+					has_royal_court = yes
+					court_grandeur_current_level < court_grandeur_minimum_expected_level
+					add = 4
+				}
+				send_interface_toast = {
+					title = wcss_harem.3201.d_toast_failure
+					left_icon = scope:wcss_harem_lady_3201
+					add_prestige = minor_prestige_loss
+					scope:activity = {
+						every_attending_character = {
+							custom = wcss_every_guest_scope_tt
+							limit = {
+								NOR = {
+									this = root
+									this = scope:wcss_harem_lady_3201
+								}
+							}
+							add_opinion = {
+								modifier = wcss_poor_host_opinion
+								target = scope:activity.activity_host
+								opinion = -20
+							}
+						}
+					}
+				}
+			}
+		}
+		ai_chance = { 
+			base = 50
+			modifier = {
+				scope:wcss_court_musician_3201.aptitude:court_musician_court_position > 3
+				add = 50
+			}
+		}
+	}
+}
+
+### 3600-3699 Lifestyle Focus Events
+
+scripted_trigger wcss_harem_has_focus_or_trait_martial_trigger = {
+	OR = {
+		has_focus_or_focus_trait_trigger = { FOCUS = martial_strategy_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = martial_authority_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = martial_chivalry_focus }
+	}
+}
+
+scripted_trigger wcss_harem_has_focus_or_trait_learning_trigger = {
+	OR = {
+		has_focus_or_focus_trait_trigger = { FOCUS = learning_medicine_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = learning_scholarship_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = learning_theology_focus }
+	}
+}
+
+scripted_trigger wcss_harem_has_focus_or_trait_intrigue_trigger = {
+	OR = {
+		has_focus_or_focus_trait_trigger = { FOCUS = intrigue_intimidation_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = intrigue_temptation_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = intrigue_skulduggery_focus }
+	}
+}
+
+scripted_trigger wcss_harem_has_focus_or_trait_diplomacy_trigger = {
+	OR = {
+		has_focus_or_focus_trait_trigger = { FOCUS = diplomacy_family_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = diplomacy_majesty_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = diplomacy_foreign_affairs_focus }
+	}
+}
+
+scripted_trigger wcss_harem_has_focus_or_trait_stewardship_trigger = {
+	OR = {
+		has_focus_or_focus_trait_trigger = { FOCUS = stewardship_domain_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = stewardship_wealth_focus }
+		has_focus_or_focus_trait_trigger = { FOCUS = stewardship_duty_focus }
+	}
+}
+
+wcss_harem.3601 = { # Lifestyle focus event: martial
+	type = activity_event
+	title = wcss_harem.3601.t
+	desc = wcss_harem.3601.desc_default # For some reason wcss_harem.3601.desc doesn't work and I have no idea why
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_martial_focus_3601
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_harem_skill_event }
+		wcss_harem_has_focus_or_trait_martial_trigger = yes
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				wcss_harem_has_focus_or_trait_martial_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.2
+		modifier = {
+			add = 0.8
+			OR = {
+				has_trait = overseer
+				has_trait = strategist
+				has_trait = gallant
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_harem_skill_event
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					wcss_harem_has_focus_or_trait_martial_trigger = yes
+				}
+				weight = {
+					base = 10
+					compatibility_modifier = { # More likely to get along and have a good conversation with those with high compatibility
+						who = root
+						compatibility_target = this
+						multiplier = 0.5
+					}
+					compare_modifier = { # Prefers higher skill rating
+						value = martial
+						multiplier = 0.5
+					}
+					modifier = { # Try to avoid those we've already had sex with at the orgy
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_martial_focus_3601
+			}
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_martial_focus_3601 }
+	}
+
+	option = { # Why don't you teach me?
+		name = wcss_harem.skill_focus_event.a
+		random_list = {
+			10 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 0.2
+				}
+				compare_modifier = {
+					value = martial
+					multiplier = 0.4
+				}
+				modifier = {
+					has_trait = shrewd
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_1
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_2
+					add = 15
+				}
+				modifier = {
+					has_trait = intellect_good_3
+					add = 20
+				}
+				modifier = {
+					scope:wcss_martial_focus_3601 = { has_trait = education_martial_3 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_martial_focus_3601 = { has_trait = education_martial_4 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_success
+					left_icon = scope:wcss_martial_focus_3601
+					add_martial_lifestyle_xp = massive_lifestyle_xp
+					scope:wcss_martial_focus_3601 = { add_martial_lifestyle_xp = massive_lifestyle_xp }
+				}
+			}
+			30 = {
+				modifier = {
+					has_trait = intellect_bad
+					add = -15
+				}
+				modifier = {
+					scope:wcss_martial_focus_3601 = { has_trait = education_martial_2 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_martial_focus_3601 = { has_trait = education_martial_1 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_failure
+					left_icon = scope:wcss_martial_focus_3601
+					add_martial_lifestyle_xp = major_lifestyle_xp
+					scope:wcss_martial_focus_3601 = { add_martial_lifestyle_xp = major_lifestyle_xp }
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = patient
+				factor = 3
+			}
+			modifier = {
+				has_trait = impatient
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Explain your theories!
+		name = wcss_harem.skill_focus_event.b
+		add_character_modifier = {
+			modifier = wcss_harem_confident_martial_modifier
+			years = 10
+		}
+		scope:wcss_martial_focus_3601 = { 
+			add_character_modifier = {
+				modifier = wcss_harem_martial_XP_modifier
+				years = 10
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = arrogant
+				factor = 3
+			}
+			modifier = {
+				has_trait = humble
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Bond over common interests
+		name = wcss_harem.skill_focus_event.c
+		wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_martial_focus_3601 }		
+		ai_chance = { 
+			base = 100
+			compatibility_modifier = {
+				who = scope:wcss_martial_focus_3601
+				compatibility_target = root
+				multiplier = 1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3611 = { # Lifestyle focus event: learning
+	type = activity_event
+	title = wcss_harem.3611.t
+	desc = wcss_harem.3611.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_learning_focus_3611
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_harem_skill_event }
+		wcss_harem_has_focus_or_trait_learning_trigger = yes
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				wcss_harem_has_focus_or_trait_learning_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.2
+		modifier = {
+			add = 0.8
+			OR = {
+				has_trait = scholar
+				has_trait = whole_of_body
+				has_trait = theologian
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_harem_skill_event
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					wcss_harem_has_focus_or_trait_learning_trigger = yes
+				}
+				weight = {
+					base = 10
+					compatibility_modifier = { # More likely to get along and have a good conversation with those with high compatibility
+						who = root
+						compatibility_target = this
+						multiplier = 0.5
+					}
+					compare_modifier = { # Prefers higher skill rating
+						value = learning
+						multiplier = 0.5
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+					modifier = { # Try to avoid those we've already had sex with at the orgy
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+				}
+				save_scope_as = wcss_learning_focus_3611
+			}
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_learning_focus_3611 }
+	}
+
+	option = { # Why don't you teach me?
+		name = wcss_harem.skill_focus_event.a
+		random_list = {
+			10 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 0.6
+				}
+				modifier = {
+					has_trait = shrewd
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_1
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_2
+					add = 15
+				}
+				modifier = {
+					has_trait = intellect_good_3
+					add = 20
+				}
+				modifier = {
+					scope:wcss_learning_focus_3611 = { has_trait = education_learning_3 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_learning_focus_3611 = { has_trait = education_learning_4 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_success
+					left_icon = scope:wcss_learning_focus_3611
+					add_learning_lifestyle_xp = massive_lifestyle_xp
+					scope:wcss_learning_focus_3611 = { add_learning_lifestyle_xp = massive_lifestyle_xp }
+				}
+			}
+			30 = {
+				modifier = {
+					has_trait = intellect_bad
+					add = -15
+				}
+				modifier = {
+					scope:wcss_learning_focus_3611 = { has_trait = education_learning_2 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_learning_focus_3611 = { has_trait = education_learning_1 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_failure
+					left_icon = scope:wcss_learning_focus_3611
+					add_learning_lifestyle_xp = major_lifestyle_xp
+					scope:wcss_learning_focus_3611 = { add_learning_lifestyle_xp = major_lifestyle_xp }
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = patient
+				factor = 3
+			}
+			modifier = {
+				has_trait = impatient
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Explain your theories!
+		name = wcss_harem.skill_focus_event.b
+		add_character_modifier = {
+			modifier = wcss_harem_confident_learning_modifier
+			years = 10
+		}
+		scope:wcss_learning_focus_3611 = { 
+			add_character_modifier = {
+				modifier = wcss_harem_learning_XP_modifier
+				years = 10
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = arrogant
+				factor = 3
+			}
+			modifier = {
+				has_trait = humble
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Bond over common interests
+		name = wcss_harem.skill_focus_event.c
+		wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_learning_focus_3611 }
+		ai_chance = { 
+			base = 100
+			compatibility_modifier = {
+				who = scope:wcss_learning_focus_3611
+				compatibility_target = root
+				multiplier = 1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3621 = { # Lifestyle focus event: intrigue
+	type = activity_event
+	title = wcss_harem.3621.t
+	desc = wcss_harem.3621.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_intrigue_focus_3621
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_harem_skill_event }
+		wcss_harem_has_focus_or_trait_intrigue_trigger = yes
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				wcss_harem_has_focus_or_trait_intrigue_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.2
+		modifier = {
+			add = 0.8
+			OR = {
+				has_trait = seducer
+				has_trait = schemer
+				has_trait = torturer
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_harem_skill_event
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					wcss_harem_has_focus_or_trait_intrigue_trigger = yes
+				}
+				weight = {
+					base = 10
+					compatibility_modifier = { # More likely to get along and have a good conversation with those with high compatibility
+						who = root
+						compatibility_target = this
+						multiplier = 0.5
+					}
+					compare_modifier = { # Prefers higher skill rating
+						value = intrigue
+						multiplier = 0.5
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+					modifier = { # Try to avoid those we've already had sex with at the orgy
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+				}
+				save_scope_as = wcss_intrigue_focus_3621
+			}
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_intrigue_focus_3621 }
+	}
+
+	option = { # Why don't you teach me?
+		name = wcss_harem.skill_focus_event.a
+		random_list = {
+			10 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 0.2
+				}
+				compare_modifier = {
+					value = intrigue
+					multiplier = 0.4
+				}
+				modifier = {
+					has_trait = shrewd
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_1
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_2
+					add = 15
+				}
+				modifier = {
+					has_trait = intellect_good_3
+					add = 20
+				}
+				modifier = {
+					scope:wcss_intrigue_focus_3621 = { has_trait = education_intrigue_3 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_intrigue_focus_3621 = { has_trait = education_intrigue_4 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_success
+					left_icon = scope:wcss_intrigue_focus_3621
+					add_intrigue_lifestyle_xp = massive_lifestyle_xp
+					scope:wcss_intrigue_focus_3621 = { add_intrigue_lifestyle_xp = massive_lifestyle_xp }
+				}
+			}
+			30 = {
+				modifier = {
+					has_trait = intellect_bad
+					add = -15
+				}
+				modifier = {
+					scope:wcss_intrigue_focus_3621 = { has_trait = education_intrigue_2 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_intrigue_focus_3621 = { has_trait = education_intrigue_1 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_failure
+					left_icon = scope:wcss_intrigue_focus_3621
+					add_intrigue_lifestyle_xp = major_lifestyle_xp
+					scope:wcss_intrigue_focus_3621 = { add_intrigue_lifestyle_xp = major_lifestyle_xp }
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = patient
+				factor = 3
+			}
+			modifier = {
+				has_trait = impatient
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Explain your theories!
+		name = wcss_harem.skill_focus_event.b
+		add_character_modifier = {
+			modifier = wcss_harem_confident_intrigue_modifier
+			years = 10
+		}
+		scope:wcss_intrigue_focus_3621 = { 
+			add_character_modifier = {
+				modifier = wcss_harem_intrigue_XP_modifier
+				years = 10
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = arrogant
+				factor = 3
+			}
+			modifier = {
+				has_trait = humble
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Bond over common interests
+		name = wcss_harem.skill_focus_event.c
+		wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_intrigue_focus_3621 }
+		ai_chance = { 
+			base = 100
+			compatibility_modifier = {
+				who = scope:wcss_intrigue_focus_3621
+				compatibility_target = root
+				multiplier = 1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3631 = { # Lifestyle focus event: diplomacy
+	type = activity_event
+	title = wcss_harem.3631.t
+	desc = wcss_harem.3631.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_diplomacy_focus_3631
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_harem_skill_event }
+		wcss_harem_has_focus_or_trait_diplomacy_trigger = yes
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				wcss_harem_has_focus_or_trait_diplomacy_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.2
+		modifier = {
+			add = 0.8
+			OR = {
+				has_trait = family_first
+				has_trait = diplomat
+				has_trait = august
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_harem_skill_event
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					wcss_harem_has_focus_or_trait_diplomacy_trigger = yes
+				}
+				weight = {
+					base = 10
+					compatibility_modifier = { # More likely to get along and have a good conversation with those with high compatibility
+						who = root
+						compatibility_target = this
+						multiplier = 0.5
+					}
+					compare_modifier = { # Prefers higher skill rating
+						value = diplomacy
+						multiplier = 0.5
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+					modifier = { # Try to avoid those we've already had sex with at the orgy
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+				}
+				save_scope_as = wcss_diplomacy_focus_3631
+			}
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_diplomacy_focus_3631 }
+	}
+
+	option = { # Why don't you teach me?
+		name = wcss_harem.skill_focus_event.a
+		random_list = {
+			10 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 0.2
+				}
+				compare_modifier = {
+					value = diplomacy
+					multiplier = 0.4
+				}
+				modifier = {
+					has_trait = shrewd
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_1
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_2
+					add = 15
+				}
+				modifier = {
+					has_trait = intellect_good_3
+					add = 20
+				}
+				modifier = {
+					scope:wcss_diplomacy_focus_3631 = { has_trait = education_diplomacy_3 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_diplomacy_focus_3631 = { has_trait = education_diplomacy_4 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_success
+					left_icon = scope:wcss_diplomacy_focus_3631
+					add_diplomacy_lifestyle_xp = massive_lifestyle_xp
+					scope:wcss_diplomacy_focus_3631 = { add_diplomacy_lifestyle_xp = massive_lifestyle_xp }
+				}
+			}
+			30 = {
+				modifier = {
+					has_trait = intellect_bad
+					add = -15
+				}
+				modifier = {
+					scope:wcss_diplomacy_focus_3631 = { has_trait = education_diplomacy_2 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_diplomacy_focus_3631 = { has_trait = education_diplomacy_1 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_failure
+					left_icon = scope:wcss_diplomacy_focus_3631
+					add_diplomacy_lifestyle_xp = major_lifestyle_xp
+					scope:wcss_diplomacy_focus_3631 = { add_diplomacy_lifestyle_xp = major_lifestyle_xp }
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = patient
+				factor = 3
+			}
+			modifier = {
+				has_trait = impatient
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Explain your theories!
+		name = wcss_harem.skill_focus_event.b
+		add_character_modifier = {
+			modifier = wcss_harem_confident_diplomacy_modifier
+			years = 10
+		}
+		scope:wcss_diplomacy_focus_3631 = { 
+			add_character_modifier = {
+				modifier = wcss_harem_diplomacy_XP_modifier
+				years = 10
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = arrogant
+				factor = 3
+			}
+			modifier = {
+				has_trait = humble
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Bond over common interests
+		name = wcss_harem.skill_focus_event.c
+		wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_diplomacy_focus_3631 }
+		ai_chance = { 
+			base = 100
+			compatibility_modifier = {
+				who = scope:wcss_diplomacy_focus_3631
+				compatibility_target = root
+				multiplier = 1.5
+			}
+		}
+	}
+}
+
+wcss_harem.3641 = { # Lifestyle focus event: stewardship
+	type = activity_event
+	title = wcss_harem.3641.t
+	desc = wcss_harem.3641.desc
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:wcss_stewardship_focus_3641
+		animation = happiness
+	}
+	cooldown = { months = 6 }
+
+	trigger = {
+		wcss_harem_has_serious_illness_trigger = no
+		NOT = { has_character_flag = wcss_had_harem_skill_event }
+		wcss_harem_has_focus_or_trait_stewardship_trigger = yes
+		scope:activity = {
+			any_attending_character = { 
+				wcss_harem_participant_trigger = yes 
+				wcss_harem_has_focus_or_trait_stewardship_trigger = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 0.2
+		modifier = {
+			add = 0.8
+			OR = {
+				has_trait = avaricious
+				has_trait = administrator
+				has_trait = architect
+			}
+		}
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_had_harem_skill_event
+			months = 6
+		}
+		scope:activity = {
+			random_attending_character = {
+				limit = { 
+					wcss_harem_participant_trigger = yes 
+					wcss_harem_has_focus_or_trait_stewardship_trigger = yes
+				}
+				weight = {
+					base = 10
+					compatibility_modifier = { # More likely to get along and have a good conversation with those with high compatibility
+						who = root
+						compatibility_target = this
+						multiplier = 0.5
+					}
+					compare_modifier = { # Prefers higher skill rating
+						value = stewardship
+						multiplier = 0.5
+					}
+					modifier = { # Try to avoid those we've already had sex with at the orgy
+						has_opinion_modifier = {
+							modifier = wcss_had_sex_at_orgy_opinion
+							target = root
+						}
+						factor = 0.1
+					}
+					modifier = {
+						root = { has_activity_intent = befriend_attendee_intent }
+						this = root.intent_target
+						factor = 3							
+					}
+				}
+				save_scope_as = wcss_stewardship_focus_3641
+			}
+		}
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_stewardship_focus_3641 }
+	}
+
+	option = { # Why don't you teach me?
+		name = wcss_harem.skill_focus_event.a
+		random_list = {
+			10 = {
+				compare_modifier = {
+					value = learning
+					multiplier = 0.2
+				}
+				compare_modifier = {
+					value = stewardship
+					multiplier = 0.4
+				}
+				modifier = {
+					has_trait = shrewd
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_1
+					add = 10
+				}
+				modifier = {
+					has_trait = intellect_good_2
+					add = 15
+				}
+				modifier = {
+					has_trait = intellect_good_3
+					add = 20
+				}
+				modifier = {
+					scope:wcss_stewardship_focus_3641 = { has_trait = education_stewardship_3 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_stewardship_focus_3641 = { has_trait = education_stewardship_4 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_success
+					left_icon = scope:wcss_stewardship_focus_3641
+					add_stewardship_lifestyle_xp = massive_lifestyle_xp
+					scope:wcss_stewardship_focus_3641 = { add_stewardship_lifestyle_xp = massive_lifestyle_xp }
+				}
+			}
+			30 = {
+				modifier = {
+					has_trait = intellect_bad
+					add = -15
+				}
+				modifier = {
+					scope:wcss_stewardship_focus_3641 = { has_trait = education_stewardship_2 }
+					add = 15
+				}
+				modifier = {
+					scope:wcss_stewardship_focus_3641 = { has_trait = education_stewardship_1 }
+					add = 30
+				}
+				send_interface_toast = {
+					title = wcss_harem.skill_roll_failure
+					left_icon = scope:wcss_stewardship_focus_3641
+					add_stewardship_lifestyle_xp = major_lifestyle_xp
+					scope:wcss_stewardship_focus_3641 = { add_stewardship_lifestyle_xp = major_lifestyle_xp }
+				}
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = patient
+				factor = 3
+			}
+			modifier = {
+				has_trait = impatient
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Explain your theories!
+		name = wcss_harem.skill_focus_event.b
+		add_character_modifier = {
+			modifier = wcss_harem_confident_stewardship_modifier
+			years = 10
+		}
+		scope:wcss_stewardship_focus_3641 = { 
+			add_character_modifier = {
+				modifier = wcss_harem_stewardship_XP_modifier
+				years = 10
+			}
+		}
+		ai_chance = { 
+			base = 100
+			modifier = {
+				has_trait = arrogant
+				factor = 3
+			}
+			modifier = {
+				has_trait = humble
+				factor = 0.3
+			}
+		}
+	}
+
+	option = { # Bond over common interests
+		name = wcss_harem.skill_focus_event.c
+		wcss_make_friend_or_friend_progress = { CHARACTER = scope:wcss_stewardship_focus_3641 }
+		ai_chance = { 
+			base = 100
+			compatibility_modifier = {
+				who = scope:wcss_stewardship_focus_3641
+				compatibility_target = root
+				multiplier = 1.5
+			}
+		}
+	}
+}
+
+#################
+# FINISHING EVENTS
+# 9000 - 9999
+#################
+
+wcss_harem.9001 = { # In the bedroom alone or with lover
+	type = activity_event
+	title = wcss_harem.9001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { wcss_harem_has_serious_illness_trigger = yes }
+				desc = wcss_harem.9001.desc.unhealthy
+			}
+			triggered_desc = {
+				trigger = { exists = scope:wcss_this_lover }
+				desc = wcss_harem.9001.desc.has_lover
+			}
+			desc = wcss_harem.9001.desc.alone
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = happiness
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}	
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = flirtation
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = { 
+		exists = scope:activity
+		NOT = { has_character_flag = wcss_harem_ending_event_in_progress }
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = wcss_harem_ending_event_in_progress
+			days = 20
+		}
+		if = { # Priority list is primary spouse, any spouse, soulmate, any lover, any concubine. Note that a lover concubine for example will be pushed above others.
+			limit = { 
+				NOT = { exists = scope:wcss_this_lover }
+				exists = primary_spouse
+				primary_spouse = {
+					wcss_harem_participant_trigger = yes
+				}
+			}
+			primary_spouse = { save_scope_as = wcss_this_lover }
+		}
+		else_if = {
+			limit = {
+				NOT = { exists = scope:wcss_this_lover }
+				any_spouse = {
+					wcss_harem_participant_trigger = yes					
+				}
+			}
+			scope:activity = {
+				random_attending_character = {
+					limit = {
+						is_spouse_of = root
+						wcss_harem_participant_trigger = yes
+					}
+					weight = {
+						base = 1
+						opinion_modifier = {
+							who = root
+							opinion_target = this
+							multiplier = 1
+						}
+					}
+					save_scope_as = wcss_this_lover
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { exists = scope:wcss_this_lover }
+				any_relation = {
+					type = soulmate
+					wcss_harem_participant_trigger = yes
+				}
+			}
+			scope:activity = {
+				random_attending_character = {
+					limit = {
+						has_relation_soulmate = root
+						wcss_harem_participant_trigger = yes
+					}
+					save_scope_as = wcss_this_lover
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { exists = scope:wcss_this_lover }
+				any_relation = {
+					type = lover
+					wcss_harem_participant_trigger = yes
+				}
+			}
+			scope:activity = {
+				random_attending_character = {
+					limit = {
+						has_relation_lover = root
+						wcss_harem_participant_trigger = yes
+					}
+					weight = {
+						base = 1
+						opinion_modifier = {
+							who = root
+							opinion_target = this
+							multiplier = 1
+						}
+						modifier = {
+							is_concubine_of = root
+							factor = 2
+						}
+					}
+					save_scope_as = wcss_this_lover
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { exists = scope:wcss_this_lover }
+				any_concubine = {
+					wcss_harem_participant_trigger = yes
+				}
+			}
+			scope:activity = {
+				random_attending_character = {
+					limit = {
+						is_concubine_of = root
+						wcss_harem_participant_trigger = yes
+					}
+					weight = {
+						base = 1
+						opinion_modifier = {
+							who = root
+							opinion_target = this
+							multiplier = 1
+						}
+					}
+					save_scope_as = wcss_this_lover
+				}
+			}
+		}
+		# Build a list for a possible private orgy
+		if = { # Four wives condition, one is chosen lover
+			limit = {
+				exists = scope:wcss_this_lover
+				any_spouse = {
+					wcss_harem_participant_trigger = yes
+					count > 3
+				}
+				scope:wcss_this_lover = { is_spouse_of = root }
+			}
+			scope:wcss_this_lover = { add_to_list = wcss_private_orgy_list }
+			every_spouse = {
+				limit = {
+					wcss_harem_participant_trigger = yes
+					NOR = { 
+						is_in_list = wcss_private_orgy_list
+						this = scope:wcss_this_lover
+					}
+				}
+				add_to_list = wcss_private_orgy_list
+			}	
+		}
+		else_if = { # Chosen lover with concubines
+			limit = {
+				exists = scope:wcss_this_lover
+				any_concubine = {
+					wcss_harem_participant_trigger = yes
+					count > 2
+				}
+			}
+			scope:wcss_this_lover = { add_to_list = wcss_private_orgy_list }
+			every_concubine = {
+				limit = {
+					wcss_harem_participant_trigger = yes
+					NOR = { 
+						is_in_list = wcss_private_orgy_list
+						this = scope:wcss_this_lover
+					}					
+				}
+				add_to_list = wcss_private_orgy_list
+			}
+		}
+		else_if = { # Chosen lover with ladies in waiting
+			limit = {
+				exists = scope:wcss_this_lover
+				any_court_position_holder = {
+					type = lady_in_waiting_court_position
+					count >= 2
+					is_participant_in_activity = scope:activity
+					wcss_harem_participant_trigger = yes
+				}			
+			}
+			scope:wcss_this_lover = { add_to_list = wcss_private_orgy_list }
+			every_court_position_holder = {
+				type = lady_in_waiting_court_position
+				limit = {
+					is_participant_in_activity = scope:activity
+					NOT = { is_in_list = wcss_private_orgy_list }
+					wcss_harem_participant_trigger = yes
+				}
+				add_to_list = wcss_private_orgy_list			
+			}
+		}
+	}
+	
+	option = { # Join the orgy (alone)
+		trigger = { NOT = { exists = scope:wcss_this_lover } }
+		name = wcss_harem.9001.a
+		custom_tooltip = wcss_harem.9001.a.tt
+		trigger_event = {
+			id = wcss_harem.9002
+			days = { 3 5 }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Join the orgy (with lover)
+		trigger = { exists = scope:wcss_this_lover }
+		name = wcss_harem.9001.b
+		custom_tooltip = wcss_harem.9001.b.tt
+		trigger_event = {
+			id = wcss_harem.9002
+			days = { 3 5 }
+		}
+		ai_chance = {
+			base = 100
+			modifier = {
+				OR = {
+					has_trait = chaste
+					has_trait = shy
+				}
+				factor = 0.1
+			}
+		}
+	}
+
+	option = { # Private Orgy option
+		trigger = { 
+			exists = scope:wcss_this_lover
+			list_size = {
+				name = wcss_private_orgy_list
+				value >= 3
+			}
+		}
+		name = wcss_harem.9001.e
+		every_in_list = {
+			list = wcss_private_orgy_list
+			limit = { 
+				NOT = { this = scope:wcss_this_lover }
+			}
+			save_scope_as = wcss_temp_orgy
+			custom_tooltip = wcss_harem.9001.e.tt
+		}
+		trigger_event = {
+			id = wcss_harem.9020
+			days = { 3 5 }
+		}
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_trait = shy
+				add = 80
+			}
+		}
+	}
+
+	option = { #Stay with lover
+		trigger = { exists = scope:wcss_this_lover }
+		name = wcss_harem.9001.c
+		custom_tooltip = wcss_harem.9001.c.tt
+		trigger_event = {
+			id = wcss_harem.9010
+			days = { 5 10 }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				OR = {
+					has_trait = lustful
+					has_trait = rakish
+					has_trait = seducer
+					has_focus = intrigue_temptation_focus
+				}
+				factor = 0
+			}
+			modifier = {
+				has_relation_soulmate = scope:wcss_this_lover
+				add = 90
+			}
+		}
+	}
+
+	option = { # Has std or other contagious disease
+		trigger = { wcss_harem_has_serious_illness_trigger = yes }
+		exclusive = yes
+		name = wcss_harem.9001.d
+		custom_tooltip = wcss_harem.9001.d.tt
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+wcss_harem.9002 = { # Outside the orgy
+	type = activity_event
+	title = wcss_harem.9002.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = scope:wcss_this_lover 
+					OR = {
+						should_be_naked_trigger = yes
+						scope:wcss_this_lover = { should_be_naked_trigger = yes }
+					}	
+				}
+				desc = wcss_harem.9002.desc_naked.has_lover
+			}
+			triggered_desc = {
+				trigger = { exists = scope:wcss_this_lover }
+				desc = wcss_harem.9002.desc.has_lover
+			}
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = scope:wcss_this_lover }
+					should_be_naked_trigger = yes
+				}
+				desc = wcss_harem.9002.desc_naked.alone
+			}
+			desc = wcss_harem.9002.desc.alone
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = admiration
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = happiness
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = corridor_day }
+
+	trigger = { exists = scope:activity }
+
+	immediate = {
+		if = {
+			limit = { exists = scope:wcss_this_lover }
+			hidden_effect = {
+				wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_this_lover }
+			}
+		}
+	}
+
+	option = { # Join the orgy
+		name = wcss_harem.9002.a
+		custom_tooltip = wcss_harem.9002.a.tt
+		hidden_effect = {
+			wcss_main_event_orgy_effect = yes
+			if = {
+				limit = { has_character_flag = wcss_cheap_debauch_attendee }
+				add_character_flag = {
+					flag = wcss_orgy_participant
+					days = 20
+				}
+			}
+		}
+		trigger_event = {
+			id = wcss_harem.9003
+			days = 3
+		}
+	}
+}
+
+wcss_harem.9003 = { # Inside the orgy
+	type = activity_event
+	title = wcss_harem.9002.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { exists = scope:wcss_this_lover }
+				desc = wcss_harem.9003.desc.has_lover
+			}
+			desc = wcss_harem.9003.desc.alone
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = love
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = personality_bold
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+
+	trigger = { exists = scope:activity }
+
+	immediate = {
+		show_as_tooltip = {
+			scope:activity = {
+				every_attending_character = {
+					limit = {
+						NOT = { this = root }
+						has_opinion_modifier = {
+							target = root
+							modifier = wcss_had_sex_at_orgy_opinion
+						}
+					}
+					save_temporary_scope_as = wcss_had_sex_with
+					custom_tooltip = wcss_sex_at_orgy_effect.tt
+				}
+			}
+		}
+	}
+
+	option = { # Head to wrap-up event
+		name = wcss_harem.9003.a
+		if = {
+			limit = { 
+				NOR = { 
+					has_trait = strong
+					has_trait = physique_bad
+				} 
+			}
+			random = {
+				chance = 10
+				if = {
+					limit = { has_trait = weak }
+					remove_trait = weak
+				}
+				else = {
+					add_trait = strong
+				}
+			}
+		}
+		if = {
+			limit = { has_trait = chaste }
+
+		}
+		wcss_harem_stress_impact = yes
+	}
+
+	option = { # Head to wrap-up event
+		trigger = { 
+			NOT = { has_trait = cynical }
+			faith = { has_doctrine_parameter = wcss_harem_piety_gain_or_loss }
+		}
+		exclusive = yes
+		name = wcss_harem.9003.b
+		if = {
+			limit = { 
+				NOR = { 
+					has_trait = strong
+					has_trait = physique_bad
+				} 
+			}
+			random = {
+				chance = 10
+				if = {
+					limit = { has_trait = weak }
+					remove_trait = weak
+				}
+				else = {
+					add_trait = strong
+				}
+			}
+		}
+		wcss_harem_stress_impact = yes
+	}
+}
+
+wcss_harem.9010 = { # Stay with lover
+	type = activity_event
+	title = wcss_harem.9010.t
+	desc = wcss_harem.9010.desc
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = happiness
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = happiness
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = { 
+		exists = scope:activity 
+		exists = scope:wcss_this_lover
+	}
+
+	immediate = {
+		wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_this_lover }
+		add_character_modifier = {
+			modifier = wcss_harem_glowing_modifier
+			years = 5
+		}
+		scope:wcss_this_lover = {
+			add_character_modifier = {
+				modifier = wcss_harem_glowing_modifier
+				years = 5
+			}
+		}
+		show_as_tooltip = {
+			scope:activity = {
+				every_attending_character = {
+					limit = {
+						NOT = { 
+							this = root 
+							this = scope:wcss_this_lover
+						}
+						has_opinion_modifier = {
+							target = root
+							modifier = wcss_had_sex_at_orgy_opinion
+						}
+					}
+					save_temporary_scope_as = wcss_had_sex_with
+					custom_tooltip = wcss_sex_at_orgy_effect.tt
+				}
+			}
+		}
+	}
+
+	option = { # Send to wrap-up
+		name = wcss_harem.9010.a
+		if = {
+			limit = { 
+				any_relation = {
+					type = soulmate
+					count < 1
+				}
+			}
+			set_relation_soulmate = { 
+				reason = wcss_harem_lover_relation_default
+				target = scope:wcss_this_lover
+				involved_character = scope:activity.activity_host
+				province = scope:activity.activity_location
+			}			
+		}
+		else_if = {
+			limit = { 
+				NOT = { has_relation_lover = scope:wcss_this_lover }
+			}
+			set_relation_lover = { 
+				reason = wcss_harem_lover_relation_default
+				target = scope:wcss_this_lover
+				involved_character = scope:activity.activity_host
+				province = scope:activity.activity_location
+			}			
+		}
+		reverse_add_opinion = {
+			target = scope:wcss_this_lover
+			modifier = romance_opinion
+			opinion = 50
+		}
+		wcss_harem_stress_impact = yes
+	}
+}
+
+wcss_harem.9020 = { # Arrange private orgy
+	type = activity_event
+	title = wcss_harem.9020.t
+	desc = { 
+		first_valid = {
+			triggered_desc = {
+				trigger = { 
+					exists = scope:wcss_extra_lover_3
+					scope:wcss_this_lover = { should_be_naked_trigger = yes }
+				}
+				desc = wcss_harem.9020.fivesome_naked_desc
+			}
+			triggered_desc = { 
+				trigger = { exists = scope:wcss_extra_lover_3 }
+				desc = wcss_harem.9020.fivesome_desc
+			}
+			triggered_desc = { 
+				trigger = { 
+					NOT = { exists = scope:wcss_extra_lover_3 }
+					scope:wcss_this_lover = { should_be_naked_trigger = yes }
+				}
+				desc = wcss_harem.9020.foursome_naked_desc
+			}
+			triggered_desc = { 
+				trigger = { 
+					NOT = { exists = scope:wcss_extra_lover_3 }
+				}
+				desc = wcss_harem.9020.foursome_desc
+			}
+			desc = wcss_harem.9020.fallback_desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = flirtation_left
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = love
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	lower_left_portrait = {
+		character = scope:wcss_extra_lover_1
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}		
+	lower_center_portrait = {
+		character = scope:wcss_extra_lover_2
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	lower_right_portrait = {
+		character = scope:wcss_extra_lover_3
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = { 
+		exists = scope:activity 
+		exists = scope:wcss_this_lover
+		list_size = {
+			name = wcss_private_orgy_list
+			value >= 3
+		}
+	}
+
+	immediate = {
+		random_in_list = {
+			list = wcss_private_orgy_list
+			limit = { 
+				NOT = { this = scope:wcss_this_lover }
+			}
+			save_scope_as = wcss_extra_lover_1
+		}
+		if = { 
+			limit = { exists = scope:wcss_extra_lover_1 }
+			random_in_list = {
+				list = wcss_private_orgy_list
+				limit = { 
+					NOR = { 
+						this = scope:wcss_this_lover
+						this = scope:wcss_extra_lover_1
+					}
+				}
+				save_scope_as = wcss_extra_lover_2
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:wcss_extra_lover_2
+				any_in_list = {
+					list = wcss_private_orgy_list
+					NOR = {
+						this = scope:wcss_this_lover
+						this = scope:wcss_extra_lover_1
+						this = scope:wcss_extra_lover_2	
+					}
+				}
+			}
+			random_in_list = {
+				list = wcss_private_orgy_list
+				limit = {
+					NOR = { 
+						this = scope:wcss_this_lover
+						this = scope:wcss_extra_lover_1
+						this = scope:wcss_extra_lover_2
+					}					
+				}
+				save_scope_as = wcss_extra_lover_3			
+			}
+		}
+	}
+
+	option = { # Send to next event
+		name = wcss_harem.9020.a
+		if = {
+			limit = { exists = scope:wcss_extra_lover_3 }
+			custom_tooltip = wcss_harem_9020_fivesome_tt
+		}
+		else_if = {
+			limit = { exists = scope:wcss_extra_lover_2 }
+			custom_tooltip = wcss_harem_9020_foursome_tt
+		}
+		show_as_tooltip = {
+			every_in_list = {
+				list = wcss_private_orgy_list
+				add_opinion = {
+					target = root
+					modifier = wcss_had_sex_at_private_orgy_opinion
+				}
+			}
+		}
+		hidden_effect = {
+			every_in_list = {
+				list = wcss_private_orgy_list
+				save_temporary_scope_as = wcss_sex_partner_temp
+				root = { 
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_sex_partner_temp }
+					reverse_add_opinion = {
+						target = scope:wcss_sex_partner_temp
+						modifier = wcss_had_sex_at_private_orgy_opinion
+					}
+					add_opinion = {
+						target = scope:wcss_sex_partner_temp
+						modifier = wcss_had_sex_at_private_orgy_opinion
+					}
+				} # Everyone has sex with everyone, and the non-roots may become lovers with each other (root gets lover check in follow-up event)
+				every_in_list = {
+					list = wcss_private_orgy_list
+					limit = {
+						NOR = { 
+							this = scope:wcss_sex_partner_temp
+							has_opinion_modifier = {
+								modifier = wcss_had_sex_at_private_orgy_opinion
+								target = scope:wcss_sex_partner_temp
+							}
+						}
+					}
+					wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_sex_partner_temp }
+					reverse_add_opinion = {
+						target = scope:wcss_sex_partner_temp
+						modifier = wcss_had_sex_at_private_orgy_opinion
+					}
+					add_opinion = {
+						target = scope:wcss_sex_partner_temp
+						modifier = wcss_had_sex_at_private_orgy_opinion
+					}
+					wcss_make_lover_or_lover_progress = { CHARACTER = scope:wcss_sex_partner_temp } # Easier to handle this part here
+					wcss_make_lover_or_lover_progress_effect = { CHARACTER = scope:wcss_sex_partner_temp }
+				}
+			}
+		}
+		trigger_event = {
+			id = wcss_harem.9021
+			days = 3
+		}
+	}	
+}
+
+wcss_harem.9021 = { # Have private orgy
+	type = activity_event
+	title = wcss_harem.9020.t
+	desc = { 
+		first_valid = {
+			triggered_desc = { 
+				trigger = { exists = scope:wcss_extra_lover_3 }
+				desc = wcss_harem.9021.fivesome_desc
+			}
+			triggered_desc = { 
+				trigger = { exists = scope:wcss_extra_lover_2 }
+				desc = wcss_harem.9021.foursome_desc
+			}
+			desc = wcss_harem.9021.fallback_desc
+		}
+	}
+	theme = wcss_harem_activity
+	left_portrait = {
+		character = root
+		animation = personality_bold
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	right_portrait = {
+		character = scope:wcss_this_lover
+		animation = ecstasy
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}		
+	}
+	lower_left_portrait = {
+		character = scope:wcss_extra_lover_1
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}		
+	lower_center_portrait = {
+		character = scope:wcss_extra_lover_2
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	lower_right_portrait = {
+		character = scope:wcss_extra_lover_3
+		triggered_outfit = { # Standard nudity
+			trigger = { age >= 18 }
+			outfit_tags = { no_clothes }
+		}
+	}
+	override_background = { reference = bedchamber }
+
+	trigger = { 
+		exists = scope:activity 
+		exists = scope:wcss_this_lover
+		exists = scope:wcss_extra_lover_1
+		exists = scope:wcss_extra_lover_2
+	}
+
+	immediate = {
+		show_as_tooltip = {
+			scope:activity = {
+				every_attending_character = {
+					limit = {
+						NOT = { this = root }
+						has_opinion_modifier = {
+							target = root
+							modifier = wcss_had_sex_at_orgy_opinion
+						}
+					}
+					save_temporary_scope_as = wcss_had_sex_with
+					custom_tooltip = wcss_sex_at_orgy_effect.tt
+				}
+			}
+		}
+	}
+
+	option = { # Send to wrap-up (may gain lovers)
+		name = wcss_harem.9021.a
+		every_in_list = {
+			list = wcss_private_orgy_list
+			limit = {
+				NOR = { 
+					has_relation_soulmate = root
+					has_relation_lover = root 
+				}
+			}
+			save_temporary_scope_as = wcss_this_character
+			custom_tooltip = wcss_harem_9021_lover_progress
+			hidden_effect = {
+				root = {
+					wcss_make_lover_or_lover_progress = { CHARACTER = prev }
+					send_interface_toast = {
+						title = wcss_harem.lover_progress
+						left_icon = prev	
+						wcss_make_lover_or_lover_progress_effect = { CHARACTER = prev }
+					}
+				}				
+			}
+		}
+		wcss_harem_stress_impact = yes
+	}
+
+	option = { # Send to wrap-up (will not gain lovers)
+		name = wcss_harem.9021.b
+		wcss_harem_stress_impact = yes
+	}
+
+	after = {
+		hidden_effect = {
+			every_secret = {
+				limit = {
+					secret_type = secret_lover
+					secret_target = { is_in_list = wcss_private_orgy_list }
+				}
+				save_temporary_scope_as = wcss_root_secret
+				every_in_list = {
+					list = wcss_private_orgy_list
+					limit = {
+						NOT = { 
+							scope:wcss_root_secret = { secret_target = prev }
+						}
+					}
+					scope:wcss_root_secret = {
+						reveal_to = prev
+						disable_exposure_by = prev					
+					}
+				}
+			}
+			every_in_list = {
+				list = wcss_private_orgy_list
+				save_temporary_scope_as = wcss_secret_owner
+				every_secret = {
+					limit = {
+						secret_type = secret_lover
+						OR = { 
+							secret_target = root
+							secret_target = { is_in_list = wcss_private_orgy_list }
+						}
+					}
+					save_temporary_scope_as = wcss_this_secret
+					root = {
+						scope:wcss_this_secret = {
+							reveal_to = prev
+							disable_exposure_by = prev					
+						}						
+					}
+					every_in_list = {
+						list = wcss_private_orgy_list
+						limit = {
+							NOT = { 
+								scope:wcss_this_secret = { secret_target = prev }
+							}
+						}
+						scope:wcss_this_secret = {
+							reveal_to = prev
+							disable_exposure_by = prev					
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_harem.9999 = { # Wrap-up
+	type = activity_event
+	title = wcss_harem.9999.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { root = scope:host }
+				desc = wcss_harem.9999.desc.host
+			}
+			desc = wcss_harem.9999.desc.guest
+		}
+	}
+	theme = wcss_harem_activity
+	right_portrait = {
+		character = scope:host
+		animation = personality_bold
+	}
+	override_background = { reference = corridor_day }
+
+	option = { # Host End
+		trigger = { root = scope:host }
+		name = wcss_harem.9999.a
+		show_as_tooltip = { disburse_harem_host_rewards_effect = yes }
+		wcss_harem_cleansing_effect = yes
+	}
+
+	option = { # Guest End
+		trigger = {
+			NOT = { root = scope:host }
+		}
+		name = wcss_harem.9999.b
+		wcss_harem_cleansing_effect = yes
+	}
+}

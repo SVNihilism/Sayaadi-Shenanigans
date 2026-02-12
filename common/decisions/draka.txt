@@ -1,0 +1,44 @@
+﻿#Warcraft
+draka_decision = {
+
+	ai_check_interval = 12
+	decision_group_type = major
+	picture = { 
+		reference =  "gfx/interface/illustrations/decisions/draka.dds"
+	}
+	desc = draka_decision_desc
+	selection_tooltip = draka_decision_tooltip
+
+	is_shown = {
+		has_character_flag = quest_one
+	}
+
+	is_valid = {
+		has_perk = kidnapper_perk
+		character:10020 = { is_imprisoned_by = root }
+	}
+
+	is_valid_showing_failures_only = {
+
+	}
+
+	effect = {
+		custom_tooltip = quest_continue
+		set_characters_effect = yes
+		trigger_event = {
+			id = draka.0002
+		}
+		remove_character_flag = quest_one
+		hidden_effect = { 
+			scope:draka = { remove_character_modifier = infernal_luck }
+		}
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

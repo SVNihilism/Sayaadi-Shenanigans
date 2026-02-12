@@ -1,0 +1,35 @@
+pdxmesh = {
+	name = "dreadlord_armor_mesh"
+	file = "dreadlord_armor.mesh"
+
+	blend_shape = { id = "dreadlord_armor_bs_infant"		type = "dreadlord_armor_bs_infant.mesh" }
+	blend_shape = { id = "dreadlord_armor_bs_fat"		type = "dreadlord_armor_bs_fat.mesh" }
+	blend_shape = { id = "dreadlord_armor_bs_gaunt"		type = "dreadlord_armor_bs_gaunt.mesh" }
+	blend_shape = { id = "dreadlord_armor_bs_old"		type = "dreadlord_armor_bs_old.mesh" }
+	blend_shape = { id = "dreadlord_armor_bs_muscular"		type = "dreadlord_armor_bs_muscular.mesh" }
+	blend_shape = { id = "dreadlord_armor_bs_dwarf"		type = "dreadlord_armor_bs_dwarf.mesh" }
+
+	meshsettings = {
+		name = "dreadlord_armorShape"
+		index = 0
+		texture_diffuse = "dreadlord_diff.dds"
+		texture_normal = "dreadlord_norm.dds"
+		texture_specular = "dreadlord_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "dreadlord_armor_01_entity"
+	pdxmesh = "dreadlord_armor_mesh"
+
+	attribute = { name = "bs_body_infant_1"					blend_shape = "dreadlord_armor_bs_infant" }
+	attribute = { name = "bs_body_fat_1"					blend_shape = "dreadlord_armor_bs_fat" }
+	attribute = { name = "bs_body_gaunt_1"					blend_shape = "dreadlord_armor_bs_gaunt" }
+	attribute = { name = "bs_body_muscular_1"				blend_shape = "dreadlord_armor_bs_muscular" }	
+	attribute = { name = "bs_body_old_1"					blend_shape = "dreadlord_armor_bs_old" }
+	attribute = { name = "bs_body_dwarf_1"					blend_shape = "dreadlord_armor_bs_dwarf" }
+	
+}
+

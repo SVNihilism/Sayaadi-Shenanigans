@@ -1,0 +1,254 @@
+﻿namespace = thrall
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+#character:60572 #Sally
+#character:48081 #Jaina
+#character:60004 #Calia
+#character:60002 #Lianne
+#character:53005 #Taretha
+#character:10021 #Thrall
+
+# Starts the Intro
+thrall.01 = { 
+	type = character_event
+	title = WCSS_thrall_01_TITLE
+	desc = WCSS_thrall_01_DESC
+	theme = crown
+
+	override_background = {
+		reference = ep2_hunt_poachers_camp
+	}
+
+	left_portrait = {
+		character = character:60002 #lianne
+		animation = cough
+	}
+	right_portrait = {
+		character = character:10020 #Draka
+		animation = anger
+	}
+	option = {
+		trigger_event = thrall.02
+		name = {
+			text = {
+				desc = WCSS_thrall_01_OPT
+			}
+		}
+	}
+}
+
+thrall.02 = {
+	type = character_event
+	title = WCSS_thrall_02_TITLE
+	desc = WCSS_thrall_02_DESC
+	theme = prison
+
+	left_portrait = {
+		character = character:10021 #Thrall
+		animation = content
+	}
+	right_portrait = {
+		character = character:53005 #Taretha
+		animation = throne_room_conversation_4
+	}
+	option = {
+		trigger_event = thrall.03
+		name = {
+			text = {
+				desc = WCSS_thrall_02_OPT
+			}
+		}
+	}
+}
+
+thrall.03 = {
+	type = character_event
+	title = WCSS_thrall_03_TITLE
+	desc = WCSS_thrall_03_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = character:60003 #arthas
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = ecstasy
+	}
+	option = {
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_03_OPT
+			}
+		}
+	}
+}
+
+thrall.04 = {
+	type = character_event
+	title = WCSS_thrall_04_TITLE
+	desc = WCSS_thrall_04_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_04_OPT
+			}
+		}
+	}
+}
+
+thrall.05 = {
+	type = character_event
+	title = WCSS_thrall_05_TITLE
+	desc = WCSS_thrall_05_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_05_OPT
+			}
+		}
+	}
+}
+
+thrall.06 = {
+	type = character_event
+	title = WCSS_thrall_06_TITLE
+	desc = WCSS_thrall_06_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_06_OPT
+			}
+		}
+	}
+}
+
+thrall.07 = {
+	type = character_event
+	title = WCSS_thrall_07_TITLE
+	desc = WCSS_thrall_07_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_07_OPT
+			}
+		}
+	}
+}
+
+thrall.08 = {
+	type = character_event
+	title = WCSS_thrall_08_TITLE
+	desc = WCSS_thrall_08_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_08_OPT
+			}
+		}
+	}
+}
+
+thrall.09 = {
+	type = character_event
+	title = WCSS_thrall_09_TITLE
+	desc = WCSS_thrall_09_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_thrall_09_OPT
+			}
+		}
+	}
+}

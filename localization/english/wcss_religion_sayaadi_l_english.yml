@@ -1,0 +1,47 @@
+﻿l_english:
+
+ #Common sayaadism Localization
+ sayaadi_religion:0 "The Twin Desires"
+ sayaadism_adj:0 "Sayaadistic"
+ sayaadi_religion_adj:0 "The Twin Desires"
+ sayaadi_religion_adherent:0 "Cultist"
+ sayaadi_adherent:0 "Cultist"
+ sayaadi_adherent_plural:0 "Cultists"
+ sayaadi_religion_adherent_plural:0 "Cultists"
+ sayaadi_religion_desc:0 "A harem, poorly masked as a cult, of a rather ambitious succubus. Its followers are subject to the whims of the twin sisters, which means both pleasure and pain."
+
+ sayaadi_1: "Sayaadi"
+ sayaadi_2: "Sayaadi"
+ sayaadi_3: "Sayaadi"
+ sayaadi_4: "Sayaadi"
+ sayaadi_5: "Sayaadi"
+ sayaadi_6: "Sayaadi"
+
+ doctrine_parameter_wcss_piety_gain_for_conversions:0 "Female adherents earn [piety|E] for successfully completing romance, conversion, and seduction [schemes|E] targeting women"
+ doctrine_parameter_wcss_lesbian_marriage_parameter:0 "Female adherents can marry women, and take women as [concubines|E] if permitted by [doctrine|E] or [culture|E]"
+ doctrine_parameter_wcss_lesbian_consorts_parameter:0 "Female adherents get monthly [piety|E] for each female [spouse|E] or [concubine|E]. The amount varies based on your $doctrine_marriage_type_name$ [doctrine|E]"
+ doctrine_parameter_wcss_lesbian_dlc2gw_parameter:0 "Female adherents gain a moderate amount of [piety|E] when hosting a Grand Wedding, and a large amount of piety the first time in their life they are married at a Grand Wedding"
+ doctrine_parameter_wcss_harem_piety_gain_or_loss:0 "[rulers|E] earn [piety|E] for hosting a [GetActivityType( 'wcss_activity_harem' ).GetNameNoTooltip]. [vassals|E] who refuse to attend will lose [piety|E]"
+ doctrine_parameter_wcss_harem_fervor_gain:0 "#P +1#! [fervor|E] when an adherent hosts a [GetActivityType( 'wcss_activity_harem' ).GetNameNoTooltip] with twenty or more attendees"
+
+ wcss_doctrine_lesbian_category_name:0 "Lesbian Relations"
+
+ wcss_doctrine_no_lesbian_doctrine_name:0 "None"
+ wcss_doctrine_no_lesbian_doctrine_desc:0 "No special significance is given to lesbian relationships."
+
+ wcss_doctrine_lesbian_marriage_name:0 "Lesbian Marriage"
+ wcss_doctrine_lesbian_marriage_desc:0 "For a woman to marry another woman is no different than marrying a man in the eyes of [ROOT.Faith.HighGodName], and their marriage shall be permitted in [ROOT.Faith.HighGodHerHis] name."
+
+ wcss_doctrine_lesbian_divinity_name:0 "Lesbian Divinity"
+ wcss_doctrine_lesbian_divinity_desc:0 "The romantic and sexual love between women is the highest expression of the faith to be found in this imperfect, mortal world. The wise women that rule us must be allowed to fully embrace and embody this love."
+
+ wcss_doctrine_sapphic_exaltation_name:0 "Sapphic Exaltation"
+ wcss_doctrine_sapphic_exaltation_desc:0 "To delight in Sapphic pleasure is to partake of the divine. Our most pious are those women most devoted to the sensual exploration and celebration of the feminine form, unblemished by men."
+
+ wcss_lesbian_special_doctrine_devoted_name:0 "Lesbian Doctrine"
+ wcss_lesbian_divinity_doctrine_name:0 "Lesbian Divinity"
+ wcss_lesbian_divinity_doctrine_desc:0 "The romantic and sexual love between women is the highest expression of the faith to be found in this imperfect, mortal world. The wise women that rule us must be allowed to fully embrace and embody this love."
+
+ wcss_lesbian_special_doctrine_carnal_name:0 "Lesbian Doctrine"
+ wcss_sapphic_exaltation_doctrine_name:0 "Sapphic Exaltation"
+ wcss_sapphic_exaltation_doctrine_desc:0 "To delight in Sapphic pleasure is to partake of the divine. Our most pious are those women most devoted to the sensual exploration and celebration of the feminine form, unblemished by men."

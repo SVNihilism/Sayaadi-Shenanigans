@@ -1,0 +1,112 @@
+﻿wcss_harem_glowing_modifier = {
+	icon = health_positive
+	health = 0.25
+	general_opinion = 5
+}
+
+wcss_harem_confidence_modifier = {
+	icon = fertility_positive
+	intrigue = 1
+	attraction_opinion = 25
+}
+
+wcss_harem_sensual_dessert_modifier = {
+	icon = treat_positive
+	attraction_opinion = 10
+}
+
+wcss_harem_hygiene_treatment_modifier = {
+	icon = health_positive
+	health = 0.5
+	attraction_opinion = 20
+	fertility = 0.15
+}
+
+wcss_harem_relaxed_modifier = {
+	icon = stress_positive
+	stress_gain_mult = -0.2
+}
+
+wcss_harem_generous_to_dancers_modifier = {
+	icon = diplomacy_positive
+	diplomacy = 1
+	courtier_and_guest_opinion = 10
+}
+
+wcss_harem_sextoy_modifier = {
+	icon = love_positive
+	stress_loss_mult = 0.25
+}
+
+wcss_harem_maidservant_lover_modifier = {
+	icon = intrigue_positive
+	intrigue = 2
+}
+
+wcss_harem_martial_XP_modifier = {
+	icon = martial_positive
+	monthly_martial_lifestyle_xp_gain_mult = 0.5
+}
+
+wcss_harem_confident_martial_modifier = {
+	icon = martial_positive
+	martial = 2
+}
+
+wcss_harem_learning_XP_modifier = {
+	icon = learning_positive
+	monthly_learning_lifestyle_xp_gain_mult = 0.5
+}
+
+wcss_harem_confident_learning_modifier = {
+	icon = learning_positive
+	learning = 2
+}
+
+wcss_harem_intrigue_XP_modifier = {
+	icon = intrigue_positive
+	monthly_intrigue_lifestyle_xp_gain_mult = 0.5
+}
+
+wcss_harem_confident_intrigue_modifier = {
+	icon = intrigue_positive
+	intrigue = 2
+}
+
+wcss_harem_diplomacy_XP_modifier = {
+	icon = diplomacy_positive
+	monthly_diplomacy_lifestyle_xp_gain_mult = 0.5
+}
+
+wcss_harem_confident_diplomacy_modifier = {
+	icon = diplomacy_positive
+	diplomacy = 2
+}
+
+wcss_harem_stewardship_XP_modifier = {
+	icon = stewardship_positive
+	monthly_stewardship_lifestyle_xp_gain_mult = 0.5
+}
+
+wcss_harem_confident_stewardship_modifier = {
+	icon = stewardship_positive
+	stewardship = 2
+}
+
+wcss_harem_hired_courtesans_modifier = {
+	icon = prestige_negative
+	monthly_prestige = -0.5
+}
+
+wcss_harem_good_host_modifier = {
+	icon = prestige_positive
+	monthly_prestige = 0.5
+	direct_vassal_opinion = 5
+	courtier_and_guest_opinion = 10
+}
+
+wcss_harem_recent_debauch_modifier = {
+	icon = wcss_lesbian_positive
+	county_opinion_add = 20
+	development_growth_factor = small_development_growth_gain
+}

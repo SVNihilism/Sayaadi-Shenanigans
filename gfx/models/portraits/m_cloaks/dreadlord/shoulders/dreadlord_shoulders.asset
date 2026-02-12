@@ -1,0 +1,21 @@
+pdxmesh = {
+	name = "dreadlord_shoulders_mesh"
+	file = "dreadlord_shoulders.mesh"
+
+	meshsettings = {
+		name = "dreadlord_shouldersShape"
+		index = 0
+		texture_diffuse = "dreadlord_diff.dds"
+		texture_normal = "dreadlord_norm.dds"
+		texture_specular = "dreadlord_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "dreadlord_shoulders_entity"
+	pdxmesh = "dreadlord_shoulders_mesh"
+	
+
+}

@@ -1,0 +1,25 @@
+pdxmesh = {
+	name = "female_clothes_secular_human_jainaShape_mesh"
+	file = "female_clothes_secular_human_jainaShape.mesh"
+
+
+
+	meshsettings = {
+		name = "female_clothes_secular_human_jainaShape"
+		index = 0
+		texture_diffuse = "jaina_base_diff.dds"
+		texture_normal = "jaina_base_norm.dds"
+		texture_specular = "jaina_base_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "female_clothes_secular_human_jaina_01_entity"
+	pdxmesh = "female_clothes_secular_human_jainaShape_mesh"
+
+
+}
+
+ 

@@ -1,0 +1,6 @@
+﻿
+story = {
+	sort_order = 175
+	gui_tags = { big_button }
+}
+

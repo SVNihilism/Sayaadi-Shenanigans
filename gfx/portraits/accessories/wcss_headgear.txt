@@ -1,0 +1,30 @@
+﻿# These assets are then used in the genes (game/common/genes/..) at the bottom of the file. 
+
+sylvanas_hood = {	
+	set_tags = ""
+	
+	# Warcraft
+	entity = { required_tags = "no_headgear"			shared_pose_entity = head	 }	
+	
+	entity = { required_tags = ""			shared_pose_entity = head		entity = sylvanas_hood_entity 	 }		
+}
+
+alex_hair = {	
+	set_tags = "no_hair"
+	
+	# Warcraft
+	entity = { required_tags = "no_headgear"			shared_pose_entity = head	 }	
+	
+	entity = { required_tags = ""			shared_pose_entity = head		entity = alex_hair_entity 	 }		
+}
+
+
+male_headgear_human_medivh_hood = {	
+	set_tags = "cap"
+	
+	# Warcraft
+	entity = { required_tags = "no_headgear"			shared_pose_entity = head	 }	
+	
+	entity = { required_tags = ""			shared_pose_entity = head		entity = male_headgear_human_medivh_hood_entity }		
+}
+

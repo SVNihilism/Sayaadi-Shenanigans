@@ -1,0 +1,7 @@
+﻿set_relation_twin_sister = {
+	global = GET_twin_sister
+	first = YOU_GET_twin_sister
+	third = THEY_GET_twin_sister
+	first_past = YOU_GOT_twin_sister
+	third_past = THEY_GOT_twin_sister
+}

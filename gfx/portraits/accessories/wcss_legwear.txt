@@ -1,0 +1,24 @@
+﻿female_legwear_secular_human_jaina_slippers = {
+	set_tags = ""
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = female_legwear_secular_human_jaina_slippers_entity }
+}
+
+ne_legs = {
+	set_tags = ""
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = ne_legs_entity }
+}
+
+male_troll_loincloth = {
+	set_tags = ""
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = male_troll_loincloth_entity }
+}
+
+male_legwear_illidan_legs = {
+	set_tags = ""
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = male_legwear_illidan_legs_entity }
+}
+
+alex_feet = {
+	set_tags = ""
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = alex_feet_entity  }
+}

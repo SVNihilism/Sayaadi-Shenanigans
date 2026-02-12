@@ -1,0 +1,365 @@
+﻿### ACTIVITY INVITE RULES ###
+activity_invite_rule_vassals = {
+	effect = {
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			every_vassal = {
+				limit = {
+					is_female = yes
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+		else = {
+			every_vassal = {
+				limit = {
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+	}
+}
+
+
+# Knights
+activity_invite_rule_knights = {
+	effect = {
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			every_knight = {
+				limit = {
+					is_female = yes
+					is_playable_character = no
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+		else = {
+			every_knight = {
+				limit = {
+					is_playable_character = no
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+
+	}
+}
+
+activity_invite_rule_courtiers = {
+	effect = {
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			every_courtier = {
+				limit = {
+					is_knight = no
+					is_playable_character = no
+					is_female = yes
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+			}
+			add_to_list = characters
+		}
+		else_if = {
+			limit = { 
+				NOT = { 
+					faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter } 
+				}
+			}
+			every_courtier = {
+				limit = {
+					is_knight = no
+					is_playable_character = no
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+			}
+			add_to_list = characters
+		}
+	}
+}
+
+# Pool Guests, Foreign Guests
+activity_invite_rule_guests = {
+	effect = {
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			every_pool_guest = {
+				limit = {
+					# Remove diarchs from the list.
+					is_female = yes
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+			every_foreign_court_guest = {
+				limit = {
+					# Remove diarchs from the list.
+					is_female = yes
+					bannable_serving_diarch_trigger = no
+				}
+			add_to_list = characters
+			}
+		}
+		else_if = {
+			limit = {
+				faith = { NOT = { has_doctrine_parameter = wcss_lesbian_marriage_parameter } }
+			}
+			every_pool_guest = {
+				limit = {
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+			every_foreign_court_guest = {
+				limit = {
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+			add_to_list = characters
+			}
+		}
+	}
+}
+
+# Spouses only if Polyamory active
+wcss_harem_invite_rule_spouses = {
+	effect = {
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+			}
+			every_spouse = {
+				limit = {
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					NOT = { #Do not invite family unless it is allowed by faith; this is too public a venue for that
+						relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = root } 
+					}				
+					wcss_bannable_serving_diarch_consort_exception_trigger = no # Diarchs can't play unless they are spouse/concubine of host. It's okay since within own realm.
+				}
+				add_to_list = characters
+			}
+		}
+	}
+}
+# Concubines should be invited to a Sapphic Debauch
+wcss_harem_invite_rule_concubines = {
+	effect = {
+		every_concubine = {
+			limit = { 
+				NOT = { #Do not invite family unless it is allowed by faith; this is too public a venue for that
+					relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = root } 
+				}		
+				wcss_bannable_serving_diarch_consort_exception_trigger = no # Diarchs can't play unless they are spouse/concubine of host. It's okay since within own realm.
+			}
+			add_to_list = characters
+		}
+	}
+}
+# Lovers
+wcss_harem_invite_rule_lovers = {
+	effect = {
+		every_relation = {
+			type = lover
+			limit = {
+				NOT = { #Do not invite family unless it is allowed by faith; this is too public a venue for that
+					relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = root } 
+				}				
+				wcss_bannable_serving_diarch_consort_exception_trigger = no # Diarchs can't play unless they are spouse/concubine of host. It's okay since within own realm.
+			}
+			add_to_list = characters
+		}
+		every_relation = { # This might already be covered, but we'll put it in here anyway
+			type = soulmate
+			limit = {
+				NOT = { #Do not invite family unless it is allowed by faith; this is too public a venue for that
+					relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = root } 
+				}				
+				wcss_bannable_serving_diarch_consort_exception_trigger = no # Diarchs can't play unless they are spouse/concubine of host. It's okay since within own realm.
+			}
+			add_to_list = characters
+		}	
+	}
+}
+# Liege
+wcss_harem_invite_rule_liege = {
+	effect = {
+		liege ?= {
+			if = {
+				limit = {
+					NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+	}
+}
+# Friends
+wcss_harem_invite_rule_friends = {
+	effect = {
+		every_relation = {
+			type = friend
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+			}
+			add_to_list = characters
+		}
+	}
+}
+# Carnal Clergy
+wcss_harem_invite_rule_carnal_clergy = {
+	effect = { # We want to invite clergy if we follow a faith that values carnal interactions
+		if = {
+			limit = { 
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			every_vassal = {
+				limit = {
+					faith = root.faith
+					has_government = theocracy_government
+					bannable_serving_diarch_trigger = no
+					NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)					
+				}
+				add_to_list = characters
+			}
+			every_councillor = {
+				limit = {
+					faith = root.faith
+					is_clergy = yes
+					has_council_position = councillor_court_chaplain
+					bannable_serving_diarch_trigger = no
+					NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				}
+				add_to_list = characters
+			}
+			faith.religious_head ?= {
+				if = {
+					limit = {
+						bannable_serving_diarch_trigger = no
+						NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+					}
+					add_to_list = characters
+				}
+			}
+		}
+	}
+}
+# Vassals
+wcss_harem_invite_rule_vassals = {
+	effect = {
+		every_vassal = {
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+			}
+			add_to_list = characters
+		}
+	}
+}
+# Fellow Vassals 
+wcss_harem_invite_rule_fellow_vassals = {
+	effect = {
+		if = {
+			limit = {
+				is_independent_ruler = no
+			}
+			liege = {
+				every_vassal = {
+					limit = {
+						NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+						# Remove diarchs from the list.
+						bannable_serving_diarch_trigger = no
+					}
+					add_to_list = characters
+				}
+			}
+		}
+	}
+}
+# Courtiers
+wcss_harem_invite_rule_courtiers = {
+	effect = {
+		every_courtier = {
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				# We don't care if they are knights. Knights can come play.
+				is_playable_character = no
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+			}
+			add_to_list = characters
+		}
+	}
+}
+# Pool Guests, Foreign Guests
+wcss_harem_invite_rule_guests = {
+	effect = {
+		every_pool_guest = {
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+			}
+			add_to_list = characters
+		}
+		every_foreign_court_guest = {
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+			}
+			add_to_list = characters
+		}
+	}
+}
+# Neighbouring Rulers
+wcss_harem_invite_rule_neighboring_rulers = {
+	effect = {
+		top_liege ?= {
+			every_neighboring_and_across_water_top_liege_realm_owner = {
+				limit = {
+					NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+				}
+				add_to_list = characters
+			}
+		}
+	}
+}
+# Multiplayer
+wcss_harem_invite_rule_mp = {
+	effect = {
+		every_player = {
+			limit = {
+				NOT = { is_close_or_extended_family_of = root } #Do not invite family (unless also lover/consort)
+			}
+			add_to_list = characters
+		}
+	}
+}
+
+

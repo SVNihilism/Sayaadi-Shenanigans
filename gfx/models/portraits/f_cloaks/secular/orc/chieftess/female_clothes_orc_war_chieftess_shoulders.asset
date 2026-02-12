@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "female_clothes_orc_war_chieftess_shoulders_mesh"
+	file = "female_clothes_orc_war_chieftess_shoulders.mesh"
+
+	meshsettings = {
+		name = "female_clothes_orc_war_chieftess_shouldersShape"
+		index = 0
+		texture_diffuse = "orc_blackrock_diff.dds"
+		texture_normal = "orc_blackrock_norm.dds"
+		texture_specular = "orc_blackrock_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "female_clothes_orc_war_chieftess_shoulders_entity"
+	pdxmesh = "female_clothes_orc_war_chieftess_shoulders_mesh"
+	
+}

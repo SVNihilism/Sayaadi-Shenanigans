@@ -1,0 +1,47 @@
+﻿l_english:
+
+ decision_group_type_story: "Quests"
+
+	wcss_cascading_development_effect_tt: "Your [capital|E] [county|E] gains #V 20#! [development_growth|E], every [county|E] adjacent to your [capital|E] gains #V 10#! [development_growth|E], and every other [county|E] adjacent to those counties gains #V 5#! [development_growth|E]"
+
+ draka_decision: "Quest: Draka the Orc"
+ draka_decision_desc: "You have heard of a powerful orc warrior by the name of Draka. She seems like the perfect first addition to your harem. \n\nHowever, you'll never be able to seduce her surrounded by her clan of blood thirsty warriors juiced up on fel magic. \n\nMaybe you should take inspiration from Azerothian literature. Be the brave knight that kidnaps the princess and imprison her in a tower... or something. To be honest you skimmed to the juicy bits, but you can't argue with results!"
+ draka_decision_tooltip: "Kidnap Draka"
+ draka_decision_confirm: "How Hard Could it Be?"
+
+ guldan_decision: "Quest: Gul'dan's Head"
+ guldan_magic_desc: "Learn the [interactions|E] Drain Life and Fel Infusion"
+ guldan_decision_desc: "Draka has agreed to become your first wife, but first you must kill the warlock Gul'dan and bring her his head!\n\nAttacking him directly however would be suicide, perhaps it would be wise to attempt it from the shadows."
+ guldan_decision_tooltip: "Kill Gul'dan and take his loot!"
+ guldan_decision_confirm: "Looted!"
+
+ jaina_decision: "Quest: Jaina, the Ice Princess"
+ jaina_decision_desc: "Word has reached your ears of a powerful human mage named Jaina. She has just come of age and suitors from all over the continent are making their interests known, with rumors that she may be bethrothed to a childhood friend called Arthas. \n\nObviously, these people aren't respecting the fact you just called dibs. You should invite her over to meet you, consentually of course. "
+ jaina_decision_tooltip: "Kidnap Jaina"
+ jaina_decision_confirm: "Don't Fix What's Not Broken!"
+
+
+ 
+guldan_skull: "Gul'dan's Skull"
+guldan_skull_desc: "The skull of an Orc Warlock. Fel magic radiates off of it."
+
+culture_orc: "You have assimilated Orcs into your culture!"
+culture_human: "You have assimilated Humans into your culture!"
+culture_highelves: "You have assimilated High Elves into your culture!"
+culture_nightelves: "You have assimilated Night Elves into your culture!"
+culture_dragon_green: "You have assimilated Green Dragons into your culture!"
+culture_dragon_red: "You have assimilated Red Dragons into your culture!"
+culture_dragon_black: "You have assimilated Black Dragons into your culture!"
+
+harem_decision: "Construct a Harem"
+harem_decision_desc: ""
+harem_decision_tooltip: "Construct a Harem"
+harem_decision_confirm: "So Expensive!"
+harem_creation: "Enables the Harem Tab"
+harem_activity: "Enables the Harem Gathering [activity|E]"
+quest_continue: "Continue the Quest!"
+guldans_head_quest: "You must kill Gul'dan by your hand!"
+become_warlock: "You have become a Warlock!"
+
+is_alive: "[CHARACTER.GetShortUIName|U] is alive"
+HUD_HAREM: "#T Harem#!"

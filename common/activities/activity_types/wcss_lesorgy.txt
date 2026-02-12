@@ -1,0 +1,2656 @@
+﻿@weight_up_ai_select_province_small = 10
+@weight_up_ai_select_province_medium = 50
+@weight_up_ai_select_province_large = 250
+@weight_up_ai_select_province_massive = 500
+
+@feast_cost_gold_low = tiny_gold_value
+@feast_cost_gold_medium = medium_gold_value
+@feast_cost_gold_high = major_gold_value
+
+wcss_activity_harem = {
+	is_shown = {
+		is_playable_character = yes
+		highest_held_title_tier >= tier_county # Barons don't need to spam this
+		is_female = yes
+		is_attracted_to_women = yes
+		trigger_if = { # For the AI, we want them to be willing to cheat on every partner. Note that Polyamory means it's not cheating so this is a yes automatically!
+			limit = { is_ai = yes }
+			might_cheat_on_every_partner_trigger = yes
+		}
+	}
+
+	can_start_showing_failures_only = {
+		faith = { has_doctrine_parameter = adultery_female_accepted }
+		is_available_adult = yes
+		age >= 18
+		NOT = { has_trait = incapable }
+		custom_tooltip = {
+			#Cannot use if you have an STD or other contagious disease
+			text = wcss_has_contagious_disease_trigger_tt
+			has_contagious_disease_trigger = no
+		}
+		custom_tooltip= {
+			#Health must be Fine or better. This activity is pretty physical and being sickly at one of these is bad in multiple regards.
+			text = wcss_harem_has_serious_illness_trigger_tt
+			health >= fine_health
+			wcss_harem_has_serious_illness_trigger = no
+		}
+		custom_tooltip = {
+			#Disfiguring trait disqualifies you from orgies
+			text = wcss_harem_has_disfiguring_trait_trigger_tt
+			wcss_harem_has_disfiguring_trait_trigger = no
+		}
+		OR = {
+			culture = { has_cultural_tradition = wcss_tradition_hedonists }
+			custom_tooltip = {
+				text = wcss_faith_lustful_is_virtue_tt
+				# Covers Sapphic Exaltation and Carnal Exaltation
+				faith = { trait_is_virtue = lustful }
+			}
+			faith = { trait_is_virtue = lustful } 
+			has_trait = lustful
+			has_trait = rakish
+			has_trait = seducer
+			has_focus = intrigue_temptation_focus
+			has_trait = lifestyle_reveler
+			has_trait = creature_sayaadi
+		}
+	}
+
+	is_valid = {
+		scope:host = { # Standard requirements, but invalidate if the host somehow becomes not attracted to women
+			is_alive = yes
+			is_capable_adult = yes
+			is_imprisoned = no
+			is_playable_character = yes
+			is_attracted_to_women = yes
+			is_incapable = no # If gets STD or other contagious disease, stop events for them instead of cancelling activity
+		}	
+		# If no one shows up
+		trigger_if = {
+			limit = {
+				is_current_phase_active = yes
+			}
+			has_attending_activity_guests = yes
+		}
+	}
+	
+	on_host_death = {
+		every_attending_character = {
+			limit = { is_alive = yes }
+			trigger_event = {
+				id = wcss_harem.0051
+				days = 1 # So you don't get spammed
+			}
+		}
+		every_attending_character = {
+			limit = { has_character_flag = wcss_had_2701 }
+			remove_character_flag = wcss_had_2701
+		}		
+		# Code sends your entourage home on invalidated
+		scope:activity.var:host_var = {
+			# Saving the title for loc
+			primary_title = { save_scope_as = host_title }
+			# Inform your heir if you have one
+			player_heir ?= {
+				trigger_event = {
+					id = feast.0800
+					days = 1
+				}
+			}
+		}
+	}
+
+	on_invalidated = {
+		every_attending_character = {
+			limit = { has_character_flag = wcss_had_2701 }
+			remove_character_flag = wcss_had_2701
+		}
+		if = {
+			limit = {
+				scope:host = { is_imprisoned = yes }
+			}
+			#Host has been imprisoned
+			every_attending_character = {
+				limit = {
+					NOT = { this  = scope:host }
+				}
+				trigger_event = wcss_harem.0053
+			}
+			scope:host = { trigger_event = wcss_harem.0052 }
+		}
+		if = {
+			limit = {
+				scope:host = { is_incapable = yes }
+			}
+			scope:activity = {
+				activity_type = { save_scope_as = activity_type }
+			}
+			scope:host = {
+				trigger_event = activity_system.0330
+			}
+			every_attending_character = {
+				limit = { NOT = { this = scope:host } }
+				trigger_event = activity_system.0331
+			}
+		}
+		if = { # No one shows up
+			limit = {
+				has_attending_activity_guests = no
+			}
+			scope:activity = {
+				activity_type = { save_scope_as = activity_type }
+				activity_location = { save_scope_as = location }
+			}
+			scope:host = { trigger_event = wcss_harem.0002 }
+		}
+		# Accolade stuff
+		if = {
+			limit = {
+				any_attending_character = {
+					has_character_modifier = accolade_charmer_party_modifier
+				}
+			}
+			every_attending_character = {
+				limit = {
+					has_character_modifier = accolade_charmer_party_modifier
+				}
+				remove_character_modifier = accolade_charmer_party_modifier
+			}
+		}
+		if = {
+			limit = {
+				any_attending_character = {
+					has_character_modifier = accolade_charmer_party_high_modifier
+				}
+			}
+			every_attending_character = {
+				limit = {
+					has_character_modifier = accolade_charmer_party_high_modifier
+				}
+				remove_character_modifier = accolade_charmer_party_high_modifier
+			}
+		}
+		# Host becomes unlanded
+		if = {
+			limit = {
+				scope:host = { is_playable_character = no }
+			}
+			scope:activity = {
+				activity_type = { save_scope_as = activity_type }
+			}
+			every_attending_character = {
+				trigger_event = activity_system.0320
+			}
+		}
+	}
+
+	###################
+	# PARAMETERS
+	###################
+
+	is_grand_activity = no
+	is_single_location = yes
+
+	province_filter = domicile_domain
+	ai_province_filter = capital
+
+	max_route_deviation_mult = 2.0
+
+	is_location_valid = {
+		OR = {
+			this = scope:host.capital_province
+			scope:host.domicile.domicile_location ?= this
+		}
+	}
+
+	province_description = {
+		desc = wcss_activity_harem_province_desc
+		# +++ / triple plus good
+		triggered_desc = {
+			trigger = { has_building_or_higher = citadel_of_aleppo_01 }
+			desc = wcss_activity_harem_province_desc_citadel_of_aleppo
+		}
+		triggered_desc = {
+			trigger = { has_building_or_higher = palace_of_aachen_01 }
+			desc = wcss_activity_harem_province_desc_palace_of_aachen
+		}
+		triggered_desc = {
+			trigger = { has_building_or_higher = doges_palace_01 }
+			desc = wcss_activity_harem_province_desc_doges_palace
+		}
+		triggered_desc = {
+			trigger = { has_building_or_higher = leisure_palace_01 }
+			desc = wcss_activity_harem_province_desc_leisure_palace
+		}
+		triggered_desc = {
+			trigger = { has_building_or_higher = alhambra_01 }
+			desc = wcss_activity_harem_province_desc_alhambra
+		}
+		# ++ / double plus good
+		triggered_desc = {
+			trigger = { has_building_or_higher = caravanserai_01 }
+			desc = wcss_activity_harem_province_desc_caravanserai
+		}	
+		# + / plus good
+		triggered_desc = {
+			trigger = { has_building_or_higher = longhouses_01 }
+			desc = wcss_activity_harem_province_desc_longhouses
+		}		
+	}
+
+	max_province_icons = 5
+
+	province_score = {
+		value = 0
+		# BUILDINGS
+		# Triple good / +++
+		if = {
+			limit = { has_building_or_higher = citadel_of_aleppo_01 }
+			add = 100
+		}
+		if = {
+			limit = { has_building_or_higher = palace_of_aachen_01 }
+			add = 100
+		}
+		if = {
+			limit = { has_building_or_higher = doges_palace_01 }
+			add = 100
+		}
+		if = {
+			limit = { has_building_or_higher = leisure_palace_01 }
+			add = 100
+		}
+		if = {
+			limit = { has_building_or_higher = alhambra_01 }
+			add = 100
+		}
+		# Double good / ++
+		if = {
+			limit = { has_building_or_higher = caravanserai_01 }
+			add = 50
+		}
+		# Good / +
+		if = {
+			limit = { has_building_or_higher = longhouses_01 }
+			add = 25
+		}
+	}
+
+	cooldown = { years = wcss_harem_cooldown_time }
+
+	# desc is only shown in debug AI watch window
+	ai_will_do = {
+		add = {
+			value = 30
+			desc = "Base"
+		}
+		add = {
+            value = ai_greed
+            multiply = -0.25
+            desc = "ai_greed"
+        }
+        add = {
+        	value = ai_sociability
+        	multiply = 0.5
+        	desc = "ai_sociability"
+        }
+		if = {
+			limit = {
+				ai_energy < 0
+			}
+			add = {
+				add = ai_energy
+				desc = "ai_energy"
+			}
+		}
+		if = {
+			limit = { has_trait = gregarious }
+			add = {
+				value = 10
+				desc = "Is gregarious"
+			}
+		}
+		if = {
+			limit = { has_trait = lustful }
+			add = {
+				value = 10
+				desc = "Is lustful"
+			}
+		}		
+		if = {
+			limit = { has_trait = shy }
+			add = {
+				value = -30
+				desc = "Is shy"
+			}
+		}
+		if = {
+			limit = { has_trait = chaste }
+			add = {
+				value = -30
+				desc = "Is chaste"
+			}
+		}
+		if = {
+			limit = { has_trait = reclusive }
+			add = {
+				value = -30
+				desc = "Is reclusive"
+			}
+		}
+		if = {
+			limit = {
+				short_term_gold >= wcss_harem_activity_cost
+				short_term_gold >= major_gold_value
+			}
+			add = {
+				value = 30
+				desc = "Got gold to burn"
+			}
+		}
+		if = {
+			limit = { has_trait = lifestyle_reveler }
+			add = {
+				value = 20
+				desc = "Is Reveler"
+			}
+		}
+		if = {
+			limit = { has_trait = creature_sayaadi }
+			add = {
+				value = 20
+				desc = "Is Debauchess"
+			}		
+		}	
+		if = {
+			limit = {
+				has_royal_court = yes 
+				has_court_type = court_intrigue
+				}
+			add = {
+				value = 10
+				desc = "Intrigue court trait"
+			}
+		}
+		if = {
+			limit = { has_trait = rakish }
+			add = {
+				value = 10
+				desc = "Is rakish"
+			}
+		}
+		# Stress
+		if = { # Low Stress
+            limit = {
+				stress >= lower_than_baseline_stress
+				NOT = { has_trait = shy }
+			}
+            add = {
+            	value = 10
+            	desc = "lower_than_baseline_stress"
+            }
+        }
+        if = { # High Stress
+        	limit = {
+				stress >= higher_than_baseline_stress
+				NOT = { has_trait = shy }
+			}
+        	add = {
+        		value = 10
+        		desc = "higher_than_baseline_stress"
+        	}
+        }
+        if = { # Very High Stress
+        	limit = {
+				stress >= high_stress
+				NOT = { has_trait = shy }
+			}
+        	add = {
+        		value = 10
+        		desc = "high_stress"
+        	}
+        }
+		if = {
+			limit = {
+				culture = {
+					has_cultural_tradition = wcss_tradition_hedonists
+				}
+			}
+			add = {
+				value = 20
+				desc = "Host culture has Culinary Artists Cultural Tradition"
+			}
+		}
+		if = {
+			limit = {
+				faith = { has_doctrine = tenet_ritual_celebrations }
+			}
+			add = {
+				value = 35
+				desc = "Host culture has Ritual Celebrations Cultural Tradition"
+			}
+		}
+		if = {
+			limit = {
+				faith = { has_doctrine = tenet_hedonistic }
+			}
+			add = {
+				value = 35
+				desc = "Host faith has Hedonistic Tenet"
+			}
+		}
+		if = {
+			limit = {
+				faith = { trait_is_virtue = lustful }
+			}
+			add = {
+				value = 35
+				desc = "Host faith has carnal Tenet"
+			}
+		}
+		if = {
+			limit = {
+				host.faith = {
+					has_doctrine = tenet_asceticism
+				}
+			}
+			add = {
+				value = -20
+				desc = "Host faith has Asceticism tenet"
+			}
+		}
+        if = {
+        	limit = { has_character_flag = wcss_debauche_addict }
+        	add = {
+            	value = 500
+            	desc = "Sex addict"
+            }
+        }
+		if = {
+			limit = {
+				is_independent_ruler = no
+				has_vassal_stance = courtly
+			}
+			add = {
+				value = 10
+				desc = courtly
+			}
+		}
+        if = {
+        	limit = { ai_has_warlike_personality = yes }
+        	add = {
+            	value = -30
+            	desc = "Warlike"
+            }
+        }
+        if = {
+        	limit = {
+				ai_has_warlike_personality = yes
+				war_chest_gold < war_chest_gold_maximum
+			}
+        	multiply = {
+            	value = 0.25
+            	desc = "Warlike"
+            }
+        }
+        # Economic Archetype
+		if = { # Too busy booming the economy
+            limit = {
+                OR = {
+                    ai_has_economical_boom_personality = yes
+                    has_character_flag = ai_boom
+                }
+            }
+            add = {
+            	value = -200
+            	desc = "Builder"
+            }
+        }
+	}
+
+	###################
+	# GUEST HANDLING
+	###################
+
+	max_guests = 40
+
+	guest_invite_rules = {
+		rules = {	
+			# Magnates.
+			6 = wcss_harem_invite_rule_neighboring_rulers
+			# MP 
+			6 = wcss_harem_invite_rule_mp
+		}
+		defaults = {
+			1 = wcss_harem_invite_rule_spouses
+			1 = wcss_harem_invite_rule_concubines
+			1 = wcss_harem_invite_rule_lovers
+			1 = wcss_harem_invite_rule_liege
+			2 = wcss_harem_invite_rule_friends
+			2 = wcss_harem_invite_rule_carnal_clergy
+			2 = wcss_harem_invite_rule_vassals
+			3 = wcss_harem_invite_rule_fellow_vassals
+			3 = wcss_harem_invite_rule_courtiers
+			5 = wcss_harem_invite_rule_guests
+		}
+	}
+
+	can_be_activity_guest = {
+		wcss_can_join_harem_trigger = yes
+		in_diplomatic_range = scope:host
+		trigger_if = {
+			limit = { is_ai = yes }
+			might_cheat_on_every_partner_trigger = yes # They need to be okay with sleeping around, either via personality or Polyamory.
+		}
+	}
+
+	host_intents = {
+		intents = { reduce_stress_intent woo_attendee_intent befriend_attendee_intent }
+		default = reduce_stress_intent
+	}
+
+	guest_intents = {
+		intents = { reduce_stress_intent woo_attendee_intent befriend_attendee_intent }
+		default = reduce_stress_intent
+	}
+
+	guest_join_chance = {
+		base = 10
+		base_activity_modifier = yes
+
+		# Scripted Modifiers
+		activity_guest_shared_ai_accept_modifier = yes 
+		wcss_activity_guest_harem_ai_accept_modifier = yes
+		
+		# If the Host has hosted a Murder Feast recently people are sus. This may not be a feast, but it's still bad.
+		modifier = {
+			scope:host = { has_variable = recent_murder_feast_var }
+			add = {
+				value = -15
+				desc = "Recent $feast_type_murder$"
+			}
+		}
+		
+		# Master of Revels Accolade increasing invite acceptance
+		modifier = {
+   		   scope:host = {
+   		   		any_active_accolade = {
+					has_accolade_parameter = acclaimed_knight_feast_wedding_invite_acceptance_bonus
+				}
+   		   }
+   		   add = accolade_feast_wedding_invite_acceptance_value
+   		}
+	}
+
+	travel_entourage_selection = {
+		weight = {
+			value = standard_travel_entourage_additions
+			if = {
+				limit = {
+					OR = {
+						has_trait = gregarious
+						has_trait = lustful
+						has_trait = lifestyle_reveler
+						has_trait = beauty_good
+					}
+				}
+				add = 25
+			}
+			if = {
+				limit = {
+					OR = {
+						has_relation_lover = root
+						has_relation_soulmate = root
+					}
+				}
+				add = 50
+			}
+			if = {
+				limit = {
+					faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+					is_consort_of = root
+				}
+				add = 100
+			}
+		}
+		max = 18
+		invite_rule_order = 4
+	}
+
+	cost = {
+		gold = {
+			add = {
+				add = {
+					value = wcss_harem_activity_cost
+					desc = wcss_harem_activity_cost_desc
+				}
+				add = {
+					value = wcss_harem_activity_cost
+					multiply = activity_cost_scale_by_era
+					subtract = wcss_harem_activity_cost
+					desc = activity_cost_scale_by_era_desc
+				}
+				if = {
+					limit = {
+						scope:province ?= { has_building_or_higher = citadel_of_aleppo_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_max_value
+						desc = wcss_harem_cost_discount_citadel_of_aleppo
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= { has_building_or_higher = palace_of_aachen_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_max_value
+						desc = wcss_harem_cost_discount_palace_of_aachen
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= { has_building_or_higher = doges_palace_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_max_value
+						desc = wcss_harem_cost_discount_doges_palace
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= { has_building_or_higher = leisure_palace_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_max_value
+						desc = wcss_harem_cost_discount_leisure_palaces
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= { has_building_or_higher = alhambra_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_max_value
+						desc = wcss_harem_cost_discount_alhambra
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= {	has_building_or_higher = longhouses_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_min_value
+						desc = wcss_harem_cost_discount_longhouses
+					}
+				}
+				if = {
+					limit = {
+						scope:province ?= {	has_building_or_higher = caravanserai_01 }
+					}
+					add = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = wcss_harem_activity_cost_discount_medium_value
+						desc = wcss_harem_cost_discount_caravanserai
+					}
+				}
+
+				if = {
+					limit = {
+						dynasty ?= {
+							has_dynasty_perk = law_legacy_1
+						}
+					}
+					subtract = {
+						value = 0
+						add = {
+							value = wcss_harem_activity_cost
+							add = {
+								value = wcss_harem_activity_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_activity_cost
+							}
+						}
+						multiply = law_legacy_cost_reduction_mult
+						desc = law_legacy_1_name
+					}
+				}
+				min = 0
+			}
+		}
+	}
+
+	ui_predicted_cost = {
+		# All costs are balanced on County/Early Era starting point
+		gold = {
+			add = { # Base Cost, scaled by era
+				value = wcss_harem_activity_cost
+				multiply = activity_cost_scale_by_era
+			}
+			
+			# Options 
+			add = { # Entertainment 
+				value = 0 # Bad Option Cost
+				add = 10 # Normal Option Cost
+				add = 35 # Good Option Cost
+				# Scale the sum of the options by era and tier
+				add = {
+					value = 45
+					multiply = activity_cost_scale_by_tier
+				}
+				add = {
+					value = 45
+					multiply = activity_cost_scale_by_era
+				}
+				# Divide by 3 (num of levels for this option) so we get the average option cost
+				divide = 3
+			}
+			add = { # Luxuries 
+				value = 0 # Bad Option Cost
+				add = 10 # Normal Option Cost
+				add = 35 # Good Option Cost
+				# Scale the sum of the options by era and tier
+				add = {
+					value = 45
+					multiply = activity_cost_scale_by_tier
+				}
+				add = {
+					value = 45
+					multiply = activity_cost_scale_by_era
+				}
+				# Divide by 3 (num of levels for this option) so we get the average option cost
+				divide = 3
+			}
+			save_temporary_value_as = wcss_pre_discount_harem_cost_ui
+			if = {
+				limit = {
+					dynasty ?= {
+						has_dynasty_perk = law_legacy_1
+					}
+				}
+				subtract = {
+					value = scope:wcss_pre_discount_harem_cost_ui
+					multiply = law_legacy_cost_reduction_mult
+				}
+			}
+			
+			# Make it a multiple of 5 (rounded up)
+			divide = 5
+			ceiling = yes 
+			multiply = 5
+		}
+	}
+
+	###################
+	# GRAPHICS
+	###################
+
+	map_entity = { 
+		trigger = {
+			activity_location.culture = {
+				OR = {
+					has_graphical_mena_culture_group_trigger = yes
+					has_graphical_steppe_culture_group_trigger = yes
+					has_graphical_african_culture_group_trigger = yes
+				}
+			}
+		}
+		reference = "building_mena_feast_01_entity"
+	}
+
+	map_entity = {
+		trigger = {
+			activity_location.culture = {
+				has_graphical_india_culture_group_trigger = yes
+			}
+		}
+		reference = "building_indian_feast_01_entity"
+	}
+	
+	map_entity = "building_western_feast_01_entity" # Affects the graphic that appears on the map.
+
+	# Travel
+	background = { # Bridge
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				is_riverside_province = yes
+				geographical_region = world_europe
+				OR = {
+					terrain = farmlands
+					terrain = plains
+					terrain = mountains
+					terrain = hills
+				}
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_bridge.dds"
+		environment = "environment_travel_bridge"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+	
+	background = { # Farmland, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				terrain = farmlands
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_farm.dds"
+		environment = "environment_travel_farmlands"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { # Farmland, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				terrain = farmlands
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/farms.dds"
+		environment = "environment_event_farms"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #Desert, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_desert_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_desert.dds"
+		environment = "environment_travel_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+	background = { #Desert, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_desert_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/desert.dds"
+		environment = "environment_event_bp1_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+
+	background = { #forest snowy
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location ?= { hunt_snowy_forest_trigger = yes }
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_hunt_snowy_forest.dds"
+		environment = "environment_hunt_snowy_forest"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+
+	background = { #forest_pine
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_forest_pine_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/forest_pine.dds"
+		environment = "environment_event_forest_pine"
+		ambience = "event:/SFX/Events/Backgrounds/coniferous_forest_day"
+	}
+
+	background = { #forest
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_forest_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/forest.dds"
+		environment = "environment_event_forest"
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #mountains, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_mountains_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_mountains.dds"
+		environment = "environment_travel_mountain_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+	background = { #mountains, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_mountains_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/mountains.dds"
+		environment = "environment_event_mountains"
+		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
+	}
+
+	background = { #steppe, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_steppe_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_steppe.dds"
+		environment = "environment_travel_steppe_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/steppe_day"
+	}
+	background = { #steppe, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_steppe_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/steppe.dds"
+		environment = "environment_event_steppe"
+		ambience = "event:/SFX/Events/Backgrounds/steppe_day"
+	}
+
+	background = { #drylands (formerly desert)
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_drylands_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/drylands.dds"
+		environment = "environment_event_desert"
+		ambience = "event:/SFX/Events/Backgrounds/desert_day"
+	}
+
+	background = { #wetlands
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_wetlands_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_wetlands.dds"
+		environment = "environment_event_bp1_wetlands" 
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #jungle
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_wilderness_jungle_trigger = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_jungle.dds"
+		environment = "environment_event_bp1_jungle"
+		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
+	}
+
+	background = { #plains, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_plains_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_hills.dds"
+		environment = "environment_travel_hills_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { #plains, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_plains_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_plains.dds"
+		environment = "environment_event_bp1_plains"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #hills, settled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_hills_trigger = yes
+				exists = province_owner
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_travel_hills.dds"
+		environment = "environment_travel_hills_settlement"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+	background = { #hills, unsettled
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				graphical_hills_trigger = yes
+				NOT = { exists = province_owner }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/bp1_hills.dds"
+		environment = "environment_event_bp1_hills"
+		ambience = "event:/SFX/Events/Backgrounds/fields_farms_day"
+	}
+
+	background = { #sea
+		trigger = {
+			OR = {
+				NOT = {
+					scope:host.location = scope:activity.activity_location
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest.location ?= scope:activity.activity_location
+					}
+				}
+				AND = {
+					exists = scope:activity.special_guest:honorary_guest_regular.location
+					NOT = {
+						scope:activity.special_guest:honorary_guest_regular.location ?= scope:activity.activity_location
+					}
+				}
+			}
+			scope:host.location = {
+				is_sea_province = yes
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/fp1_ocean.dds"
+		environment = "environment_event_fp1_ocean"
+		ambience = "event:/DLC/FP1/SFX/Events/event_ocean_longship"
+	}
+	# End Travel
+
+	background = {
+		trigger = {
+			activity_location.culture = { has_building_gfx = indian_building_gfx }
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_wedding_ceremony_indian.dds"
+		environment = "environment_indian_wedding"
+		ambience = "event:/SFX/Events/Backgrounds/feasthall"
+		music = "grandfeast_cue"
+	}
+	background = {
+		trigger = {
+			OR = {
+				activity_location.culture = { has_building_gfx = arabic_group_building_gfx }
+				activity_location.culture = { has_building_gfx = berber_group_building_gfx }
+				activity_location.culture = { has_building_gfx = iberian_building_gfx }
+			}
+		}
+		texture = "gfx/interface/illustrations/event_scenes/ep2_wedding_ceremony_mena.dds"
+		environment = "environment_mena_wedding"
+		ambience = "event:/SFX/Events/Backgrounds/feasthall"
+		music = "grandfeast_cue"
+	}
+	background = {
+		# Fallback
+		texture = "gfx/interface/illustrations/event_scenes/ep2_wedding_ceremony_western.dds"
+		environment = "environment_western_wedding"
+		ambience = "event:/SFX/Events/Backgrounds/feasthall"
+		music = "grandfeast_cue"
+	}
+
+	window_characters = {
+		
+		guest = {
+			camera = camera_body_right
+
+			effect = {
+				if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						exists = scope:player
+						scope:player = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+						}
+					}
+					scope:player ?= { add_to_list = characters }
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						exists = scope:host.intent_target
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							this = scope:host.intent_target
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							this = scope:host.intent_target
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							OR = {
+								has_relation_lover = scope:host
+								has_relation_friend = scope:host
+							}
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							OR = {
+								has_relation_lover = scope:host
+								has_relation_friend = scope:host
+							}
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_consort_of = scope:host
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_consort_of = scope:host
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_county
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_county
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						exists = scope:host.intent_target
+						scope:host = {
+							has_activity_intent = woo_attendee_intent
+						}
+						scope:character = scope:host.intent_target
+					}
+					animation = { personality_bold love }
+				}
+				triggered_animation = {
+					trigger = {
+						exists = scope:host.intent_target
+						scope:host = {
+							has_activity_intent = befriend_attendee_intent
+						}
+						scope:character = scope:host.intent_target
+					}
+					animation = { happiness admiration }
+				}
+				#Fallback
+				triggered_animation = {
+					trigger = {
+						always = yes
+					}
+					animation = { happiness love flirtation admiration }
+				}
+			}
+		}
+		
+		host = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					scope:host = {
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						exists = scope:host.intent_target
+						scope:host = {
+							is_female = yes
+							OR = {
+								has_activity_intent = woo_attendee_intent
+								has_activity_intent = befriend_attendee_intent
+							}
+						}
+						scope:host.intent_target.location = scope:activity.activity_location
+					}
+					animation = { reception_bride_right }
+				}
+				triggered_animation = {
+					trigger = {
+						always = yes
+					}
+					animation = { happiness love flirtation admiration }
+				}
+			}
+		}
+		
+		travel_host = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						NOT = {
+							scope:host.location = scope:activity.activity_location
+						}
+					}
+					scope:host = {
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				triggered_animation = {
+					trigger = {
+						scope:character.location = { is_sea_province = yes }
+					}
+					animation = { idle }
+				}
+				triggered_animation = {
+					trigger = { scope:character = { has_trait = impatient } }
+					animation = { jockey_gallop }
+				}
+				animation = jockey_walk
+			}
+		}
+		
+		guest = {
+			camera = camera_body
+			
+			effect = {
+				if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 2
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 2
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 2
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_county
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+								scope:activity.special_guest:honorary_guest ?= this
+								scope:activity.special_guest:honorary_guest_regular ?= this
+							}
+							highest_held_title_tier >= tier_county
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				#Fallback
+				triggered_animation = {
+					trigger = {
+						always = yes
+					}
+					animation = { laugh personality_bold }
+				}
+			}
+		}
+		
+		guest = {
+			camera = camera_body_left
+			
+			effect = {
+				if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 3
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOR = {
+								this = scope:host
+							}
+							is_councillor_of = scope:host
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 3
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_duchy
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+						any_attending_character = {
+							count >= 3
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_county
+						}
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+							highest_held_title_tier >= tier_county
+						}
+						add_to_list = characters
+					}
+				}
+				else_if = {
+					limit = {
+						scope:host.location = scope:activity.activity_location
+					}
+					every_attending_character = {
+						limit = {
+							location = scope:activity.activity_location
+							NOT = {
+								this = scope:host
+							}
+						}
+						add_to_list = characters
+					}
+				}
+			}
+
+			scripted_animation = {
+				#Fallback
+				triggered_animation = {
+					trigger = {
+						always = yes
+					}
+					animation = { happiness love flirtation admiration }
+				}
+			}
+		}
+	}
+
+	###################
+	# OPTIONS
+	###################
+
+	options = {
+
+		# How well-vetted are the dancers and courtesans?
+		wcss_harem_option_entertainment = {
+
+			wcss_harem_entertainment_bad = { # Add a small chance of STD transmission for the bad option.
+				is_shown = { has_dlc_feature = advanced_activities }
+				
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_cheap_expense_value
+					# Entertainment preference.
+					add = wcss_activity_option_desires_simple_entertainment
+				}				
+			}
+
+			wcss_harem_entertainment_normal = {
+				default = yes
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = wcss_harem_normal_option_cost
+								desc = wcss_harem_entertainment_normal
+							}
+							add = {
+								value = wcss_harem_normal_option_cost
+								multiply = activity_cost_scale_by_tier
+								subtract = wcss_harem_normal_option_cost
+								desc = activity_cost_scale_by_tier_desc
+							}
+							add = {
+								value = wcss_harem_normal_option_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_normal_option_cost
+								desc = activity_cost_scale_by_era_desc
+							}
+							if = {
+								limit = {
+									dynasty ?= {
+										has_dynasty_perk = law_legacy_1
+									}
+								}
+								subtract = {
+									value = wcss_harem_normal_option_cost
+									add = {
+										value = wcss_harem_normal_option_cost
+										multiply = activity_cost_scale_by_tier
+										subtract = wcss_harem_normal_option_cost
+									}
+									add = {
+										value = wcss_harem_normal_option_cost
+										multiply = activity_cost_scale_by_era
+										subtract = wcss_harem_normal_option_cost
+									}
+									multiply = law_legacy_cost_reduction_mult
+									desc = law_legacy_1_name
+								}
+							}
+							min = 0
+						}
+					}
+				}
+
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_middling_expense_value
+					# Entertainment preference.
+					## We just use slightly reduced entertainment prefs here.
+					add = {
+						value = wcss_activity_option_desires_good_entertainment
+						multiply = 0.5
+					}
+				}
+			}
+			
+			wcss_harem_entertainment_good = {
+				is_shown = { has_dlc_feature = advanced_activities }
+
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = wcss_harem_good_option_cost
+								desc = wcss_harem_entertainment_good
+							}
+							add = {
+								value = wcss_harem_good_option_cost
+								multiply = activity_cost_scale_by_tier
+								subtract = wcss_harem_good_option_cost
+								desc = activity_cost_scale_by_tier_desc
+							}
+							add = {
+								value = wcss_harem_good_option_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_good_option_cost
+								desc = activity_cost_scale_by_era_desc
+							}
+							if = {
+								limit = {
+									dynasty ?= {
+										has_dynasty_perk = law_legacy_1
+									}
+								}
+								subtract = {
+									value = wcss_harem_good_option_cost
+									add = {
+										value = wcss_harem_good_option_cost
+										multiply = activity_cost_scale_by_tier
+										subtract = wcss_harem_good_option_cost
+									}
+									add = {
+										value = wcss_harem_good_option_cost
+										multiply = activity_cost_scale_by_era
+										subtract = wcss_harem_good_option_cost
+									}
+									multiply = law_legacy_cost_reduction_mult
+									desc = law_legacy_1_name
+								}
+							}
+							min = 0
+						}
+					}
+				}
+
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_heavy_expense_value
+					# Entertainment preference.
+					add = wcss_activity_option_desires_good_entertainment
+				}
+			}	
+
+		}
+
+		# How extravagent are the luxuries you are providing?
+		wcss_harem_option_luxuries = {
+
+			wcss_harem_luxuries_bad = {
+				is_shown = { has_dlc_feature = advanced_activities }
+
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_cheap_expense_value
+					# Fanciness preference.
+					add = wcss_activity_option_likes_fewer_luxuries_option_value
+				}
+			}
+
+			wcss_harem_luxuries_normal = {
+				default = yes
+	
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = wcss_harem_normal_option_cost
+								desc = wcss_harem_luxuries_normal
+							}
+							add = {
+								value = wcss_harem_normal_option_cost
+								multiply = activity_cost_scale_by_tier
+								subtract = wcss_harem_normal_option_cost
+								desc = activity_cost_scale_by_tier_desc
+							}
+							add = {
+								value = wcss_harem_normal_option_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_normal_option_cost
+								desc = activity_cost_scale_by_era_desc
+							}
+							if = {
+								limit = {
+									dynasty ?= {
+										has_dynasty_perk = law_legacy_1
+									}
+								}
+								subtract = {
+									value = wcss_harem_normal_option_cost
+									add = {
+										value = wcss_harem_normal_option_cost
+										multiply = activity_cost_scale_by_tier
+										subtract = wcss_harem_normal_option_cost
+									}
+									add = {
+										value = wcss_harem_normal_option_cost
+										multiply = activity_cost_scale_by_era
+										subtract = wcss_harem_normal_option_cost
+									}
+									multiply = law_legacy_cost_reduction_mult
+									desc = law_legacy_1_name
+								}
+							}
+							min = 0
+						}
+					}
+				}
+
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_middling_expense_value
+					# Fanciness preference.
+					## We just use slightly reduced fanciness prefs here.
+					add = {
+						value = wcss_activity_option_likes_extravagent_luxuries
+						multiply = 0.5
+					}
+				}
+			}
+
+			wcss_harem_luxuries_good = {
+				is_shown = { has_dlc_feature = advanced_activities }
+
+				cost = {
+					gold = {
+						add = {
+							add = {
+								value = wcss_harem_good_option_cost
+								desc = wcss_harem_luxuries_good
+							}
+							add = {
+								value = wcss_harem_good_option_cost
+								multiply = activity_cost_scale_by_tier
+								subtract = wcss_harem_good_option_cost
+								desc = activity_cost_scale_by_tier_desc
+							}
+							add = {
+								value = wcss_harem_good_option_cost
+								multiply = activity_cost_scale_by_era
+								subtract = wcss_harem_good_option_cost
+								desc = activity_cost_scale_by_era_desc
+							}
+							if = {
+								limit = {
+									dynasty ?= {
+										has_dynasty_perk = law_legacy_1
+									}
+								}
+								subtract = {
+									value = wcss_harem_good_option_cost
+									add = {
+										value = wcss_harem_good_option_cost
+										multiply = activity_cost_scale_by_tier
+										subtract = wcss_harem_good_option_cost
+									}
+									add = {
+										value = wcss_harem_good_option_cost
+										multiply = activity_cost_scale_by_era
+										subtract = wcss_harem_good_option_cost
+									}
+									multiply = law_legacy_cost_reduction_mult
+									desc = law_legacy_1_name
+								}
+							}
+							min = 0
+						}
+					}
+				}
+
+				ai_will_do = {
+					value = 0
+					# Financial preference.
+					add = activity_option_likes_heavy_expense_value
+					# Fanciness preference.
+					add = wcss_activity_option_likes_extravagent_luxuries
+				}
+			}
+
+			# Add additional, context-specific levels? Something to think about. Problem is that this is a DLC feature and I don't want to bloat those.
+		}
+
+	}
+
+	###################
+	# PHASES
+	###################
+
+	max_guest_arrival_delay_time = { months = 8 }
+
+	phases = {
+
+		# Entertainment. Guests hang out and enjoy the attentions of dancers and courtesans, partake in the various amenities, and spend time together.
+		wcss_harem_phase_entertainment = {
+			order = 1
+			is_predefined = yes
+
+			is_shown = { always = yes }
+			on_phase_active = {
+				# Sort some stuff on the host.
+				if = {
+					limit = { this = scope:host }
+
+					scope:activity = { progress_activity_phase_after = { months = 1 } }
+
+					## If this is an orgy of sufficient size, flag that for later. Do this now so later additions such as people created by events don't count.
+					if = {
+						limit = {
+							scope:activity = {
+								any_attending_character = {
+									count >= 20
+								}
+							}
+						}
+						add_character_flag = {
+							flag = wcss_harem_size_large
+							days = 100 # An orgy won't last longer than this, and you won't be able to hold another in this timeframe.
+						}
+					}
+
+					## Look for a target you're trying to befriend
+					if = {
+						limit = {
+							any_scheme = {
+								scheme_type = befriend
+								scheme_target_character = {
+									exists = involved_activity
+									involved_activity = scope:activity
+								}
+							}
+						}
+						random_scheme = {
+							limit = {
+								scheme_type = befriend
+								scheme_target_character = {
+									exists = involved_activity
+									involved_activity = scope:activity
+								}
+							}
+							scheme_target_character = {
+								save_scope_as = potential_friend
+								scope:activity = {
+									set_variable = {
+										name = potential_friend
+										value = scope:potential_friend
+									}
+								}
+							}
+							scheme_freeze = { days = 10 }
+						}
+					}
+					# And now, the main event!
+					## Check that there are guests apart from the feast host.
+					if = {
+						limit = {
+							scope:activity = {
+								any_attending_character = {
+									count = 0
+									NOT = {	this = scope:host }
+								}
+							}
+						}
+						# If there are no other guests, throw this event.
+						## [sad period-appropriate trombone noises]
+						trigger_event = wcss_harem.0002
+						if = {
+							limit = { has_character_flag = wcss_had_2701 }
+							remove_character_flag = wcss_had_2701
+						}
+					}
+					## Otherwise, there are guests present.
+					### The key event is chosen for the host, and fires other events from there to every participant.
+					else = {
+						trigger_event = wcss_harem.2001
+					}
+					# Accolade stuff
+					if = {
+						limit = {
+							any_active_accolade = {
+								has_accolade_parameter = accolade_party_fertility
+							}
+						}
+						add_character_modifier = {
+							modifier = accolade_charmer_party_modifier
+						}
+					}
+					if = {
+						limit = {
+							any_active_accolade = {
+								has_accolade_parameter = accolade_party_fertility_high
+							}
+						}
+						add_character_modifier = {
+							modifier = accolade_charmer_party_high_modifier
+						}
+					}
+				}
+				# And for everyone else.
+				else = {
+					# You're busy at another party! (invites were sent the same day, but you agreed to another party after this one )
+					if = {
+						limit = {
+							exists = var:booked_for_a_party
+							var:booked_for_a_party = {
+								NOT = { this = scope:activity.activity_host }
+							}
+						}
+						trigger_event = wcss_harem.0010
+						if = {
+							limit = { has_character_flag = wcss_had_2701 }
+							remove_character_flag = wcss_had_2701
+						}
+					}
+					else = {
+						random_list = {
+							0 = { #they don't join
+								modifier = {
+									add = 100
+									scope:host = { has_variable = murder_feast_perpetrator_var } #if you have hosted a murder feast
+								}
+							}
+							100 = {
+								trigger_event = wcss_harem.2501
+							}
+						}
+						# Remove blocker for invitations to feasts (the activity is now active and will work as a blocker)
+						remove_variable = booked_for_a_party						
+					}
+				}
+			}
+			
+			on_weekly_pulse = {
+				trigger_event = { id = wcss_harem.0005 } # For everyone! We go pretty nuts with this. Everyone is sleeping around randomly, even outside of scripted events.
+				if = { #host
+					limit = {
+						this = scope:host
+					}
+					trigger_event = { on_action = wcss_harem_host_event_selection }
+				}
+				else_if = { #guest
+					limit = {
+						NOT = { this = scope:host }
+					}
+					trigger_event = { on_action = wcss_harem_event_selection }
+				}
+			}
+		}
+
+		# Orgy. Everyone gets together in a big pile and... well, you can guess the rest.
+		wcss_harem_phase_orgy = {
+			order = 2
+			is_predefined = yes
+
+			on_enter_phase = {
+				scope:activity = { 
+					every_attending_character = { # Off with the clothes, we don't need them anymore.
+						limit = { 
+							NOT = { has_character_flag = is_naked }
+						}
+						add_character_flag = {
+							flag = is_naked
+							days = 15
+						}
+					}
+					if = {
+						limit = {
+							has_activity_option = {
+								category = wcss_harem_option_entertainment
+								option = wcss_harem_entertainment_bad
+							}
+						}
+						every_attending_character = {
+							limit = { wcss_harem_has_serious_illness_trigger = no }
+							add_character_flag = {
+								flag = wcss_cheap_debauch_attendee
+								days = 30
+							}
+						}
+					}
+				}
+				if = {
+					limit = { this = scope:host }
+					# No passive state for the orgy, just jump right into it
+					scope:activity = { progress_activity_phase_after = { days = 1 } }
+				}
+			}
+
+			on_phase_active = {
+				trigger_event = wcss_harem.9001 # Begin the wrap-up chain.
+				if = {
+					limit = { this = scope:host }		
+					scope:activity = { progress_activity_phase_after = { days = 14 } }
+				}
+			}
+
+			on_end = { 
+				wcss_harem_STD_transmission = yes # Only for Cheap Company option.
+				wcss_harem_activity_clear_blockers = yes 
+			}
+		}
+
+	}
+
+	ai_check_interval = 60
+
+	ai_will_select_province = {
+		# Base
+		value = 0
+		# Buildings
+		## Tribal
+		### Gathering Halls
+		if = {
+			limit = { has_building_or_higher = longhouses_01 }
+			add = {
+				value = @weight_up_ai_select_province_small
+				desc = wcss_activity_harem_province_desc_longhouses
+			}
+		}
+		## Terrain
+		### Manor Houses
+		if = {
+			limit = { has_building_or_higher = caravanserai_01 }
+			add = {
+				value = @weight_up_ai_select_province_medium
+				desc = wcss_activity_harem_province_desc_caravanserai
+			}
+		}
+		## Duchy
+		### Leisure Palaces
+		if = {
+			limit = { has_building_or_higher = leisure_palace_01 }
+			add = {
+				value = @weight_up_ai_select_province_large
+				desc = wcss_activity_harem_province_desc_leisure_palace
+			}
+		}
+		## Special
+		### Doge's Palace
+		if = {
+			limit = { has_building_or_higher = doges_palace_01 }
+			add = {
+				value = @weight_up_ai_select_province_massive
+				desc = wcss_activity_harem_province_desc_doges_palace
+			}
+		}
+		### Palace of Aachen
+		if = {
+			limit = { has_building_or_higher = palace_of_aachen_01 }
+			add = {
+				value = @weight_up_ai_select_province_large
+				desc = wcss_activity_harem_province_desc_palace_of_aachen
+			}
+		}
+		### Royal Palace of Alhambra
+		if = {
+			limit = { has_building_or_higher = alhambra_01 }
+			add = {
+				value = @weight_up_ai_select_province_massive
+				desc = wcss_activity_harem_province_desc_alhambra
+			}
+		}
+		### Citadel of Aleppo
+		if = {
+			limit = { has_building_or_higher = citadel_of_aleppo_01 }
+			add = {
+				value = @weight_up_ai_select_province_massive
+				desc = wcss_activity_harem_province_desc_citadel_of_aleppo
+			}
+		}
+		### Theodosian Walls
+		#### Standing in for "Constantinople's guts" because otherwise we'd use the Hagia Sophia, and that would be weird.
+		if = {
+			limit = { has_building_or_higher = theodosian_walls_01 }
+			add = {
+				value = @weight_up_ai_select_province_massive
+				desc = wcss_activity_harem_province_desc_theodosian_walls
+			}
+		}
+		### Hall of Heroes
+		if = {
+			limit = { has_building_or_higher = hall_of_heroes_01 }
+			add = {
+				value = @weight_up_ai_select_province_medium
+				desc = wcss_activity_harem_province_desc_hall_of_heroes
+			}
+		}
+	}
+
+	###################
+	# ACTIVITY-SPECIFIC PULSES
+	###################
+	
+	pulse_actions = {
+		entries = { 
+			guest_friendship guest_insulted good_kitty good_puppy jester_entertained_guests antiquarian_admires_artifact
+			wcss_virtuous_harem wcss_guest_enjoys_courtesan_attention wcss_dancers_entertain_guests wcss_drank_good_wine wcss_guests_charm_others wcss_guests_are_intimate
+		}
+		chance_of_no_event = 3
+	}
+	
+	on_start = {
+		set_variable = {
+			name = host_var
+			value = scope:host
+		}
+		add_activity_log_entry = {
+			key = wcss_harem_start_log
+			character = scope:host
+			score = 10
+		}
+		scope:host = {
+			if = {
+				limit = {
+					ai_sociability > 0
+					is_ai = yes
+				}
+				random = {
+					chance = {
+						value = 0.5 # One in 200 debauches
+						if = {
+							limit = {
+								has_trait = lustful
+							}
+							add = 0.5
+						}
+						if = {
+							limit = {
+								has_trait = rakish
+							}
+							add = 0.5
+						}
+						if = {
+							limit = {
+								ai_rationality <= -25
+								has_personality_extroverted_trigger = yes
+							}
+							add = 0.5
+						}
+					}
+					add_character_flag = wcss_debauche_addict
+				}
+			}
+		}
+	}
+	
+	on_enter_passive_state = {
+		trigger_event = wcss_harem.2701
+	}
+
+	# Effects run when the activity completes after its last phase
+	# root = character in this phase
+	# scope:activity = the activity
+	# scope:host = host of the activity
+	on_complete = {
+		if = {
+			limit = { has_character_flag = wcss_had_2701 }
+			remove_character_flag = wcss_had_2701
+		}
+		# Run conclusion stuff here
+		if = {
+			limit = { this = scope:host }
+			location = { save_scope_as = activity_location }
+			scope:host = {
+				save_scope_as = root_scope
+				trigger_event = wcss_harem.9999
+				disburse_harem_host_rewards_effect = yes
+				wcss_hosted_successful_harem_effect = yes
+			}
+			## Remove strife variable.
+			if = {
+				limit = { has_variable = strife_loss_total }
+				remove_variable = strife_loss_total
+			}
+			# Accolade stuff
+			if = {
+				limit = {
+					has_character_modifier = accolade_charmer_party_modifier
+				}
+				remove_character_modifier = accolade_charmer_party_modifier
+			}
+			if = {
+				limit = {
+					has_character_modifier = accolade_charmer_party_high_modifier
+				}
+				remove_character_modifier = accolade_charmer_party_high_modifier
+			}
+		}
+		# Conclusion event for guests
+		else = {
+			if = {
+				limit = {
+					is_alive = yes
+					NOT = { this = scope:host }
+					is_imprisoned = no
+				}
+				show_as_tooltip = { wcss_harem_stress_impact = yes }
+				trigger_event = wcss_harem.9999
+			}
+		}
+		# Glory management.
+		## We want to toss out a little glory to knights who go socialize and make themselves known
+		#accolades_activity_complete_feast_glory_effect = yes
+	}
+}

@@ -1,0 +1,40 @@
+﻿
+450003={
+	name=Nazri
+	dna=nazri_dna
+	female=yes
+	dynasty=69096
+	culture=sayaadi_1 religion=sayaadi_religion
+	martial=6 diplomacy=5 stewardship=5 intrigue=7 learning=5
+	disallow_random_traits = yes
+	sexuality = homosexual
+	trait=education_intrigue_4
+	trait=beauty_good_3
+	trait=sadistic
+	trait=brave
+	trait=deceitful
+	trait=lustful
+	565.1.1={ birth=yes trait=creature_sayaadi trait=being_demon trait=deviant effect = { make_important_lore_character_effect = yes }  }
+	20.1.1={ effect={ set_variable = { name = harem_leader value = character:450003 } set_relation_twin_sister = scope:450004 add_character_flag = got_starting_courtiers set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value } } }
+}
+450004={
+	name=Nehra
+	dna=nehra_dna
+	female=yes
+	dynasty=69096
+	culture=sayaadi_1 religion=sayaadi_religion
+	martial=6 diplomacy=5 stewardship=5 intrigue=7 learning=5
+	disallow_random_traits = yes
+	sexuality = asexual
+	trait=education_martial_4
+	trait=physique_good_3
+	trait=sadistic
+	trait=wrathful
+	trait=brave
+	trait=lustful
+	565.1.1={ birth=yes trait=creature_sayaadi trait=being_demon effect = { make_important_lore_character_effect = yes harem_character_effect = yes } }
+	582.2.1={ employer=450003 }
+	582.2.2={ give_council_position = councillor_marshal }
+	20.1.1={ effect={ set_relation_twin_sister = scope:450003 set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value } } }
+}
+

@@ -1,0 +1,40 @@
+﻿### Triggers for handling creating a Matiarchal Dynasty
+
+wcss_no_male_rulers_in_dynasty = {
+	dynasty = {
+		any_dynasty_member = {
+			count <= 0
+			is_female = no
+			highest_held_title_tier >= tier_county
+		}
+	}
+}
+
+wcss_has_large_dynasty = {
+	dynasty = {
+		any_dynasty_member = {
+			count >= 15
+			highest_held_title_tier >= tier_county
+		}	
+	}
+}
+
+wcss_has_small_dynasty = {
+	dynasty = {
+		any_dynasty_member = {
+			count <= 5
+			highest_held_title_tier >= tier_county
+		}	
+	}
+}
+
+# wcss_is_close_family_relation_of_trigger checks if the character is a child, grandchild, sibling, sibling's child, or spouse of the scope
+wcss_is_close_family_relation_of_trigger = {
+	OR = {
+		is_child_of = $CHARACTER$
+		is_grandchild_of = $CHARACTER$
+		is_great_grandchild_of = $CHARACTER$
+		is_sibling_of = $CHARACTER$
+		is_nibling_of = $CHARACTER$
+	}
+}

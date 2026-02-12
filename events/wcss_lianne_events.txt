@@ -1,0 +1,322 @@
+﻿namespace = LIANNE
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+
+# Starts the Intro
+LIANNE.0000 = {
+	type = character_event
+	title = WCSS_LIANNE_0_TITLE
+	desc = WCSS_LIANNE_0_DESC
+	theme = learning
+	left_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+	option = {
+		set_characters_effect = yes
+		add_character_flag = warlock
+		set_variable = {
+			name = soulshards
+			value = 0
+		}
+		trigger_event = LIANNE.0001
+		name = {
+			text = {
+				desc = WCSS_LIANNE_0_OPT
+			}
+		}
+	}
+}
+
+LIANNE.0001 = {
+	type = character_event
+	title = WCSS_LIANNE_1_TITLE
+	desc = WCSS_LIANNE_1_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = scope:lianne
+		animation = shock
+		outfit_tags = { no_clothes }
+	}
+	right_portrait = {
+		character = root
+		animation = personality_content
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = LIANNE.0002
+		name = {
+			text = {
+				desc = WCSS_LIANNE_1_OPT
+			}
+		}
+	}
+}
+LIANNE.0002 = {
+	type = character_event
+	title = WCSS_LIANNE_2_TITLE
+	desc = WCSS_LIANNE_2_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = scope:lianne
+		animation = throne_room_conversation_1
+		outfit_tags = { no_clothes }
+	}
+	right_portrait = {
+		character = root
+		animation = throne_room_conversation_4
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = LIANNE.0003
+		name = {
+			text = {
+				desc = WCSS_LIANNE_2_OPT
+			}
+		}
+	}
+}
+LIANNE.0003 = {
+	type = character_event
+	title = WCSS_LIANNE_3_TITLE
+	desc = WCSS_LIANNE_3_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = scope:king
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:lianne
+		animation = shock
+		outfit_tags = { no_clothes }
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = LIANNE.0004
+		name = {
+			text = {
+				desc = WCSS_LIANNE_3_OPT
+			}
+		}
+	}
+}
+LIANNE.0004 = {
+	type = character_event
+	title = WCSS_LIANNE_4_TITLE
+	desc = WCSS_LIANNE_4_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_forest
+	}
+	left_portrait = {
+		character = scope:lianne
+		animation = throne_room_kneel_1
+		outfit_tags = { no_clothes }
+	}
+	right_portrait = {
+		character = root
+		animation = throne_room_conversation_1
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = LIANNE.0005
+		name = {
+			text = {
+				desc = WCSS_LIANNE_4_OPT
+			}
+		}
+	}
+}
+LIANNE.0005 = {
+	type = character_event
+	title = WCSS_LIANNE_5_TITLE
+	desc = WCSS_LIANNE_5_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_forest
+	}
+	left_portrait = {
+		character = character:450004
+		animation = celebrate_sword
+		
+	}
+	right_portrait = {
+		character = root
+		animation = stayback
+	}
+	immediate = {
+		character:60001 = {
+			random_courtier = {
+				limit = { is_knight = yes }
+				save_scope_as = guard
+			}
+		}
+	}
+	option = {
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = root
+			SC_ATTACKER = character:450004
+			SC_DEFENDER = scope:guard
+			FATALITY = always
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = wcss_duel.0001
+			INVALIDATION_EVENT = fp1_tbc.0021
+		}
+		set_characters_effect = yes
+		hidden_effect = {
+			character:60002 = { add_character_modifier = pact_bound }
+		}
+		name = {
+			text = {
+				desc = WCSS_LIANNE_5_OPT
+			}
+		}
+	}
+}
+LIANNE.0006 = {
+	type = character_event
+	title = WCSS_LIANNE_6_TITLE
+	desc = WCSS_LIANNE_6_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_forest
+	}
+	left_portrait = {
+		character = scope:lianne
+		animation = admiration
+		outfit_tags = { no_clothes }
+	}
+	right_portrait = {
+		character = root
+		animation = flirtation_left
+	}
+	option = {
+		trigger_event = LIANNE.0007
+		name = {
+			text = {
+				desc = WCSS_LIANNE_6_OPT
+			}
+		}
+	}
+}
+LIANNE.0007 = {
+	type = character_event
+	title = WCSS_LIANNE_7_TITLE
+	desc = WCSS_LIANNE_7_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	lower_left_portrait = { 
+		character = character:10020 
+	}
+    lower_center_portrait = {
+		character = scope:sister
+	}
+	right_portrait = {
+		character = scope:lianne
+		animation = shock
+		outfit_tags = { no_clothes }
+	}
+	option = {
+		set_characters_effect = yes
+		scope:lianne = { 
+			set_house = root.house
+			add_character_modifier = soul_link
+		}
+		hidden_effect = { lianne_complete_effect = yes }
+		lianne_complete_effect_2 = yes 
+		custom_tooltip = culture_human
+		trigger_event = LIANNE.0008
+		name = {
+			text = {
+				desc = WCSS_LIANNE_7_OPT
+			}
+		}
+	}
+}
+LIANNE.0008 = {
+	type = character_event
+	title = WCSS_LIANNE_8_TITLE
+	desc = WCSS_LIANNE_8_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = { 
+		character = character:10020 
+		animation = anger
+	}
+    lower_center_portrait = {
+		character = root
+	}
+	right_portrait = {
+		character = scope:lianne
+		animation = worry
+		outfit_tags = { no_clothes }
+	}
+	option = {
+		trigger_event = {
+			id = LIANNE.0009
+			days = 30
+		}
+		name = {
+			text = {
+				desc = WCSS_LIANNE_8_OPT
+			}
+		}
+	}
+}
+
+LIANNE.0009 = {
+	type = character_event
+	title = WCSS_LIANNE_9_TITLE
+	desc = WCSS_LIANNE_9_DESC
+	theme = stewardship
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = root
+		animation = chancellor
+	}
+
+	right_portrait = {
+		character = scope:lianne
+		animation = throne_room_conversation_2
+	}
+	option = {
+		add_character_flag = build_harem
+		decision:harem_decision = {
+			open_view_data = {
+				view = decision_detail
+				player = root
+			}
+		}
+		name = {
+			text = {
+				desc = WCSS_LIANNE_9_OPT
+			}
+		}
+	}
+}
+
+

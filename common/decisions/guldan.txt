@@ -1,0 +1,47 @@
+﻿#Warcraft
+guldan_decision = {
+	ai_check_interval = 12
+	decision_group_type = major
+	picture = { 
+		reference =  "gfx/interface/illustrations/decisions/guldan.dds"
+	}
+	desc = guldan_decision_desc
+	selection_tooltip = guldan_decision_tooltip
+
+	is_shown = {
+		has_character_flag = draka_deal
+		}
+
+	is_valid = {
+		character:10015 = { is_alive = yes }
+		custom_tooltip = {
+			text = guldans_head_quest
+			character:10015 = { is_alive = no }
+			trigger_if = { 
+				limit = { 
+					character:10015 = { is_alive = no }
+				}
+				character:10015 = { killer = root } 
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+
+	}
+
+	effect = {
+		set_characters_effect = yes
+		trigger_event = { id = draka.0004 }
+		custom_tooltip = quest_continue
+		remove_character_flag = draka_deal
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

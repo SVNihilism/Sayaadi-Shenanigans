@@ -1,0 +1,223 @@
+﻿namespace = draka
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+
+# Starts the Intro
+draka.0001 = {
+	type = character_event
+	title = WCSS_Draka_1_TITLE
+	desc = WCSS_Draka_1_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = quest_one
+		decision:draka_decision = {
+			open_view_data = {
+				view = decision_detail
+				player = root
+			}
+		}
+		hidden_effect = { 
+			character:10020 = { add_character_modifier = { modifier = infernal_luck } }
+		}
+		name = {
+			text = {
+				desc = WCSS_draka_1_OPT
+			}
+		}
+	}
+}
+draka.0002 = {
+	type = character_event
+	title = WCSS_Draka_2_TITLE
+	desc = WCSS_Draka_2_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = character:10020
+		animation = personality_bold
+	}
+	option = {
+		trigger_event = { id = draka.0003 }
+		name = {
+			text = {
+				desc = WCSS_draka_2_OPT
+			}
+		}
+	}
+}
+draka.0003 = {
+	type = character_event
+	title = WCSS_Draka_3_TITLE
+	desc = WCSS_Draka_3_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = character:10020
+		animation = personality_cynical
+	}
+	option = {
+		add_character_flag = draka_deal
+		draka_release_effect = yes
+		character:10020 = { add_character_modifier = pact_bound }
+		decision:guldan_decision = {
+			open_view_data = {
+				view = decision_detail
+				player = root
+			}
+		}
+		character:10015 = {
+			remove_character_modifier = important_lore_character
+		}
+		name = {
+			text = {
+				desc = WCSS_draka_3_OPT
+			}
+		}
+	}
+}
+draka.0004 = {
+	type = character_event
+	title = WCSS_Draka_4_TITLE
+	desc = WCSS_Draka_4_DESC
+	theme = dungeon
+	override_background = {
+		reference = wc_background_slavedocks
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = character:53001 
+		animation = throne_room_conversation_3
+	}
+	lower_left_portrait = {
+		character = character:10021
+	}
+	option = {
+		remove_character_flag = draka_deal
+		add_gold = 50
+		set_characters_effect = yes
+		hidden_effect = {
+			scope:thrall = { add_trait = bastard }
+			thrall_slavery_effect = yes
+		}
+		trigger_event = { id = draka.0005 }		
+		name = {
+			text = {
+				desc = WCSS_draka_4_OPT
+			}
+		}
+	}
+}
+draka.0005 = {
+	type = character_event
+	title = WCSS_Draka_5_TITLE
+	desc = WCSS_Draka_5_DESC
+	theme = intrigue
+	override_background = {
+		reference = fp1_tribal_corridor
+	}
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = character:10020
+		animation = anger
+	}
+	option = {
+		set_characters_effect = yes
+
+		trigger_event = { id = draka.0006 }		
+		name = {
+			text = {
+				desc = WCSS_draka_5_OPT
+			}
+		}
+	}
+}
+draka.0006 = {
+	type = character_event
+	title = WCSS_Draka_6_TITLE
+	desc = WCSS_Draka_6_DESC
+	theme = battle
+	override_background = {
+		reference = bp1_bonfire
+	}
+	left_portrait = {
+		character = character:10020
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:durotan
+		animation = shock
+	}
+	option = {
+		set_characters_effect = yes
+		draka_complete_effect = yes	
+		custom_tooltip = culture_orc
+		hidden_effect = { 
+			scope:thrall = { remove_trait = bastard }
+			culture_upgrade_1 = yes
+		}
+		wcss_innovation_1_effect = yes
+		name = {
+			text = {
+				desc = WCSS_draka_6_OPT
+			}
+		}
+		trigger_event = { 
+			id = draka.0007 
+			days = 7
+		}	
+	}
+}
+
+draka.0007 = {
+	type = character_event
+	title = WCSS_Draka_7_TITLE
+	desc = WCSS_Draka_7_DESC
+	theme = learning
+	left_portrait = {
+		character = root
+		animation = reading
+	}
+	option = {
+		custom_tooltip = become_warlock
+		character:10020 = { add_character_modifier = soul_link }
+		trigger_event = LIANNE.0000
+		name = {
+			text = {
+				desc = WCSS_LIANNE_0_OPT
+			}
+		}
+	}
+}

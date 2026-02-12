@@ -1,0 +1,9 @@
+﻿l_english:
+  wcss_drain_life_interaction:0 "Drain Life"
+  wcss_life_drained:0 "Take his life force to create a Health Stone"
+
+  wcss_fel_infusion_interaction:0 "Fel Infusion"
+  wcss_fel_infusion:0 "Revitalize her life force with a Health Stone"
+
+RACIAL_ACTIONS: "Racial Abilities"
+CLASS_ACTIONS: "Class Abilities"

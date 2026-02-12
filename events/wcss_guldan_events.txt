@@ -1,0 +1,138 @@
+﻿namespace = guldan
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+ 
+# Starts the Intro
+guldan.01 = {
+	type = character_event
+	title = WCSS_guldan_1_TITLE
+	desc = WCSS_guldan_1_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = throne_room_conversation_1
+	}
+	right_portrait = {
+		character = character:450004
+		animation = inspect_weapon
+	}
+	option = {
+		character:450004 = {
+			create_guldan_skull_artifact_effect = { OWNER = character:450004 }
+		}
+		trigger_event = { id = guldan.03 } 
+		name = {
+			text = {
+				desc = WCSS_guldan_1_OPT
+			}
+		}
+	}
+}
+guldan.02 = {
+	type = character_event
+	title = WCSS_guldan_2_TITLE
+	desc = WCSS_guldan_2_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	option = {
+		death = { death_reason = death_disappearance }
+		name = {
+			text = {
+				desc = WCSS_guldan_2_OPT
+			}
+		}
+	}
+}
+guldan.03 = {
+	type = character_event
+	title = WCSS_guldan_3_TITLE
+	desc = WCSS_guldan_3_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = throne_room_conversation_1
+	}
+	right_portrait = {
+		character = character:10620
+		animation = idle
+	}
+	option = {
+		trigger_event = { id = guldan.04 } 
+		name = {
+			text = {
+				desc = WCSS_guldan_3_OPT
+			}
+		}
+	}
+}
+guldan.04 = {
+	type = character_event
+	title = WCSS_guldan_4_TITLE
+	desc = WCSS_guldan_4_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = throne_room_conversation_1
+	}
+	right_portrait = {
+		character = character:10620
+		animation = crying
+	}
+	option = {
+		trigger_event = { id = guldan.05 } 
+		name = {
+			text = {
+				desc = WCSS_guldan_4_OPT
+			}
+		}
+	}
+}
+guldan.05 = {
+	type = character_event
+	title = WCSS_guldan_5_TITLE
+	desc = WCSS_guldan_5_DESC
+	theme = dungeon
+	override_background = {
+		reference = fp1_tribal_prison
+	}
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	right_portrait = {
+		character = character:10620
+		animation = shame
+	}
+	option = {
+		trigger_event = { id = draka.0004 } 
+		add_courtier = character:10620
+		add_hook = {
+			type = strong_favor_hook
+				target = character:10620
+		}
+		name = {
+			text = {
+				desc = WCSS_guldan_5_OPT
+			}
+		}
+	}
+}

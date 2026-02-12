@@ -1,0 +1,158 @@
+﻿##############################
+# RITUAL CULTURAL TRADITIONS #
+##############################
+
+wcss_tradition_samesex_marriage = {
+	category = ritual
+
+	layers = {
+		0 = default4.dds
+		1 = mediterranean
+		4 = diplomacy.dds
+	}
+
+	can_pick = { always = yes }
+	can_pick_for_hybridization = { always = yes }
+
+	parameters = { wcss_samesex_marriage_tradition_parameter = yes }
+
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						scope:character.faith = { has_doctrine = doctrine_homosexuality_accepted }
+						scope:character.faith = { has_doctrine = wcss_doctrine_homosexuality_embraced }
+						scope:character.faith = { has_doctrine = tenet_sapphic }
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = cheaper_tradition_from_faith
+				}
+			}
+
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+		if = {
+			limit = {
+				OR = {
+					scope:character.faith = { has_doctrine = doctrine_homosexuality_accepted }
+					scope:character.faith = { has_doctrine = wcss_doctrine_homosexuality_embraced }
+					AND = {
+						scope:character = { is_female = yes }
+						scope:character.faith = { has_doctrine = tenet_sapphic }
+					}
+				}
+			}
+			add = 100
+		}
+	}
+}
+
+wcss_tradition_hedonists = {
+	category = ritual
+
+	layers = {
+		0 = intrigue
+		1 = mediterranean
+		4 = food.dds
+	}
+
+	can_pick = {
+		custom_tooltip = {
+			text = wcss_faith_has_reveler_sin_desc
+			NOT = {
+				scope:character.faith = { trait_is_sin = reveler_1 }
+			}
+		}
+	}
+
+	parameters = {
+		renown_from_feasts = yes
+		reveler_traits_more_common = yes
+		reveler_traits_more_valued = yes
+	}
+
+	character_modifier = { stress_gain_mult = -0.25 }
+
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						any_in_list = { list = traits this = flag:ethos_courtly }
+						any_in_list = { list = traits this = flag:ethos_communal }
+						any_in_list = { list = traits this = flag:ethos_stoic }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_courtly_communal_or_stoic_desc
+				}
+			}
+			if = {
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = { is_ai = no }
+						}
+						NOT = {
+							any_ruler = {
+								count >= 5
+								culture = prev
+								primary_title.tier >= tier_county
+								OR = {
+									has_trait = witch
+									has_trait = lifestyle_reveler
+								}
+							}
+						}
+					}
+					trigger_else = { always = no }
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = wcss_rulers_with_reveler_or_debauchess_lifestyle_desc
+				}
+			}
+
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+		if = {
+			limit = {
+				scope:character = { wcss_prefers_lesbian_orgy_over_feast_trigger = yes }
+			}
+			add = 100
+		}
+		if = {
+			limit = {
+				NOR = {
+					scope:character = {
+						has_trait = witch
+						has_trait = lifestyle_reveler
+					}
+				}
+			}
+			multiply = 0.5
+		}
+	}
+}

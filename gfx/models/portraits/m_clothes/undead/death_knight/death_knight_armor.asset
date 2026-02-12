@@ -1,0 +1,24 @@
+pdxmesh = {
+	name = "death_knight_armor_mesh"
+	file = "death_knight_armor.mesh"
+
+
+	meshsettings = {
+		name = "death_knight_armorShape"
+		index = 0
+		texture_diffuse = "lk_diff.dds"
+		texture_normal = "lk_norm.dds"
+		texture_specular = "lk_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "death_knight_armor_01_entity"
+	pdxmesh = "death_knight_armor_mesh"
+
+
+
+}
+

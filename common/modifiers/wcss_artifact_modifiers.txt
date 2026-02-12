@@ -1,0 +1,4 @@
+﻿guldan_skull_modifier = {
+	prowess = 15
+}
+

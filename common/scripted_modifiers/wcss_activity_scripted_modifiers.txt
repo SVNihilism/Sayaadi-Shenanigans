@@ -1,0 +1,210 @@
+﻿#Scripted Modifiers used for Activities
+wcss_harem_willing_to_have_sex_modifier = {
+	# CHARACTER_1 is initiator
+	# CHARACTER_2 is event target
+	min = 2
+	opinion_modifier = {
+		who = $CHARACTER_2$
+		opinion_target = $CHARACTER_1$
+		multiplier = 0.25
+	}
+	compare_modifier = {
+		target = $CHARACTER_1$
+		value = attraction
+		offset = high_positive_attraction
+		multiplier = 0.4
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_focus = intrigue_temptation_focus }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_trait = seducer }
+		add = 100
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = lustful }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			has_opinion_modifier = {
+				target = $CHARACTER_1$
+				modifier = wcss_had_sex_at_orgy_opinion
+			}
+		}
+		add = 150
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			has_opinion_modifier = {
+				target = $CHARACTER_1$
+				modifier = romance_opinion
+			}
+		}
+		add = 50
+	}
+}
+
+wcss_harem_unwilling_to_have_sex_modifier = {
+	# CHARACTER_1 is initiator
+	# CHARACTER_2 is event target
+	opinion_modifier = {
+		who = $CHARACTER_2$
+		opinion_target = $CHARACTER_1$
+		multiplier = -0.25
+	}
+	compare_modifier = {
+		target = $CHARACTER_1$
+		value = attraction
+		offset = high_positive_attraction
+		multiplier = -0.4
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			is_extended_family_of = $CHARACTER_1$
+			is_deviant_trigger = no
+			is_incestuous_trigger = no
+			relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER_1$ }
+		}
+		$CHARACTER_1$ = {
+			NOT = { has_perk = subtle_desire_perk }
+		}
+		add = 50
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			is_close_family_of = $CHARACTER_1$
+			is_deviant_trigger = no
+			is_incestuous_trigger = no
+			relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER_1$ }
+		}
+		$CHARACTER_1$ = {
+			NOT = { has_perk = subtle_desire_perk }
+		}
+		add = 100
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = chaste }
+		add = 50
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = shy }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_trait = irritable }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_relation_lover = $CHARACTER_2$ }
+		factor = 0
+	}
+}
+
+wcss_harem_willing_to_be_lovers_modifier = {
+	# CHARACTER_1 is initiator
+	# CHARACTER_2 is event target
+	min = 2
+	opinion_modifier = {
+		who = $CHARACTER_2$
+		opinion_target = $CHARACTER_1$
+		multiplier = 0.5
+	}
+	compatibility_modifier = {
+		who = $CHARACTER_2$
+		compatibility_target = $CHARACTER_1$
+		min = -20
+		max = 20
+		multiplier = 2
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_focus = intrigue_temptation_focus }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_trait = seducer }
+		add = 100
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = lustful }
+		add = 25
+	}
+	modifier = { # If faith preaches carnal doctrine, more likely to accept more lovers
+		$CHARACTER_2$ = {
+			OR = {
+				AND = {
+					faith = { has_doctrine = tenet_sapphic }
+					is_female = yes
+					$CHARACTER_1$ = { is_female = yes }
+				}
+				faith = { has_doctrine = tenet_carnal_exaltation }
+			}
+		}
+		add = 20
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			has_opinion_modifier = {
+				target = $CHARACTER_1$
+				modifier = romance_opinion
+			}
+		}
+		factor = 1.5
+	}
+}
+
+wcss_harem_unwilling_to_be_lovers_modifier = {
+	# CHARACTER_1 is initiator
+	# CHARACTER_2 is event target
+	opinion_modifier = {
+		who = $CHARACTER_2$
+		opinion_target = $CHARACTER_1$
+		multiplier = -0.5
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = chaste }
+		add = 50
+	}
+	modifier = {
+		$CHARACTER_2$ = { has_trait = shy }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_1$ = { has_trait = irritable }
+		add = 25
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			is_extended_family_of = $CHARACTER_1$
+			is_deviant_trigger = no
+			is_incestuous_trigger = no
+			relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER_1$ }
+		}
+		$CHARACTER_1$ = {
+			NOT = { has_perk = subtle_desire_perk }
+		}
+		add = 75
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			is_close_family_of = $CHARACTER_1$
+			is_deviant_trigger = no
+			is_incestuous_trigger = no
+			relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER_1$ }
+		}
+		$CHARACTER_1$ = {
+			NOT = { has_perk = subtle_desire_perk }
+		}
+		add = 150
+	}
+	modifier = {
+		$CHARACTER_2$ = {
+			num_of_relation_lover > 2
+			NOT = {
+				faith = { has_doctrine_parameter = no_unfaithfulness_penalty_active }
+			}
+		}
+		factor = 1.5 # Harder to have more than 3 lovers, unless polyamory is accepted
+	}
+}

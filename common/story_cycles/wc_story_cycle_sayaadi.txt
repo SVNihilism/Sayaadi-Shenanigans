@@ -1,0 +1,13 @@
+﻿story_sayaadi = {
+	on_setup = {
+		set_story_characters_effect = yes
+		explosion_effect = yes
+		}
+	on_end = {
+	}
+	on_owner_death = {
+			end_story = yes
+	}
+	effect_group = {
+	}
+}

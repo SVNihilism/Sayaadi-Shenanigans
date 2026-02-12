@@ -1,0 +1,9 @@
+﻿l_english:
+  wcss_every_attendee:0 "Every guest"
+
+  wcss_virtuous_harem_title:0 "[first.GetShortUINameNoTooltip|U] Attended a Harem Gathering"
+  wcss_guest_enjoys_courtesan_attention_title:0 "[first.GetShortUINameNoTooltip|U] Enjoyed the Attentions of the Sayaad"
+  wcss_dancers_entertain_guests_title:0 "Sayaadi Put On A Good Show"
+  wcss_drank_good_wine_title:0 "[first.GetShortUINameNoTooltip|U] Had A Great Glass of Wine"
+  wcss_guests_charm_others_title:0 "[first.GetShortUINameNoTooltip|U] and [second.GetShortUINameNoTooltip|U] Share a Passionate Kiss"
+  wcss_guests_are_intimate_title:0 "[first.GetShortUINameNoTooltip|U] and [second.GetShortUINameNoTooltip|U] Get Physically Intimate"

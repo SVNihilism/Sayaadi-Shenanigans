@@ -1,0 +1,23 @@
+﻿### Character modifiers
+
+## Lesbian Divinity modifiers
+wcss_lesbian_union_concubines = {
+	icon = wcss_lesbian_positive
+	monthly_piety = 0.2
+	stacking = yes
+	hide_effects = yes
+}
+
+wcss_lesbian_union_polygamy = {
+	icon = wcss_lesbian_positive
+	monthly_piety = 0.3
+	stacking = yes
+	hide_effects = yes
+}
+
+wcss_lesbian_union_monogamy = {
+	icon = wcss_lesbian_positive
+	monthly_piety = 1.5
+	stacking = yes
+	hide_effects = yes
+}

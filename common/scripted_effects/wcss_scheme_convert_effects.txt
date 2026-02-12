@@ -1,0 +1,581 @@
+﻿### Interaction Effect
+wcss_convert_interaction_stress_effect = {
+	if = {
+		limit = {
+			NOT = {
+				scope:recipient = {
+					is_consort_of = scope:actor
+				}
+			}
+			scope:actor = {
+				is_female = yes
+				faith = { NOT = { has_doctrine_parameter = adultery_female_accepted } }
+			}
+		}
+		scope:actor = {
+			stress_impact = {
+				chaste = medium_stress_impact_gain
+				zealous = minor_stress_impact_gain
+				honest = minor_stress_impact_gain
+				just = minor_stress_impact_gain
+			}
+		}
+	}
+	else = {
+		scope:actor = {
+			stress_impact = {
+				chaste = medium_stress_impact_gain
+			}
+		}
+	}
+}
+
+### Effects for Ongoing Events
+wcss_convert_ongoing_add_scheme_modifier_effect = {
+	scope:scheme = {
+		add_scheme_modifier = {
+			type = wcss_convert_$OUTCOME$_$MILESTONE$_modifier
+		}
+	}
+}
+
+wcss_convert_ongoing_possible_outcomes_tooltip_effect = {
+	show_as_tooltip = {
+		random_list = {
+			1 = {
+				desc = wcss_convert_ongoing_possible_outcomes_tooltip_effect.success.desc
+				show_chance = no
+				wcss_convert_ongoing_add_scheme_modifier_effect = { MILESTONE = $MILESTONE$ OUTCOME = success }
+			}
+			1 = {
+				desc = wcss_convert_ongoing_possible_outcomes_tooltip_effect.failure.desc
+				show_chance = no
+				wcss_convert_ongoing_add_scheme_modifier_effect = { MILESTONE = $MILESTONE$ OUTCOME = failure }
+			}
+		}
+	}
+}
+
+### Effects for Outcome Events
+## Lays with Effects
+wcss_target_convert_sex_effect = {
+	scope:target = {
+		if = {
+			limit = {
+				NAND = {
+					scope:owner = { is_ai = no }
+					scope:target = { is_ai = yes }
+				}
+			}
+			had_sex_with_effect = {
+				CHARACTER = scope:owner
+				PREGNANCY_CHANCE = 0
+			}
+		}
+		else = {
+			show_as_tooltip = {
+				had_sex_with_effect = {
+					CHARACTER = scope:owner
+					PREGNANCY_CHANCE = 0
+				}
+			}
+		}
+	}
+}
+
+wcss_owner_convert_sex_effect = {
+	scope:owner = {
+		if = {
+			limit = {
+				scope:owner = { is_ai = no }
+				scope:target = { is_ai = yes }
+			}
+			had_sex_with_effect = {
+					CHARACTER = scope:target
+					PREGNANCY_CHANCE = 0
+			}
+		}
+		else = {
+			show_as_tooltip = {
+				had_sex_with_effect = {
+					CHARACTER = scope:owner
+					PREGNANCY_CHANCE = 0
+				}
+			}
+		}
+	}
+}
+## Discovery
+wcss_owner_convert_outcome_success_send_discovery_event_effect = {
+	hidden_effect = {
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			trigger_event = {
+				id = wcss_convert_outcome.2900
+				days = 3
+			}
+		}
+	}
+}
+## Lovers or Just Sex
+wcss_convert_change_sexual_orientation_effects = {
+	$CHARACTER$ = { save_scope_as = wcss_convert_target }
+	scope:wcss_convert_target = {
+		random_list = {
+			1 = {
+				modifier = {
+					add = 9
+					has_sexuality = asexual #asexuals are less likely to become bisexual
+				}
+				modifier = {
+					add = 3
+					wcss_lesbian_faith_devotee = yes #following a lesbian faith means they're more likely to become lesbian
+				}
+				set_sexuality = homosexual
+				hidden_effect = {
+					every_relation = { #If becomes lesbian, break up with all male lovers
+						type = lover
+						limit = { is_male = yes }
+						lover_breakup_effect = {
+							BREAKER = scope:wcss_convert_target
+							LOVER = this
+						}
+					}
+					every_relation = { #If becomes lesbian, end all male crushes (for children, note this effect is not relevant for schemes which only target adults)
+						type = crush
+						limit = { is_male = yes }
+						save_temporary_scope_as = wcss_temp_crush
+						scope:wcss_convert_target = { remove_relation_crush = scope:wcss_temp_crush }
+					}
+					if = {
+						limit = { # If faith allows lesbian concubines, dismiss all male consorts
+							faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+						}
+						every_concubine = {
+							limit = { is_male = yes }
+							save_temporary_scope_as = wcss_male_concubine
+							scope:wcss_convert_target = { remove_concubine = scope:wcss_male_concubine }
+						}
+					}
+				}
+			}
+			1 = {
+				set_sexuality = homosexual
+			}
+		}
+		if = { # If concubine, update opinion (when applicable) # May be defunct now but I need to get back to this, pretty sure the hetero concubine penalty was removed
+			limit = { is_concubine = yes }
+			concubinist = { save_temporary_scope_as = wcss_concubinist }
+			if = {
+				limit = {
+					has_opinion_modifier = {
+						modifier = wcss_hetero_lesbian_concubine_opinion
+						target = scope:wcss_concubinist
+					}
+				}
+				remove_opinion = {
+					modifier = wcss_hetero_lesbian_concubine_opinion
+					target = scope:wcss_concubinist
+				}
+				if = {
+					limit = {
+						NOT = {
+							faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+						}
+					} # Accepts without complaint if faith allows lesbian concubines, otherwise add decaying penalty
+					add_opinion = {
+						modifier = wcss_hetero_lesbian_concubine_opinion_decaying
+						target = scope:wcss_concubinist
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_owner_convert_outcome_become_lovers_option_effects = {
+	#show_as_tooltip = { set_relation_lover = scope:target }
+	#add_character_flag = { #For now this is unncessary, as only AIs can be targeted by the scheme
+	#	flag = wcss_consummation_and_relationship
+	#	days = 10
+	#}
+	set_relation_lover = scope:target
+	reverse_add_opinion = {
+		target = scope:target
+		modifier = romance_opinion
+		opinion = 20
+	}
+
+	if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = wcss_piety_gain_for_conversions
+				has_doctrine_parameter = no_unfaithfulness_penalty_active
+			}
+		}
+		add_piety = minor_piety_gain
+	}
+
+	if = { #Heterosexual lesbian concubine
+		limit = {
+			scope:target = {
+				has_opinion_modifier = {
+					modifier = wcss_hetero_lesbian_concubine_opinion
+					target = scope:owner
+				}
+			}
+		}
+		scope:target = {
+			remove_opinion = {
+				modifier = wcss_hetero_lesbian_concubine_opinion
+				target = scope:owner
+			}
+		}
+		if = {
+			limit = {
+				scope:target.faith = {
+					NOT = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+				}
+			} # Accepts without complaint if faith allows lesbian concubines, otherwise add decaying penalty
+			scope:target = {
+				add_opinion = {
+					modifier = wcss_hetero_lesbian_concubine_opinion_decaying
+					target = scope:owner
+				}
+			}
+		}
+	}
+
+	wcss_owner_convert_outcome_success_send_discovery_event_effect = yes
+}
+
+wcss_owner_convert_outcome_just_sex_effects = {
+	reverse_add_opinion = {
+		target = scope:target
+		modifier = romance_opinion
+		opinion = 20
+	}
+
+	if = {
+		limit = {
+			faith = {
+				has_doctrine_parameter = wcss_piety_gain_for_conversions
+				has_doctrine_parameter = no_unfaithfulness_penalty_active
+			}
+		}
+		add_piety = minor_piety_gain
+	}
+
+	if = { #Heterosexual lesbian concubine
+		limit = {
+			scope:target = {
+				has_opinion_modifier = {
+					modifier = wcss_hetero_lesbian_concubine_opinion
+					target = scope:owner
+				}
+			}
+		}
+		scope:target = {
+			remove_opinion = {
+				modifier = wcss_hetero_lesbian_concubine_opinion
+				target = scope:owner
+			}
+		}
+		if = {
+			limit = {
+				scope:target.faith = {
+					NOT = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+				}
+			} # Accepts without complaint if faith allows lesbian concubines, otherwise add decaying penalty
+			scope:target = {
+				add_opinion = {
+					modifier = wcss_hetero_lesbian_concubine_opinion_decaying
+					target = scope:owner
+				}
+			}
+		}
+	}
+
+	wcss_owner_convert_outcome_success_send_discovery_event_effect = yes
+}
+
+## Rejection Effects
+wcss_convert_block_character_effect = {
+	if = {
+		limit = { root = scope:target }
+		custom_tooltip = wcss_convert_outcome.permanent_block
+
+		hidden_effect = {
+			add_opinion = {
+				target = $CHARACTER$
+				modifier = wcss_convert_permanent_blocker_opinion
+			}
+		}
+	}
+	else = {
+		add_opinion = {
+			target = $CHARACTER$
+			modifier = wcss_convert_permanent_blocker_opinion
+		}
+	}
+}
+
+wcss_convert_cooldown_for_character_effect = {
+	if = {
+		limit = { root = scope:target }
+		custom_tooltip = wcss_convert_outcome.cooldown
+
+		hidden_effect = {
+			add_opinion = {
+				target = $CHARACTER$
+				modifier = wcss_convert_regular_cooldown_opinion
+			}
+		}
+	}
+	else = {
+		add_opinion = {
+			target = $CHARACTER$
+			modifier = wcss_convert_regular_cooldown_opinion
+		}
+	}
+}
+
+## Discovery effect
+wcss_convert_outcome_success_send_discovery_event_effect = {
+	hidden_effect = {
+		if = {
+			limit = { exists = scope:scheme_discovered }
+			trigger_event = {
+				id = wcss_convert_outcome.2900
+				days = 3
+			}
+		}
+	}
+}
+
+## Revelation effects (mostly copied from seduction scheme)
+wcss_convert_outcome_discovered_expose_secrets_and_adultery_effect = {
+	extramarital_sex_attempt_exposure_consequences_with_target_effect = { TARGET = $CHARACTER$ SPOUSE_EVENT = yes } #Adds trait
+	if = {
+		limit = { relation_with_character_is_incestuous_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER$ } }
+		random_secret = {
+			limit = { secret_type = secret_incest }
+			expose_secret = $EXPOSER$
+		}
+	}
+	if = {
+		limit = { relation_with_character_is_sodomy_in_my_or_lieges_faith_trigger = { CHARACTER = $CHARACTER$ } }
+		random_secret = {
+			limit = { secret_type = secret_homosexual }
+			expose_secret = $EXPOSER$
+		}
+	}
+}
+
+wcss_convert_outcome_failure_discovered_apply_secrets_effect = {
+	give_incest_secret_or_nothing_with_target_effect = { CHARACTER = scope:target }
+	give_homosexual_secret_or_nothing_with_target_effect = { CHARACTER = scope:target }
+}
+
+wcss_convert_outcome_success_discovered_effect = {
+	if = {
+		limit = {
+			any_secret = {
+				secret_type = secret_lover
+				OR = {
+					secret_target = scope:target
+					secret_target = scope:owner
+				}
+			}
+		}
+		random_secret = { #Revealing the secret will send events for both lovers if secret exists
+			limit = {
+					secret_type = secret_lover
+				OR = {
+					secret_target = scope:target
+					secret_target = scope:owner
+				}
+			}
+			expose_secret = scope:target_liege
+		}
+	}
+	else = {
+		scope:owner = { wcss_convert_outcome_discovered_expose_secrets_and_adultery_effect = { CHARACTER = scope:target EXPOSER = scope:target_liege } }
+		scope:target = { wcss_convert_outcome_discovered_expose_secrets_and_adultery_effect = { CHARACTER = scope:owner EXPOSER = scope:target_liege } }
+	}
+}
+
+wcss_convert_outcome_publicised_attempted_crimes_or_nothing_effect = {
+	$TARGET$ = {
+		#Grab everyone relevant who might be interested in the attempt.
+		every_close_family_member = { add_to_list = relevant_parties }
+		every_consort = {
+			limit = {
+				NOT = { is_in_list = relevant_parties }
+			}
+			add_to_list = relevant_parties
+		}
+		if = {
+			limit = {
+				exists = liege
+				liege = {
+					NOT = { is_in_list = relevant_parties }
+				}
+			}
+			add_to_list = relevant_parties
+		}
+		if = {
+			limit = {
+				exists = court_owner
+				court_owner = {
+					NOT = { is_in_list = relevant_parties }
+				}
+			}
+			add_to_list = relevant_parties
+		}
+		every_vassal = {
+			limit = {
+				NOT = { is_in_list = relevant_parties }
+			}
+			add_to_list = relevant_parties
+		}
+		every_relation = {
+			type = friend
+			limit = {
+				NOT = { is_in_list = relevant_parties }
+			}
+			add_to_list = relevant_parties
+		}
+		every_relation = {
+			type = lover
+			limit = {
+				NOT = { is_in_list = relevant_parties }
+			}
+			add_to_list = relevant_parties
+		}
+		$OWNER$ = {
+			every_close_family_member = {
+				limit = {
+					NOT = { is_in_list = relevant_parties }
+				}
+				add_to_list = relevant_parties
+			}
+		}
+
+		#Adulterer
+		if = {
+			limit = {
+				$OWNER$ = { is_married = yes }
+				trait_is_shunned_or_criminal_in_faith_trigger = {
+					TRAIT = adulterer
+					FAITH = this.faith
+					GENDER_CHARACTER = $OWNER$
+				}
+			}
+			every_in_list = {
+				list = relevant_parties
+				limit = {
+					#Filter out anyone who wouldn't care about this.
+					NOR = {
+						#Kids too young to understand the bias have no prejudice.
+						is_adult = no
+						#Not compos mentis.
+						has_trait = incapable
+						#People who are adulterers.
+						has_trait = adulterer
+						#The person doing the seducing don't think less of themselves either.
+						this = $OWNER$
+					}
+					#And who count the action as adulterous.
+					trait_is_shunned_or_criminal_in_faith_trigger = {
+						TRAIT = adulterer
+						FAITH = faith
+						GENDER_CHARACTER = $OWNER$
+					}
+				}
+				custom = characters_close_to_target_who_dislike_adultery
+				#Apply attempt opinion effects.
+				add_opinion = {
+					modifier = adulterer_advances_on_relevant_character
+					target = $OWNER$
+				}
+			}
+		}
+
+		#Fornicator
+		if = {
+			limit = {
+				$OWNER$ = { is_married = no }
+				trait_is_shunned_or_criminal_in_faith_trigger = {
+					TRAIT = fornicator
+					FAITH = faith
+					GENDER_CHARACTER = $OWNER$
+				}
+			}
+			every_in_list = {
+				list = relevant_parties
+				limit = {
+					#Filter out anyone who wouldn't care about this.
+					NOR = {
+						#Kids too young to understand the bias have no prejudice.
+						is_adult = no
+						#Not compos mentis.
+						has_trait = incapable
+						#People who are fornicators.
+						has_trait = fornicator
+						#The person doing the seducing don't think less of themselves either.
+						this = $OWNER$
+					}
+					#And who count the action to be fornication.
+					trait_is_shunned_or_criminal_in_faith_trigger = {
+						TRAIT = fornicator
+						FAITH = this.faith
+						GENDER_CHARACTER = $OWNER$
+					}
+				}
+				custom = characters_close_to_target_who_dislike_fornication
+				#Apply attempt opinion effects.
+				add_opinion = {
+					modifier = fornicator_advances_on_relevant_character
+					target = $OWNER$
+				}
+			}
+		}
+
+		#Incestuous
+		if = {
+			limit = {
+				relation_with_character_is_incestuous_in_my_faith_trigger = { CHARACTER = $OWNER$ }
+			}
+			every_in_list = {
+				list = relevant_parties
+				limit = {
+					#Filter out anyone who wouldn't care about this.
+					NOR = {
+						#Kids too young to understand the bias have no prejudice.
+						is_adult = no
+						#Not compos mentis.
+						has_trait = incapable
+						#People who are incestuous.
+						has_trait = incestuous
+						#Or who don't count the action as incestuous.
+						faith = {
+							faith_allows_marriage_consanguinity_trigger = {
+								CHARACTER_1 = $OWNER$
+								CHARACTER_2 = $TARGET$
+							}
+						}
+						#The person doing the seducing don't think less of themselves either.
+						this = $OWNER$
+					}
+				}
+				custom = characters_close_to_target_who_dislike_incest
+				#Apply attempt opinion effects.
+				add_opinion = {
+					modifier = incestuous_advances_on_relevant_character
+					target = $OWNER$
+				}
+			}
+		}
+	}
+}

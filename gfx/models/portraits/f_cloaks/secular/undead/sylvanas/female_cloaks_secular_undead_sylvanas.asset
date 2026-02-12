@@ -1,0 +1,21 @@
+pdxmesh = {
+	name = "female_cloaks_secular_undead_sylvanas_mesh"
+	file = "female_cloaks_secular_undead_sylvanas.mesh"
+
+	meshsettings = {
+		name = "female_cloaks_secular_undead_sylvanasShape"
+		index = 0
+		texture_diffuse = "sylvanas_diff.dds"
+		texture_normal = "sylvanas_norm.dds"
+		texture_specular = "dress_properties.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "female_cloaks_secular_undead_sylvanas_entity"
+	pdxmesh = "female_cloaks_secular_undead_sylvanas_mesh"
+	
+
+}

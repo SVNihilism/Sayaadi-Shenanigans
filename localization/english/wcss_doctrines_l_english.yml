@@ -1,0 +1,142 @@
+﻿l_english:
+	wcss_dummy_tenet_name:0 "Dummy Tenet"
+	wcss_dummy_tenet_desc:0 "Nothing here. This is a placeholder for unused doctrine parameters."
+
+	doctrine_wcss_relationships_name:0 "Relationships"
+
+	doctrine_wcss_monogamy_name:0 "Holy Matrimony"
+	doctrine_wcss_monogamy_desc:0 "While there exist many forms of love, true love as recognized by [ROOT.Faith.FertilityGodName] is found in marriage. The faithful are expected to be wholly devoted to their spouses."
+
+	doctrine_wcss_syncretism_name:0 "Syncretism"
+
+	doctrine_wcss_no_syncretism_name:0 "One True Faith"
+	doctrine_wcss_no_syncretism_desc:0 "Ours is the one truth faith."
+	doctrine_wcss_no_syncretism_effect:0 "One True Faith"
+
+	wcss_shieldmaiden_doctrine_name:0 "Warrior Doctrine"
+
+	doctrine_wcss_no_nudity_name:0 "None"
+	doctrine_wcss_no_nudity_desc:0 "Our bodies are of the material world, with all of its inherent inpurities. They should be covered to avoid inspiring immoral desires."
+	doctrine_parameter_wcss_no_nudity_active:0 "Adherents wear clothes"
+
+	doctrine_parameter_naked_priests_active:0 "Priests and zealous characters do not wear clothes"
+
+	doctrine_wcss_full_nudity_name:0 "Full Nudity"
+	doctrine_wcss_full_nudity_desc:0 "Our bodies are a reflection of innocence and divinity, and thus should remain fully exposed. Only by shedding our clothes can we fully know the love of [ROOT.Faith.HighGodName]."
+
+	wcss_special_doctrine_shieldmaiden_tradition_name:0 "Shieldmaiden Tradition"
+	wcss_special_doctrine_shieldswain_tradition_name:0 "Shieldswain Tradition"
+	wcss_special_doctrine_shieldmaiden_tradition_desc:0 "Certain women of great prowess and renown are chosen by pious rulers of this faith to act in the service of [ROOT.Faith.WarGodName]. These women can always serve as soldiers."
+	wcss_special_doctrine_shieldswain_tradition_desc:0 "Certain men of great prowess and renown are chosen by pious rulers of this faith to act in the service of [ROOT.Faith.WarGodName]. These men can always serve as soldiers."
+
+	doctrine_parameter_wcss_shieldmaiden_tradition_parameter:0 "Can designate [close_family|E] as shieldmaidens or shieldswains."
+	doctrine_parameter_wcss_shieldmaiden_service_parameter:0 "Shieldmaidens and shieldswains can serve as combatants."
+
+  wcss_tenet_lesbian_divinity_name:0 "Lesbian Divinity"
+  wcss_tenet_lesbian_divinity_desc:0 "The romantic and sexual love between women is the highest expression of the divine to be found in this imperfect, mortal world. The wise women that rule us must be allowed to fully embrace and embody this love."
+
+	doctrine_parameter_wcss_lesbian_concubines_allowed:0 "Female rulers can take female [concubines|E]"
+	doctrine_parameter_wcss_piety_gain_for_lesbian_concubines:0 "Female rulers get monthly [piety|E] for each female [concubine|E]"
+	doctrine_parameter_wcss_piety_gain_for_conversions:0 "If you have the [GetFaithDoctrine('tenet_polyamory').GetBaseName] [doctrine|E], female adherents earn [piety|E] for successfully completing conversion and seduction [schemes|E] targeting women"
+	doctrine_parameter_wcss_piety_gain_for_romance:0 "If you have the [GetFaithDoctrine('doctrine_wcss_monogamy').GetBaseName] [doctrine|E], female adherents earn [piety|E] for the first successful romance scheme targeting their female spouse"
+	doctrine_parameter_wcss_piety_gain_for_lesbian_lovers:0 "Female adherents get monthly [piety|E] for each female [lover|E] #weak (For up to 5 lovers)#!"
+	doctrine_parameter_wcss_lesbian_marriage_parameter:0 "Female adherents can marry women, and take women as [concubines|E] if permitted by [doctrine|E] or [culture|E]"
+	doctrine_parameter_wcss_lesbian_love_parameter:0 "Female adherents get monthly [piety|E] for each female [spouse|E] or [concubine|E]. The amount varies based on your $doctrine_marriage_type_name$ [doctrine|E]."
+
+	wcss_lesbian_MARRIAGE_IS_DIVINE:0 "Lesbian marriage is divine: $VALUE|+=0$"
+
+	wcss_doctrine_homosexuality_embraced_name:0 "Embraced"
+	wcss_doctrine_homosexuality_embraced_desc:0 "The sacred unions recognized by the divine are equal, no matter the genders of the joined"
+
+	doctrine_parameter_wcss_homosexuality_embraced:0 "Male adherents can marry men, and take men as [concubines|E] if permitted by [doctrine|E] or [culture|E]"
+
+	wcss_tenet_sapphic_eroticism_name:0 "Sapphic Hedonism"
+	wcss_tenet_sapphic_eroticism_desc:0 "The female body is a sacred gift meant to be shared between the blessed women of our faith. In fulfilling our sexual desires do we come to strengthen our connection with the divine."
+
+	doctrine_parameter_wcss_harem_piety_gain_or_loss:0 "[rulers|E] earn [piety|E] for hosting Lesbian Orgies. [vassals|E] who refuse to attend will lose [piety|E]"
+	doctrine_parameter_wcss_harem_fervor_gain:0 "#P +1#! [fervor|E] when an adherent hosts a $wcss_activity_harem$ with twenty or more attendees"
+
+	wcss_fervor_gain_large_orgy:0 "[host.GetShortUIName|U] hosted a large lesbian orgy at [wcss_orgy_location.GetName]"
+	wcss_fervor_gain_orgy:0 "[host.GetShortUIName|U] hosted a lesbian orgy at [wcss_orgy_location.GetName]"
+
+	wcss_tenet_valhalla_bound_name:0 "Heralds of Ragnarok"
+	wcss_tenet_valhalla_bound_desc:0 "We shall not wane into obscurity without a fight! The end times are near. Our people must prove their worth if they are ever to enter Valhalla."
+
+	doctrine_parameter_wcss_can_get_conquerer_trait:0 "Upon winning an offensive [war|El], rulers may get or upgrade a special [lifestyle_trait|E]. Failure to wage war or [raid|El] for a time may result in same-[faith|El] and popular [opinion|El] penalties"
+	doctrine_parameter_wcss_can_raid_faith:0 "Rulers can [raid|E] foreign [counties|El] for loot"
+	doctrine_parameter_wcss_warriors_can_be_berserkers:0 "Warriors may gain the [GetTrait('berserker').GetName( GetNullCharacter )] [trait|El]"
+
+	wcss_tenet_eternal_riders_name:0 "Eternal Riders"
+	wcss_tenet_eternal_riders_desc:0 "The Endless Blue Sky beckons our armies to ride forward and spread to the four corners of the world, untamed and unstoppable."
+
+	light_cavalry_max_size_add:0 "Max Size of [light_cavalry|E] [regiments|E]"
+	horse_archer_max_size_add:0 "Max Size of [horse_archer|E] [regiments|E]"
+
+	wcss_tenet_survivor_of_ukko_name:0 "Survivor of Ukko"
+	wcss_tenet_survivor_of_ukko_desc:0 "For too long our people have squabbled against each other while our real enemies besieged us from outside. We must stand united or disappear forever."
+
+	doctrine_parameter_wcss_children_receive_better_educations_active:0 "Childen being [educated|El] by adherents receive better [education_traits|E]"
+
+	wcss_tenet_children_of_perun_name:0 "Children of Perun"
+	wcss_tenet_children_of_perun_desc:0 "All the children of Perun will come together, sharing a new, harmonious understanding of the gods, and celebrate as our traditions dictate."
+
+	doctrine_parameter_wcss_faith_major_river_sailing:1 "Adherents can sail in Major Rivers"
+	doctrine_parameter_wcss_skill_gain_from_feasts_active:0 "Hosting a [feast|E] may increase your [skills|E]"
+	wcss_skill_gain_from_feasts_toast:0 "Skill Improved"
+
+	wcss_tenet_defenders_of_dievas_name:0 "Defenders of Dievas"
+	wcss_tenet_defenders_of_dievas_desc:0 "We must stand strong to survive the assaults of the new religions. Only the best among us will survive to preserve the memory of the gods."
+	doctrine_parameter_wcss_dievas_defender_conversion_resistance:0 "County Conversion Resistance: #P +30%#!"
+
+	doctrine_parameter_wcss_eldership_powerful_vassal_adjustment:0 "[powerful_vassals|E] no longer demand [council|E] positions while below age 50"
+	doctrine_parameter_wcss_eldership_increase_skills:0 "Chance to improve [skills|E] on each birthday starting at age 50"
+	doctrine_parameter_wcss_eldership_councilor_bonus:0 "[rulers|E] get #P 4%#! monthly [piety|E] for each [councillor|E] age 50 or older"
+	wcss_eldership_increase_skill_toast:0 "Elder Wisdom"
+	wcss_eldership_councilor_bonus_modifier:0 "Elder Councilor"
+
+	wcss_tenet_civilized_name:0 "Civilized"
+	wcss_tenet_civilized_desc:0 "We must remember that the gods are hardly ever interested in mortal affairs and that we should endeavor to maintain a detached attitude towards faith."
+	doctrine_parameter_wcss_develop_county_same_faith_bonus:0 "Develop County Speed in [counties|E] of my [faith|E]: #P +50%#!"
+
+	wcss_tenet_elder_veneration_name:0 "Elder Veneration"
+	wcss_tenet_elder_veneration_desc:0 "With age comes wisdom. The eldest among us shall serve as the voice of [ROOT.Faith.HighGodName], and the youthful should show them due respect and deference."
+
+ tenet_sapphic_name:0 "Sappho's Spirit"
+ tenet_sapphic_desc:0 "Sappho embodied the divine femininity. She was the best in every woman and the promise of something greater."
+
+	wcss_tenet_animism_name:0 "Animism"
+	wcss_tenet_animism_desc:0 "Through ritual celebration, we invite the beneficial spirits of the world to bring prosperity and fortune to our peoples."
+
+	wcss_tenet_totem_spirits_name_alternative:0 "Atunwa"
+	wcss_tenet_totem_spirits_name_default:0 "Totem Guardians"
+	wcss_tenet_totem_spirits_desc:0 "In order for any spirit to get its due we must make sure that our priestly caste is qualified in all the spells and rituals scattered throughout our old traditions."
+
+	wcss_tenet_magyar_shamanism_name:0 "Magyar Shamanism"
+	wcss_tenet_magyar_shamanism_desc:0 "The destined táltos shall serve as our revered guides here in the world of the living, as they have a unique connection to the divine, often marked at birth."
+	wcss_pilgrimage_because_i_have_tenet_magyar_shamanism:0 "Because your [faith|E] has the [GetFaithDoctrine('wcss_tenet_magyar_shamanism').GetBaseName] [core_tenet|E]:"
+	doctrine_parameter_wcss_court_chaplain_better_physicians:0 "[court_chaplains|E] and [realm_priests|E] have a better chance of becoming an experienced [GetCourtPositionType('court_physician_court_position').GetName()]"
+
+	wcss_tenet_ekeraa_name:0 "Ekeraa"
+	wcss_tenet_ekeraa_desc:0 "In death, we are reunited with the ancestors that predeceased us in the Place of Truth. These spirits hear our prayers and shall receive our offerings."
+	wcss_pilgrimage_because_i_have_tenet_ekeraa:0 "Because your [faith|E] has the [GetFaithDoctrine('wcss_tenet_ekeraa_name').GetBaseName] [core_tenet|E]:"
+
+	wcss_tenet_hogon_tradition_name:0 "Elder Traditions"
+	wcss_tenet_hogon_tradition_desc:0 "The spiritual and political heart of each community is the hogon, the elder who hears the wisdom of the eight original ancestors. We are taught that duality is necessary for our continued existence as complete beings."
+
+	wcss_tenet_tani_resistance_name:0 "Enduring Donyi-Polo"
+	wcss_tenet_tani_resistance_desc:0 "Loss of culture is loss of identity. We must codify and reinforce our traditions in order to endure the onslaught of strange, new faiths."
+	doctrine_parameter_wcss_tani_resistance_active:0 "County Conversion Resistance: #P +30%#!"
+
+	wcss_tenet_kirat_shamanism_name:0 "Kirat Shamanism"
+	wcss_tenet_kirat_shamanism_desc:0 "The worship of our ancestors harmonizes with the veneration of nature. Our festivals honor both and our shamans intercede to bring good fortune to our people."
+
+	wcss_tenet_hsexje_unity_name:0 "Hsexje Unity"
+	wcss_tenet_hsexje_unity_desc:0 "Our disparate peoples must come together and unite if our traditions are to be preserved. We can learn much from each other, about both ourselves and the heavens."
+
+	wcss_tenet_great_hunt_name:0 "The Great Hunt"
+	wcss_tenet_great_hunt_desc:0 "We honor those hunters who provide, and the wilderness that provides for us in equal measure. Reverence for nature and the hunt is core to our beliefs."
+	doctrine_parameter_wcss_piety_from_hunts_acitve:0 "Going on a [hunt|E] earns [piety|E]"
+
+	doctrine_parameter_wcss_grove_dedication_active:0 "Rulers can [decide|E] to host a dedication to nature, gaining bonuses for forested or unspoiled terrain within their [domain|El]"
+	wcss_ghw_from_which_tenet_valhalla_bound:0 "$wcss_tenet_valhalla_bound_name$"
+	wcss_ghw_from_which_tenet_eternal_riders:0 "$wcss_tenet_eternal_riders_name$"

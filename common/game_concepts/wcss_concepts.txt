@@ -1,0 +1,22 @@
+﻿wcss_gene_father = {
+	parent = relation
+	texture = "gfx/interface/icons/icon_characterlist_culture.dds"
+}
+wcss_gene_child = {
+	parent = relation
+	texture = "gfx/interface/icons/icon_characterlist_culture.dds"
+}
+
+twin_sister = {
+	parent = relation
+	texture = "gfx/interface/icons/icon_characterlist_culture.dds"
+}
+
+harem = {
+	texture = "gfx/interface/icons/character_interactions/council.dds"
+}
+
+murliver_oil = {
+	parent = artifact
+}
+

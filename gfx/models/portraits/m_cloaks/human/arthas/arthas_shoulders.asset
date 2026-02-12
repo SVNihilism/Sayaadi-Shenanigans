@@ -1,0 +1,19 @@
+pdxmesh = {
+	name = "arthas_shoulders_mesh"
+	file = "arthas_shoulders.mesh"
+
+	meshsettings = {
+		name = "arthas_shouldersShape"
+		index = 0
+		texture_diffuse = "arthas_wc3_diff.dds"
+		texture_normal = "arthas_wc3_norm.dds"
+		texture_specular = "arthas_wc3_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "arthas_shoulders_entity"
+	pdxmesh = "arthas_shoulders_mesh"
+}

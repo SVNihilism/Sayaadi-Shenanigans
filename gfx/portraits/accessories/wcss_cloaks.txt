@@ -1,0 +1,39 @@
+﻿female_cloaks_secular_human_jaina_shoulder = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = female_cloaks_secular_human_jaina_shoulder_entity }
+}
+female_cloaks_secular_undead_sylvanas = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = female_cloaks_secular_undead_sylvanas_entity }
+}
+guldan_back = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = guldan_back_entity }
+}
+dreadlord_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = dreadlord_shoulders_entity }
+}
+paladin_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = paladin_shoulders_entity }
+}
+ne_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = ne_shoulders_entity }
+}
+priestess_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = priestess_shoulders_entity }
+}
+female_clothes_orc_war_chieftess_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = female_clothes_orc_war_chieftess_shoulders_entity }
+}
+male_cloaks_human_medivh_cloak = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = male_cloaks_human_medivh_cloak_entity }
+}
+thrall_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = thrall_shoulders_entity }
+}
+death_knight_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = death_knight_shoulders_entity }
+}
+alex_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = alex_shoulders_entity }
+}
+arthas_shoulders = {
+	entity = { required_tags = ""		shared_pose_entity = torso		entity = arthas_shoulders_entity }
+}

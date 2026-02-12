@@ -1,0 +1,434 @@
+﻿## Effect used to marry AI off randomly.
+wcss_lesbian_marriage_pulse_effect = {
+	$CHARACTER$ = { save_scope_as = wcss_spouse }
+
+	if = {
+		limit = {
+			is_married = yes
+			any_spouse = { is_female = no }
+		}
+		every_spouse = {
+			limit = { is_female = no }
+			save_temporary_scope_as = wcss_divorcee
+			divorce_effect = {
+				DIVORCER = scope:wcss_root
+				DIVORCEE = scope:wcss_divorcee
+			}
+		}
+	}
+
+	if = { # Simplest result is that the character is unlanded and unmarried
+		limit = {
+			scope:wcss_spouse = {
+				is_ruler = no
+				is_married = no
+			} # Not ruler, not married, auto-accept
+		}
+		wcss_lesbian_marriage_accepted_effect = yes
+	}
+	else_if = {
+		limit = {
+			scope:wcss_spouse = { is_married = yes }
+			scope:wcss_spouse = {
+				any_spouse = { is_female = no }
+			}
+		}
+		scope:wcss_spouse = {
+			random_spouse = {
+				limit = { is_female = no }
+				save_scope_as = wcss_temp_comparison_spouse
+			}
+		}
+		random_list = {
+			0 = {
+				min = 0
+				max = 200
+				wcss_lesbian_marriage_pulse_accept_modifier = yes
+				wcss_lesbian_marriage_accepted_effect = yes
+			}
+			0 = {
+				min = 0
+				max = 200
+				opinion_modifier = {
+					who = scope:wcss_spouse
+					opinion_target = scope:wcss_temp_comparison_spouse
+					multiplier = 1
+				}
+				opinion_modifier = {
+					who = scope:wcss_spouse
+					opinion_target = scope:wcss_root
+					multiplier = -1
+				}
+				modifier = {
+					add = 200 # We're going to devalue this if you're married to close family of your liege or top_liege
+					is_independent_ruler = no # This also makes sure that top_liege is not own self
+					OR = {
+						AND = {
+							exists = liege
+							scope:wcss_temp_comparison_spouse = {
+								wcss_is_close_family_relation_of_trigger = { CHARACTER = scope:wcss_root.liege }
+							}
+						}
+						AND = {
+							exists = top_liege
+							scope:wcss_temp_comparison_spouse = {
+								wcss_is_close_family_relation_of_trigger = { CHARACTER = scope:wcss_root.top_liege }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			scope:wcss_spouse = { is_ruler = yes }
+		}
+		random_list = {
+			0 = {
+				min = 0
+				max = 200
+				wcss_lesbian_marriage_pulse_accept_modifier = yes
+				wcss_lesbian_marriage_accepted_effect = yes
+			}
+			0 = {
+				min = 0
+				max = 200
+				opinion_modifier = {
+					who = scope:wcss_spouse
+					opinion_target = scope:wcss_root
+					multiplier = -1
+				}
+			}
+		}
+	}
+}
+
+wcss_lesbian_marriage_accepted_effect = {
+	if = { # Removes concubinage
+		limit = {
+			scope:wcss_spouse = { is_concubine = yes }
+		}
+		scope:wcss_spouse = {
+			random_consort = {
+				limit = {
+					any_concubine = { this = scope:wcss_spouse }
+				}
+				remove_concubine = scope:wcss_spouse
+			}
+		}
+	}
+	if = { # Break marriages to men
+		limit = {
+			scope:wcss_spouse = { is_married = yes }
+		}
+		scope:wcss_spouse = {
+			every_spouse = {
+				limit = { is_female = no }
+				save_temporary_scope_as = wcss_divorcee
+				divorce_effect = {
+					DIVORCER = scope:wcss_spouse
+					DIVORCEE = scope:wcss_divorcee
+				}
+			}
+			if = {
+				limit = {
+					NOR = {
+						scope:wcss_spouse.faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+						scope:wcss_spouse.faith = { has_doctrine = doctrine_divorce_allowed }
+					}
+				}
+				add_prestige_level = -1
+				add_piety_level = -1
+			}
+		}
+	}
+	if = {
+		limit = {
+			can_marry_character_trigger = { CHARACTER = scope:wcss_spouse }
+		}
+		marry = scope:wcss_spouse
+	}
+}
+
+wcss_lesbian_marriage_pulse_monthly_effect = {
+	save_scope_as = wcss_root
+	every_relation = {
+		type = soulmate
+		limit = {
+			wcss_lesbian_marriage_pulse_trigger = yes
+			NOT = { is_in_list = wcss_potential_spouses }
+		}
+		add_to_temporary_list = wcss_potential_spouses
+	}
+	every_relation = {
+		type = lover
+		limit = {
+			wcss_lesbian_marriage_pulse_trigger = yes
+			NOT = { is_in_list = wcss_potential_spouses }
+		}
+		add_to_temporary_list = wcss_potential_spouses
+	}
+	every_relation = {
+		type = friend
+		limit = {
+			wcss_lesbian_marriage_pulse_trigger = yes
+			NOT = { is_in_list = wcss_potential_spouses }
+		}
+		add_to_temporary_list = wcss_potential_spouses
+	}
+	every_courtier_or_guest = {
+		limit = {
+			wcss_lesbian_marriage_pulse_trigger = yes
+			NOT = { is_in_list = wcss_potential_spouses }
+		}
+		add_to_temporary_list = wcss_potential_spouses
+	}
+	top_liege = {
+		if = {
+			limit = {
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			add_to_temporary_list = wcss_potential_spouses
+		}
+		random_courtier = {
+			limit = {
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			weight = {
+				base = 1
+				modifier = {
+					add = { value = wcss_lesbian_marriage_script_value }
+				}
+			}
+			add_to_temporary_list = wcss_potential_spouses
+		}
+		every_vassal_or_below = {
+			limit = {
+				highest_held_title_tier >= tier_county
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			add_to_temporary_list = wcss_potential_spouses
+			random_courtier = {
+				limit = {
+					wcss_lesbian_marriage_pulse_trigger = yes
+					NOT = { is_in_list = wcss_potential_spouses }
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = { value = wcss_lesbian_marriage_script_value }
+					}
+				}
+				add_to_temporary_list = wcss_potential_spouses
+			}
+		}
+	}
+	every_realm_province = {
+		if = {
+			limit = {
+				save_temporary_scope_as = wcss_potential_province
+				NOT = {
+					any_in_list = {
+						list = wcss_pool_provinces
+						county.duchy = scope:wcss_potential_province.county.duchy
+					}
+				}
+			}
+			add_to_temporary_list = wcss_pool_provinces
+		}
+	}
+	every_neighboring_top_liege_realm_owner = {
+		every_realm_province = {
+			if = {
+				limit = {
+					save_temporary_scope_as = wcss_potential_province
+					NOT = {
+						any_in_list = {
+							list = wcss_pool_provinces
+							county.duchy = scope:wcss_potential_province.county.duchy
+						}
+					}
+				}
+				add_to_temporary_list = wcss_pool_provinces
+			}
+		}
+		random_courtier = {
+			limit = {
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			weight = {
+				base = 1
+				modifier = {
+					add = { value = wcss_lesbian_marriage_script_value }
+				}
+			}
+			add_to_temporary_list = wcss_potential_spouses
+		}
+		every_vassal_or_below = {
+			limit = {
+				highest_held_title_tier >= tier_county
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			add_to_temporary_list = wcss_potential_spouses
+			random_courtier = {
+				limit = {
+					wcss_lesbian_marriage_pulse_trigger = yes
+					NOT = { is_in_list = wcss_potential_spouses }
+				}
+				weight = {
+					base = 1
+					modifier = {
+						add = { value = wcss_lesbian_marriage_script_value }
+					}
+				}
+				add_to_temporary_list = wcss_potential_spouses
+			}
+		}
+	}
+	every_in_list = {
+		list = wcss_pool_provinces
+		save_temporary_scope_as = wcss_pool_province
+
+		every_pool_character = {
+			province = scope:wcss_pool_province
+			limit = {
+				wcss_lesbian_marriage_pulse_trigger = yes
+				NOT = { is_in_list = wcss_potential_spouses }
+			}
+			add_to_temporary_list = wcss_potential_spouses
+		}
+	}
+	set_variable = {
+		name = wcss_iterate_potential_spouses
+		value = 1
+	}
+
+	while = {
+		limit = {
+			has_variable = wcss_iterate_potential_spouses
+			list_size = {
+				name = wcss_potential_spouses
+				value >= var:wcss_iterate_potential_spouses
+			}
+		}
+		ordered_in_list = {
+			list = wcss_potential_spouses
+			order_by = wcss_lesbian_marriage_script_value
+			position = {
+				value = var:wcss_iterate_potential_spouses
+				subtract = 1
+				min = 0
+			}
+			save_scope_as = wcss_spouse_candidate
+		}
+		change_variable = {
+			name = wcss_iterate_potential_spouses
+			add = 1
+		}
+		wcss_lesbian_marriage_pulse_effect = { CHARACTER = scope:wcss_spouse_candidate } # Attempt to marry the target.
+		if = {
+			limit = {
+				wcss_has_expected_num_wives_trigger = yes
+				has_variable = wcss_iterate_potential_spouses
+			}
+			remove_variable = wcss_iterate_potential_spouses # Stops the while loop if we're at the spouse limit
+		}
+	}
+	if = {
+		limit = {
+			has_variable = wcss_iterate_potential_spouses
+			list_size = {
+				name = wcss_potential_spouses
+				value <= var:wcss_iterate_potential_spouses
+			}
+		}
+		remove_variable = wcss_iterate_potential_spouses
+	}
+}
+
+## Updating the lesbian marriage modifiers
+wcss_update_lesbian_marriage_effect = {
+	save_temporary_scope_as = wcss_this_character
+	if = {
+		limit = {
+			NOT = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			is_alive = yes
+		}
+		remove_all_character_modifier_instances = wcss_lesbian_union_concubines
+		remove_all_character_modifier_instances = wcss_lesbian_union_polygamy
+		remove_all_character_modifier_instances = wcss_lesbian_union_monogamy
+	}
+	else_if = {
+		limit = {
+			faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+		}
+		if = {
+			limit = { is_alive = yes }
+			remove_all_character_modifier_instances = wcss_lesbian_union_concubines
+			remove_all_character_modifier_instances = wcss_lesbian_union_polygamy
+			remove_all_character_modifier_instances = wcss_lesbian_union_monogamy
+		}
+		if = {
+			limit = {
+				wcss_lesbian_concubines_trigger = yes
+				is_married = yes
+				is_alive = yes
+				is_female = yes
+			}
+			every_spouse = {
+				limit = {
+					is_female = yes
+					is_alive = yes
+				}
+				scope:wcss_this_character = {
+					add_character_modifier = wcss_lesbian_union_concubines
+					add_character_modifier = wcss_lesbian_union_concubines
+					add_character_modifier = wcss_lesbian_union_concubines
+				}
+			}
+			every_concubine = {
+				limit = {
+					is_female = yes
+					is_alive = yes
+				}
+				scope:wcss_this_character = { add_character_modifier = wcss_lesbian_union_concubines }
+			}
+		}
+		else_if = {
+			limit = {
+				wcss_lesbian_polygamy_trigger = yes
+				is_married = yes
+				is_female = yes
+			}
+			every_spouse = {
+				limit = {
+					is_female = yes
+					is_alive = yes
+				}
+				scope:wcss_this_character = { add_character_modifier = wcss_lesbian_union_polygamy }
+			}
+		}
+		else_if = {
+			limit = {
+				wcss_lesbian_monogamy_trigger = yes
+				is_married = yes
+				is_female = yes
+			}
+			every_spouse = {
+				limit = {
+					is_female = yes
+					is_alive = yes
+				}
+				scope:wcss_this_character = { add_character_modifier = wcss_lesbian_union_monogamy }
+			}
+		}
+	}
+}

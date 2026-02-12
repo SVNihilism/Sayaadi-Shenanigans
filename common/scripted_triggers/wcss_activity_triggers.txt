@@ -1,0 +1,136 @@
+﻿## Sets the requirements for the lesbian orgy
+
+wcss_can_join_harem_trigger = {
+	age >= 18
+	is_available_for_activity_trigger = yes
+	wcss_harem_has_disfiguring_trait_trigger = no
+	wcss_harem_has_serious_illness_trigger = no
+	is_female = yes
+	OR = {
+		has_sexuality = bisexual
+		has_sexuality = homosexual
+	}
+	NOT = { has_trait = celibate }
+}
+
+wcss_harem_0003_potential_guest_trigger = {
+	age >= 18
+	age <= 35
+	is_female = yes
+	is_ai = yes
+	is_landed = yes
+	is_ruler = yes
+	is_available_for_activity_trigger = yes
+	wcss_harem_has_disfiguring_trait_trigger = no
+	wcss_harem_has_serious_illness_trigger = no
+	might_cheat_on_every_partner_trigger = yes #Since orgy is rampant sex, only willing to join if willing to cheat.
+	has_sexuality = heterosexual
+	NOR = {
+		has_trait = beauty_bad
+		has_trait = physique_bad
+		has_trait = weak
+		has_trait = bleeder
+		has_trait = chaste
+		has_trait = shy
+		has_trait = reclusive
+		has_trait = celibate
+		is_close_or_extended_family_of = scope:host
+	}
+	faith = scope:host.faith
+	culture = { has_same_culture_heritage = scope:host.culture }
+}
+
+wcss_harem_pulse_action_trigger = {
+	is_physically_able_ai_adult = yes
+	wcss_harem_has_serious_illness_trigger = no
+	wcss_harem_has_disfiguring_trait_trigger = no	
+}
+
+wcss_harem_participant_trigger = {
+	is_ai = yes
+	NOT = { this = root }
+	is_alive = yes
+	is_imprisoned = no
+	wcss_harem_is_lover_trigger = yes
+	wcss_harem_is_incest_trigger = no
+	wcss_harem_has_serious_illness_trigger = no
+	wcss_harem_has_disfiguring_trait_trigger = no
+
+}
+
+wcss_harem_is_lover_trigger = {
+	OR = {
+		has_relation_lover = root
+		has_relation_soulmate = root
+	}
+	has_character_flag = harem_character
+}
+
+wcss_harem_is_incest_trigger = { # Triggers TRUE if relationship would be incestuous and not already a lover/consort
+	is_close_or_extended_family_of = root
+	NOR = {
+		has_relation_soulmate = root
+		has_relation_lover = root
+		is_consort_of = root
+	}
+}
+
+wcss_harem_has_serious_illness_trigger = { # Any serious illness, but not cancer or basic illness.
+	OR = {
+		has_contagious_disease_trigger = yes
+		has_trait = pneumonic
+		has_trait = leper
+		has_trait = consumption
+		has_trait = typhus
+	}
+}
+
+wcss_harem_has_disfiguring_trait_trigger = { # Blind, one-eyed, and scarred are okay. Most others are not. Also includes some debilitating traits.
+	OR = {
+		has_trait = spindly
+		has_trait = leper
+		has_trait = disfigured
+		has_trait = maimed
+		has_trait = one_legged
+		has_trait = infirm
+		has_trait_rank = {
+			trait = wounded
+			rank >= 2
+		}
+	}
+}
+
+wcss_prefers_lesbian_orgy_over_feast_trigger = { # If CAN host lesbian orgy and is willing to cheat, should have less feasts and more orgies
+	is_female = yes
+	highest_held_title_tier >= tier_county
+	faith = { has_doctrine_parameter = adultery_female_accepted }
+	might_cheat_on_every_partner_trigger = yes
+	NOR = {
+		has_trait = chaste
+		has_trait = celibate
+	}
+	OR = {
+		has_sexuality = homosexual
+		has_sexuality = bisexual
+	}
+	OR = {
+		culture = { has_cultural_tradition = wcss_tradition_hedonists }
+		faith = { has_doctrine = wcss_tenet_sapphic_eroticism }
+		faith = { has_doctrine = tenet_carnal_exaltation }
+		has_trait = lustful
+		has_trait = rakish
+		has_trait = seducer
+		has_focus = intrigue_temptation_focus
+	}
+	wcss_harem_has_disfiguring_trait_trigger = no
+	wcss_harem_has_serious_illness_trigger = no
+}
+
+nazri_start_trigger = {
+	OR = {
+		is_target_in_global_variable_list = {
+			name = wc_events_happened
+			target = flag:nazri_start
+		}
+	}
+}

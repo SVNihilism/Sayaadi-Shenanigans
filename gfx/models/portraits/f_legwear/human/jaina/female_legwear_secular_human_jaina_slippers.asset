@@ -1,0 +1,28 @@
+pdxmesh = {
+	name = "female_legwear_secular_human_jaina_slippers_mesh"
+	file = "female_legwear_secular_human_jaina_slippers.mesh"
+
+	#blend_shape = { id = "female_legwear_secular_human_jaina_slippers_bs_child"				type = "female_legwear_secular_human_jaina_slippers_bs_child.mesh" }
+	#blend_shape = { id = "female_legwear_secular_human_jaina_slippers_bs_no_left_leg"			type = "female_legwear_secular_human_jaina_slippers_bs_no_left_leg.mesh" }
+	#blend_shape = { id = "female_legwear_secular_human_jaina_slippers_bs_seated"				type = "female_legwear_secular_human_jaina_slippers_bs_seated.mesh" }
+
+	meshsettings = {
+		name = "female_legwear_secular_human_jaina_slippersShape"
+		index = 0
+		texture_diffuse = "jaina_base_diff.dds"
+		texture_normal = "jaina_base_norm.dds"
+		texture_specular = "jaina_base_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "female_legwear_secular_human_jaina_slippers_entity"
+	pdxmesh = "female_legwear_secular_human_jaina_slippers_mesh"
+
+	#attribute = { name = "bs_body_child_1"					blend_shape = "female_legwear_secular_human_jaina_slippers_bs_child" }
+	#attribute = { name = "bs_body_no_left_leg"				blend_shape = "female_legwear_secular_human_jaina_slippers_bs_no_left_leg" }
+	#attribute = { name = "bs_body_seated"					blend_shape = "female_legwear_secular_human_jaina_slippers_bs_seated" }
+}
+

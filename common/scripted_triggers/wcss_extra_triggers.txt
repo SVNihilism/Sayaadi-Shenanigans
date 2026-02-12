@@ -1,0 +1,22 @@
+﻿is_sayaadi_trigger = {
+    exist = this
+    OR = {
+        has_trait = creature_sayaadi
+        is_race_gene_no_race_trait_trigger = { RACE = creature_sayaadi }
+    }
+}
+
+is_undead_trigger = {
+    exist = this
+    OR = {
+        has_trait = being_undead
+        is_race_gene_no_race_trait_trigger = { RACE = creature_undead }
+    }
+}
+is_nathrezim_trigger = {
+    exist = this
+    OR = {
+        has_trait = creature_nathrezim
+        is_race_gene_no_race_trait_trigger = { RACE = creature_nathrezim }
+    }
+}

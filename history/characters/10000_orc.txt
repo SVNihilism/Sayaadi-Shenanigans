@@ -1,0 +1,5088 @@
+﻿#dynasty=2000
+10000={
+	name=Blackhand
+	dna = blackhand_dna_2
+	dynasty_house = house_blackhand
+	give_nickname=nick_the_destroyer
+	culture=blackrock religion=orcish_fel
+	sexuality = heterosexual
+	martial=6 diplomacy=5 stewardship=4 intrigue=3 learning=4
+	trait=education_martial_4 trait=education_martial_prowess_4 trait=physique_good_3
+	trait=wrathful trait=greedy trait=arrogant trait=arbitrary trait=viking
+	disallow_random_traits = yes
+	father = 10701 #Ugratil
+	542.1.13={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	558.1.13={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	562.1.1={
+		add_spouse = 10001	#Urukal
+	}
+	583.1.1={
+		# create_bloodline = {
+			# type = blackhand
+		# }
+		effect = {
+			# join_society_shadow_council_effect = yes
+			fire_councillor = cp:councillor_spymaster
+			assign_councillor_type = {
+				type = councillor_spymaster
+				target = character:10016
+			}
+		}
+	}
+	#Executed his own daughter
+	584.1.1={
+		trait=kinslayer_1
+	}
+	586.2.1={
+		death = {
+			death_reason = death_duel
+			killer = 10050 #Orgrim Doomhammer
+		}
+	}
+}
+10001={
+	name=Urukal
+	dna = urukal_dna
+	female = yes
+	culture=blackrock religion=orcish_fel
+	sexuality = heterosexual
+	martial=7 diplomacy=4 stewardship=7 intrigue=2 learning=3
+	trait=education_martial_2
+	trait=arrogant trait=temperate
+	543.9.27={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	559.9.27={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	586.9.8={ death=yes }
+}
+10002={
+	name=Dal'rend
+	dna = dalrend_dna
+	### dynasty=2000
+	dynasty_house = house_blackhand
+	culture=blackrock religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=5 intrigue=2 learning=2
+	trait=education_martial_3 trait=education_martial_prowess_3 trait=viking
+	trait=arrogant trait=greedy trait=wrathful trait=zealous
+	disallow_random_traits = yes
+	father=10000
+	mother=10001
+	563.9.14={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	579.9.14={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	590.9.14={
+		trait=one_eyed
+	}
+	608.4.7={ death=yes }
+}
+10003={
+	name=Maim
+	dna = maim_dna
+	### dynasty=2000
+	dynasty_house = house_blackhand
+	culture=blackrock religion=orcish_fel
+	martial=5 diplomacy=4 stewardship=4 intrigue=1 learning=1
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=viking
+	trait=content trait=sadistic trait=arbitrary
+	disallow_random_traits = yes
+	father=10000
+	mother=10001
+	565.1.18={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	581.1.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.3.23={ death=yes }
+}
+#Griselda Blackhand
+10004={
+	name=Griselda
+	dna = griselda_dna
+	female = yes
+	### dynasty=2000
+	dynasty_house = house_blackhand
+	culture=blackrock religion=orcish_fel
+	sexuality = heterosexual
+	martial=4 diplomacy=5 stewardship=3 intrigue=4 learning=2
+	trait=education_intrigue_2
+	trait=chaste trait=humble trait=brave trait=content
+	father=10000 #Blackhand
+	mother=10001
+	566.3.11={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	582.3.11={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_dexterity_1
+		# trait=physical_lifestyle_strength_1
+	}
+	583.1.1={
+		employer=10000 #Blackhand[2000]
+		effect={
+			set_relation_soulmate = character:52450 #Turok
+		}
+	}
+	#Executed by Blackhand
+	584.1.1={
+		death = { death_reason = death_execution killer = 10000 } #Blackhand
+	}
+}
+
+#dynasty=2150
+10005={
+	name=Kilrogg
+	dna=kilrogg_dna_2
+	dynasty=2150 #Deadeye
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=8 diplomacy=6 stewardship=4 intrigue=6 learning=7
+	trait=education_martial_4 trait=education_martial_prowess_4
+	trait=brave trait=impatient trait=stubborn trait=deceitful
+	trait=lifestyle_mystic trait=shrewd
+	trait=aggressive_attacker trait=jungle_stalker
+	disallow_random_traits = yes
+	father=bleedinghollow3
+	mother=bleedinghollow4
+	516.1.15={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes }
+	}
+	542.1.15={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = jungle_stalker
+				value = 50
+			}
+			add_trait_xp = {
+				trait = aggressive_attacker
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	571.10.10={
+		trait=one_eyed #Vision Quest
+		effect={
+			if = {
+				limit = { NOT = { has_perk = know_thyself_perk } }
+				add_perk = know_thyself_perk #Saw his death
+			}
+			add_trait_xp = {
+				trait = lifestyle_mystic
+				value = 50
+			}
+			add_trait_xp = {
+				trait = jungle_stalker
+				value = 50
+			}
+		}
+	}
+	571.10.17={
+		trait=kinslayer_3 #Killed his dad
+	}
+	580.1.1={
+		religion=orcish_fel #Drinks the blood of Mannoroth
+	}
+	591.6.18={
+		death = {
+			death_reason = death_battle
+			killer = 38004 # Danath Trollbane
+		}
+	}
+}
+
+jorin_deadeye={ # Kilrogg's only living canon son
+	name=Jorin
+	dynasty=2150
+	culture=bleeding_hollow religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=5 intrigue=5 learning=7
+	trait=education_learning_3
+	trait=zealous trait=stubborn trait=calm trait=curious
+	trait=one_eyed
+	father=10005
+	575.9.26={
+		birth=yes trait=creature_orc
+	}
+	582.5.15 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes #is in Outland
+			}
+		}
+	}
+	678.12.22={ death=yes }
+}
+
+bleedinghollow1={ # Kilrogg grandpa [non-lore]
+	name=Braknoth
+	dynasty=2150
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=8 diplomacy=2 stewardship=2 intrigue=7 learning=5
+	trait=education_martial_4
+	trait=vengeful trait=zealous trait=stubborn trait=impatient
+	trait=jungle_stalker trait=one_eyed
+	disallow_random_traits = yes
+	463.5.8={
+		birth=yes trait=creature_orc
+	}
+	486.10.1={
+		add_spouse=bleedinghollow2
+	}
+	521.6.18={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+bleedinghollow2={ # Kilrogg grandma [non-lore]
+	name=Alguna
+	female=yes
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=8 diplomacy=9 stewardship=3 intrigue=2 learning=6
+	trait=education_martial_3
+	trait=gregarious trait=brave trait=content trait=diligent
+	trait=shieldmaiden trait=scarred
+	disallow_random_traits = yes
+	469.9.14={
+		birth=yes trait=creature_orc
+	}
+	521.6.18={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+bleedinghollow3={ # Kilrogg dad [kinda-lore, his name is unknown]
+	name=Karnarmok
+	dynasty=2150
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=7 diplomacy=4 stewardship=4 intrigue=4 learning=6
+	trait=education_martial_3
+	trait=just trait=zealous trait=stubborn trait=patient
+	trait=jungle_stalker trait=one_eyed
+	disallow_random_traits = yes
+	father=bleedinghollow1
+	mother=bleedinghollow2
+	489.11.9={
+		birth=yes trait=creature_orc
+	}
+	510.4.22={
+		add_spouse=bleedinghollow4
+	}
+	550.4.22={
+		trait=ill
+	}
+	571.10.17={
+		death = {
+			death_reason = death_murder_known #At last... this. This is the death I saw! (Last words.)
+			killer = 10005 #Kilrogg
+		}
+	}
+}
+bleedinghollow4={ # Kilrogg mom [non-lore]
+	name=Tamkumo
+	female=yes
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=2 diplomacy=7 stewardship=3 intrigue=2 learning=9
+	trait=education_learning_3
+	trait=chaste trait=calm trait=compassionate trait=generous
+	trait=lifestyle_mystic
+	disallow_random_traits = yes
+	491.2.21={
+		birth=yes trait=creature_orc
+	}
+	571.12.31={
+		death = {
+			death_reason = death_vanished
+		}
+	}
+}
+bleedinghollow5={ # Ugannar mom [non-lore]
+	name=Ketra
+	female=yes
+	culture=bleeding_hollow religion=orcish_fel
+	sexuality = heterosexual
+	martial=6 diplomacy=6 stewardship=6 intrigue=6 learning=6
+	trait=education_martial_2
+	trait=vengeful trait=chaste trait=wrathful trait=brave
+	trait=shieldmaiden trait=scarred
+	disallow_random_traits = yes
+	521.5.23={
+		birth=yes trait=creature_orc
+	}
+	540.7.19={
+		add_spouse=bleedinghollow6
+	}
+	572.10.10={
+		death={
+			death_reason = death_duel
+		}
+	}
+}
+bleedinghollow6={ # Ugannar dad [non-lore]
+	name=Kalmak
+	dynasty=2150
+	culture=bleeding_hollow religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=2 diplomacy=4 stewardship=8 intrigue=6 learning=6
+	trait=education_stewardship_2
+	trait=zealous trait=brave trait=gregarious trait=diligent
+	father=bleedinghollow3
+	mother=bleedinghollow4
+	530.2.11={ 
+		birth=yes trait=creature_orc
+	}
+	571.1.1={
+		death={
+			death_reason = death_vanished
+		}
+	}
+}
+bleedinghollow7={ # someone's OC but i added more OCs to justify his existence because he makes the game interesting - SS
+	name=Ugannar
+	dynasty=2150
+	culture=bleeding_hollow religion=orcish_fel
+	martial=9 diplomacy=5 stewardship=3 intrigue=5 learning=7
+	trait=education_learning_3
+	trait=zealous trait=vengeful trait=ambitious trait=gregarious
+	mother=bleedinghollow5
+	father=bleedinghollow6
+	555.9.26={ 
+		birth=yes trait=creature_orc
+	}
+	583.1.1={ employer=10005 }
+	603.1.1={
+		add_prestige = 200	#Freed from internment camps and elected leader of clan
+		trait=one_eyed		#Vision Quest
+		trait=berserker
+		#employer=10021
+	}
+	608.12.22={ death=yes }
+}
+10007={
+	name=Boram
+	culture=bleeding_hollow religion=orcish_fel
+	martial=5 diplomacy=8 stewardship=6 intrigue=6 learning=4
+	trait=education_martial_2 trait=trusting trait=sadistic trait=arbitrary
+	trait=deceitful
+	dynasty=2150
+	father=10005	# Kilrogg
+	537.4.7={ birth=yes trait=creature_orc }
+	566.4.7={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	572.8.27={
+		death = {
+			death_reason = death_battle
+			killer = 10005
+		}
+	}
+}
+10008={
+	name=Makban
+	culture=bleeding_hollow religion=orcish_fel
+	martial=8 diplomacy=5 stewardship=6 intrigue=5 learning=4
+	trait=education_martial_3 trait=arrogant
+	trait=greedy trait=arbitrary 
+	dynasty=2150
+	father=10007	#Boram
+	558.4.26={ birth=yes trait=creature_orc }
+	582.4.26={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	582.9.23={
+		death = {
+			death_reason = death_battle
+			killer = 10005
+		}
+	}
+}
+10009={
+	name=Thragagus
+	culture=bleeding_hollow religion=orcish_fel
+	martial=7 diplomacy=6 stewardship=5 intrigue=5 learning=6
+	trait=education_martial_2 trait=arrogant trait=lazy
+	trait=greedy
+	father=10005		# Kilrogg
+	dynasty=2150
+	540.6.18={ birth=yes trait=creature_orc }
+	567.6.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	572.12.19={
+		death = {
+			death_reason = death_battle
+			killer = 10005
+		}
+	}
+}
+10010={
+	name=Marmurak
+	culture=bleeding_hollow religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=6 intrigue=4 learning=3
+	trait=education_martial_1 trait=paranoid
+	trait=sadistic
+	dynasty=2150
+	father=10009	#Thragagus
+	560.4.9={ birth=yes trait=creature_orc }
+	582.4.9={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	582.12.26={
+		death = {
+			death_reason = death_battle
+			killer = 10005
+		}
+	}
+}
+10011={
+	name=Ronagarstan
+	culture=bleeding_hollow religion=orcish_fel
+	martial=5 diplomacy=8 stewardship=7 intrigue=5 learning=4
+	trait=education_martial_2 trait=sadistic trait=paranoid
+	trait=deceitful
+	father=10005
+	dynasty=2150
+	548.4.23={ birth=yes trait=creature_orc }
+	570.4.23={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	575.1.19={
+		death = {
+			death_reason = death_battle
+			killer = 10005
+		}
+	}
+}
+
+#dynasty=2100
+# 10012={
+	# name=Kargath
+	# culture=shattered_hand religion=orcish_fel
+	# martial=6 diplomacy=7 stewardship=7 intrigue=5 learning=4
+	# dynasty=2100
+	# trait=education_martial_4 trait=sadistic
+	# trait=diligent trait=wrathful trait=ambitious 
+	# disallow_random_traits = yes
+	# 553.6.18={ 
+		# birth=yes trait=creature_orc
+		# effect = { make_important_lore_character_effect = yes }
+	#}
+	# 553.6.18={
+		# effect = { add_artifact = prosthetic_blade_hand }
+	# }
+	# 569.6.18={
+		# effect={
+			# set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			# set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		# }
+		# # trait=physical_lifestyle_endurance_3
+		# # trait=physical_lifestyle_strength_3
+	# }
+	# 583.1.1={
+		# effect={
+			# join_society_shadow_council_effect = yes
+			# society_rank_up = 1
+		# }
+	# }
+	# 591.2.19={ death=yes }
+# }
+
+# dynasty = 2353
+# CK3 - NEEDS MAJOR REWRITE, WAS FAULTY
+10014={
+	name=Ner'zhul
+	dynasty = 2353
+	culture=shadowmoon religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=5 diplomacy=6 stewardship=5 intrigue=5 learning=7
+	trait = education_learning_4 trait=magic_good_2
+	trait = shrewd trait = patient trait = ambitious trait = callous trait = deceitful
+	511.8.11 = {
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	530.1.1={
+		add_spouse = rulkan
+		#effect = { set_relation_soulmate = character:rulkan }
+	}
+	531.8.11 = {
+		effect={
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+	}
+	591.11.1={
+		culture=scourge religion=death_god
+		trait = being_undead
+		remove_trait = creature_orc
+		add_trait = creature_lich
+		trait = lich_king
+		remove_trait = education_learning_4
+		add_trait = education_learning_5
+		trait = in_ice_prison
+		
+		effect = {
+			scourge_603_pack_effect = yes
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_magic_trait_value }
+		}
+	}
+	605.7.1={
+		death = {
+			death_reason = death_merge
+			killer = 60003 # Arthas
+		}
+	}
+}
+
+rulkan={
+	name=Rulkan
+	female=yes
+	culture=shadowmoon religion=orcish_shamanism
+	sexuality = heterosexual
+	mother=neema
+	trait=just trait=zealous
+	511.8.11={
+		birth=yes trait=creature_orc
+	}
+	531.8.11 = {
+		effect={
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	562.1.1={ death=yes }
+}
+neema={
+	name=Neema
+	female=yes
+	culture=shadowmoon religion=orcish_shamanism
+	sexuality = heterosexual
+	481.8.11={
+		birth=yes trait=creature_orc
+	}
+	542.1.1={ death=yes }
+}
+
+#dynasty=2350
+10015={
+	name=Gul'dan
+    dna=guldan_dna_2
+	dynasty=2350
+	culture=shadowmoon religion=orcish_fel
+	martial=4 diplomacy=5 stewardship=4 intrigue=7 learning=6
+	trait=education_learning_4
+	trait=hunchbacked trait=magic_good_3 trait=physique_bad_1
+	trait=ambitious trait=arrogant trait=wrathful trait=deceitful trait=disloyal
+	disallow_random_traits = yes
+	# Actually, Gul'dan is pretty young, he looks old because of Fel
+	553.6.18={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	573.1.1={
+		effect = {
+			add_character_modifier = fel_corruption_modifier
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value }
+			learn_language = language_eredun
+		}
+		give_nickname = nick_darkness_incarnate
+	}
+	577.6.6 = {
+		effect = { # Shadow Council relations
+			add_hook_no_toast = {
+				target = character:10016 # Nagaz
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10017 # Teron'gor
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10018 # Fel'dan
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10022 # Ragnok
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:10023 # Drak'thul
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:urdan # Urdan
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ilkrud_magthrull # Ilkrud
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ulathek # Ulathek
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:gaz_soulripper # Gaz
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:ras_splinterspine # Ras
+				type = loyalty_hook
+			}
+			add_hook_no_toast = {
+				target = character:rage_winterchill # RAGE
+				type = loyalty_hook
+			}
+		}
+		give_council_position = councillor_chancellor
+	}
+	587.6.1 = { culture = stormreaver } 
+	590.2.19 = { death=yes }
+}
+
+#dynasty=none
+10016={
+	name=Nagaz
+	culture=bleeding_hollow religion=orcish_fel
+	martial=7 diplomacy=4 stewardship=3 intrigue=7 learning=5
+	trait=education_learning_3 trait=education_martial_prowess_2
+	trait=sadistic trait=arrogant trait=deceitful
+	540.1.1={ birth=yes trait=creature_orc }
+	556.1.1={
+		effect={
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	583.1.1={
+		employer = 10000
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }
+			# join_society_shadow_council_effect = yes
+			# society_rank_up = 2
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+		employer = 10015
+	} 
+	590.2.19={
+		effect = {
+			#set_society_grandmaster = yes
+			#add_society_currency_massive_effect = yes
+		}
+	}
+	600.1.1={
+		employer = 58002 #Aliden Perenolde
+		trait=one_eyed
+		learn_language = language_common
+		religion=holy_light
+		effect = { make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_fel } }
+	}
+
+	615.1.19={ death=yes }
+}
+
+#dynasty=none
+10017={
+	name="Teron'gor"
+	culture=shadowmoon
+	religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=4 intrigue=6 learning=6
+	trait=education_learning_3
+	trait=sadistic trait=wrathful trait=deceitful
+	536.1.1={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	552.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.6.1={
+		remove_trait = creature_orc
+		trait = being_undead
+		add_trait = creature_human
+		culture = stormreaver
+		dynasty = 2352	# Gorefiend
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			change_first_name = Teron
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	609.2.19={ death=yes }
+}
+
+#dynasty=none
+10018={
+	name=Fel'dan
+	dynasty=2354
+	culture=shadowmoon religion=orcish_fel
+	sexuality = heterosexual
+	martial=3 diplomacy=6 stewardship=4 intrigue=7 learning=5
+	trait=education_learning_3 trait=sadistic trait=arrogant trait = lustful
+	541.1.1={ birth=yes trait=creature_orc }
+	557.1.1={
+		effect = {
+			make_important_lore_character_effect = yes
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+		learn_language = language_eredun
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }	#Gul'dan
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	603.1.1={
+		employer = 10550 #Jubei'thos
+		effect = {
+			set_relation_lover = character:450000 # Moora
+			set_relation_lover = character:450001 # Salia
+			add_hook_no_toast = {
+				target = character:450000
+				type = minion_hook
+			}
+			add_hook_no_toast = {
+				target = character:450001
+				type = minion_hook
+			}
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			add_opinion = { modifier = loyal_servant target = character:banehollow }
+		}
+	}
+	603.10.5 = {
+		trait = being_demon
+	}
+	608.2.19={ death=yes }
+}
+
+#dynasty=2200
+10019={
+	name=Durotan
+	dynasty=2200
+	dna=durotan_dna
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=garad_frostwolf
+	mother=greatmother_geyah
+	martial=5 diplomacy=7 stewardship=6 intrigue=3 learning=3 prowess=56
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=honest trait=patient trait=just trait=brave trait=lifestyle_hunter
+	disallow_random_traits = yes
+	558.1.2={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	558.1.2={
+		effect={
+			set_relation_best_friend = character:10050
+
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	573.1.1={
+		add_spouse = 10020
+		effect = { set_relation_soulmate = character:10020 }
+	}
+	583.1.1={
+		add_prestige = 300
+		#faith law doesnt allow, sry
+		#fire_councillor = cp:councillor_court_chaplain
+		#assign_councillor_type = {
+		#	type = councillor_court_chaplain
+		#	target = character:10100
+		#}
+	}
+	# 583.8.12={
+		# create_bloodline = {
+			# type = durotan
+		# }
+	# }
+	585.1.1={
+		death = {
+			death_reason = death_murder
+			killer=10015 #Gul'dan
+		}
+	}
+}
+10020={
+	name=Draka
+	female = yes
+	dna=draka_dna
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=kelkar
+	mother=zuura
+	martial=5 diplomacy=6 stewardship=4 intrigue=5 learning=6
+	trait=education_martial_2 trait=honest trait=brave trait=zealous trait=vengeful trait=physique_bad_2
+	560.8.6={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes harem_character_effect = yes }
+	}
+	576.8.6={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+		remove_trait=physique_bad_2 #Events from "A Warrior Made"
+		add_trait=strong
+		trait=lifestyle_hunter
+	}
+	585.1.1={
+		death = {
+			death_reason = death_murder
+			killer=10015 #Gul'dan
+		}
+	}
+}
+lokra={
+	name=Lokra
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=kelkar
+	mother=zuura
+	trait=education_martial_1 trait=honest trait=brave trait=compassionate trait=patient
+	564.8.6={
+		birth=yes trait=creature_orc
+	}
+	577.8.6={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+		add_spouse=karg_bloodfury
+		#set_relation_soulmate = character:karg_bloodfury
+		trait=lifestyle_hunter
+	}
+	581.1.1={ death=yes }
+}
+rhakish={
+	name=Rhakish
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	480.1.2={
+		birth=yes trait=creature_orc
+	}
+	560.1.1={ death=yes }
+}
+kelkar={
+	name=Kelkar
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=rhakish
+	538.1.2={
+		birth=yes trait=creature_orc
+	}
+	546.1.1={
+		add_spouse = zuura
+		#effect = { set_relation_soulmate = character:zuura }
+	}
+	580.1.1={ death=yes }
+}
+zuura={
+	name=Zuura
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	538.1.2={
+		birth=yes trait=creature_orc
+	}
+	580.1.1={ death=yes }
+}
+10021={
+	name=Go'el
+	dynasty=2200
+    dna = thrall_dna_2
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=4 diplomacy=7 stewardship=5 intrigue=2 learning=6
+	father=10019	#Durotan
+	mother = 10020	#Draka
+	583.1.1={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes harem_character_effect = yes }
+	}
+	585.1.1={
+		effect = {
+			if = {
+				limit = { game_start_date < 601.3.24 }
+				imprison = {
+					target = character:53001 #Aedelas
+					type = dungeon
+				}
+			}
+			change_first_name = Thrall
+			learn_language = language_common
+		}
+	}
+	599.1.1={
+		trait=education_martial_3 trait=education_martial_prowess_3
+		trait=content trait=patient trait=brave trait=shrewd trait=honest
+	}
+	603.1.1={
+		culture = durotaric
+		effect = {
+			set_relation_friend = character:68001 #Vol'jin
+			set_relation_blood_brother = character:10658 #Blood-brothers with Nazgrel
+			add_opinion = { modifier = mentored_me_opinion target = character:10100 }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.5.10={
+		effect={
+			set_relation_friend = character:210000 #Cairne
+		}
+	}
+	605.5.20={
+		add_gold = 300 #Military budget
+		effect = {
+			add_hook_no_toast = {
+				target = character:myranda_the_hag
+				type = favor_hook
+			}
+		}
+	}
+	611.1.1={
+		add_spouse = aggralan
+		effect = { set_relation_soulmate = character:aggralan }
+	}
+	640.6.6={ death=yes }
+}
+rokuk_frostwolf={
+	name=Rokuk
+	dynasty=2200
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	450.1.2={
+		birth=yes trait=creature_orc
+	}
+	510.1.1={ death=yes }
+}
+durkosh_frostwolf={
+	name=Durkosh
+	dynasty=2200
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=rokuk_frostwolf
+	480.1.2={
+		birth=yes trait=creature_orc
+	}
+	560.1.1={ death=yes }
+}
+garad_frostwolf={
+	name=Garad
+	dynasty=2200
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=durkosh_frostwolf
+	trait=education_martial_3
+	trait=honest trait=patient trait=brave
+	518.1.2={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	546.1.1={
+		add_spouse = greatmother_geyah
+		#effect = { set_relation_soulmate = character:greatmother_geyah }
+	}
+	573.1.1={
+		death = {
+			death_reason = death_horrible_disease
+		}
+	}
+}
+kerzug={
+	name=Kerzug
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	450.1.2={
+		birth=yes trait=creature_orc
+	}
+	510.1.1={ death=yes }
+}
+zungal={
+	name=Zungal
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=kerzug
+	480.1.2={
+		birth=yes trait=creature_orc
+	}
+	560.1.1={ death=yes }
+}
+greatmother_geyah={
+	name=Geyah
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	father=zungal
+	sexuality = heterosexual
+	trait=education_diplomacy_3
+	trait=honest trait=patient trait=brave trait=lifestyle_hunter
+	538.1.2={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	546.1.1={
+		effect = {
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	580.1.1={
+		culture=maghar
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	620.6.6={ death=yes }
+}
+ganar_frostwolf={
+	name=Ga'nar
+	dynasty=2200
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=garad_frostwolf
+	mother=greatmother_geyah
+	martial=5 diplomacy=7 stewardship=6 intrigue=3 learning=3
+	trait=education_stewardship_2
+	trait=honest trait=impatient trait=callous trait=lifestyle_hunter
+	555.1.2={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	572.1.1={
+		death = {
+			death_reason = death_battle #sacrificed himself while helping many young mok'nathal escape from Bladespire Hold
+		}
+	}
+}
+#house wolfbrother
+fenris_wolfbrother={
+	name=Fenris
+	dynasty=2200
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	father=garad_frostwolf
+	mother=greatmother_geyah
+	martial=6 diplomacy=5 stewardship=5 intrigue=5 learning=3
+	trait=education_martial_3 trait=education_martial_prowess_2 trait=intellect_good_2
+	trait=honest trait=patient trait=ambitious trait=brave trait=lifestyle_hunter trait=viking
+	give_nickname=nick_the_hunter
+	disallow_random_traits = yes
+	550.1.2={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	572.1.1={
+		dynasty_house=house_wolfbrother
+		culture=thunderlord
+		add_spouse = gerhel
+		effect = {
+			#set_relation_soulmate = character:gerhel
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	599.6.6={ death=yes }
+}
+gerhel={
+	name=Ger'hel
+	female=yes
+	culture=thunderlord religion=orcish_shamanism
+	sexuality = heterosexual
+	trait=education_martial_3
+	trait=lustful trait=callous trait=brave trait=lifestyle_hunter
+	552.1.2={
+		birth=yes trait=creature_orc
+	}
+	581.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	582.6.6={ death=yes }
+}
+garm_wolfbrother={
+	name=Garm
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=fenris_wolfbrother
+	mother=gerhel
+	trait=lifestyle_hunter
+	573.1.2={
+		birth=yes trait=creature_orc
+		effect = {
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	600.6.6={ death=yes }
+}
+hatock_wolfbrother={
+	name=Hatock
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=fenris_wolfbrother
+	mother=gerhel
+	trait=lifestyle_hunter
+	give_nickname=nick_the_gronnmaster
+	574.1.1={
+		birth=yes trait=creature_orc
+		effect = {
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	600.6.6={ death=yes }
+}
+grotan_wolfbrother={
+	name=Grotan
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=fenris_wolfbrother
+	mother=gerhel
+	trait=lifestyle_hunter
+	give_nickname=nick_the_herald
+	575.1.1={
+		birth=yes trait=creature_orc
+		effect = {
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	600.6.6={ death=yes }
+}
+skal_wolfbrother={
+	name=Skal
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=fenris_wolfbrother
+	mother=gerhel
+	trait=lifestyle_hunter
+	give_nickname=nick_the_trapper
+	577.1.1={
+		birth=yes trait=creature_orc
+		effect = {
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 590.1.1 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	600.6.6={ death=yes }
+}
+durkot_wolfbrother={
+	name=Durkot
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=garm_wolfbrother
+	trait=education_stewardship_2 trait=lifestyle_hunter trait=lifestyle_reveler trait=just trait=patient trait=generous
+	589.1.2={
+		birth=yes trait=creature_orc
+		effect = {
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 25
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 25
+			}
+		}
+	}
+	650.6.6={ death=yes }
+}
+omakka_wolfbrother={
+	name=Omakka
+	female=yes
+	dynasty_house=house_wolfbrother
+	culture=thunderlord religion=orcish_shamanism
+	father=garm_wolfbrother
+	trait=gregarious
+	593.1.2={
+		birth=yes trait=creature_orc
+	}
+	603.1.1={
+		effect = {	
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	650.6.6={ death=yes }
+}
+
+#dynasty=2351
+10022={
+	name=Ragnok
+	dynasty=2351
+	culture=bonechewer religion=orcish_fel
+	martial=5 diplomacy=1 stewardship=4 intrigue=6 learning=6
+	trait=education_learning_3 trait=greedy trait=patient trait=deceitful trait=content
+	disallow_random_traits = yes
+	532.1.1={ birth=yes trait=creature_orc }
+	548.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			add_opinion = { modifier = loyal_servant target = character:10015 }
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.1.1={
+		remove_trait = creature_orc
+		trait = being_undead
+		add_trait = creature_human
+		culture = stormreaver
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	591.10.6={ death=yes }
+}
+
+#dynasty=none
+10023={
+	name=Drak'thul
+	culture=thunderlord religion=orcish_fel
+	martial=5 diplomacy=3 stewardship=4 intrigue=5 learning=5
+	trait=education_intrigue_2 trait=physique_good_1 trait=lifestyle_mystic trait=magic_good_1
+	trait=craven trait=shy trait=deceitful trait=shrewd
+	558.1.1={ birth=yes trait=creature_orc }
+	574.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } 
+			add_trait_xp = {
+				trait = lifestyle_mystic
+				value = 50
+			}
+		}
+	}
+	583.1.1={
+		employer = 10015 #Gul'dan
+		give_council_position = councillor_court_chaplain
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }	#Gul'dan
+			# join_society_shadow_council_effect = yes
+			# society_rank_up = 2
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	590.2.20={
+		trait = reclusive
+	}
+	628.2.19={ death=yes }
+}
+
+#dynasty=2001
+10050={
+	name=Orgrim
+	dna = orgrim_doomhammer_dna_2
+	dynasty=2001
+	culture=blackrock religion=orcish_shamanism
+	father=telkar
+	martial=7 diplomacy=4 stewardship=5 intrigue=6 learning=3
+	trait=education_martial_4 trait=education_martial_prowess_4 trait=physique_good_3 trait=honest trait=wrathful trait=brave trait=ambitious trait=shrewd
+	disallow_random_traits = yes
+	558.1.1={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	578.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	583.1.1={
+		add_prestige = 750		# Should be able to invite clans when he's Warchief
+		add_piety = 375
+		give_council_position = councillor_marshal
+		effect = {
+			appoint_court_position = {
+				recipient = character:utok_scratcher
+				court_position = chronicler_court_position
+			}
+		}
+	}
+	586.2.1={ 
+		give_nickname=nick_the_backstabber
+		learn_language = language_common
+	}
+	601.11.1={ death=yes }
+}
+telkar={
+	name=Telkar
+	dynasty=2001
+	culture=blackrock religion=orcish_shamanism
+	sexuality = heterosexual
+	father=ruvash
+	trait=education_martial_3 trait=education_martial_prowess_4
+	trait=honest trait=patient trait=brave
+	515.1.2={ 
+		birth=yes trait=creature_orc
+	}
+	572.1.1={ death=yes }
+}
+ruvash={
+	name=Ruvash
+	dynasty=2001
+	culture=blackrock religion=orcish_shamanism
+	sexuality = heterosexual
+	father=gelnar
+	480.1.2={
+		birth=yes trait=creature_orc
+	}
+	560.1.1={ death=yes }
+}
+gelnar={ #Orgrim's distant ancestor. Responsible for the creation of the legendary weapon known as the Doomhammer
+	name=Gelnar
+	dynasty=2001
+	culture=blackrock religion=orcish_shamanism
+	sexuality = heterosexual
+	trait=education_martial_4 trait=education_martial_prowess_4 
+	trait=brave #trait=profession_blacksmith
+	430.1.2={
+		birth=yes trait=creature_orc
+	}
+	510.1.1={ death=yes }
+}
+
+# dynasty=2002 Not really lore void undead rulers of Crestfall
+10060={
+	name=Dilik
+	female=yes
+	dynasty=2002
+	culture=blackrock religion=orcish_fel
+	martial=4 diplomacy=6 stewardship=6 intrigue=6 learning=4
+	trait=education_martial_1 trait=generous trait=trusting trait=sadistic
+	556.2.11={ birth=yes trait=creature_orc }
+	581.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	590.1.1={
+		trait=being_undead
+		religion=voidfarer
+	}
+	700.5.20={ death=yes }
+}
+10061={
+	name=N'ot
+	dynasty=2002
+	culture=blackrock religion=orcish_fel
+	martial=6 diplomacy=7 stewardship=7 intrigue=7 learning=6
+	trait=education_intrigue_4 trait=trusting trait=arrogant trait=zealous trait=gluttonous trait=rowdy
+	mother=10060	#Dilik
+	570.1.12={birth=yes trait=creature_orc }
+	590.1.1={
+		trait=being_undead
+		religion=voidfarer
+		effect={ set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value } }
+	}
+	700.9.23={ death=yes }
+}
+
+# dynasty=2201
+10100={
+	name=Drek'thar
+	dna=drekthar_dna
+	dynasty=2201
+	culture=frostwolf religion=orcish_shamanism
+	martial=6 diplomacy=5 stewardship=6 intrigue=4 learning=6
+	trait=education_learning_3
+	trait=blind trait=magic_good_2
+	trait=brave trait=honest trait=content trait=diligent
+	546.6.26={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	566.1.1={
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	583.1.1={
+		employer=10019
+		give_council_position = councillor_court_chaplain
+	}
+	625.8.10={ death=yes }
+}
+kalthar={ #semi-lore son of Drek'Thar from Warcraft Adventures
+	name=Kal'Thar
+	dynasty=2201
+	culture=frostwolf religion=orcish_shamanism
+	father=10100
+	martial=4 diplomacy=8 stewardship=6 intrigue=6 learning=6
+	trait=education_diplomacy_1 trait=magic_good_1 trait=trusting trait=calm trait=patient
+	578.6.26={
+		birth=yes trait=creature_orc 
+	}
+	665.8.10={ death=yes }
+}
+
+# dynasty=2300
+10200={
+	name=Grommash
+	dna = grommash_dna
+	dynasty_house=house_hellscream
+	culture=warsong religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=5 diplomacy=8 stewardship=7 intrigue=5 learning=6
+	trait=education_martial_4 trait=education_martial_prowess_4
+	trait = physique_good_3
+	trait=wrathful trait=brave trait=impatient trait=lifestyle_blademaster
+	father = golmash
+	557.2.21={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes }
+	}
+	557.2.21 = {
+		effect = {
+			if = {
+				limit = { NOT = { game_start_date >= 603.1.1 } }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	572.2.21={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	577.5.12={
+		add_spouse = 10600
+	}
+	603.10.27={
+		# create_bloodline = { #Defeats Mannoroth
+			# type = grommash
+		# }
+		death = { death_reason = death_battle killer = mannoroth }
+	}	
+}
+garrosh = {
+	name = Garrosh
+	dna = garrosh_dna
+	dynasty_house = house_hellscream
+	culture = maghar
+	religion = orcish_shamanism
+	martial=8 diplomacy=5 stewardship=7 intrigue=5 learning=6
+	trait=education_martial_4 trait=education_martial_prowess_4
+	trait=wrathful trait=impatient trait=brave
+	trait = physique_good_3
+	father = 10200
+	mother = 10600
+	581.5.15 = {
+		birth = yes trait = creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	581.5.15 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	609.12.25={
+		employer=10021
+	}
+	614.12.23 = {
+		death = {
+			death_reason = death_duel
+			killer = 10021
+		}
+	}
+}
+golmash = {
+	name = Golmash
+	dynasty_house = house_hellscream
+	culture = warsong
+	religion = orcish_shamanism
+	martial=10 diplomacy=6 stewardship=5 intrigue=5 learning=5
+	trait = education_martial_4
+	trait = stubborn
+	trait = brave
+	trait = arrogant
+	disallow_random_traits = yes
+	505.1.1={ 
+		birth=yes
+		trait=creature_orc
+	}
+	523.1.1={
+		give_nickname = nick_the_giantslayer
+	}	
+	571.1.1={
+		death = { death_reason = death_battle }
+	}	
+}
+
+# dynasty=2400
+10250={
+	name=Nekros
+	dynasty=2400
+	culture=dragonmaw religion=orcish_fel
+	martial=6 diplomacy=4 stewardship=5 intrigue=6 learning=5
+	trait=education_martial_3
+	trait=sadistic trait=cynical trait=deceitful trait=content
+	trait=loyal # Loyal to the Dragonmaw clan
+	disallow_random_traits = yes
+	557.7.18 = {
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes } # Locked Alexstrasza away in his dungeon Grim Batol
+	}
+	575.11.4 = { # Started to become apprentice of Zuluhed
+		employer=10300 # Zuluhed the Whacked
+		effect={ add_opinion = { modifier = mentored_me_opinion target = character:10300 } }
+	}
+	577.5.26 = { # Gul'dan form other warlocks, but Nekros never joined the Shadow Council
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	585.6.6 = { add_trait = one_legged } # Nekros peg leg
+	593.2.23 = { # Battle of Grim'batol
+		death = {
+			death_reason = death_eaten
+			killer = 62400 # Alexstrasza
+		}
+	}
+}
+
+10251={
+	name=Nek'rosh
+	dynasty=2400
+	father=10250 # Nekros
+	culture=dragonmaw religion=orcish_fel
+	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=6
+	trait=physique_good_1
+	580.5.26={ birth=yes trait=creature_orc }
+	596.5.26={
+		trait=education_martial_3
+		trait=ambitious trait=diligent trait=brave trait=vengeful
+		trait=loyal
+
+		# Good warrior, and catapults
+		trait=education_martial_prowess_3 trait=military_engineer
+		effect={
+			add_trait_xp = {
+				trait = military_engineer
+				value = 50
+			}
+		}
+	}
+	608.1.23 = { # Killed by adventurers in WoW, sent by Stoutfist
+		death = {
+			death_reason = death_battle
+			killer = 23000 # Captain Stoutfist
+		}
+	}
+}
+
+# dynasty=2401
+10300={
+	name=Zuluhed
+	dynasty=2401
+	culture=dragonmaw religion=orcish_shamanism
+	martial=5 diplomacy=4 stewardship=4 intrigue=3 learning=6
+	trait=education_learning_3
+	trait=content trait=patient trait=cynical trait=temperate
+	trait=physique_good_1 trait=shrewd trait=loyal # Horde strong loyalist
+	disallow_random_traits = yes
+	530.4.8 = {
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+		give_nickname=nick_the_whacked
+	}
+	551.3.15 = { # Become shaman
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	609.1.6 = {
+		death = {
+			death_reason = death_battle
+			# Killer = Karynaku
+		}
+	}
+}
+
+# dynasty=2402
+10350={
+	name=Gorfax
+	dynasty=2402 #Angerfang
+	culture=dragonmaw religion=orcish_fel
+	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
+	trait=education_stewardship_1 trait=wrathful trait=brave trait=deceitful trait=patient 
+	579.12.6={ birth=yes trait=creature_orc }
+	582.1.1 = { employer=10300 } # First War
+	625.5.15={ death=yes }
+}
+
+garneg_charskull={
+	name=Garneg
+	dynasty=charskull
+	culture=dragonmaw religion=orcish_fel
+	martial=4 diplomacy=4 stewardship=4 intrigue=5 learning=8
+	trait=education_stewardship_1 trait=education_martial_prowess_1 trait=brave
+	579.12.6={ birth=yes trait=creature_orc }
+	582.1.1 = { employer=10300 } # First War
+	583.12.6={
+		effect = {
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+	}
+	603.1.1={
+		employer=10350
+	}
+	625.5.15={ death=yes }
+}
+
+# dynasty=2403
+10400={
+	name=Gozurmok
+	dynasty=2403
+	culture=dragonmaw religion=orcish_fel
+	martial=4 diplomacy=6 stewardship=6 intrigue=7 learning=8
+	trait=education_learning_1 trait=torturer trait=paranoid trait=wrathful 
+	trait=brave trait=lunatic_1 
+	580.5.25={ birth=yes trait=creature_orc }
+	582.1.1 = { employer=10300 } # First War
+	626.7.31={ death=yes }
+}
+
+# dynasty=2404
+10450={
+	name=Somurrek
+	dynasty=2404
+	culture=dragonmaw religion=orcish_fel
+	martial=7 diplomacy=7 stewardship=8 intrigue=7 learning=6
+	trait=education_intrigue_2 trait=arbitrary trait=generous trait=brave trait=wounded_1 
+	580.6.10={ birth=yes trait=creature_orc }
+	582.1.1 = { employer=10300 } # First War
+	675.6.26={ death=yes }
+}
+
+# dynasty=2405
+10500={
+	name=Ragnok
+	dynasty=2405
+	culture=dragonmaw religion=orcish_fel
+	martial=5 diplomacy=5 stewardship=6 intrigue=5 learning=4
+	trait=education_stewardship_2 trait=sadistic trait=lazy trait=paranoid trait=chaste 
+	579.8.10={ birth=yes trait=creature_orc }
+	582.1.1 = { employer=10300 } # First War
+	665.7.29={ death=yes }
+}
+
+10550={
+	name=Jubei'thos
+	dynasty=2406
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=4 stewardship=7 intrigue=6 learning=5
+	trait=education_martial_4 trait=education_martial_prowess_2
+	trait=arbitrary trait=paranoid trait=ambitious trait=zealous trait=lifestyle_blademaster
+	disallow_random_traits = yes
+	550.5.18={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	590.1.1={ trait = being_demon }
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+# dynasty=2149
+10555={
+	name=Tharil'zun
+	dynasty=2149
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=5 stewardship=5 intrigue=5 learning=5
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=brave trait=cynical trait=sadistic trait=arbitrary
+	disallow_random_traits = yes
+	555.3.11={ birth=yes trait=creature_orc }
+	570.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	582.1.1={
+		employer=10002 #Dal'rend
+	}
+	606.2.23={
+		trait=being_undead
+		effect={ set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value } }
+	}
+	611.2.23={ death=yes }
+}
+# dynasty=2145
+10560={
+	name=Malkorok
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=4 stewardship=5 intrigue=5 learning=8
+	trait=education_martial_3 trait=diligent trait=zealous trait=strong trait=brave trait=arbitrary
+	disallow_random_traits = yes
+	555.12.6={ 
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	570.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	600.1.1={ religion=orcish_shamanism }
+	615.8.3={ death=yes }
+}
+# dynasty=2290
+10565={
+	name=Koruk
+	dynasty=2290
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=5 stewardship=8 intrigue=5 learning=5
+	trait=education_martial_2	trait=just trait=brave trait=content
+	510.9.15={ birth=yes trait=creature_orc }
+	570.8.22={ death=yes }
+}
+10566={
+	name=Broxigar
+	dynasty=2290
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=5 stewardship=7 intrigue=4 learning=7
+	trait=education_martial_3 trait=education_martial_prowess_4 trait=strong trait=brave trait=physique_good_3 trait=humble 
+	disallow_random_traits = yes
+	father=10565	#Koruk
+	550.7.6={ 
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	570.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_5_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_5
+		# trait=physical_lifestyle_strength_5
+	}
+	587.1.1={
+		religion=orcish_shamanism
+	}
+	606.2.1={ 
+		death= { 
+			death_reason=death_vanished #thrown ten thousand years into the past
+		} 
+	}
+}
+10567={
+	name=Varok
+	dynasty=2290
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=5 stewardship=7 intrigue=4 learning=7
+	trait=education_martial_3 trait=education_martial_prowess_3
+	trait=diligent trait=brave trait=strong trait=just trait=patient trait=physique_good_3
+	disallow_random_traits = yes
+	father=10565	#Koruk
+	560.10.18={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	576.1.1={
+		add_spouse=remda
+		effect={
+			if = { limit = { character:remda = { is_alive = yes } } set_relation_soulmate = character:remda }
+		}
+	}
+	580.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	583.1.1 = {
+		employer = 10000
+	}
+	586.2.1 = {
+		employer = 10050 #Orgrim
+	}
+	587.1.1={
+		religion=orcish_shamanism
+	}
+	601.11.1={
+		employer=10021
+	}
+	616.10.1={
+		death = {
+			death_reason = death_duel
+			killer = 42076 #Sylvanas
+		}
+	}
+}
+remda={
+	name=Remda
+	female=yes
+	culture=blackrock religion=orcish_shamanism
+	trait=education_diplomacy_2 trait=diligent trait=paranoid trait=just
+	560.10.18={
+		birth=yes trait=creature_orc
+	}
+	582.1.9={ death=yes }
+}
+dranosh={
+	name=Dranosh
+	dynasty=2290
+	culture=maghar religion=orcish_shamanism
+	martial=7 diplomacy=8 stewardship=5 intrigue=4 learning=6
+	trait=education_martial_3 trait=education_martial_prowess_3 trait=diligent trait=brave trait=strong trait=just trait=gregarious
+	disallow_random_traits = yes
+	father=10567	#Varok
+	mother=remda
+	580.10.18={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	581.5.15 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	590.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	610.1.15={
+		trait = being_undead
+		religion = death_god
+		culture = scourge
+	}
+	610.12.8={
+		death = {
+			death_reason = death_battle
+			killer = 10567
+		}
+	}
+}
+
+# dynasty=2357
+10570={
+	name=Sevine
+	female=yes
+	dynasty=2357
+	culture=blackrock religion=orcish_fel
+	martial=5 diplomacy=5 stewardship=6 intrigue=6 learning=8
+	trait=education_learning_3 trait=beauty_good_3
+	trait=diligent trait=deceitful trait=lustful trait=patient
+	disallow_random_traits = yes
+	563.3.14={ birth=yes trait=creature_orc }
+	580.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_magic_trait_value } }
+		learn_language=language_eredun
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	604.1.1={
+		trait=being_demon #received a third of the nathrezim's amulet
+		effect={
+			add_opinion = { modifier = loyal_servant target = character:430600 } #Razelikh
+		}
+	}
+	609.1.9={ death=yes }
+}
+
+# Lowborn
+10600={ # Grom's Mate, mother of Garrosh
+	name=Golka
+	female=yes	
+	#dynasty=2300
+	culture=maghar religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=6 diplomacy=6 stewardship=7 intrigue=6 learning=6
+	trait=education_martial_2
+	trait=brave trait=gregarious trait=compassionate trait=diligent
+	disallow_random_traits = yes
+	556.10.5={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	556.10.5={
+		culture=warsong
+	}
+	579.1.9 ={ death=yes }
+}
+
+# dynasty=2149
+10610={
+	name=Rexxar
+	dna=rexxar_dna
+	dynasty=2700
+	culture=moknathal religion=orcish_shamanism
+	father=leoroxx
+	martial=5 diplomacy=7 stewardship=5 intrigue=3 learning=4
+	trait=education_martial_4 trait=education_martial_prowess_3 trait=lifestyle_hunter trait=lifestyle_traveler
+	trait=temperate trait=generous trait=patient trait=just
+	561.3.25={
+		birth=yes trait=creature_orc
+		#trait = blood_ogre
+		effect = {
+			make_important_lore_character_effect = yes
+			learn_language = language_ogre
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 50
+			}
+			add_character_modifier = {
+				modifier = ep2_beastmaster_modifier
+			}
+		}
+	}
+	583.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 50
+			}
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = falconer
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_dexterity_4
+		employer=10000	#Blackhand
+	}
+	#586.2.1={ employer=10200 } #Grommash
+	593.1.1={	# Only trusts beasts from thereon out
+		remove_trait=trusting
+		remove_trait=content
+		trait=reclusive
+	}
+	603.1.1={
+		#employer=10021	#Go'el
+		effect={
+			set_relation_friend = character:500182 # Chen Stormstout
+			set_relation_friend = character:68100 # Rokhan
+			add_trait_xp = {
+				trait = lifestyle_traveler
+				track = danger
+				value = 50
+			}
+		}
+	}
+	605.5.19 = {
+		trait=adventurer #Becomes a veteran adventurer after getting landed
+		add_prestige = 250
+	}
+	606.4.22={
+		give_nickname=nick_champion_of_the_horde
+		remove_trait=education_martial_prowess_3
+		add_trait=education_martial_prowess_4
+		add_prestige = 1000
+	}
+	635.3.10={ death=yes }
+}
+leoroxx={
+	name=Leoroxx
+	dynasty=2700
+	culture=moknathal religion=orcish_shamanism
+	martial=5 diplomacy=7 stewardship=5 intrigue=3 learning=4
+	trait=education_martial_4 trait=education_martial_prowess_3 trait=lifestyle_hunter
+	trait=temperate trait=stubborn trait=just
+	538.3.25={
+		birth=yes trait=creature_orc
+		#trait = blood_ogre
+		effect = {
+			make_important_lore_character_effect = yes
+			learn_language = language_ogre
+			add_trait_xp = {
+				trait = lifestyle_hunter
+				track = hunter
+				value = 50
+			}
+		}
+	}
+	583.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	635.3.10={ death=yes }
+}
+
+# Garona
+10620={
+	name=Garona
+	dynasty=2758
+	dna=garona_dna
+	female=yes
+	culture=shadowmoon religion=orcish_fel
+	sexuality = heterosexual
+	martial=7 diplomacy=4 stewardship=7 intrigue=8 learning=6
+	trait=education_intrigue_4 trait=education_martial_prowess_3
+	trait=intellect_good_2 trait=content trait=humble trait=patient trait=chaste trait = legitimized_bastard
+	559.7.13={
+		birth=yes trait=creature_orc
+		#trait = blood_draenei
+		effect = {
+			make_important_lore_character_effect = yes
+			harem_character_effect = yes
+			add_character_modifier = {
+				modifier = secrets_of_language_modifier #had a talent for learning new languages
+			}
+		}
+	}
+	576.1.1={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_dexterity_4
+		# trait=physical_lifestyle_strength_4
+		learn_language = language_draenei
+	}
+	583.1.1={
+		employer=10015
+		give_council_position = councillor_spymaster
+		learn_language=language_common
+	}
+	586.10.1={
+		trait=murderer #Assassinated King Llane
+	}
+	590.2.19={	# Gul'dan is dead
+		religion=orcish_shamanism
+		trait=just
+		remove_trait=trusting
+		remove_trait=content
+		employer=270464	#Itesh, Lord of d_orsis	...since she tries to kill Cho'gall
+	}
+	609.12.25={
+		remove_hook={
+			target = character:52000 #Cho'gall
+			type = mindcontrol_hook
+		}
+	}
+	625.4.13={ death=yes }
+}
+
+# dynasty=2301
+10650={ # Drum Fel
+	name=Drum
+	dynasty=2301
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=7 diplomacy=5 stewardship=6 intrigue=6 learning=7
+	trait=education_martial_2
+	trait=brave trait=physique_good_1 trait=just trait=diligent trait=wrathful
+	disallow_random_traits = yes
+	566.10.5={ birth=yes trait=creature_orc }
+	583.1.1={
+		add_spouse=10700 #Korin
+		effect={
+			set_relation_soulmate = character:10700 #Korin
+		}
+	}
+	605.5.1 = {
+		effect={
+			appoint_court_position = {
+				recipient = character:gregory_victor
+				court_position = court_physician_court_position
+			}
+		}
+	}
+	635.11.12 ={ death=yes }
+}
+
+10651={ # Gharsul the Remorseless
+	name=Gharsul
+	dynasty=2750
+	culture=blackrock religion=orcish_fel
+	martial=5 diplomacy=5 stewardship=7 intrigue=6 learning=7
+	trait=education_learning_3
+	trait=brave trait=physique_good_1 trait=just trait=diligent trait=wrathful
+	disallow_random_traits = yes
+	584.10.5={ birth=yes trait=creature_orc }
+	600.11.3={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value } }
+	}
+	603.9.27={
+		trait = being_undead
+		effect={ change_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable add = wc_perks_given_for_magical_level_up_value } }
+		religion = death_god
+		give_nickname = nick_the_remorseless
+	}
+	615.11.12 ={ death=yes }
+}
+
+10652={ # Kohor
+	name=Kohor
+	dynasty=2751
+	culture=burning_blade religion=orcish_fel
+	martial=5 diplomacy=6 stewardship=5 intrigue=6 learning=7
+	trait=education_learning_3
+	trait=arrogant trait=lustful trait=gluttonous trait=wrathful
+	disallow_random_traits = yes
+	583.11.5={ birth=yes trait=creature_orc }
+	600.11.3={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value } }
+	}
+	609.1.1 ={ death=yes }
+}
+
+10653={ # Jugkar Grim'rod
+	name=Jugkar
+	dynasty=2752
+	culture=burning_blade religion=orcish_fel
+	martial=5 diplomacy=6 stewardship=5 intrigue=6 learning=7
+	trait=education_learning_3
+	trait=arrogant trait=lustful trait=gluttonous trait=wrathful
+	disallow_random_traits = yes
+	583.11.5={ birth=yes trait=creature_orc }
+	600.11.3={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value } }
+	}
+	609.1.1 ={ death=yes }
+}
+
+10654={ # Neeru Fireblade
+	name=Neeru
+	dynasty=2753
+	father=xerash_fireblade
+	culture=burning_blade religion=orcish_fel
+	martial=4 diplomacy=7 stewardship=6 intrigue=6 learning=6
+	trait=education_diplomacy_4
+	trait=deceitful trait=humble trait=patient trait=chaste
+	trait = charming
+	disallow_random_traits = yes
+	575.1.5={ birth=yes trait=creature_orc }
+	596.1.9={
+		effect={ 
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_fel }
+		}
+		religion = orcish_shamanism
+	}
+	601.11.1={
+		employer=10021
+	}
+	613.9.21={ death=yes }
+}
+
+10655={ # Thork of Crossroads
+	name=Thork
+	dynasty=2754
+	culture=frostwolf religion=orcish_shamanism
+	martial=4 diplomacy=7 stewardship=6 intrigue=6 learning=6
+	trait=education_stewardship_4 trait=education_martial_prowess_2
+	trait=generous trait=brave trait=physique_good_1 trait=just trait=diligent
+	trait = pensive
+	disallow_random_traits = yes
+	571.2.7={ birth=yes trait=creature_orc }
+	587.2.8={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	611.1.1={ death=yes }
+}
+10656={ # Rehgar Earthfury
+	name=Rehgar
+	dynasty=2755
+	culture=frostwolf religion=orcish_shamanism
+	martial=6 diplomacy=4 stewardship=7 intrigue=4 learning=5
+	trait=education_stewardship_4 trait=education_martial_prowess_3
+	trait=compassionate trait=temperate trait=patient trait=zealous
+	disallow_random_traits = yes
+	555.3.11={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	571.3.11={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	583.1.1={
+		employer=10019
+	}
+	602.3.15={
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	607.1.1={
+		effect = {
+			if = {
+				limit = { NOT = { game_start_date >= 609.12.24 } }
+				imprison = {
+					target = character:42211	#Valeera
+					type = dungeon
+				}
+				imprison = {
+					target = character:broll_bearmantle
+					type = dungeon
+				}
+			}
+		}
+	}
+	607.10.1={
+		effect = {
+			if={
+				limit = { NOT = { game_start_date >= 609.12.24 } }
+				imprison = {
+					target = character:8	#Varian
+					type = dungeon
+				}
+			}
+		}
+	}
+	620.1.1={ death=yes }
+}
+
+10657={ # Kash'drakor
+	name=Kash'drakor
+	dynasty=2756
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=4 stewardship=5 intrigue=3 learning=5
+	trait=education_martial_3 trait=education_martial_prowess_3
+	trait=physique_good_3 trait=honest trait=wrathful trait=zealous
+	disallow_random_traits = yes
+	541.5.4={ birth=yes trait=creature_orc }
+	557.5.4={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	598.2.5={ death=yes }
+}
+10658={ # Nazgrel
+	name=Nazgrel
+	dna=nazgrel_dna
+	dynasty=2756
+	father=10657
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=5 learning=5
+	trait=education_martial_3 trait=education_martial_prowess_2 trait=viking
+	trait=honest trait=zealous trait=intellect_good_2 trait=chaste trait=compassionate
+	disallow_random_traits = yes
+	564.1.12={ 
+		birth=yes trait=creature_orc 
+		effect = { make_important_lore_character_effect = yes } 
+	}
+	580.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	583.1.1={
+		employer=10019
+	}
+	601.11.1={
+		employer=10021
+	}
+	603.1.1={
+		culture = durotaric
+		effect={
+			add_opinion = { modifier = loyal_servant target = character:10021 }
+		}
+	}
+	620.1.1={ death=yes }
+}
+10659={ # Iskar
+	name=Iskar
+	dynasty=2757
+	culture=warsong religion=orcish_shamanism
+	martial=6 diplomacy=3 stewardship=5 intrigue=4 learning=5
+	trait=education_martial_3
+	trait=gregarious trait=zealous trait=wrathful trait=diligent
+	disallow_random_traits = yes
+	561.1.19={ birth=yes trait=creature_orc }
+	561.1.19={
+		effect = {
+			if = {
+				limit = { NOT = { game_start_date >= 590.1.1 } }
+				purge_historical_character_effect = yes
+			}
+		}
+	}
+	577.1.19={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_dexterity_2
+	}
+	620.1.1={ death=yes }
+}
+
+#Korin Fel
+10700={
+	name=Korin
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	martial=7 diplomacy=8 stewardship=7 intrigue=5 learning=4
+	trait=education_diplomacy_2
+	trait=chaste trait=compassionate	
+	566.9.6={ birth=yes }
+	635.1.28={ death=yes }
+}
+
+10701={
+	name=Ugratil
+	dynasty=2000
+	culture=blackrock religion=orcish_shamanism
+	martial=7 diplomacy=8 stewardship=7 intrigue=5 learning=4
+	trait=education_diplomacy_2
+	trait=chaste trait=compassionate
+	522.9.6={ birth=yes trait=creature_orc }
+	560.1.28={ death=yes }
+}
+
+arnak_blademaster = {
+	name=Arnak
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=8 diplomacy=2 stewardship=3 intrigue=4 learning=2
+	trait=education_martial_3 trait=physique_good_1 trait=education_martial_prowess_3
+	trait=brave trait=arrogant trait=vengeful trait=diligent trait=lifestyle_blademaster
+	522.3.10 = { birth=yes trait=creature_orc }
+	576.7.1 = {
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	582.4.15 = { # Injured and let Samuro rule
+		add_trait = disfigured
+		add_trait = maimed
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	586.6.4 = { death = yes }
+}
+
+kamgak_blademaster = {
+	name=Kamgak
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=9 diplomacy=1 stewardship=2 intrigue=6 learning=1
+	trait=education_martial_1 trait=physique_good_1 trait=education_martial_prowess_2
+	trait=lustful trait=wrathful trait=callous trait=diligent trait=lifestyle_blademaster
+	trait=loyal
+	father=arnak_blademaster
+	542.6.12 = { birth=yes trait=creature_orc }
+	564.6.6 = { # Raid on draenei village
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	586.10.3 = { # Killed during the siege of Stormwind
+		death = {
+			death_reason = death_battle
+			killer = 1008 # Anduin Lothar
+		}
+	}
+}
+
+samuro_blademaster = {
+	name=Samuro
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=7 diplomacy=2 stewardship=3 intrigue=8 learning=2
+	trait=education_martial_2 trait=physique_good_3 trait=education_martial_prowess_4
+	trait=brave trait=just trait=vengeful trait=diligent trait=lifestyle_blademaster
+	father=arnak_blademaster
+	disallow_random_traits = yes
+	553.4.7={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	580.9.14={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+	}
+	596.1.9={
+		religion = orcish_shamanism
+		effect={
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+	}
+	606.4.22={
+		set_relation_friend = character:68001 #Voljin
+	}
+	615.6.9 = { death = yes }
+}
+
+lantresor_blademaster = {
+	name=Lantresor
+	dynasty=of_the_blade
+	culture=burning_blade religion=orcish_fel
+	martial=7 diplomacy=4 stewardship=3 intrigue=6 learning=3
+	trait=education_martial_3 trait=physique_good_1 trait=education_martial_prowess_4
+	trait=brave trait=just trait=cynical trait=temperate trait=lifestyle_blademaster
+	trait=disloyal
+	father=kamgak_blademaster
+	disallow_random_traits = yes
+	565.1.2 = {
+		birth=yes trait=creature_orc
+		#trait = blood_draenei
+		effect = { make_important_lore_character_effect = yes }
+	}
+	580.6.15 = {
+		add_trait_xp = {
+			trait = lifestyle_blademaster
+			value = 50
+		}
+	}
+	596.1.9 = { religion = orcish_shamanism }
+	670.1.1 = { death = yes }
+}
+
+blondy={
+	name=Blondy
+	culture=blackrock religion=orcish_shamanism
+	martial=7 diplomacy=6 stewardship=7 intrigue=5 learning=5
+	trait=education_martial_3
+	trait=wrathful trait=callous trait=brave
+	566.9.6={ birth=yes trait=creature_orc }
+	583.1.1={
+		employer = 10050 #Orgrim Doomhammer
+	}
+	630.1.28={ death=yes }
+}
+stabby={
+	name=Stabby
+	culture=blackrock religion=orcish_shamanism
+	martial=7 diplomacy=6 stewardship=7 intrigue=9 learning=4
+	trait=education_intrigue_3
+	trait=deceitful trait=paranoid trait=content
+	566.9.6={ birth=yes trait=creature_orc }
+	583.1.1={
+		employer = 10050 #Orgrim Doomhammer
+	}
+	630.1.28={ death=yes }
+}
+
+utok_scratcher={
+	name=Utok
+	dynasty=scratcher
+	culture=blackrock religion=orcish_shamanism
+	martial=5 diplomacy=7 stewardship=7 intrigue=5 learning=9
+	trait=education_learning_4
+	trait=temperate trait=patient trait=journaller trait=intellect_good_2
+	565.9.6={ birth=yes trait=creature_orc }
+	583.1.1={
+		employer = 10050 #Orgrim Doomhammer
+		effect = {
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	630.1.28={ death=yes }
+}
+
+thok={
+	name=Thok
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=6 stewardship=5 intrigue=6 learning=4
+	trait=education_martial_2
+	trait=intellect_bad_2 trait=physique_good_2 trait=gluttonous trait=brave trait=callous
+	563.1.10={ birth=yes trait=creature_orc }
+	581.1.10={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	630.1.31={ death=yes }
+}
+
+eitrigg={
+	name=Eitrigg
+	culture=blackrock religion=orcish_fel
+	martial=7 diplomacy=5 stewardship=6 intrigue=4 learning=8
+	trait=education_martial_3 trait=education_martial_prowess_4 trait=diligent trait=brave trait=strong trait=just trait=patient
+	disallow_random_traits = yes
+	554.10.18={ 
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	580.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	583.1.1 = {
+		employer = 10000
+	}
+	586.2.1 = {
+		employer = 10050 #Orgrim
+	}
+	587.1.1={
+		religion=orcish_shamanism
+	}
+	599.1.1={
+		effect = {
+			set_relation_best_friend = character:60014 #Tirion Fordring
+			set_relation_blood_brother = character:60014 #Eitrigg proclaimed that Tirion and he were brothers, bound by blood and honor.
+		}
+	}
+	601.11.1={
+		employer=10021
+	}
+	630.1.31={ death=yes }
+}
+ariok={
+	name=Ariok
+	culture=blackrock religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=6 intrigue=4 learning=8
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=diligent trait=brave trait=strong trait=just trait=patient
+	father=eitrigg
+	disallow_random_traits = yes
+	584.10.18={ 
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	590.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_4_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_4
+		# trait=physical_lifestyle_strength_4
+	}
+	614.1.21={
+		trait=dire trait=berserker
+	}
+	660.1.31={ death=yes }
+}
+
+marez_cowl={
+	name=Marez
+	female=yes
+	dynasty=cowl
+	culture=frostwolf religion=orcish_fel
+	martial=5 diplomacy=8 stewardship=7 intrigue=8 learning=7
+	trait=education_intrigue_3
+	trait=deceitful trait=patient trait=diligent
+	574.9.6={ birth=yes trait=creature_orc }
+	587.1.1={
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	} 
+	600.1.1={
+		employer = 58002 #Aliden Perenolde
+		learn_language = language_common
+		religion=holy_light
+		effect = { make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_fel } }
+	}
+	604.4.17={
+		employer=58016 #Lord Falconcrest
+	}
+	630.1.28={ death=yes }
+}
+
+genjuros={
+	name=Genjuros
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=4 stewardship=5 intrigue=5 learning=3
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=lifestyle_blademaster
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+haomarush={
+	name=Haomarush
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=4 stewardship=5 intrigue=5 learning=3
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=lifestyle_blademaster
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+khanzo={
+	name=Khanzo
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=4 stewardship=5 intrigue=5 learning=3
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=lifestyle_blademaster
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.1.1={
+		employer = 10550 #Jubei'thos
+	}
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+mazrigos={
+	name=Mazrigos
+	culture=blackrock religion=orcish_fel
+	martial=6 diplomacy=4 stewardship=5 intrigue=4 learning=6
+	trait=education_learning_2
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect = {
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+throk_feroth={
+	name=Throk'Feroth
+	culture=blackrock religion=orcish_fel
+	martial=6 diplomacy=4 stewardship=5 intrigue=4 learning=6
+	trait=education_learning_2 trait=viking
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect = {
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.10.21={
+		death = {
+			death_reason = death_battle
+			killer = 60003
+		}
+	}
+}
+slave_master={
+	name=Mathog
+	dynasty=slavemaster
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=3 stewardship=5 intrigue=6 learning=3
+	trait=education_martial_3 trait=education_martial_prowess_2 trait=reaver trait=viking trait=overseer
+	trait=sadistic trait=wrathful trait=arbitrary trait=physique_good_2
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = reaver
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.1.15={
+		death = {
+			death_reason = death_battle
+			killer = 60003 #Arthas
+		}
+	}
+}
+
+master_kang={
+	name=Kang
+	culture=frostwolf religion=orcish_shamanism
+	martial=6 diplomacy=4 stewardship=5 intrigue=5 learning=6
+	trait=education_intrigue_2 trait=diligent trait=stubborn trait=patient
+	563.9.6={ birth=yes trait=creature_orc }
+	566.5.18={
+		effect = {
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		employer = 58018 #Jorach
+		add_opinion = { modifier = loyal_servant target = character:58018 }
+		learn_language = language_common
+	}
+	657.4.10 = { death = yes }
+}
+
+captain_galvangar={
+	name=Galvangar
+	culture=frostwolf religion=orcish_shamanism
+	martial=6 diplomacy=4 stewardship=5 intrigue=5 learning=6
+	trait=education_martial_3 trait=lifestyle_blademaster trait=physique_good_1 trait=education_martial_prowess_2 trait=diligent trait=stubborn trait=patient
+	553.9.6={ birth=yes trait=creature_orc }
+	568.5.18={
+		effect = {
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	585.1.1={
+		employer = 10100 #Drek'thar
+	}
+	657.4.10 = { death = yes }
+}
+mogrin={
+	name=Mogrin
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_martial_1 trait=education_martial_prowess_1
+	trait=just trait=brave trait=stubborn trait=loyal
+	574.2.12={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	605.4.22={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+morg_wolfsong={
+	name=Morg
+	dynasty=wolfsong
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_learning_2
+	trait=generous trait=zealous trait=stubborn
+	564.2.12={ birth=yes trait=creature_orc }
+	576.1.1={
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	605.4.23={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+karg_bloodfury={
+	name=Karg
+	dynasty=bloodfury
+	culture=frostwolf religion=orcish_shamanism
+	sexuality=heterosexual
+	trait=education_martial_1 trait=education_martial_prowess_1
+	trait=just trait=brave trait=stubborn
+	564.2.12={ birth=yes trait=creature_orc }
+	581.12.30={ death=yes }
+}
+
+sarrak={
+	name=Sarrak
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	sexuality=heterosexual
+	530.1.1={ birth=yes trait=creature_orc }
+	562.6.6={ death=yes }
+}
+ryal={
+	name=Ryal
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	mother=sarrak
+	sexuality=heterosexual
+	560.1.1={ birth=yes trait=creature_orc }
+	580.1.1={
+		culture=maghar
+	}
+	582.6.6={ death=yes }
+}
+aggralan={
+	name=Aggralan
+	female=yes
+	culture=maghar religion=orcish_shamanism
+	mother=ryal
+	sexuality=heterosexual
+	trait=education_learning_3
+	trait=patient trait=brave trait=stubborn
+	582.1.1={
+		birth=yes trait=creature_orc
+		effect = { make_important_lore_character_effect = yes }
+	}
+	582.1.1 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes
+			}
+		}
+	}
+	602.1.1={
+		effect = {	
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	640.6.6={ death=yes }
+}
+durak={
+	name=Durak
+	culture=durotaric religion=orcish_shamanism
+	father=10021 # Thrall
+	mother=aggralan
+	613.1.1={ birth=yes trait=creature_orc }
+	700.6.6={ death=yes }
+}
+rehze={
+	name=Rehze
+	female=yes
+	culture=durotaric religion=orcish_shamanism
+	father=10021 # Thrall
+	mother=aggralan
+	614.2.1={ birth=yes trait=creature_orc }
+	700.6.6={ death=yes }
+}
+
+garthok={
+	name=Gar'Thok
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=5 learning=5
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=honest trait=zealous trait=brave trait=generous
+	566.1.12={
+		birth=yes trait=creature_orc
+	}
+	580.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	603.8.29={
+		employer=10658 #Nazgrel
+	}
+	620.1.1={ death=yes }
+}
+grunt_maug={
+	name=Maug
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=5 learning=5
+	trait=education_martial_1 trait=education_martial_prowess_1
+	trait=honest trait=zealous trait=chaste #trait=profession_blacksmith
+	576.1.12={
+		birth=yes trait=creature_orc
+	}
+	580.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	601.11.1={employer=10021} # Go'el[2200]
+	603.1.1={
+		culture = durotaric
+	}
+	620.1.1={ death=yes }
+}
+#Warcraft Adventures
+baelgun_frostwolf={ #Semi-canon. Tribal Elder and historian of the Frostwolf clan
+	name=Baelgun
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_learning_3 trait=journaller
+	trait=stubborn trait=honest trait=diligent
+	549.6.26={ birth=yes trait=creature_orc }
+	585.1.1={
+		employer = 10100 #Drek'thar
+	}
+	625.8.10={ death=yes }
+}
+zargil={ #Semi-canon. Tribal Elder of the Frostwolf clan
+	name=Zar'gil
+	culture=frostwolf religion=orcish_shamanism
+	547.6.26={ birth=yes trait=creature_orc }
+	585.1.1={
+		employer = 10100 #Drek'thar
+	}
+	625.8.10={ death=yes }
+}
+gathras={ #Semi-canon. Tribal Elder of the Frostwolf clan
+	name=Gath'ras
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	542.6.26={ birth=yes trait=creature_orc }
+	585.1.1={
+		employer = 10100 #Drek'thar
+	}
+	625.8.10={ death=yes }
+}
+
+palkar={ #a young orc of the Frostwolf clan who serves as Drek'Thar's personal attendant
+	name=Palkar
+	culture=frostwolf religion=orcish_shamanism
+	martial=4 diplomacy=5 stewardship=7 intrigue=5 learning=5
+	trait=education_stewardship_3 trait=calm trait=patient trait=content
+	father=zargil
+	585.6.26={ birth=yes trait=creature_orc }
+	597.1.1={
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_air_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			set_variable = { name = wc_elemental_earth_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+			add_opinion = { modifier = mentored_me_opinion target = character:10100 }
+		}
+		employer = 10100 #Drek'thar
+		give_council_position = councillor_steward
+	}
+	665.8.10={ death=yes }
+}
+
+narg_snarl = { #From the RPG books
+	name = Narg
+	dynasty = snarl
+	religion = orcish_fel culture = blackrock
+	trait=education_stewardship_2 trait=arrogant trait=callous trait=wrathful trait=bossy
+	566.9.11 = {
+		birth = yes
+		trait = creature_orc
+	}
+	583.1.1 = {
+		employer = 10000
+	}
+	586.2.1 = {
+		employer = 10050 #Orgrim
+	}
+	588.1.1 = {
+		remove_trait=arrogant
+		add_trait=humble # humbled by peons
+		remove_trait=education_stewardship_2
+		add_trait=education_stewardship_3
+	}
+	590.12.1 = {
+		trait = being_undead
+	}
+	680.12.30={ death=yes }
+}
+
+kruk_ironjaw={
+	name=Kruk
+	dynasty=ironjaw
+	culture=blackrock religion=orcish_shamanism
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=wrathful trait=brave trait=stubborn
+	539.2.12={ birth=yes trait=creature_orc }
+	576.1.30={ death=yes }
+}
+kug_ironjaw={
+	name=Kug
+	dynasty=ironjaw
+	culture=blackrock religion=orcish_shamanism
+	father=kruk_ironjaw
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=just trait=brave trait=stubborn
+	569.2.12={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	605.9.9={
+		religion = argent
+	}
+	608.12.30={
+		death = {
+			death_reason = death_execution #Killed by the orc death knight pc
+		}
+	}
+}
+duroc_ironjaw={
+	name=Duroc
+	dynasty=ironjaw
+	culture=blackrock religion=orcish_shamanism
+	father=kruk_ironjaw
+	trait=education_diplomacy_1
+	trait=just trait=craven trait=stubborn
+	574.2.12={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	680.12.30={ death=yes }
+}
+
+tharbek = { #a subchieftain under Orgrim Doomhammer during the Second War
+	name = Tharbek
+	religion = orcish_shamanism culture = blackrock
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=brave trait=impatient trait=wrathful trait=aggressive_attacker
+	568.9.11 = {
+		birth = yes trait = creature_orc
+	}
+	583.1.1 = {
+		employer = 10050 #Orgrim
+	}
+	589.2.1={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+
+uglaz={ #Semi-canon character from Warcraft Adventures
+	name=Uglaz
+	culture=blackrock religion=orcish_fel
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=deceitful trait=callous
+	564.2.12={ birth=yes trait=creature_orc }
+	582.1.1={
+		employer=10002 #Dal'rend
+	}
+	628.2.19={ death=yes }
+}
+
+gathilzogg={ #one of the Warlords of the Blackrock clan
+	name=Gath'Ilzogg
+	culture=blackrock religion=orcish_fel
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=deceitful trait=callous trait=brave
+	564.2.12={ birth=yes trait=creature_orc }
+	580.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	582.1.1={
+		employer=10002 #Dal'rend
+	}
+	589.11.1={
+		effect = {	
+			add_hook_no_toast = {
+				target = character:targorr_the_dread
+				type = loyalty_hook
+			}
+			#appoint_court_position = {
+			#	recipient = character:targorr_the_dread
+			#	court_position = executioner_court_position
+			#}
+		}
+	}
+	606.2.23={
+		effect={ set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value } }
+	}
+	628.2.19={ death=yes }
+}
+targorr_the_dread={ #served the Blackrock orcs under Gath'Ilzogg as supreme executioner
+	name=Targorr
+	culture=blackrock religion=orcish_fel
+	trait=education_intrigue_2 trait=education_martial_prowess_2
+	trait=deceitful trait=sadistic trait=arbitrary trait=torturer
+	give_nickname = nick_the_dread
+	564.2.12={ birth=yes trait=creature_orc }
+	580.1.1={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	582.1.1={
+		employer=10002 #Dal'rend
+	}
+	589.11.1={
+		employer = gathilzogg
+	}
+	608.1.8={ death=yes }
+}
+
+jergosh_the_invoker={
+	name=Jergosh
+	culture=shadowmoon religion=orcish_fel
+	martial=5 diplomacy=6 stewardship=4 intrigue=5 learning=3
+	trait=education_intrigue_2 trait=deceitful trait=impatient trait=wrathful
+	551.1.1={ birth=yes trait=creature_orc }
+	567.1.1={
+		effect = {
+			make_important_lore_character_effect = yes
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+		learn_language = language_eredun
+		give_nickname = nick_the_invoker
+	}
+	583.1.1={
+		employer = 10015
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	608.2.19={ death=yes }
+}
+
+urdan={
+	name=Ur'dan
+	culture=shadowmoon religion=orcish_fel
+	martial=3 diplomacy=6 stewardship=7 intrigue=5 learning=5
+	trait=education_stewardship_2 trait=patient trait=humble trait=calm
+	561.1.1={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+		learn_language = language_eredun
+		learn_language = language_nathrezim
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }	#Gul'dan
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	603.1.1={
+		effect = {
+			if = { limit = { character:banehollow = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:banehollow } }
+		}
+	}
+	605.1.24={
+		employer = 10018 #Fel'dan
+	}
+	608.2.19={ death=yes }
+}
+ilkrud_magthrull={
+	name=Ilkrud
+	dynasty=magthrull
+	culture=shadowmoon religion=orcish_fel
+	martial=3 diplomacy=5 stewardship=7 intrigue=5 learning=6
+	trait=education_learning_2 trait=patient trait=humble trait=lustful trait=loyal
+	561.1.1={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }	#Gul'dan
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	603.1.1={
+		effect = {
+			add_opinion = { modifier = loyal_servant target = character:athrikus_narassin }
+		}
+	}
+	608.2.19={ death=yes }
+}
+ulathek={
+	name=Ulathek
+	culture=shadowmoon religion=orcish_fel
+	martial=3 diplomacy=5 stewardship=7 intrigue=5 learning=6
+	trait=education_learning_2 trait=patient trait=humble trait=craven
+	561.1.1={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }	#Gul'dan
+		}
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	603.1.1={
+		effect = {
+			add_opinion = { modifier = loyal_servant target = character:helnurath }
+		}
+	}
+	605.1.24={
+		employer = 10018 #Fel'dan
+	}
+	608.2.19={ death=yes }
+}
+gaz_soulripper={
+	name=Gaz
+	dynasty=soulripper
+	culture=shadowmoon religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=4 intrigue=6 learning=6
+	trait=education_learning_2
+	trait=callous trait=stubborn trait=zealous
+	536.1.1={
+		birth=yes trait=creature_orc
+	}
+	552.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.6.1={
+		remove_trait = creature_orc
+		trait = being_undead
+		add_trait = creature_human
+		culture = stormreaver
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	591.12.1={
+		death = {
+			death_reason = death_battle
+			killer = 60247 #Turalyon
+		}
+	}
+}
+
+xerash_fireblade={
+	name=Xerash
+	dynasty=2753
+	culture=burning_blade religion=orcish_fel
+	martial=3 diplomacy=5 stewardship=7 intrigue=5 learning=6
+	trait=education_learning_3 trait=patient trait=humble trait=fickle
+	551.1.1={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value }
+		}
+	}
+	583.1.1={
+		employer = 10015
+	}
+	596.1.9={
+		religion = orcish_shamanism
+		effect = { make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:orcish_fel } }
+	}
+	638.2.19={ death=yes }
+}
+
+rakmar_sharpfang={ #unofficial leader of the necrolytes
+	name=Rakmar
+	dynasty=sharpfang
+	culture=shadowmoon religion=orcish_fel
+	martial=3 diplomacy=5 stewardship=7 intrigue=5 learning=6
+	trait=education_learning_3 trait=craven trait=humble trait=fickle
+	554.6.18={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect={ set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	587.6.1={
+		death = {
+			death_reason = death_punishment #slaughtered for the sake of using their energies to create the death knights
+			killer=10015 #Gul'dan
+		}
+	}
+}
+urluk_cloudkiller={
+	name=Urluk
+	dynasty=cloudkiller
+	culture=thunderlord religion=orcish_fel
+	martial=3 diplomacy=7 stewardship=5 intrigue=5 learning=6
+	trait=education_learning_1 trait=craven trait=paranoid trait=honest
+	554.6.18={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect={ 
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	583.1.1={
+		employer = 10015
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	590.2.18={
+		death = {
+			death_reason = death_punishment #killed for being frightened by the guardians of the tomb
+			killer=10015 #Gul'dan
+		}
+	}
+}
+
+ras_splinterspine={
+	name=Ras
+	dynasty=splinterspine
+	culture=bonechewer religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=4 intrigue=6 learning=6
+	trait=education_learning_2
+	trait=callous trait=stubborn trait=deceitful
+	536.1.1={
+		birth=yes trait=creature_orc
+	}
+	552.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.6.1={
+		remove_trait = creature_orc
+		trait = being_undead
+		add_trait = creature_human
+		culture = stormreaver
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	591.6.1={
+		remove_trait = creature_human
+		add_trait = creature_lich
+		religion = death_god
+		culture = scourge
+		effect={
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+			make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:burning_legion_religion }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	605.5.21={
+		employer=430400 # Balnazzar
+		religion=burning_legion_religion
+	}
+	605.6.10={
+		death = {
+			death_reason = death_battle
+			killer = 42076 # Sylvanas
+		}
+	}
+}
+rage_winterchill={
+	name=Rage
+	dynasty=winterchill
+	culture=frostwolf religion=orcish_fel
+	martial=6 diplomacy=5 stewardship=4 intrigue=6 learning=6
+	trait=education_martial_2
+	trait=callous trait=wrathful trait=zealous trait=loyal
+	536.1.1={
+		birth=yes trait=creature_orc
+	}
+	552.1.1={
+		effect={ set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_magic_trait_value } }
+	}
+	583.1.1={
+		employer = 10015
+		effect={
+			if = { limit = { character:10015 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10015 } }
+			#join_society_shadow_council_effect = yes
+			#society_rank_up = 2
+		}
+	}
+	587.6.1={
+		remove_trait = creature_orc
+		trait = being_undead
+		add_trait = creature_human
+		culture = stormreaver
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	591.6.1={
+		remove_trait = creature_human
+		add_trait = creature_lich
+		religion = burning_legion_religion
+		culture = scourge
+		effect={
+			set_variable = { name = wc_elemental_water_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	604.6.1={
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+
+gargok={
+	name=Gargok
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=6 intrigue=4 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=patient trait=diligent trait=brave
+	561.1.1={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	638.2.19={ death=yes }
+}
+krenna={
+	name=Krenna
+	female=yes
+	father=gargok
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=6 intrigue=4 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=impatient trait=wrathful trait=brave
+	579.1.1={ birth=yes trait=creature_orc }
+	597.1.1={
+		effect = {
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	610.12.23 = {
+		death = { 
+			death_reason = death_duel
+			killer = gorgonna
+		}
+	}
+}
+gorgonna={
+	name=Gorgonna
+	female=yes
+	father=gargok
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=6 intrigue=4 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=patient trait=diligent trait=brave
+	581.1.1={ birth=yes trait=creature_orc }
+	597.1.1={
+		effect = {
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	658.2.19={ death=yes }
+}
+rokaro={
+	name=Rokaro
+	culture=shattered_hand religion=orcish_shamanism
+	martial=6 diplomacy=5 stewardship=4 intrigue=7 learning=4
+	trait=education_intrigue_2 trait=education_martial_prowess_1 trait=deceitful trait=diligent trait=brave
+	565.3.25={ birth=yes trait=creature_orc }
+	577.1.1={
+		effect = {
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	605.5.19 = {
+		employer=10610 #Rexxar
+		set_relation_friend = character:10610
+	}
+	658.2.19={ death=yes }
+}
+
+mankrik={
+	name=Mankrik
+	dna=mankrik_dna
+	culture=burning_blade religion=orcish_shamanism
+	sexuality = heterosexual
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=vengeful trait=diligent trait=brave
+	trait=lifestyle_blademaster trait=rowdy
+	disallow_random_traits = yes
+	574.1.1={ birth=yes trait=creature_orc }
+	582.1.1={
+		effect = {
+			set_relation_friend = character:olgra
+		}
+	}
+	586.1.1={
+		effect = {
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_relation_soulmate = character:olgra
+			add_trait_xp = {
+				trait = lifestyle_blademaster
+				value = 50
+			}
+		}
+		add_spouse = olgra
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	603.8.29={
+		employer = 10655
+	}
+	616.1.8={
+		trait = one_eyed
+	}
+	638.2.19={ death=yes }
+}
+
+olgra={ #Mankrik's Wife
+	name=Olgra
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	sexuality = heterosexual
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=wrathful trait=vengeful trait=brave
+	trait=rowdy
+	disallow_random_traits = yes
+	574.1.1={ birth=yes trait=creature_orc }
+	586.1.1={
+		effect = {
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	603.8.29={
+		employer = 10655
+	}
+	608.1.1={
+		death = {
+			death_reason = death_battle #killed by quilboars
+		}
+	}
+}
+
+nazgrim={
+	name=Nazgrim
+	dna=nazgrim_dna
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=4 stewardship=6 intrigue=5 learning=4
+	trait=education_martial_4 trait=education_martial_prowess_2 trait=loyal
+	trait=honest trait=diligent trait=stubborn trait=brave trait=rowdy
+	disallow_random_traits = yes
+	568.1.12={
+		birth=yes trait=creature_orc
+	}
+	580.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	588.2.1={
+		employer = 10200
+		effect={
+			if = { limit = { character:10200 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10200 } }
+		}
+	}
+	611.1.12={
+		employer=garrosh
+		effect={
+			add_opinion = { modifier = loyal_servant target = character:garrosh }
+		}
+	}
+	613.12.10 = {
+		effect = {
+			if = {
+				limit = {
+					game_start_date <= 615.2.1
+				}
+				death = {
+					death_reason = death_battle # kiled by adventurers in the Siege of Orgrimmar
+				}
+			}
+		}
+	}
+	615.2.1 = {
+		trait = being_undead # brought back as a death knight during Legion
+		set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+	}
+	738.2.19={ death=yes }
+}
+
+mokvar={ #former member of the Veiled Blade
+	name=Mokvar
+	culture=dragonmaw religion=orcish_shamanism
+	martial=3 diplomacy=5 stewardship=7 intrigue=6 learning=5
+	trait=education_stewardship_3
+	trait=greedy trait=humble trait=honest trait=pensive
+	disallow_random_traits = yes
+	568.1.12={
+		birth=yes trait=creature_orc
+	}
+	608.10.28={
+		culture = durotaric
+		employer=10021
+	}
+	611.1.12={
+		employer=garrosh
+		effect={
+			add_opinion = { modifier = loyal_servant target = character:garrosh }
+		}
+	}
+	613.10.1 = {
+		give_nickname = nick_the_treasurer
+	}
+	613.12.10 = {
+		death = {
+			death_reason = death_battle # killed by adventurers in the Siege of Orgrimmar
+		}
+	}
+}
+
+groth={ #Part of Grymstone's bounty-hunter team
+	name=Groth
+	dna=groth_dna
+	culture=dragonmaw religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=3 intrigue=6 learning=5
+	trait=education_stewardship_3 trait=education_martial_prowess_2
+	trait=patient trait=humble trait=brave trait=rowdy
+	disallow_random_traits = yes
+	586.1.12={
+		birth=yes trait=creature_orc
+	}
+	594.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		employer=harkyn_grymstone
+	}
+	622.1.30 = { death = yes }
+}
+
+usha_eyegouge={
+	name=Usha
+	female=yes
+	dynasty=eyegouge
+	father=eyegouge_father
+	mother=eyegouge_mother
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=5 intrigue=4 learning=5
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=gregarious trait=impatient trait=brave
+	disallow_random_traits = yes
+	586.1.12={
+		birth=yes trait=creature_orc
+	}
+	592.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+		employer = 10100 #Drek'thar
+	}
+	642.1.30 = { death = yes }
+}
+oro_eyegouge={ #Member of Sergeant Bly's party
+	name=Oro
+	dynasty=eyegouge
+	father=eyegouge_father
+	mother=eyegouge_mother
+	culture=frostwolf religion=orcish_fel
+	martial=4 diplomacy=5 stewardship=4 intrigue=6 learning=7
+	trait=education_stewardship_3 trait=bossy
+	trait=greedy trait=humble trait=deceitful trait=one_eyed
+	disallow_random_traits = yes
+	588.1.12={
+		birth=yes trait=creature_orc
+	}
+	594.1.12={
+		effect={
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	622.1.30 = { death = yes }
+}
+eyegouge_father={
+	name=Orodaruld
+	dynasty=eyegouge
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_1
+	trait=brave trait=humble trait=honest
+	disallow_random_traits = yes
+	558.1.12={
+		birth=yes trait=creature_orc
+	}
+	589.1.1 = { death = yes }
+}
+eyegouge_mother={
+	name=Orodaruld
+	female=yes
+	culture=frostwolf religion=orcish_fel
+	martial=4 diplomacy=5 stewardship=4 intrigue=6 learning=7
+	trait=education_intrigue_1
+	trait=greedy trait=arrogant trait=deceitful
+	disallow_random_traits = yes
+	558.1.12={
+		birth=yes trait=creature_orc
+	}
+	589.1.1 = { death = yes }
+}
+
+jurrix_whitemane={ #Member of the Bad Dogs
+	name=Jurrix
+	dynasty=whitemane_orc
+	culture=shattered_hand religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=patient trait=humble trait=deceitful
+	578.1.12={
+		birth=yes trait=creature_orc
+	}
+	584.1.12={
+		effect={
+			set_variable = { name = wc_elemental_fire_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_magic_trait_value }
+		}
+	}
+	622.1.30 = { death = yes }
+}
+amakkar={
+	name=Amakkar
+	culture=shattered_hand religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_1
+	trait=patient trait=humble trait=deceitful
+	disallow_random_traits = yes
+	586.1.12={
+		birth=yes trait=creature_orc
+	}
+	594.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	622.1.30 = { death = yes }
+}
+gargal={
+	name=Gargal
+	culture=shattered_hand religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_1
+	trait=patient trait=humble trait=deceitful
+	disallow_random_traits = yes
+	586.1.12={
+		birth=yes trait=creature_orc
+	}
+	594.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	622.1.30 = { death = yes }
+}
+
+lunk_goretooth={ #Leader of the Kargath Expeditionary Force
+	name=Lunk
+	dynasty=goretooth
+	culture=shattered_hand religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=lustful trait=humble trait=brave
+	578.1.12={
+		birth=yes trait=creature_orc
+	}
+	584.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	622.1.30 = { death = yes }
+}
+
+orkus={
+	name=Orkus
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_1 trait=education_martial_prowess_1
+	trait=trusting trait=arrogant trait=craven trait=rowdy
+	disallow_random_traits = yes
+	588.1.12={
+		birth=yes trait=creature_orc
+	}
+	594.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	610.12.8={
+		give_nickname=nick_kingslayer #didn't actually kill him
+	}
+	611.1.14 = {
+		death = {
+			death_reason = death_wounds # killed by wounds inflicted by Vanndar Stormpike
+		}
+	}
+}
+captain_greenbelly={ #leader of Greenbelly's Raiders
+	name=Greenbelly
+	female=yes
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=rowdy
+	trait=brave trait=sadistic trait=gregarious trait=viking trait=lifestyle_hunter
+	disallow_random_traits = yes
+	584.1.12={
+		birth=yes trait=creature_orc
+	}
+	590.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	616.2.24 = {
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+ironpatch={ #member of the Bloodsail Buccaneers found in Cape of Stranglethorn
+	name=Ironpatch
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_2 trait=education_martial_prowess_2 trait=rowdy
+	trait=brave trait=sadistic trait=gregarious trait=viking trait=lifestyle_hunter
+	disallow_random_traits = yes
+	582.1.12={
+		birth=yes trait=creature_orc
+	}
+	588.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	600.1.1={
+		employer=90001
+	}
+	612.2.24 = {
+		death = {
+			death_reason = death_battle
+			killer=makasa_flintwill
+		}
+	}
+}
+skycapn_kragg={ #member of the Irontide Raiders found in Freehold
+	name=Kragg
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=4 intrigue=6 learning=4
+	trait=education_martial_3 trait=education_martial_prowess_2 trait=rowdy
+	trait=brave trait=lazy trait=gregarious trait=viking trait=gallowsbait
+	disallow_random_traits = yes
+	572.1.12={
+		birth=yes trait=creature_orc
+	}
+	588.1.12={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		employer=90100 #Harlan Sweete
+	}
+	616.3.17={
+		death = {
+			death_reason = death_battle #Slain in Freehold
+		}
+	}
+}
+zangus={ #member of the Cult of the Damned. He leads the Anub'ar in the Pit of Narjun.
+	name=Zangus
+	culture=shadowmoon religion=orcish_fel
+	martial=5 diplomacy=4 stewardship=4 intrigue=6 learning=7
+	trait=education_learning_3
+	trait=deceitful trait=sadistic trait=patient trait=pensive
+	disallow_random_traits = yes
+	562.1.12={
+		birth=yes trait=creature_orc
+	}
+	578.1.12={
+		effect={
+			set_variable = { name = wc_death_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+	}
+	603.9.27={
+		religion = orcish_shamanism
+		effect = {
+			make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:death_god }
+		}
+	}
+	610.1.1={
+		religion = death_god
+	}
+	610.1.15 = {
+		death = {
+			death_reason = death_battle
+		}
+	}
+}
+
+lhara={ #Darkmoon Faire Exotic Goods
+	name=Lhara
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	martial=5 diplomacy=4 stewardship=7 intrigue=6 learning=4
+	trait=education_stewardship_2
+	trait=gregarious trait=diligent trait=charming
+	572.1.12={
+		birth=yes trait=creature_orc
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	605.1.1={
+		employer=16630 #Silas
+		learn_language=language_gnomish
+	}
+	642.1.30 = { death = yes }
+}
+morja={
+	name=Morja
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	martial=5 diplomacy=6 stewardship=4 intrigue=4 learning=7
+	trait=education_stewardship_2
+	trait=trusting
+	572.1.12={
+		birth=yes trait=creature_orc
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	605.1.1={
+		employer=16630 #Silas
+		learn_language=language_gnomish
+	}
+	642.1.30 = { death = yes }
+}
+flik={ #frog vendor located in the Darkmoon Faire
+	name=Flik
+	culture=frostwolf religion=orcish_shamanism
+	martial=5 diplomacy=4 stewardship=7 intrigue=6 learning=4
+	trait=rowdy
+	601.1.12={
+		birth=yes trait=creature_orc
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	605.1.1={
+		employer=16630 #Silas
+		learn_language=language_gnomish
+	}
+	682.1.30 = { death = yes }
+}
+
+samuro_singer={ #Lead singer of the Elite Tauren Chieftains
+	name=Samuro #Not to be confused with the other one
+	culture=burning_blade religion=orcish_shamanism
+	martial=7 diplomacy=8 stewardship=3 intrigue=2 learning=2
+	trait=education_diplomacy_3
+	trait=brave trait=gregarious trait=impatient trait=lifestyle_poet
+	573.4.7={
+		birth=yes trait=creature_orc
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	670.6.9 = { death = yes }
+}
+
+havoc_the_heartless={ #an especially cruel orc bandit
+	name=Havoc
+	culture=burning_blade religion=orcish_shamanism
+	martial=8 diplomacy=2 stewardship=3 intrigue=7 learning=2
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=arrogant trait=sadistic trait=impatient trait=viking trait=gallowsbait
+	give_nickname=nick_the_heartless
+	573.4.7={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			add_trait_xp = {
+				trait = gallowsbait
+				track = bandit
+				value = 20
+			}
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	604.6.15 = {
+		death = {
+			death_reason = death_battle
+			killer = nori_blackfinger
+		}
+	}
+}
+
+shive={ #an orc working with Havoc the Heartless
+	name=Shive
+	culture=burning_blade religion=orcish_shamanism
+	trait=education_martial_1
+	trait=greedy trait=sadistic trait=impatient trait=gallowsbait
+	573.4.7={ birth=yes trait=creature_orc }
+	604.6.14 = {
+		death = {
+			death_reason = death_battle
+			killer = nori_blackfinger
+		}
+	}
+}
+
+tokal={ #found in Booty Bay in Stranglethorn Vale
+	name=Tokal
+	female=yes
+	culture=bleeding_hollow religion=orcish_shamanism
+	martial=8 diplomacy=2 stewardship=3 intrigue=7 learning=2
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=arrogant trait=sadistic trait=impatient trait=viking trait=gallowsbait
+	give_nickname=nick_the_heartless
+	573.4.7={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			add_trait_xp = {
+				trait = gallowsbait
+				track = marauder
+				value = 15
+			}
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	664.6.9 = { death = yes }
+}
+
+pargath_throatsplitter={ #a skilled but quiet warrior from the Bleeding Hollow clan.
+	name=Pargath
+	dynasty=throatsplitter
+	culture=bleeding_hollow religion=orcish_fel
+	martial=8 diplomacy=3 stewardship=6 intrigue=5 learning=5
+	trait=education_martial_2 trait=education_martial_prowess_3
+	trait=shy trait=patient trait=content
+	555.9.26={
+		birth=yes trait=creature_orc
+	}
+	570.1.2={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	583.1.1={ employer=10005 }
+	638.12.22={ death=yes }
+}
+
+mastok_wrilehiss={ #located at Splintertree Post in Ashenvale
+	name=Mastok
+	dynasty=wrilehiss
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=2 stewardship=7 intrigue=4 learning=2
+	trait=education_stewardship_2 trait=education_martial_prowess_2
+	trait=diligent trait=shy trait=impatient trait=reclusive
+	563.4.7={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	664.6.9 = { death = yes }
+}
+
+belgrom_rockmaul={ #located in the Valley of Honor in Orgrimmar
+	name=Belgrom
+	dynasty=rockmaul
+	sexuality=heterosexual
+	culture=warsong religion=orcish_shamanism
+	martial=7 diplomacy=5 stewardship=5 intrigue=4 learning=2
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=arbitrary trait=lustful trait=diligent
+	567.4.7={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_1
+	}
+	603.1.1={
+		culture = durotaric
+		employer=10021
+	}
+	664.6.9 = { death = yes }
+}
+
+tharlidun={ # stable master located in Hammerfall in the Arathi Highlands
+	name=Tharlidun
+	culture=frostwolf religion=orcish_shamanism
+	martial=5 diplomacy=5 stewardship=7 intrigue=5 learning=5
+	trait=education_stewardship_2
+	trait=brave trait=just trait=diligent
+	566.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+urda={ # flight master located at Hammerfall in the Arathi Highlands
+	name=Urda
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_2
+	566.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+gormul={ # located in Hammerfall in the Arathi Highlands. 
+	name=Gor'mul
+	culture=frostwolf religion=orcish_shamanism
+	martial=7 diplomacy=4 stewardship=5 intrigue=3 learning=7
+	trait=education_martial_3 trait=education_martial_prowess_2
+	trait=brave trait=generous trait=diligent
+	disallow_random_traits = yes
+	556.10.5={ birth=yes trait=creature_orc }
+	564.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+	}
+	582.11.1={
+		effect={
+			if = { limit = { character:10050 = { is_alive = yes } } add_opinion = { modifier = loyal_servant target = character:10050 } }
+		}
+	}
+	589.11.1={
+		trait=depressed_1
+		trait=one_eyed
+	}
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	608.7.1={
+		remove_trait=depressed_1
+	}
+	635.11.12 ={ death=yes }
+}
+zaruk={ # located in Hammerfall in the Arathi Highlands. 
+	name=Zaruk
+	culture=frostwolf religion=orcish_shamanism
+	martial=5 diplomacy=4 stewardship=4 intrigue=6 learning=8
+	trait=education_learning_2
+	trait=brave trait=generous trait=diligent
+	disallow_random_traits = yes
+	566.10.5={ birth=yes trait=creature_orc }
+	583.1.1={
+		culture=twilights_hammer
+		effect = {
+			set_variable = { name = wc_disorder_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		}
+	}
+	583.2.1={
+		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+	}
+	600.1.1={
+		employer=10650 #Drum Fel
+		culture=frostwolf
+	}
+	635.11.12 ={ death=yes }
+}
+graud={ # general goods vendor located in Hammerfall in the Arathi Highlands
+	name=Graud
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_2
+	trait=humble
+	566.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+keena={ # trade goods vendor located in Hammerfall in the Arathi Highlands
+	name=Keena
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_2
+	trait=humble trait=gregarious
+	576.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+uttnar={ # meat vendor located in Hammerfall in the Arathi Highlands
+	name=Uttnar
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_1
+	trait=humble trait=gregarious
+	576.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+slagg={ # cooking trainer located in Hammerfall in the Arathi Highlands
+	name=Slagg
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_2
+	trait=arrogant trait=gregarious
+	566.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+muuta={ # bow vendor located in Hammerfall in the Arathi Highlands
+	name=Mu'uta
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_1
+	566.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+junha={ # tailoring vendor located in Hammerfall in the Arathi Highlands
+	name=Jun'ha
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_1
+	576.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+tunkk={ # leatherworking vendor located in Hammerfall in the Arathi Highlands
+	name=Tunkk
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_1
+	576.10.5={ birth=yes trait=creature_orc }
+	600.1.1={
+		employer=10650 #Drum Fel
+	}
+	635.11.12 ={ death=yes }
+}
+
+horgrenn_hellcleave={ # a murderer, who was to be executed
+	name=Horgrenn
+	dynasty=hellcleave
+	culture=warsong religion=orcish_fel
+	trait=education_martial_1 trait=education_martial_prowess_3
+	trait=physique_good_3 trait=wrathful trait=impatient trait=sadistic trait=murderer
+	570.10.5={ birth=yes trait=creature_orc }
+	582.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_3
+		# trait=physical_lifestyle_strength_3
+	}
+	610.1.15={
+		death = {
+			death_reason = death_duel
+		}
+	}
+}
+
+petra_grossen={ #found in at Marshal's Refuge in Un'Goro Crater
+#Has been with Marshal Expeditions for a few years now, ever since her companion Dadanga was a babe
+	name=Petra
+	female=yes
+	dynasty=grossen
+	culture=warsong religion=orcish_shamanism
+	trait=education_diplomacy_1
+	trait=patient trait=compassionate trait=generous
+	572.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	611.1.12 ={ death=yes } #May have died in the Cataclysm
+}
+
+gorkan_bloodfist={ #captain located at Mag'har Post in the Hellfire Peninsula
+	name=Gorkan
+	dynasty=bloodfist_orc
+	culture=warsong religion=orcish_shamanism
+	trait=education_diplomacy_1 trait=education_martial_3
+	trait=patient trait=compassionate trait=generous
+	542.10.5={ birth=yes trait=creature_orc }
+	580.1.1={
+		culture=maghar
+	}
+	582.5.15 = {
+		effect = {
+			if = {
+				limit = { game_start_date < 609.12.25 }
+				vanish_historical_character_effect = yes #is in Outland
+			}
+		}
+	}
+	631.1.12 ={ death=yes }
+}
+bragor_bloodfist={ #Kor'kron Captain
+	name=Bragor
+	dynasty=bloodfist_orc
+	father=gorkan_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_martial_3 trait=education_martial_prowess_3
+	trait=patient trait=compassionate trait=generous
+	560.10.5={ birth=yes trait=creature_orc }
+	580.3.11={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	610.12.8={ #assigned by Thrall to guard the Undercity
+		employer=42076 # Sylvanas
+	}
+	631.1.12 ={ death=yes }
+}
+verzuk_bloodfist={ #Orc Rogue
+	name=Verzuk
+	dynasty=bloodfist_orc
+	father=gorkan_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_intrigue_2 trait=education_martial_1
+	trait=brave trait=wrathful trait=sadistic
+	563.10.5={ birth=yes trait=creature_orc }
+	582.3.11={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_dexterity_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	631.1.12 ={ death=yes }
+}
+agtor_bloodfist={ #located in Azshara at the Orgrimmar Rear Gate
+	name=Ag'tor
+	dynasty=bloodfist_orc
+	father=bragor_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_martial_2
+	trait=brave trait=diligent trait=content
+	580.10.5={ birth=yes trait=creature_orc }
+	582.3.11={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_1
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+haggrum_bloodfist={ #located at the Northern Rocketway Exchange in Azshara. He previously resided at Valormok
+	name=Haggrum
+	dynasty=bloodfist_orc
+	father=bragor_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_intrigue_2
+	trait=patient trait=deceitful trait=content
+	581.10.5={ birth=yes trait=creature_orc }
+	582.3.11={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_1
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	603.8.29={
+		employer = agtor_bloodfist
+	}
+	651.1.12 ={ death=yes }
+}
+scout_bloodfist={ #located at Cenarion Hold in Silithus
+	name=Sarrek
+	dynasty=bloodfist_orc
+	father=bragor_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_diplomacy_1
+	trait=patient trait=content
+	584.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	615.12.31 ={ death=yes }
+}
+loknor_bloodfist={ #quartermaster found inside the Serpent's Spine Horde Tower on the Serpent's Spine
+	name=Lok'nor
+	dynasty=bloodfist_orc
+	father=verzuk_bloodfist
+	culture=warsong religion=orcish_shamanism
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=brave trait=content trait=gregarious
+	584.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+
+turgore={ #member of Budd's gang
+	name=Turgore
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_2
+	trait=calm trait=content trait=gregarious trait=lifestyle_traveler
+	554.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+garg={ #member of Budd's gang
+	name=Garg
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_martial_1
+	trait=calm trait=content trait=gregarious trait=lifestyle_traveler
+	554.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+morgom={ #member of Budd's gang
+	name=Morgom
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_martial_1
+	trait=calm trait=content trait=gregarious trait=lifestyle_traveler
+	554.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+kurzel={ #member of Budd's gang
+	name=Kurzel
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_stewardship_1
+	trait=impatient trait=brave trait=diligent trait=lifestyle_traveler
+	573.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+kraz={ #one of the NPCs that players saved while doing the Timed Event in Zul'Aman
+	name=Kraz
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_diplomacy_2
+	trait=just trait=brave trait=diligent trait=lifestyle_mystic
+	563.10.5={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	651.1.12 ={ death=yes }
+}
+
+dreadscorn={
+	name=Dreadscorn
+	culture=blackrock religion=orcish_fel
+	martial=8 diplomacy=6 stewardship=6 intrigue=5 learning=5
+	trait=education_martial_2 trait=education_martial_prowess_2
+	trait=wrathful trait=brave trait=patient
+	563.3.14={ birth=yes trait=creature_orc }
+	580.1.1={
+		effect={
+			set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_endurance_2
+		# trait=physical_lifestyle_strength_2
+	}
+	587.6.1={
+		culture = stormreaver
+	}
+	602.1.1={
+		employer=10570 #Sevine[2357]
+	}
+	613.1.9={ death=yes }
+}
+
+jediga={ #located at Valormok in Azshara
+	name=Jediga
+	female=yes
+	culture=frostwolf religion=orcish_shamanism
+	trait=education_intrigue_2 trait=education_martial_prowess_2
+	trait=brave trait=paranoid trait=chaste
+	569.10.5={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_2_physical_trait_value }
+		}
+		# trait=physical_lifestyle_dexterity_2
+		# trait=physical_lifestyle_strength_2
+	}
+	603.1.1={
+		culture = durotaric
+	}
+	605.1.1={ #She was sent to Azshara by Belgrom Rockmaul as punishment for rejecting his offers
+		employer = agtor_bloodfist
+	}
+	651.1.12 ={ death=yes }
+}
+
+jaz={ #found inside the Halls of the Law of Blackrock Depths
+	name=Jaz
+	culture=blackrock religion=orcish_shamanism
+	trait=education_intrigue_1
+	trait=deceitful
+	569.10.5={ birth=yes trait=creature_orc }
+	590.1.2={
+		effect={
+			set_variable = { name = wc_dexterity_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+			set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_physical_trait_value }
+		}
+		# trait=physical_lifestyle_dexterity_1
+		# trait=physical_lifestyle_strength_1
+	}
+	651.1.12 ={ death=yes }
+}
+
+grunn_holde={
+	name=Grunn'Holde
+	female=yes
+	culture=warsong religion=orcish_shamanism
+	trait=education_martial_1 trait=education_martial_prowess_1
+	trait=honest trait=brave trait=stubborn
+	589.2.12={ birth=yes trait=creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	605.9.9={
+		religion = argent #member of the Argent Dawn
+	}
+	608.11.20={
+		death = { #was slain when Alexandros Mograine plunged the Ashbringer into her back
+			death_reason = death_battle
+			#killer = 60017 #Alexandros
+		}
+	}
+}
+
+#dynasty = warsong2
+warsong5 = { #Generated
+	name = Gromphon
+	dynasty = warsong2
+	religion = orcish_shamanism
+	culture = warsong
+	550.9.19 = { birth = yes trait = creature_orc }
+	622.10.20 = { death = yes }
+}
+
+#dynasty = warsong3
+warsong10 = { #Generated
+	name = Maosh
+	dynasty = warsong3
+	religion = orcish_shamanism
+	culture = warsong
+	550.9.18 = { birth = yes trait = creature_orc }
+	634.8.1 = { death = yes }
+}
+
+#dynasty = burning_blade1
+burning_blade1 = { #Generated
+	name = Urthaban
+	dynasty = burning_blade1
+	religion = orcish_shamanism
+	culture = burning_blade
+	550.10.13 = { birth = yes trait = creature_orc }
+	603.1.1={
+		culture = durotaric
+	}
+	626.5.6 = { death = yes }
+}
+
+#dynasty = blackrock1
+blackrock1 = { #Generated
+	name = Asoolek
+	dynasty = blackrock1
+	religion = orcish_shamanism
+	culture = blackrock
+	555.1.10 = { birth = yes trait = creature_orc }
+	633.1.16 = { death = yes }
+}
+
+stormreaver1 = { 
+	name = Edr'Mar
+	religion = orcish_fel
+	culture = shadowmoon
+	567.11.7 = { 
+		effect = { add_character_flag = do_not_generate_starting_family }
+		birth = yes 
+		trait = creature_orc
+		trait = magic_good_1
+		trait = intellect_good_1
+	}
+	583.1.1 = { 
+		employer = 10015
+	}
+	587.6.1={
+		culture = stormreaver
+	} 
+	590.12.1 = {
+		trait = being_undead
+	}
+}
+
+twilights_hammer1 = { 
+	name = Shar'na
+	female = yes
+	religion = orcish_fel
+	culture = twilights_hammer
+	567.11.7 = { 
+		effect = { add_character_flag = do_not_generate_starting_family }
+		birth = yes 
+		trait = creature_orc
+		trait = beauty_good_2
+		trait = intellect_good_1
+	}
+	583.1.1 = { 
+		employer = 52000
+	}
+	583.2.1={
+		make_character_crypto_religionist_effect = { CRYPTO_RELIGION = faith:twilights_hammer_cult }
+	}
+	590.12.1 = {
+		trait = being_undead
+	}
+}

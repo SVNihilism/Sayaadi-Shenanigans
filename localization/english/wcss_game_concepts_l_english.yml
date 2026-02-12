@@ -1,0 +1,14 @@
+﻿l_english:
+
+game_concept_twin_sister: "Twin Sister"
+game_concept_twin_sister_desc: "Born from the same spark of life."
+game_concept_wcss_gene_child: "Daughter"
+game_concept_wcss_gene_child_desc: "A daughter born from Lilith's magic between two women."
+game_concept_wcss_gene_father: "Mother"
+game_concept_wcss_gene_father_desc: "Replaced the Father in the conception of the $game_concept_wcss_gene_child$."
+game_concept_murliver_oil: "Murliver Oil"
+game_concept_murliver_oil_desc: "An exotic body oil that is most commonly used to increase swim speed.\n\nIt is highly sought after in certain noble courts for more unethical applications."
+
+souls_hud_tooltip_label: "Soulshards"
+souls_gui: "Captured souls.\nUsed to fuel certain Fel Magic."
+Harem (SUPER WIP): "Harem (SUPER WIP)"

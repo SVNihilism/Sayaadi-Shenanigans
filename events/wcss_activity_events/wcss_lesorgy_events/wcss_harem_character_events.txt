@@ -1,0 +1,203 @@
+﻿namespace = wcss_harem
+# Events used in the Sapphic Debauche for setup and maintenance.
+
+#################
+# MAINTENANCE EVENTS
+# 0000 - 0999
+#################
+
+#wcss_harem.0001 deprecated
+
+wcss_harem.0002 = { #Nobody showed up!
+	type = character_event
+	title = wcss_harem.0002.t
+	desc = wcss_harem.0002.desc
+	theme = wcss_harem_activity
+	left_portrait = scope:activity.activity_host
+	override_background = { reference = throne_room }
+
+	option = {
+		name = wcss_harem.0002.a
+		stress_impact = {
+			base = minor_stress_impact_gain
+			lustful = minor_stress_impact_gain
+			rakish = minor_stress_impact_gain
+			gregarious = minor_stress_impact_gain
+		}
+	}
+}
+
+wcss_harem.0005 = { #Sex event (hidden event where characters sleep with each other behind the scenes, represents random hookups and partner swapping, etc)
+	hidden = yes
+	type = activity_event
+
+	trigger = { 
+		exists = scope:activity 
+		wcss_harem_has_serious_illness_trigger = no
+		is_alive = yes
+		is_imprisoned = no
+	}
+
+	immediate = {
+		scope:activity = {
+			random = { # Every time this event pulses, there's a random chance root has sex with someone else at the orgy -- weights based on opinion
+				chance = 50
+				random_attending_character = {
+					limit = { 
+						wcss_harem_participant_trigger = yes
+						NOT = {
+							has_opinion_modifier = {
+								target = root
+								modifier = wcss_had_sex_at_orgy_opinion
+							}
+						}
+					}
+					weight = {
+						base = 1
+						opinion_modifier = {
+							who = this
+							opinion_target = root
+							multiplier = 0.1
+						}
+					}
+					save_scope_as = wcss_sex_partner
+				}
+				if = { 
+					limit = { exists = scope:wcss_sex_partner }
+					root = { 
+						wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_sex_partner }
+						if = {
+							limit = { has_sexuality = heterosexual }
+							wcss_convert_change_sexual_orientation_effects = { CHARACTER = root }
+						}
+					}
+				}			
+				random = { #If the first event triggers, random chance to sleep with someone else -- do not sleep with the same person twice
+					chance = 50
+					random_attending_character = {
+						limit = { 
+							wcss_harem_participant_trigger = yes
+							NOR = {
+								has_opinion_modifier = {
+									target = root
+									modifier = wcss_had_sex_at_orgy_opinion
+								}
+							}
+						}
+						weight = {
+							base = 1
+							opinion_modifier = {
+								who = this
+								opinion_target = root
+								multiplier = 0.1
+							}
+						}
+						save_scope_as = wcss_second_sex_partner
+					}
+					if = { 
+						limit = { exists = scope:wcss_second_sex_partner }
+						root = { 
+							wcss_harem_had_sex_effect = { CHARACTER = scope:wcss_second_sex_partner } 
+						}
+					}		
+				}
+			}
+		}
+	}
+}
+
+wcss_harem.0010 = { #Double booked!
+	type = letter_event
+	opening = {
+		desc = wcss_harem.0010.opening
+	}
+	desc = wcss_harem.0010.desc
+	sender = scope:activity.activity_host
+
+	immediate = {
+		var:booked_for_a_party = {
+			save_scope_as = other_host
+		}
+		decline_activity_invite = scope:activity
+		scope:activity.activity_host = {
+			add_opinion = {
+				target = root
+				modifier = insult_opinion
+				opinion = -10
+			}
+		}
+	}
+
+	option = {
+		name = wcss_harem.0010.a	
+	}
+}
+
+
+
+wcss_harem.0051 = { #Guest event: host died
+	type = character_event
+	title = wcss_harem.0051.t
+	desc = wcss_harem.0051.desc
+	theme = wcss_harem_activity
+	override_icon = {
+		reference = "gfx/interface/icons/event_types/type_illness.dds"
+	}
+	left_portrait = {
+		character = scope:host
+	}
+	override_background = { reference = corridor_day }
+
+	trigger = {
+		NOT = { root = scope:host }
+	}
+	
+	option = {
+		name = wcss_harem.0051.a
+		flavor = wcss_harem.0051.a.tt
+	}
+}
+
+wcss_harem.0052 = { #Host event: host imprisoned
+	type = character_event
+	title = wcss_harem.0051.t
+	desc = wcss_harem.0052.desc
+	theme = wcss_harem_activity
+	override_icon = {
+		reference = "gfx/interface/icons/event_types/type_prison.dds"
+	}
+	left_portrait = {
+		character = scope:host
+		animation = prison_dungeon
+	}
+	override_background = { reference = corridor_day }
+
+	trigger = { root = scope:host }
+	
+	option = {
+		name = wcss_harem.0052.a
+	}
+}
+
+wcss_harem.0053 = { #Guest event: host imprisoned
+	type = character_event
+	title = wcss_harem.0051.t
+	desc = wcss_harem.0053.desc
+	theme = wcss_harem_activity
+	override_icon = {
+		reference = "gfx/interface/icons/event_types/type_prison.dds"
+	}
+	left_portrait = {
+		character = scope:host
+		animation = prison_dungeon
+	}
+	override_background = { reference = corridor_day }
+
+	trigger = {
+		NOT = { root = scope:host }
+	}
+	
+	option = {
+		name = wcss_harem.0052.a
+	}
+}

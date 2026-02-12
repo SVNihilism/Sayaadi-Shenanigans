@@ -1,0 +1,114 @@
+﻿wcss_drain_life_interaction = {
+	icon = death_disease
+	category = interaction_category_hostile
+	interface_priority = 20
+	common_interaction = yes
+
+	ai_will_do = {
+		base = 0
+	}
+
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:recipient = {
+			is_adult = yes
+			NOT = { has_character_modifier = fel_corruption }
+			OR = {
+				liege = scope:actor
+				is_imprisoned_by = scope:actor
+			}
+		}
+		scope:actor = {
+			has_character_flag = warlock
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			NOT = { is_at_war_with = scope:recipient }
+		}
+	}
+
+	desc = wcss_life_drained
+
+	on_accept = {
+		wcss_drain_life_effect = yes
+	}
+	auto_accept = yes
+}
+
+
+wcss_fel_infusion_interaction = {
+	icon = fel_infusion
+	category = interaction_category_friendly
+	interface_priority = 120
+	common_interaction = yesa
+
+	ai_will_do = {
+		base = 0
+	}
+
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:recipient = {
+			is_consort_of = scope:actor
+			has_character_modifier = harem_character
+		}
+		scope:actor = {
+			has_character_modifier = health_stone
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			NOT = { is_at_war_with = scope:recipient }
+		}
+	}
+
+	desc = wcss_fel_infusion
+
+	on_accept = {
+		wcss_fel_infusion_effect = yes
+	}
+	auto_accept = yes
+}
+
+wcss_summon_interaction = {
+	icon = warlock
+	category = interaction_category_class
+	interface_priority = 120
+	common_interaction = yes
+
+	ai_will_do = {
+		base = 0
+	}
+
+	is_shown = {
+		NOT = { scope:actor = scope:recipient }
+		scope:recipient = {
+			OR = {
+				is_courtier_of = scope:actor
+				is_close_family_of = scope:actor
+				is_vassal_of = scope:actor
+				is_spoouse_of = scope:actor
+			}
+			is_imprisoned = yes
+		}
+		scope:actor = {
+			has_character_flag = warlock
+		}
+	}
+
+	is_valid_showing_failures_only = {
+
+	}
+
+	desc = wcss_summon
+
+	on_accept = {
+		scope:recipient = {
+			release_from_prison = yes
+		}
+	}
+	auto_accept = yes
+}

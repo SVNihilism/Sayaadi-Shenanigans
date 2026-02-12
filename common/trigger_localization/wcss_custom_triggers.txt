@@ -1,0 +1,7 @@
+﻿is_alive = {
+	first = is_alive
+	first_not = is_alive
+	third = is_alive
+	third_not = is_alive
+}
+

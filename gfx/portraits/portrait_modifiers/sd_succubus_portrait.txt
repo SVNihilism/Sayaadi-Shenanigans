@@ -1,0 +1,130 @@
+﻿wcss_succubus_portrait = {
+	usage = game
+	wcss_succubus_portrait = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_bust
+				value = 0.8
+				template = bust_shape_4_half
+			}
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				value = 0.4
+				template = body_fat_head_fat_low
+			}
+		}
+				 
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				has_trait = creature_sayaadi
+			}
+		}
+	}
+	charmed_portrait = {
+		dna_modifiers = {
+			color = {
+                    mode = replace
+                    gene = eye_color
+                    x = 0.873 
+                    y = 0.375 
+                }
+			morph = {
+				mode = replace
+				gene = special_eyes
+				value = 1
+				template = magic_pupils_eyes
+			}
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				has_character_modifier = charmed
+			}
+		}
+	}
+	harem_portrait = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				value = 0.4
+				template = body_fat_head_fat_low
+			}
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				has_character_flag = harem_character
+			}
+		}
+	}
+	lust_portrait = {
+		dna_modifiers = {
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				value = 0.4
+				template = body_fat_head_fat_low
+			}
+			morph = {
+				mode = replace
+				gene = gene_body_markings
+				value = 1
+				template = lust_brand
+			}
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 300
+				has_character_modifier = pact_bound
+			}
+		}
+	}
+	test_portrait = {
+		dna_modifiers = {
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 0.5
+			}
+			morph = {
+				mode = replace
+				gene = gene_bs_body_type
+				value = 0.4
+				template = body_fat_head_fat_low
+			}
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 300
+				is_jaina_proudmoore_trigger = yes
+			}
+		}
+	}
+
+	alex_portrait = {
+		dna_modifiers = {
+			morph = {
+				mode = a
+				gene = race_body_accessory
+				value = 1
+				template = alex
+			}
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 300
+				is_alexstrasza_trigger = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,154 @@
+﻿# Edited triggers below;
+allowed_to_marry_same_sex_trigger = {
+	OR = {
+		AND = { # Game rule enables as usual
+			has_game_rule = accepted_same_sex_marriage
+			OR = {
+				faith = { has_doctrine_parameter = homosexuality_accepted } # With this game rule homosexuality accepted enables for both men and women
+				AND = {
+					is_female = yes
+					faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter } # Lesbian divinity is only for women still
+				}
+			}
+		}
+		AND = { # Non-females can same-sex marriage / concubinage with proper doctrine
+			has_game_rule = default_same_sex_marriage
+			is_female = no
+			faith = { has_doctrine_parameter = wcss_homosexuality_embraced }
+		}
+		AND = { # Females need lesbian divinity for same-sex marriage / concubinage
+			has_game_rule = default_same_sex_marriage
+			is_female = yes
+			faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+		}
+		culture = { has_cultural_parameter = wcss_samesex_marriage_tradition_parameter } # Cultural tradition allows regardless of game rule
+	}
+}
+
+#Can marry right now
+can_marry_trigger = {
+	can_marry_common_trigger = yes
+	allowed_more_spouses = yes
+}
+
+### New triggers below
+# Trigger to determine eligibility for lesbian marriages via on_action
+wcss_lesbian_marriage_pulse_trigger = { # Used to find candidates, scope:wcss_root must exist
+	NOT = { this = scope:wcss_root }
+	is_ai = yes
+	is_female = yes
+	is_adult = yes
+	is_imprisoned = no
+	can_marry_common_trigger = yes # This trigger ignores current marriage/concubine status.
+	is_betrothed = no # For the sake of simplicity
+	in_diplomatic_range = scope:wcss_root
+	NAND = {
+		exists = liege
+		liege = { is_ai = no } # Don't take courtiers from non-AI.
+		is_courtier = yes
+	}
+	OR = {
+		is_married = no
+		wcss_has_expected_num_wives_trigger = no # Do they have the right number of wives? Slightly different check for polygamy.
+	}
+	faith = { # Don't bother getting candidates whose faith is too hostile
+		faith_hostility_level = {
+			target = scope:wcss_root.faith
+			value < faith_hostility_prevents_marriage_level
+		}
+	}
+}
+
+# Which type of lesbian marriage modifier do we get? Need to check both traditions and doctrines.
+wcss_lesbian_monogamy_trigger = {
+	OR = {
+		culture = { has_cultural_tradition = tradition_monogamous }
+		AND = {
+			faith = { has_doctrine = doctrine_monogamy }
+			NOR = {
+				culture = { has_cultural_tradition = tradition_concubines }
+				culture = { has_cultural_tradition = tradition_polygamous }
+			}
+		}
+	}
+}
+
+wcss_lesbian_polygamy_trigger = {
+	OR = {
+		culture = { has_cultural_tradition = tradition_polygamous }
+		AND = {
+			faith = { has_doctrine = doctrine_polygamy }
+			NOR = {
+				culture = { has_cultural_tradition = tradition_concubines }
+				culture = { has_cultural_tradition = tradition_monogamous }
+			}
+		}
+	}
+}
+
+wcss_lesbian_concubines_trigger = {
+	OR = {
+		culture = { has_cultural_tradition = tradition_concubines }
+		AND = {
+			faith = { has_doctrine = doctrine_concubines }
+			NOR = {
+				culture = { has_cultural_tradition = tradition_polygamous }
+				culture = { has_cultural_tradition = tradition_monogamous }
+			}
+		}
+	}
+}
+
+# Do we have enough wives?
+wcss_has_expected_num_wives_trigger = {
+	trigger_if = { # Polygamy expects multiple spouses depending on tier to avoid piety penalty.
+		limit = { wcss_lesbian_polygamy_trigger = yes }
+		OR = { # For AI we're going to only use the on_action pulse to pair up the minimum number of wives.
+			AND = {
+				highest_held_title_tier <= tier_county
+				any_spouse = { is_female = yes } # Countesses (and below) need one spouse.
+			} # This also serves to prevent grabbing unlanded characters for marriage if they're already married to a woman.
+			AND = {
+				highest_held_title_tier = tier_duchy
+				any_spouse = {
+					count >= 2
+					is_female = yes # Duchesses need two spouses.
+				}
+			}
+			AND = {
+				highest_held_title_tier = tier_kingdom
+				any_spouse = {
+					count >= 3
+					is_female = yes # Queens need three spouses.
+				}
+			}
+			AND = {
+				highest_held_title_tier >= tier_empire
+				any_spouse = {
+					count >= 4
+					is_female = yes # Empresses need four spouses.
+				}
+			}
+		}
+	}
+	trigger_else = { # Monogamy and Concubines just want one spouse
+		any_spouse = { is_female = yes }
+	}
+}
+
+# New version of is_struggle_parameter_active_interfaith_marriages_available_between_involved_characters_trigger for lesbian marriage. Need to replace actor with wcss_root.
+wcss_is_struggle_parameter_active_interfaith_marriages_available_between_involved_characters_trigger = {
+	scope:wcss_root = {
+		any_character_struggle = {
+			involvement = involved
+			has_struggle_phase_parameter = interfaith_marriages_available_between_involved_characters
+			save_temporary_scope_as = struggle_temp
+			scope:recipient = {
+				any_character_struggle = {
+					involvement = involved
+					this = scope:struggle_temp
+				}
+			}
+		}
+	}
+}

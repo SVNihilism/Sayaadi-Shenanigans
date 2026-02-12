@@ -1,0 +1,38 @@
+﻿## Hedonist culture cascading development effect
+wcss_cascading_development_effect = {
+	capital_province = {
+		county = {
+			add_to_list = wcss_affected_counties
+			every_neighboring_county = {
+				add_to_list = wcss_affected_counties
+				every_neighboring_county = {
+					limit = {
+						NOT = { is_in_list = wcss_affected_counties }
+					}
+					add_to_list = wcss_affected_counties
+				}
+			}
+		}
+	}
+	custom_tooltip = wcss_cascading_development_effect_tt
+	hidden_effect = {
+		every_in_list = {
+			list = wcss_affected_counties
+			if = {
+				limit = {
+					any_county_province = { this = root.capital_province }
+				}
+				change_development_progress_with_overflow = 20
+			}
+			else_if = {
+				limit = {
+					any_neighboring_county = {
+						any_county_province = { this = root.capital_province }
+					}
+				}
+				change_development_progress_with_overflow = 10
+			}
+			else = { change_development_progress_with_overflow = 5 }
+		}
+	}
+}

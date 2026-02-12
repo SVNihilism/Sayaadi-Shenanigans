@@ -1,0 +1,49 @@
+﻿## Opinion modifiers related to lesbian orgy event
+wcss_had_sex_at_orgy_opinion = {
+	opinion = 10
+	stacking = no
+	years = 1
+}
+
+wcss_orgy_public_sex_opinion = {
+	opinion = 10
+	stacking = yes
+	decaying = yes
+	years = 5
+}
+
+wcss_gave_good_massage_opinion = {
+	opinion = 25
+	decaying = yes
+	years = 10
+}
+
+wcss_hosted_orgy_opinion = {
+	opinion = 30
+	stacking = no
+	years = 5
+}
+
+wcss_harem_honored_opinion = {
+	monthly_change = 0.1
+	decaying = yes
+}
+
+wcss_had_sex_at_private_orgy_opinion = {
+	opinion = 15
+	stacking = no
+	decaying = yes
+	monthly_change = 0.5
+}
+
+wcss_respected_host_opinion = {
+	stacking = yes
+	decaying = yes
+	years = 10
+}
+
+wcss_poor_host_opinion = {
+	stacking = yes
+	decaying = yes
+	years = 10
+}

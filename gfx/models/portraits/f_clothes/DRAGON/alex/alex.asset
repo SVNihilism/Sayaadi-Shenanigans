@@ -1,0 +1,25 @@
+pdxmesh = {
+	name = "alex_mesh"
+	file = "alex.mesh"
+
+	
+
+	meshsettings = {
+		name = "alexShape"
+		index = 0
+		texture_diffuse = "alex.dds"
+		texture_normal = "alex_norm.dds"
+		texture_specular = "alex_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "alex_01_entity"
+	pdxmesh = "alex_mesh"
+
+
+}
+
+ 

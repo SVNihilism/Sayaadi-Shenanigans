@@ -1,0 +1,157 @@
+﻿#These special genes will not be part of a character's DNA.
+#The game can have hardcoded references to them and might use each of them differently
+
+#This rework allows beauty features to overlay onto existing character complexions.
+
+special_genes = {
+	morph_genes = {
+
+		
+		gene_succubus_bust = {
+
+			succubus_cleavage = { 
+				index = 0 
+				# male = {
+				# 	setting = { # The "clothed" blend shape shrinks the body slightly in areas that are more likely to intersect with clothes
+				# 		attribute = "bs_body_clothed"    
+				# 		value = { min = 1.0 max = 1.0 } 
+				# 	} 
+				# }
+				female = { 
+					setting = { 
+						required_tags = "succubus_cleavage"
+						attribute = "bs_body_succubus"	
+						value = { min = 1.0 max = 1.0 } 
+						age = { #Modesty curve for teens wearing this dress. 
+							mode = add
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.05 -0.5 }
+								{ 0.08 -0.5 }
+								{ 0.10 -0.5 }
+								{ 0.12 -0.4 }
+								{ 0.18 0.0 }
+							}
+						}	
+					}
+					setting = { # Blendshape for Hairs
+						required_tags = "succubus_cleavage"
+						attribute = "bs_bust_succubus"    
+						value = { min = 1.0 max = 1.0 } 
+					} 
+				}
+				# boy = male
+				# girl = female
+			}
+		}
+
+		gene_super_muscular = {
+
+			super_muscular = { 
+				index = 0
+				# male = {
+				# 	setting = { # The "clothed" blend shape shrinks the body slightly in areas that are more likely to intersect with clothes
+				# 		attribute = "bs_body_clothed"    
+				# 		value = { min = 1.0 max = 1.0 } 
+				# 	} 
+				# }
+				male = { 
+					setting = { 
+						required_tags = "super_muscular"
+						attribute = "bs_body_muscular_super"	
+						value = { min = 1.0 max = 1.0 } 
+						age = { #Modesty curve for teens wearing this dress. 
+							mode = add
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.05 -0.5 }
+								{ 0.08 -0.5 }
+								{ 0.10 -0.5 }
+								{ 0.12 -0.4 }
+								{ 0.18 0.0 }
+							}
+						}	
+					}
+				}
+				# boy = male
+				# girl = female
+			}
+		}
+		gene_succubus_thighs = {
+
+			succubus_thighmane = { 
+				index = 0 
+				# male = {
+				# 	setting = { # The "clothed" blend shape shrinks the body slightly in areas that are more likely to intersect with clothes
+				# 		attribute = "bs_body_clothed"    
+				# 		value = { min = 1.0 max = 1.0 } 
+				# 	} 
+				# }
+				female = { 
+					setting = { 
+						required_tags = "succubus_thighs"
+						attribute = "bs_body_thighmane"	
+						value = { min = 1.0 max = 1.0 } 
+						age = { #Modesty curve for teens wearing this dress. 
+							mode = add
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.05 -0.5 }
+								{ 0.08 -0.5 }
+								{ 0.10 -0.5 }
+								{ 0.12 -0.4 }
+								{ 0.18 0.0 }
+							}
+						}	
+					}
+					setting = { # Blendshape for Hairs
+						required_tags = "succubus_thighs"
+						attribute = "bs_bust_succubus"    
+						value = { min = 1.0 max = 1.0 } 
+					} 
+				}
+				# boy = male
+				# girl = female
+			}
+
+		}
+		gene_orc_bust = {
+
+			orc_cleavage = { 
+				index = 0 
+				# male = {
+				# 	setting = { # The "clothed" blend shape shrinks the body slightly in areas that are more likely to intersect with clothes
+				# 		attribute = "bs_body_clothed"    
+				# 		value = { min = 1.0 max = 1.0 } 
+				# 	} 
+				# }
+				female = { 
+					setting = { 
+						required_tags = "orc_cleavage"
+						attribute = "bs_body_orc"	
+						value = { min = 1.0 max = 1.0 } 
+						age = { #Modesty curve for teens wearing this dress. 
+							mode = add
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.05 -0.5 }
+								{ 0.08 -0.5 }
+								{ 0.10 -0.5 }
+								{ 0.12 -0.4 }
+								{ 0.18 0.0 }
+							}
+						}	
+					}
+					setting = { # Blendshape for Hairs
+						required_tags = "orc_cleavage"
+						attribute = "bs_bust_orc"   
+						value = { min = 1.0 max = 1.0 } 
+					} 
+				}
+				# boy = male
+				# girl = female
+			}
+		}
+	}
+	
+}

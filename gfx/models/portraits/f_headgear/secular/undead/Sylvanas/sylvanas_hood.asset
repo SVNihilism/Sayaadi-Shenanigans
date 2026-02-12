@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "sylvanas_hood_mesh"
+	file = "sylvanas_hood.mesh"
+
+	meshsettings = {
+		name = "sylvanas_hoodShape"
+		index = 0
+		texture_diffuse = "sylvanas_diff.dds"
+		texture_normal = "sylvanas_norm.dds"
+		texture_specular = "sylvanas_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "sylvanas_hood_entity"
+	pdxmesh = "sylvanas_hood_mesh"
+	
+}

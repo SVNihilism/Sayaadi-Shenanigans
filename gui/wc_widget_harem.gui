@@ -1,0 +1,401 @@
+﻿widget = {
+	name = "wc_widget_harem"
+	parentanchor = top|right
+	layer = windows_layer
+	# So it's not possible to click county behind the interface
+	alwaystransparent = no
+	filter_mouse = all
+
+	#using = Window_Size_MainTab
+	size = { 655 100% }
+
+	visible = "[GetVariableSystem.HasValue( 'right_window_open', 'harem' )]"
+
+	state = {
+		name = _show
+		using = Animation_FadeIn_Quick
+		using = Sound_WindowShow_Standard
+		using = Window_Position_MainTab
+		on_start = "[GetVariableSystem.Set( 'right_window_open', 'harem' )]"
+
+	}
+
+	state = {
+		name = _hide
+		using = Animation_FadeOut_Quick
+		using = Sound_WindowHide_Standard
+		using = Window_Position_MainTab_Hide
+
+		on_start = "[GetVariableSystem.ClearIf( 'right_window_open', GetVariableSystem.HasValue( 'right_window_open', 'none' ) )]"
+		on_start = "[GetVariableSystem.Clear( 'renaming_open' )]"
+
+		# To prevent clearing variables when you open the Decisions tab after the Unions tab
+		on_start = "[GetScriptedGui('clear_gui_union_variables').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
+	}
+	
+	margin_widget = {
+		size = { 100% 100% }
+		margin = { 0 26 }
+
+		using = Window_Background
+
+		widget = {
+			size = { 100% 100% }
+
+			# using = Window_Decoration_Thin
+
+			vbox = {
+				using = Window_Margins
+
+				scrollbox = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					visible = "[And(GetPlayer.MakeScope.Var('gui_this_union_name').IsSet, Not(EqualTo_string(GetPlayer.MakeScope.Var('gui_this_union_name').GetFlagName, 'empty_union')))]"
+					datacontext = "[GetPlayer.MakeScope.Var('gui_union')]"
+
+					scrollbar_vertical = {
+						using = Scrollbar_Vertical_White
+					}
+					blockoverride "scrollbox_background_fade"
+					{
+					}
+					blockoverride "scrollbox_background"
+					{
+					}
+					blockoverride "scrollbox_content"
+					{
+						header_pattern = {
+							background = {
+								texture = "gfx/interface/component_tiles/tile_title_bg_01.dds"
+								spriteType = Corneredtiled
+								spriteborder = { 5 5 }
+								texture_density = 2
+								margin_right = 5
+							}
+							layoutpolicy_horizontal = expanding
+							size = { 0 50 }
+							blockoverride "header_text"
+							{
+								text = "Harem (SUPER WIP)"
+							}
+							
+							
+							blockoverride "button_close"
+							{
+								onclick = "[GetVariableSystem.Clear( 'right_window_open' )]"
+							}
+						}
+						vbox = {
+							layoutpolicy_horizontal = expanding
+							layoutpolicy_vertical = expanding
+							margin_top = 10
+							spacing = 15
+
+							background = {
+								texture = "gfx/interface/illustrations/event_scenes/ep2_feast_indian.dds"
+								margin = { 5 0 }
+								fittype = start
+								alpha = 0.4
+								framesize = { 1200 848 }
+
+								modify_texture = {
+									texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+									blend_mode = alphamultiply
+								}
+							}
+							
+							# LEADER
+							vbox = {
+								layoutpolicy_horizontal = expanding
+								widget = {
+									size = { 550 28 }
+									parentanchor = left
+
+									text_label_center = {
+										parentanchor = hcenter
+										text = "Mistress"
+									}
+
+									text_label_center = {
+										parentanchor = right|vcenter
+										position = { -40 30 }
+										text = "Lady of Cultivation"
+									}
+
+									text_label_center = {
+										parentanchor = left|vcenter
+										position = { 40 30 }
+										text = "Lady of Corruption"
+									}
+								}
+								
+								widget = {
+									size = { 550 180 }
+
+									portrait_head = {
+										datacontext = "[GetPlayer.MakeScope.Var('harem_leader').GetCharacter]"
+										parentanchor = hcenter
+										blockoverride "portrait_button"
+										{
+											using = tooltip_ne
+										}
+										blockoverride "glow_visible"
+										{
+											visible = no
+										}
+										blockoverride "opinion_box" {}
+										blockoverride "coa" {}
+										blockoverride "status_icons" {}
+									}
+									portrait_head_small = {
+										datacontext = "[GetPlayer.MakeScope.Var('harem_cultivator').GetCharacter]"
+										parentanchor = right
+										position = { -60 30 }
+										blockoverride "portrait_button"
+										{
+											using = tooltip_ne
+										}
+										blockoverride "glow_visible"
+										{
+											visible = no
+										}
+										blockoverride "opinion_box"
+										{
+										}
+										blockoverride "coa"
+										{
+										}
+									}
+
+									portrait_head_small = {
+										datacontext = "[GetPlayer.MakeScope.Var('harem_corruptor').GetCharacter]"
+										parentanchor = left
+										position = { 60 30 }
+										blockoverride "portrait_button"
+										{
+											using = tooltip_ne
+										}
+										blockoverride "glow_visible"
+										{
+											visible = no
+										}
+										blockoverride "opinion_box"
+										{
+										}
+										blockoverride "coa"
+										{
+										}
+									}
+
+								}
+
+
+								text_label_center = {
+									text = "Dragons"
+								}
+								scrollarea = {
+									background = {
+										texture = "gfx/interface/component_tiles/tile_editbox.dds"
+										spriteType = Corneredtiled
+										spriteborder = { 5 5 }
+										texture_density = 2
+										margin_right = 5
+									}
+									layoutpolicy_horizontal = expanding
+									minimumsize = { 30 140 }
+									scrollbarpolicy_vertical = always_off
+									scrollbarpolicy_horizontal = as_needed
+									scrollbar_horizontal = {
+										using = Scrollbar_Horizontal
+									}
+									
+									scrollwidget = {
+										hbox = {
+											name = "people_grid"
+											datamodel = "[GetPlayer.MakeScope.GetList('harem_dragon')]"
+											#spacing = 10
+											item = {
+												flowcontainer = {
+													direction = vertical
+													datacontext = "[Scope.GetCharacter]"
+	
+													portrait_head_small = {
+														blockoverride "portrait_button"
+														{
+															using = tooltip_ne
+														}
+														blockoverride "glow_visible"
+														{
+															visible = no
+														}
+														blockoverride "coa"
+														{
+														}
+														blockoverride "opinion_box"
+														{
+														}
+													}
+
+												}
+											}
+										}
+									}
+
+								}
+
+								text_label_center = {
+									text = "Elves"
+								}
+								scrollarea = {
+									background = {
+										texture = "gfx/interface/component_tiles/tile_editbox.dds"
+										spriteType = Corneredtiled
+										spriteborder = { 5 5 }
+										texture_density = 2
+										margin_right = 5
+									}
+									layoutpolicy_horizontal = expanding
+									minimumsize = { 30 140 }
+									scrollbarpolicy_vertical = always_off
+									scrollbarpolicy_horizontal = as_needed
+									scrollbar_horizontal = {
+										using = Scrollbar_Horizontal
+									}
+									scrollwidget = {
+										hbox = {
+											name = "people_grid"
+											datamodel = "[GetPlayer.MakeScope.GetList('harem_elf')]"
+											#spacing = 10
+											item = {
+												flowcontainer = {
+													direction = vertical
+													datacontext = "[Scope.GetCharacter]"
+	
+													portrait_head_small = {
+														blockoverride "portrait_button"
+														{
+															using = tooltip_ne
+														}
+														blockoverride "glow_visible"
+														{
+															visible = no
+														}
+														blockoverride "coa"
+														{
+														}
+														blockoverride "opinion_box"
+														{
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								text_label_center = {
+									text = "Royalty"
+								}
+								scrollarea = {
+									background = {
+										texture = "gfx/interface/component_tiles/tile_editbox.dds"
+										spriteType = Corneredtiled
+										spriteborder = { 5 5 }
+										texture_density = 2
+										margin_right = 5
+									}
+									layoutpolicy_horizontal = expanding
+									minimumsize = { 30 140 }
+									scrollbarpolicy_vertical = always_off
+									scrollbarpolicy_horizontal = as_needed
+									scrollbar_horizontal = {
+										using = Scrollbar_Horizontal
+									}
+									scrollwidget = {
+										hbox = {
+											name = "people_grid"
+											datamodel = "[GetPlayer.MakeScope.GetList('harem_royalty')]"
+											#spacing = 10
+											item = {
+												flowcontainer = {
+													direction = vertical
+													datacontext = "[Scope.GetCharacter]"
+	
+													portrait_head_small = {
+														blockoverride "portrait_button"
+														{
+															using = tooltip_ne
+														}
+														blockoverride "glow_visible"
+														{
+															visible = no
+														}
+														blockoverride "coa"
+														{
+														}
+														blockoverride "opinion_box"
+														{
+														}
+													}
+
+												}
+											}
+										}
+									}
+								}
+								text_label_center = {
+									text = "Mortals"
+								}
+								scrollarea = {
+									background = {
+										texture = "gfx/interface/component_tiles/tile_editbox.dds"
+										spriteType = Corneredtiled
+										spriteborder = { 5 5 }
+										texture_density = 2
+										margin_right = 5
+									}
+									layoutpolicy_horizontal = expanding
+									minimumsize = { 30 140 }
+									scrollbarpolicy_vertical = always_off
+									scrollbarpolicy_horizontal = as_needed
+									scrollbar_horizontal = {
+										using = Scrollbar_Horizontal
+									}
+									scrollwidget = {
+										hbox = {
+											name = "people_grid"
+											datamodel = "[GetPlayer.MakeScope.GetList('harem_mortal')]"
+											#spacing = 10
+											item = {
+												flowcontainer = {
+													direction = vertical
+													datacontext = "[Scope.GetCharacter]"
+	
+													portrait_head_small = {
+														blockoverride "portrait_button"
+														{
+															using = tooltip_ne
+														}
+														blockoverride "glow_visible"
+														{
+															visible = no
+														}
+														blockoverride "coa"
+														{
+														}
+														blockoverride "opinion_box"
+														{
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

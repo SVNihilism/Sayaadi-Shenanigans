@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "female_cloaks_secular_human_jaina_shoulder_mesh"
+	file = "female_cloaks_secular_human_jaina_shoulder.mesh"
+
+	meshsettings = {
+		name = "female_cloaks_secular_human_jaina_shoulderShape"
+		index = 0
+		texture_diffuse = "jaina_base_diff.dds"
+		texture_normal = "jaina_base_norm.dds"
+		texture_specular = "jaina_base_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "female_cloaks_secular_human_jaina_shoulder_entity"
+	pdxmesh = "female_cloaks_secular_human_jaina_shoulder_mesh"
+	
+}

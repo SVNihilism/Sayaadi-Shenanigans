@@ -1,0 +1,93 @@
+﻿# On actions for the lesbian orgy activity
+#wcss_harem_main_event_selection = { #Select appropriate main event or default
+#	trigger = {
+#		exists = scope:activity
+#	}
+#	random_events = {
+#		1000 = wcss_harem.3000 #Default main event
+#	}
+#}
+
+
+#wcss_harem_start_events = { # Picks out a start event
+#	events = {
+#		wcss_harem.2001 #Host: start event
+#		wcss_harem.2501 #Guest: start event
+#	}
+#}
+
+#wcss_harem_honored_guest_selection = { #Handled directly through events currently
+#	first_valid = {
+#		wcss_harem.2800
+#	}
+#}
+
+wcss_harem_event_selection = { #Picks out the event for a participant in a wcss_harem
+	trigger = { exists = scope:activity }
+	random_events = {
+		# Special category
+		999 = wcss_harem.1000 # Got a serious illness!
+		# General category
+		100 = wcss_harem.3001 # Dancer and guest
+		100 = wcss_harem.3011 # Just dessert
+		100 = wcss_harem.3021 # Spilled wine
+		100 = wcss_harem.3031 # Walk-In
+		100 = wcss_harem.3041 # Bathing
+		100 = wcss_harem.3051 # Massage
+		100 = wcss_harem.3061 # Tip or Join the Entertainment
+		100 = wcss_harem.3071 # Satisfied
+		100 = wcss_harem.3081 # Friend or lover
+		100 = wcss_harem.3091 # Deviant event
+		100 = wcss_harem.3101 # Clergy event (carnal lesbian faith)
+		500 = wcss_harem.3111 # Seduction scheme event (root scheme)
+		500 = wcss_harem.3121 # Seduction or romance scheme event (participant targeting root)
+		100 = wcss_harem.3131 # Using a toy
+		100 = wcss_harem.3151 # Family event (friendship or incest)
+		100 = wcss_harem.3161 # Clever courtesan (intrigue)
+		100 = wcss_harem.3171 # Shy/Chaste guest
+		100 = wcss_harem.3181 # Polyamory event: lesbian wife and lover
+		100 = wcss_harem.3191 # Polyamory event: threesome proposition
+		# Lifestyle Focus/Trait based Events
+		100 = wcss_harem.3601 # Martial
+		100 = wcss_harem.3611 # Learning
+		100 = wcss_harem.3621 # Intrigue
+		100 = wcss_harem.3631 # Diplomacy
+		100 = wcss_harem.3641 # Stewardship
+	}
+}
+
+wcss_harem_host_event_selection = { #Picks out the event for the host of a wcss_harem
+	trigger = { exists = scope:activity }	
+	random_events = {
+		# Special category
+		999 = wcss_harem.1000 # Got a serious illness!
+		# General category
+		100 = wcss_harem.3001 # Dancer and guest
+		100 = wcss_harem.3011 # Just dessert
+		100 = wcss_harem.3021 # Spilled wine
+		100 = wcss_harem.3031 # Walk-In
+		100 = wcss_harem.3041 # Bathing
+		100 = wcss_harem.3051 # Massage
+		100 = wcss_harem.3061 # Tip or Join the Entertainment
+		100 = wcss_harem.3071 # Satisfied
+		100 = wcss_harem.3081 # Friend or lover
+		100 = wcss_harem.3091 # Deviant event
+		100 = wcss_harem.3101 # Clergy event (carnal lesbian faith)
+		500 = wcss_harem.3111 # Seduction scheme event (root scheme)
+		500 = wcss_harem.3121 # Seduction or romance scheme event (participant targeting root)
+		100 = wcss_harem.3131 # Using a toy
+		100 = wcss_harem.3141 # (HOST ONLY) Low on wine
+		100 = wcss_harem.3151 # Family event (friendship or incest)
+		100 = wcss_harem.3161 # Clever courtesan (intrigue)
+		100 = wcss_harem.3171 # Shy/Chaste guest
+		100 = wcss_harem.3181 # Polyamory event: lesbian wife and lover
+		100 = wcss_harem.3191 # Polyamory event: threesome proposition
+		100 = wcss_harem.3201 # (HOST ONLY) Servants harassed 
+		# Lifestyle Focus/Trait based Events
+		100 = wcss_harem.3601 # Martial
+		100 = wcss_harem.3611 # Learning
+		100 = wcss_harem.3621 # Intrigue
+		100 = wcss_harem.3631 # Diplomacy
+		100 = wcss_harem.3641 # Stewardship
+	}
+}

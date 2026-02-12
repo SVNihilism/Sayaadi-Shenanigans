@@ -1,0 +1,11 @@
+﻿l_english:
+  wcss_make_lover_or_lover_progress.a.tt:0 "They want to be lovers"
+  wcss_make_lover_or_lover_progress.b.tt:0 "They will consider being lovers"
+  wcss_make_friend_or_friend_progress.a.tt:0 "They want to be friends"
+  wcss_make_friend_or_friend_progress.b.tt:0 "They will consider being friends"
+
+  relation_wcss_gene_child:0 "[wcss_gene_child|E]"
+  relation_wcss_gene_father:0 "[wcss_gene_father|E]"
+  wcss_gene_child:0 "[wcss_gene_child|E]"
+  wcss_gene_father:0 "[wcss_gene_father|E]"
+  twin_sister:0 "[twin_sister|E]"

@@ -1,0 +1,2444 @@
+﻿# We can use these modifiers for adding specific hairstyles and beards to historical and vanity characters
+
+hairstyles_scripted_characters = {
+	
+    usage = game
+    selection_behavior = weighted_random
+    priority = 9
+	
+	# Warcraft
+	no_hairstyles = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = no_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+			}
+		}   
+        weight = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					is_antonidas_trigger = yes
+					is_garithos_trigger = yes
+					is_orgrim_trigger = yes
+					is_kilrogg_trigger = yes
+					is_garrosh_trigger = yes
+					is_guldan_trigger = yes
+					is_rexxar_trigger = yes
+					is_easteregg1_trigger = yes
+					is_gelbin_trigger = yes
+					is_spasmus_trigger = yes #Patreon
+					is_attha_trigger = yes #Patreon
+					is_easteregg13_trigger = yes
+					is_mankrik_trigger = yes #Actually has a chonmage hairstyle but it's not added yet
+					is_nazgrim_trigger = yes #Actually has a chonmage hairstyle but it's not added yet
+					is_thomas_thomson_trigger = yes
+					is_silas_trigger = yes
+					is_sicco_trigger = yes
+					is_magnus_manastorm_trigger = yes
+					is_linken_trigger = yes
+					is_harlan_trigger = yes
+					is_elisande_trigger = yes
+					is_chogall_trigger = yes #Actually has a chonmage hairstyle but it's not added yet
+					is_thogrun_trigger = yes
+					is_gazlowe_trigger = yes #Actually has a topknot hairstyle but it's not added yet
+					is_revilgaz_trigger = yes #Actually has a topknot hairstyle but it's not added yet
+					is_marin_noggenfogger_trigger = yes #Actually has a corsair hairstyle but it's not added yet
+					is_renzik_trigger = yes
+					is_sneed_trigger = yes
+				}
+			}
+		}
+	}
+	
+    male_hair_western_01 = { # Bowl cut
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.0 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_aiden_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_02= { # "Medium Unkempt"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.04 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_valerius_trigger = yes
+					is_easteregg10_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_03 = { # "Very Short"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.06 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_easteregg22_trigger = yes
+			}
+			# leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_04 = { # "Fade"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.08 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_voljin_trigger = yes
+			}
+			modifier = {
+                add = 200
+				is_maraad_trigger = yes
+			}
+			modifier = {
+                add = 200
+				is_velen_trigger = yes
+			}
+			modifier = {
+                add = 200
+                is_admetius_trigger = yes
+            }
+			modifier = {
+                add = 200
+                is_proenitus_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_05 = { # "Medium Flowing"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.10 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_06 = { # "Messy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.13 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_07 = { # "Long Flowing"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.15 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				OR = {
+					is_ansirem_trigger = yes
+					is_bolvar_trigger = yes
+					is_galen_trigger = yes
+					is_medivh_trigger = yes
+					is_alonsus_trigger = yes
+					is_aedelas_trigger = yes
+					is_rhonin_trigger = yes
+					is_harku_trigger = yes #Patreon
+					is_nefarian_trigger = yes
+					is_alexi_trigger = yes
+					is_james_whitemane_trigger = yes
+					is_gustav_trigger = yes #Patreon
+					is_kalhas_trigger = yes #Patreon
+					is_nicholas_trigger = yes #Patreon
+				}
+			}
+            modifier = {
+                add = 200
+				is_uther_trigger = yes
+                age < 40
+			}
+            modifier = {
+                add = 200
+				is_tirion_trigger = yes
+                age >= 50
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_western_08 = { # "Medium Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.18 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_tortheldrin_trigger = yes
+					is_kelthuzad_trigger = yes
+					is_terenas_trigger = yes
+					is_magni_trigger = yes
+					is_anduin_wrynn_trigger = yes
+					is_easteregg7_trigger = yes # Derthon Greenwood
+					is_liam_trigger = yes
+					is_landan_trigger = yes
+					is_godfrey_trigger = yes
+					is_alexei_trigger = yes
+					is_runthemas_trigger = yes #Patreon
+					is_harvestor_trigger = yes #Patreon
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_western_09 = { # "Short Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.2 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_tirion_trigger = yes
+                age < 50
+			}
+            modifier = {
+                add = 200
+				OR = {
+                    is_markus_trigger = yes
+					is_turalyon_trigger = yes
+					is_mathias_trigger = yes
+					is_zediwan_trigger = yes
+					is_robert_whitemane_jr_trigger = yes
+					is_millhouse_manastorm_trigger = yes
+					is_harrison_jones_trigger = yes
+					is_chris_metzen_trigger = yes # Chris Metzen
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_western_10 = { # Tonsure
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.22 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_mena_01 = { # "Curly"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.24 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_isiden_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_mena_02 = { # "Medium Curls"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.27 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_lothar_trigger = yes
+                age < 50
+			}
+            modifier = {
+                add = 200
+				OR = {
+					is_llane_trigger = yes
+					is_muradin_trigger = yes
+					is_daelin_trigger = yes
+					is_anasterian_trigger = yes
+					is_saidan_trigger = yes
+					is_taelan_trigger = yes
+					is_barathen_trigger = yes
+					is_edwin_trigger = yes
+					is_darkhan_trigger = yes
+					is_weldon_trigger = yes
+					is_robert_whitemane_trigger = yes
+					is_deathwing_trigger = yes
+					is_malus_trigger = yes
+					is_iordanos_trigger = yes #Patreon
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_mena_03 = { # "Large Curly"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.30 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_mena_04 = { # "Curly Chevelure"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.32 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_easteregg4_trigger = yes # Fenarith Greenwood
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_byzantine_01 = { # "Curly Bowl"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.35 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+                add = 200
+				is_vikram_trigger = yes #Patreon
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_byzantine_02 = { # "Roman Fade"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.38 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_genn_trigger = yes
+				is_easteregg15_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_sub_saharan_01 = { # "Short Afro"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.41 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_sub_saharan_02 = { # "Medium Afro"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.43 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_jarin_trigger = yes #Patreon
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_sub_saharan_03 = { # "Short Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.46 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_rtt_01 = { # "Mullet"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.49 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+		    modifier = {
+                add = 200
+				is_salazard_trigger = yes #Patreon
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_rtt_02 = { # "Pageboy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.52 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_indian_01 = { # "Pulled Back" (Affected by Baldness)
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.54 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				OR = {
+					is_robert_garithos_trigger = yes
+					is_danath_trigger = yes
+					is_khadgar_trigger = yes
+					is_dagran_trigger = yes
+					is_zabra_trigger = yes #technically has another hairstyle but it's not added yet
+					is_easteregg2_trigger = yes # Garith Greenwood
+					is_easteregg9_trigger = yes # Ion of Hasic
+					is_easteregg12_trigger = yes # Kuk'Ald
+					is_easteregg20_trigger = yes # Thainor
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_indian_02 = { # "Pulled Back Medium Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.57 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				OR = {
+					is_gallywix_trigger = yes
+					is_malatar_trigger = yes
+					is_nathanos_trigger = yes
+					is_brann_trigger = yes
+					is_archibald_trigger = yes
+					is_rastakhan_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_indian_03 = { # "High Bun" (Affected by Baldness)
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.60 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_blackhand_trigger = yes
+					is_maim_trigger = yes
+					is_kurdran_trigger = yes
+					is_falstad_trigger = yes
+					is_voll_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_northern_01 = { # "Very Long Wild"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.62 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_arthas_trigger = yes
+			}
+            modifier = {
+                add = 200
+				is_kaelthas_trigger = yes
+			}
+            modifier = {
+                add = 200
+				is_thoras_trigger = yes
+			}
+            modifier = {
+                add = 200
+				is_malfurion_trigger = yes
+			}
+            modifier = {
+                add = 200
+				OR = {
+					is_kalandros_trigger = yes #Kalandros Patreon
+					is_kedre_trigger = yes #Patreon
+                } 
+            }
+            modifier = {
+                add = 200
+				is_easteregg5_trigger = yes # Arren Greenwood
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_northern_02 = { # "Long Wild"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.65 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_aliden_trigger = yes
+					is_varian_trigger = yes
+					is_jarod_trigger = yes
+					is_illidan_trigger = yes
+					is_durotan_trigger = yes
+					is_thrall_trigger = yes
+					is_malakk_trigger = yes
+					is_dalrend_trigger = yes
+					is_sabellian_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_northern_03 = { # "Raider"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.68 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_steppe_01 = { # "Hair Loops"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.71 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_steppe_02 = { # "Steppe Rider"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.74 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_baby = { # baby hair
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = western_baby_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    ### FP2 Hair ###
+	
+	
+	
+    male_hair_fp2_iberian_muslim_01 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.1 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+			
+		}
+	}
+	
+    male_hair_fp2_iberian_muslim_02 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.2 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp2_iberian_muslim_03 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.4 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 300
+                has_fp2_dlc_trigger = yes
+				OR = {
+                    is_sabellian_trigger = yes
+                    is_victor_trigger = yes
+                }
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+     male_hair_fp2_iberian_christian_01 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.6# For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp2_iberian_christian_02 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.84 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp2_iberian_christian_03 = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 1 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+	
+    ### FP1 Hair ###
+	
+    male_hair_fp1_01 = { # "Bondi's Cut"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.77 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_derek_proudmoore_trigger = yes
+			}
+            modifier = {
+                add = 300
+                has_fp1_dlc_trigger = yes
+				is_mathias_trigger = yes # until we have custom beard for him
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp1_02 = { # "Ponytail"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.79 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				OR = {
+					is_liam_trigger = yes
+					is_leeroy_jenkins_trigger = yes
+					is_easteregg14_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp1_03 = { # "Short Sides"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.82 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_vejcovod_trigger = yes #Patreon
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp1_04 = { # "Jarl"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.84 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				is_zediwan_trigger = yes #Patreon
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp1_05 = { # "Long Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.87 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				OR = {
+					is_darkhan_trigger = yes
+					is_jarod_trigger = yes
+					is_rhonin_trigger = yes
+					is_vanndar_trigger = yes
+					is_harkyn_grymstone_trigger = yes
+				}
+			}
+            modifier = {
+				add = 300
+				has_fp1_dlc_trigger = yes
+				is_easteregg18_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_fp1_06 = { # "Young Vigman"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.9 # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 300
+                has_fp1_dlc_trigger = yes
+				is_deathwing_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_fp1_07 = { # "Old Berserker"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.93 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_alexandros_trigger = yes
+			}
+			modifier = {
+				add = 200
+				is_tandred_proudmoore_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				is_saidan_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				is_ansirem_trigger = yes
+			}
+            modifier = {
+                add = 300
+                is_robert_whitemane_trigger = yes
+                has_fp1_dlc_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    male_hair_fp1_08 = { # "Long with Two Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.96 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_drekthar_trigger = yes
+			}
+            modifier = {
+                add = 300
+                has_fp1_dlc_trigger = yes
+				is_malfurion_trigger = yes
+			}
+            modifier = {
+                add = 300
+                has_fp1_dlc_trigger = yes
+				OR = {
+                    is_tortheldrin_trigger = yes
+                    is_mordekain_trigger = yes
+                }
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    male_hair_fp1_09 = { # "Single Large Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.99 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_nazgrel_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+
+    m_hair_ep3_byzantine_04 = { # "Iconic Locks"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.99 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_arassarn_trigger = yes #Patreon
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    # Custom Hairstyles
+	
+    # Warcraft
+    uther_hair = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+				gene = hairstyles
+				template = uther_hair
+                value = 0 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_uther_trigger = yes
+                age >= 40
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+	# Warcraft
+	male_hair_long_with_ponytail = { # "Long with Ponytail"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = wc_scripted_character_hairstyles_01
+                value = 0.68
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_grommash_trigger = yes
+					is_lorthemar_trigger = yes
+					is_nozdormu_trigger = yes
+					is_mathemarion_trigger = yes #Patreon
+					is_groth_trigger = yes
+					is_malygos_trigger = yes
+				}
+			}
+
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+
+
+##############################################################################################################################################
+##############################################################################################################################################
+#									#
+# 			Female Hairstyles		#
+#									#
+##############################################################################################################################################
+##############################################################################################################################################
+
+
+
+
+    female_hair_western_01 = { # "Crown Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.0 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_western_02= { # "Very Long Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.04 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_jandice_trigger = yes
+					is_karandra_trigger = yes
+					is_tess_trigger = yes
+					is_sylvanas_trigger = yes
+					is_draka_trigger = yes
+					is_easteregg3_trigger = yes # Aliza Colton
+					is_easteregg6_trigger = yes # Evelyn Smith
+					is_onyxia_trigger = yes
+					is_sally_whitemane_trigger = yes
+					is_easteregg19_trigger = yes # Monóri (Easter Egg)
+				}
+			}
+            modifier = {
+                add = 200
+                is_thenell_trigger = yes # Thenell Shadowmoon(patron)
+            }
+            modifier = {
+                add = 200
+                is_savaena_trigger = yes # Savaena Windsong(patron)
+            }       
+            modifier = {
+				add = 200
+				is_shar_trigger = yes # Shar Runeguard (Patron)
+			}
+            modifier = {
+				add = 200
+				is_lilith_trigger = yes # Lilith Nightshade (Patron)
+			}
+            modifier = {
+				add = 200
+				is_fyn_trigger = yes # Sahala Silver (Patron)
+			}
+            modifier = {
+				add = 200
+				is_sophia_w_trigger = yes # Sophia W
+			}
+            modifier = {
+				add = 200
+				is_onyxia_trigger = yes
+			}
+            modifier = {
+				add = 100
+				is_nazri_trigger = yes
+			}
+            modifier = {
+				add = 100
+				is_nehra_trigger = yes
+			}
+            modifier = {
+				add = 200
+				is_sally_whitemane_trigger = yes
+			}
+            modifier = {
+                add = 200
+                is_mahiro_trigger = yes # Mahiro Shadyneth(patron)
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_western_03 = { # "Bun"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.08 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				OR = {
+					is_taelia_trigger = yes
+					is_katherine_proudmoore_trigger = yes
+					is_elena_mograine_trigger = yes
+					is_easteregg8_trigger = yes # Melyina Greenwood
+					is_lianne_trigger = yes
+					is_catelyn_trigger = yes
+					is_odilia_whitemane_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_western_04 = { # "Very Long Double Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.10 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+                is_mary_whitemane_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_western_05 = { # "Medium Wavy"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.13 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_western_06 = { # "Large Bun"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.15 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_aliberta_garithos_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_western_07 = { # "Fish Tails"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.18 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_western_08 = { # "Double Buns"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.21 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				OR = {
+					is_moira_trigger = yes
+					is_varia_trigger = yes
+					is_sintharia_trigger = yes
+					is_patricia_whitemane_trigger = yes
+				}
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_western_09 = { # "Twist"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.23 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_mia_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_western_10 = { # "Ribboned"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.26 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_taria_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_mena_01 = { # "Gilded Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.28 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_mena_02 = { # "Long Curly"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.31 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_nyxondra_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_byzantine_01 = { # "Spiral Ribboned"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.34 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_beve_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_byzantine_02 = { # "Crown Curls"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.369 # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+                is_carmelia_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_sub_saharan_01 = { # "Medium Afro"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.39 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_sub_saharan_02 = { # "Medium Thin Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.42 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_sub_saharan_03 = { # "Short Thin Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.45 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_rtt_01 = { # "Miller"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.49 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_millificent_manastorm_trigger = yes
+			}
+            modifier = {
+				add = 200
+                is_garona_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_rtt_02 = { # "Jeanne d'Arc"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.51 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_moira_trigger = yes
+			}
+            modifier = {
+				add = 200
+				is_vanessa_trigger = yes
+			}
+            modifier = {
+				add = 200
+				is_sahala_trigger = yes # Sahala Silver (Patron)
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_rtt_03 = { # "Miller Highlights"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.54 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_indian_01 = { # "Jeweled Bun"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.57 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_indian_02 = { # "Neck Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.61 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_ysera_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_indian_03 = { # "Wavy Sides"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.63 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_tiffin_trigger = yes
+			}
+            modifier = {
+				add = 200
+				is_talanji_trigger = yes
+            }
+            modifier = {
+                add = 200
+				is_tyrande_trigger = yes
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_northern_01 = { # "Back Knot"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.66 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_jaina_proudmoore_trigger = yes
+			}
+			modifier = {
+				add = 200
+				OR = {
+                    is_ishanah_trigger = yes
+                    is_alu_trigger = yes
+                }
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_northern_02 = { # "Single Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.7 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+				is_isolde_trigger = yes
+			}
+            modifier = {
+                add = 200
+				is_maiev_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_northern_03 = { # "Long with Crown Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.73 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+                is_calia_trigger = yes
+			}
+            modifier = {
+                add = 200
+				is_illucia_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_steppe_01 = { # "Twin Braids with Ribbons"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.76 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_urukal_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_steppe_02 = { # "Rolled Up Braids"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.79 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 200
+				is_ateena_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    ### FP2 Hair ###
+	
+    female_hair_fp2_iberian_muslim_01 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.1 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+				is_sintharia_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    } 
+
+    female_hair_fp2_iberian_muslim_01_common = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = fp2_hairstyles_iberian_muslim_straight
+                value = 0.341 # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+				is_shar_trigger = yes # Shar Runeguard (Patron)
+                has_fp2_dlc_trigger = yes
+			}
+        }
+    }
+
+    female_hair_fp2_iberian_muslim_02 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.2 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+				is_nyxondra_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_fp2_iberian_muslim_03 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.4 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp2_iberian_christian_01 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.6 # For the randomness to work correctly
+			}
+		}
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+				is_lilith_trigger = yes # Lilith Nightshade (Patron)
+                has_fp2_dlc_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+				is_onyxia_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+                is_nazri_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+                is_nehra_trigger = yes
+			}
+            modifier = {
+                add = 300
+                has_fp2_dlc_trigger = yes
+                OR = {
+                    is_mahiro_trigger = yes # Mahiro Shadyneth(patron)
+                    is_zula_trigger = yes 
+                }
+            }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    female_hair_fp2_iberian_christian_02 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 0.83 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+				is_fyn_trigger = yes # Sahala Silver (Patron)
+                has_fp2_dlc_trigger = yes
+			}
+            modifier = {
+				add = 300
+                has_fp2_dlc_trigger = yes
+				OR = {
+                    is_sally_whitemane_trigger = yes
+                    is_jeimy_trigger = yes
+                }
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+			modifier = {
+                add = 300
+				is_sylvanas_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp2_iberian_christian_03 = { # Let out but with smaller braids braided in
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_03
+                value = 1 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+				is_sahala_trigger = yes # Sahala Silver (Patron)
+                has_fp2_dlc_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+	
+	
+    ### FP1 Hair ###
+	
+    female_hair_fp1_01 = { # "Braided Sides"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.83 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+                modifier = {
+                    add = 200
+                    is_kargatha_trigger = yes
+                }
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp1_02 = { # "Messy Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.86 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 300
+				is_jaina_proudmoore_trigger = yes
+                has_fp1_dlc_trigger = yes
+			}
+			modifier = {
+				add = 200
+				is_alleria_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp1_03 = { # "Pigtails"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.90 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+				is_beve_trigger = yes
+                has_fp1_dlc_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp1_04 = { # "Norse Crown Braid"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.92 # For the randomness to work correctly
+            }
+        } 
+        weight = {
+            base = 0
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp1_05 = { # "Long with Ribbons"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.95 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+			modifier = {
+				add = 200
+				is_griselda_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+		}
+	}
+	
+    female_hair_fp1_06 = { # "Brigand's Daughter"
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.98 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp1_dlc_trigger = yes
+				is_vereesa_trigger = yes
+			}
+            modifier = {
+				add = 250
+                has_fp1_dlc_trigger = yes
+				is_sally_whitemane_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    # FP3 hair
+    f_hair_fp3_iranian_03_common = { # Medium Buns
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.98 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 300
+                has_fp3_dlc_trigger = yes
+                OR = {
+				    is_lettania_trigger = yes
+                }
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+
+    f_hair_alex_01 = { # Medium Buns
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = ss_hairstyles
+                value = 0.98 # For the randomness to work correctly
+			}
+		}   
+        weight = {
+            base = 0
+            modifier = {
+				add = 400
+                is_alexstrasza_trigger = yes
+			}
+            # leave this modifier last
+            modifier = {
+                factor = 0
+                has_no_portrait_trigger = yes
+			}
+        }
+    }
+}

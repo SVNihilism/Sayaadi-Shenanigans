@@ -1,0 +1,19 @@
+pdxmesh = {
+	name = "jaina_staff_mesh"
+	file = "jaina_staff.mesh"
+
+	meshsettings = {
+		name = "jaina_staffShape"
+		index = 0
+		texture_diffuse = "jaina_base_diff.dds"
+		texture_normal = "jaina_base_norm.dds"
+		texture_specular = "jaina_base_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "jaina_staff_entity"
+	pdxmesh = "jaina_staff_mesh"
+}

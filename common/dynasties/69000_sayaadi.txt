@@ -1,0 +1,6 @@
+﻿### Arakal
+69096 = {
+	name = "Arakal"
+	culture = sayaadi
+	motto = Arkal_motto
+}

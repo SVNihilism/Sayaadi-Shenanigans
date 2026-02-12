@@ -1,0 +1,446 @@
+﻿wcss_virtuous_harem = { # Virtuous orgy - carnal faith
+	icon = wcss_faith
+	is_valid = {
+		is_current_phase_active = yes
+		any_attending_character = {
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+			faith = { trait_is_virtue = lustful }
+		}
+	}
+
+	weight = {
+		value = 1
+	}
+
+	effect = {		
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				faith = { trait_is_virtue = lustful }
+			}
+			save_scope_as = first
+		}
+		
+		add_activity_log_entry = {
+			key = wcss_virtuous_harem
+			tags = { pulse_action }
+			character = scope:first
+			
+			scope:first = {
+				add_piety = minor_piety_gain
+			}
+		}
+	}
+}
+
+wcss_guest_enjoys_courtesan_attention = { # Guest enjoys attentions of courtesans
+	icon = lover
+	is_valid = {
+		is_current_phase_active = yes
+		any_attending_character = {
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+			has_personality_introverted_trigger = no
+		}
+		NOT = {
+			has_activity_type = wcss_activity_harem
+			has_activity_option = {
+				category = wcss_harem_option_entertainment
+				option = wcss_harem_entertainment_bad
+			}
+		}
+	}
+
+	weight = {
+		value = 1
+		if = {
+			limit = {
+				scope:activity = {
+					has_activity_type = wcss_activity_harem
+					has_activity_option = {
+						category = wcss_harem_option_entertainment
+						option = wcss_harem_entertainment_normal
+					}
+				}
+			}
+			add = -0.5
+		}
+	}
+
+	effect = {		
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				has_personality_introverted_trigger = no
+			}
+			save_scope_as = first
+		}
+
+		
+		add_activity_log_entry = {
+			key = wcss_guest_enjoys_courtesan_attention
+			tags = { pulse_action }
+			character = scope:first
+			
+			scope:first = {
+				stress_impact = {
+					base = medium_stress_loss
+					lustful = minor_stress_impact_loss
+					rakish = minor_stress_impact_loss
+					witch = minor_stress_impact_loss
+				}
+				if = {
+					limit = {
+						root = {
+							has_activity_type = wcss_activity_harem
+							has_activity_option = {
+								category = wcss_harem_option_entertainment
+								option = wcss_harem_entertainment_good
+							}
+						}						
+					}
+					scope:host = { add_prestige = minor_prestige_gain }
+					add_opinion = {
+						modifier = pleased_opinion
+						target = scope:host
+						opinion = 10
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_dancers_entertain_guests = { # Guests are entertained by dancers
+	icon = positive
+	is_valid = {
+		is_current_phase_active = yes
+		has_activity_type = wcss_activity_harem
+		NOT = {
+			has_activity_option = {
+				category = wcss_harem_option_entertainment
+				option = wcss_harem_entertainment_bad
+			}
+		}
+		any_attending_character = {
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+			likes_character_trigger = { CHARACTER = scope:host }
+		}
+	}
+
+	weight = {
+		value = 1
+		if = {
+			limit = {
+				has_activity_type = wcss_activity_harem
+				has_activity_option = {
+					category = wcss_harem_option_entertainment
+					option = wcss_harem_entertainment_normal
+				}
+			}
+			add = -0.5
+		}
+	}
+
+	effect = {			
+		add_activity_log_entry = {
+			key = wcss_dancers_entertain_guests
+			tags = { pulse_action }
+			character = scope:host
+
+			if = {
+				limit = {
+					has_activity_type = wcss_activity_harem
+					has_activity_option = {
+						category = wcss_harem_option_entertainment
+						option = wcss_harem_entertainment_good
+					}						
+				}
+				scope:host = { add_prestige = medium_prestige_gain }					
+			}
+			else = {
+				scope:host = { add_prestige = minor_prestige_gain }
+			}			
+			every_attending_character = {
+				limit = { 
+					wcss_harem_pulse_action_trigger = yes
+					location = scope:province
+					likes_character_trigger = { CHARACTER = scope:host }
+				}
+				custom = wcss_every_attendee
+				if = {
+					limit = {
+						root = {
+							has_activity_type = wcss_activity_harem
+							has_activity_option = {
+								category = wcss_harem_option_entertainment
+								option = wcss_harem_entertainment_good
+							}
+						}						
+					}
+					add_opinion = {
+						modifier = impressed_opinion
+						target = scope:host
+						opinion = 20
+					}						
+				}
+				else = {
+					add_opinion = {
+						modifier = impressed_opinion
+						target = scope:host
+						opinion = 10
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_drank_good_wine = { # Guest drank good wine
+	icon = courtly
+	is_valid = {
+		is_current_phase_active = yes
+		any_attending_character = {
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+			NOR = { 
+				has_trait = temperate 
+				faith = { trait_is_sin = drunkard }
+			}
+			likes_character_trigger = { CHARACTER = scope:host }
+		}
+		NOT = {
+			has_activity_type = wcss_activity_harem
+			has_activity_option = {
+				category = wcss_harem_option_luxuries
+				option = wcss_harem_luxuries_bad
+			}
+		}
+	}
+
+	weight = {
+		value = 1
+		if = {
+			limit = {
+				has_activity_type = wcss_activity_harem
+				has_activity_option = {
+					category = wcss_harem_option_luxuries
+					option = wcss_harem_luxuries_normal
+				}
+			}
+			add = -0.5
+		}
+	}
+
+	effect = {		
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				NOR = { 
+					has_trait = temperate 
+					faith = { trait_is_sin = drunkard }
+				}
+				likes_character_trigger = { CHARACTER = scope:host }
+			}
+			save_scope_as = first
+		}
+
+		
+		add_activity_log_entry = {
+			key = wcss_drank_good_wine
+			tags = { pulse_action }
+			character = scope:first
+			
+			scope:first = {
+				stress_impact = {
+					base = medium_stress_loss
+					drunkard = minor_stress_impact_loss
+					lifestyle_reveler = minor_stress_impact_loss
+				}
+			}
+			if = {
+				limit = {
+					has_activity_type = wcss_activity_harem
+					has_activity_option = {
+						category = wcss_harem_option_luxuries
+						option = wcss_harem_luxuries_good
+					}					
+				}
+				scope:first = {
+					add_opinion = {
+						modifier = grateful_opinion
+						target = scope:host
+						opinion = 10
+					}
+				}
+			}
+		}
+	}	
+}
+
+wcss_guests_charm_others = { # Charming guest
+	icon = lover
+	is_valid = {
+		is_current_phase_active = yes
+		any_attending_character = {
+			count >= 2
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+		}
+	}
+
+	weight = 1
+
+	effect = {
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+			}
+			weight = {
+				base = 1
+				modifier = {
+					add = 10
+					has_personality_extroverted_trigger = yes
+				}
+				modifier = {
+					factor = 5
+					OR = {
+						has_trait = seducer
+						has_focus = intrigue_temptation_focus
+					}
+				}
+			}
+			save_scope_as = first
+		}
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				NOT = { this = scope:first }
+			}
+			weight = {
+				base = 1
+				modifier = {
+					add = 10
+					has_personality_introverted_trigger = no
+				}
+				modifier = {
+					factor = 0.1
+					NOT = { 
+						scope:first = { 
+							likes_character_trigger = { CHARACTER = prev } 
+						}
+					}
+				}
+			}
+			save_scope_as = second
+		}
+		add_activity_log_entry = {
+			key = wcss_guests_charm_others
+			tags = { pulse_action }
+			character = scope:first
+
+			scope:second = {
+				add_opinion = {
+					modifier = romance_opinion
+					target = scope:first
+					opinion = 20
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							can_set_relation_potential_lover_trigger = { CHARACTER = scope:first }
+						}
+						set_relation_potential_lover = scope:first
+					}
+				}
+			}
+		}
+	}
+}
+
+wcss_guests_are_intimate = { # PDA
+	icon = lover
+	is_valid = {
+		is_current_phase_active = yes
+		any_attending_character = {
+			wcss_harem_pulse_action_trigger = yes
+			location = scope:province
+			any_relation = {
+				type = lover
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				is_participant_in_activity = root		
+			}
+		}
+	}
+
+	weight = 1
+
+	effect = {
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				any_relation = {
+					type = lover
+					wcss_harem_pulse_action_trigger = yes
+					location = scope:province
+					is_participant_in_activity = root		
+				}
+			}
+			save_scope_as = first
+		}
+		random_attending_character = {
+			limit = {
+				wcss_harem_pulse_action_trigger = yes
+				location = scope:province
+				NOT = { this = scope:first }
+				has_relation_lover = scope:first
+			}
+			save_scope_as = second
+		}
+		add_activity_log_entry = {
+			key = wcss_guests_are_intimate
+			tags = { pulse_action }
+			character = scope:first
+
+			scope:first = {
+				stress_impact = {
+					base = medium_stress_loss
+					lustful = minor_stress_impact_loss
+					rakish = minor_stress_impact_loss
+					witch = minor_stress_impact_loss
+				}
+				hidden_effect = {
+					add_opinion = {
+						modifier = romance_opinion
+						target = scope:second
+						opinion = 20
+					}					
+				}
+			}
+			scope:second = {
+				stress_impact = {
+					base = medium_stress_loss
+					lustful = minor_stress_impact_loss
+					rakish = minor_stress_impact_loss
+					witch = minor_stress_impact_loss
+				}
+				hidden_effect = {
+					add_opinion = {
+						modifier = romance_opinion
+						target = scope:first
+						opinion = 20
+					}					
+				}
+			}
+		}
+	}
+}

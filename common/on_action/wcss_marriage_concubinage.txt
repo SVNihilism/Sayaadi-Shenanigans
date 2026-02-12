@@ -1,0 +1,162 @@
+﻿# Characters getting married
+# root = Major partner of the marriage
+# scope:spouse = Minor partner of the marriage
+on_marriage = {
+	on_actions = {
+		wcss_lesbian_divinity_spouse_update
+		wcss_lesbian_exchange_male_for_female_spouse
+	}
+}
+
+# Characters get divorced in any way
+# root = character initiating the divorce
+# scope:spouse = the divorced spouse
+# scope:reason = flag:script or flag:faith
+on_divorce = {
+	on_actions = {
+		delay = { days = 1 } # Delay is necessary for this to work correctly. Why? loldunno
+		wcss_lesbian_divinity_spouse_update
+	}
+}
+
+# Character ceases to be another's concubine - added effect to remove divine concubines modifier
+# root = the concubinist
+# scope:concubine = the concubine
+# scope:reason = flag:death, flag:faith, or flag:script
+on_concubinage_end = {
+	on_actions = {
+		wcss_remove_divine_concubines
+	}
+}
+
+on_concubinage = {
+	on_actions = {
+		wcss_add_divine_concubines
+	}
+}
+
+# Update lesbian modifier
+wcss_lesbian_divinity_spouse_update = {
+	trigger = { # Trigger to attempt to save performance, only worry about this if they have the modifier or a relevant faith
+		is_female = yes
+		OR = {
+			faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			any_spouse = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+			}
+			has_character_modifier = wcss_lesbian_union_concubines
+			has_character_modifier = wcss_lesbian_union_polygamy
+			has_character_modifier = wcss_lesbian_union_monogamy
+		}
+	}
+	effect = {
+		wcss_update_lesbian_marriage_effect = yes
+		every_spouse = { wcss_update_lesbian_marriage_effect = yes } # Because the related on_actions make a distinction between an initiator/primary and secondary, this should not cause an infinite loop or excess triggers
+	}
+}
+
+wcss_lesbian_divinity_spouse_delayed_update = {
+	trigger = { # Trigger to attempt to save performance, only worry about this if they have the modifier or a relevant faith
+		is_female = yes
+		any_spouse = {
+			OR = {
+				faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+				has_character_modifier = wcss_lesbian_union_concubines
+				has_character_modifier = wcss_lesbian_union_polygamy
+				has_character_modifier = wcss_lesbian_union_monogamy
+			}
+		}
+	}
+	effect = {
+		every_spouse = {
+			trigger_event = {
+				days = 1
+				on_action = wcss_lesbian_divinity_spouse_update
+			}
+		}
+	}
+}
+
+## New On_action for AI lesbian marriage. We're going to skim this down for now.
+wcss_lesbian_marriage_pulse = {
+	trigger = {
+		is_ai = yes
+		is_landed = yes
+		is_female = yes
+		is_adult = yes
+		is_imprisoned = no
+		can_marry_common_trigger = yes # This trigger ignores current marriage/concubine status.
+		is_betrothed = no
+		OR = {
+			is_married = no
+			wcss_has_expected_num_wives_trigger = no # Do we have the right number of wives? Slightly different check for polygamy.
+		}
+		faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+	}
+	effect = {
+		if = { # Check if character is married to family of top_liege. For now we're only checking top_liege to keep things simple.
+			limit = {
+				is_independent_ruler = no
+				exists = top_liege
+			}
+			top_liege = { save_temporary_scope_as = wcss_liege }
+			if = {
+				limit = {
+					any_spouse = {
+						is_female = no
+						wcss_is_close_family_relation_of_trigger = { CHARACTER = scope:wcss_liege }
+					}
+				}
+				random = {
+					chance = 50
+					opinion_modifier = {
+						who = root
+						opinion_target = scope:wcss_liege
+						multiplier = -1
+						min = -50
+						max = 50
+					}
+					ai_value_modifier = {
+						ai_zeal = 0.25
+						min = 0
+					}
+					wcss_lesbian_marriage_pulse_monthly_effect = yes # Chance to not fire effect if we're married to a male close relation of top_liege.
+				}
+			}
+			else = { wcss_lesbian_marriage_pulse_monthly_effect = yes } # If we're not married to any relation of top_liege just fire the effect.
+		}
+		else = { wcss_lesbian_marriage_pulse_monthly_effect = yes } # Ditto if we don't have a top_liege.
+	}
+}
+
+wcss_lesbian_exchange_male_for_female_spouse = { # For lesbian divinity followers, we may cancel base game marriages
+	trigger = {
+		is_landed = yes
+		is_female = yes
+		scope:spouse = { is_female = no }
+		faith = { has_doctrine_parameter = wcss_lesbian_marriage_parameter }
+		OR = {
+			has_sexuality = homosexual
+			has_sexuality = bisexual
+		}
+		NOT = {
+			any_liege_or_above = {
+				scope:spouse = {
+					wcss_is_close_family_relation_of_trigger = { CHARACTER = prev }
+				}
+			}
+		}
+		NOT = { has_character_flag = wcss_delay }
+	}
+	effect = {
+		add_character_flag = {
+			flag = wcss_delay
+			days = 5
+		}
+		trigger_event = {
+			delayed = yes
+			days = 1
+			on_action = wcss_lesbian_marriage_pulse
+		}
+	}
+}

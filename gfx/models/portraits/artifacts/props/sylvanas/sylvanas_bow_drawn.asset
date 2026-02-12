@@ -1,0 +1,19 @@
+pdxmesh = {
+	name = "sylvanas_bow_drawn_mesh"
+	file = "sylvanas_bow_drawn.mesh"
+
+	meshsettings = {
+		name = "sylvanas_bow_drawnShape"
+		index = 0
+		texture_diffuse = "sylvanas_diff.dds"
+		texture_normal = "sylvanas_norm.dds"
+		texture_specular = "sylvanas_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "sylvanas_bow_drawn_entity"
+	pdxmesh = "sylvanas_bow_drawn_mesh"
+}

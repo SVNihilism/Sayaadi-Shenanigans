@@ -1,0 +1,280 @@
+﻿doctrine_homosexuality = { # Added embraced
+	group = "crimes"
+	doctrine_homosexuality_crime = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_homosexuality_crime }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_homosexuality_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = wcss_doctrine_homosexuality_embraced }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = { homosexuality_illegal = yes }
+	}
+	doctrine_homosexuality_shunned = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_homosexuality_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = wcss_doctrine_homosexuality_embraced }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = { homosexuality_shunned = yes }
+	}
+	doctrine_homosexuality_accepted = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_homosexuality_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_homosexuality_crime }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = { homosexuality_accepted = yes }
+	}
+	wcss_doctrine_homosexuality_embraced = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = wcss_doctrine_homosexuality_embraced }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_homosexuality_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_homosexuality_crime }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
+		}
+		parameters = {
+			homosexuality_accepted = yes
+			wcss_homosexuality_embraced = yes
+			wcss_homosexual_consorts_parameter = yes
+		}
+	}
+}
+
+wcss_doctrine_lesbian_category = {
+	group = "marriage"
+
+	wcss_doctrine_no_lesbian_doctrine = { # None. Will remove the category entirely upon creation (via on_action)
+		piety_cost = {
+			if = {
+				limit = { 
+					has_doctrine_parameter = wcss_lesbian_marriage_parameter
+				}
+				value = faith_tenet_cost_massive	
+			}
+			else = { value = 0 }
+		}
+	}
+
+	wcss_doctrine_lesbian_marriage = { # Allows for lesbian marriage, but no other effects. Fewer requirements than other doctrines.
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						has_doctrine = doctrine_homosexuality_accepted
+						has_doctrine = wcss_doctrine_homosexuality_embraced
+						has_doctrine = wcss_doctrine_lesbian_divinity
+						has_doctrine = wcss_doctrine_sapphic_exaltation
+					}
+				}
+				value = faith_tenet_cost_low				
+			}
+			else_if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+						religion_tag = hinduism_religion
+					}
+				}
+				value = faith_tenet_cost_high
+			}
+			else_if = {
+				limit = {
+					has_doctrine = abrahamic_hostility_doctrine
+				}
+				value = faith_tenet_cost_massive
+			}
+			else = {
+				value = faith_tenet_cost_mid
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = wcss_doctrine_lesbian_marriage }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+	
+		parameters = {
+			wcss_lesbian_marriage_parameter = yes	# Enables lesbian marriage.
+			wcss_lesbian_consorts_parameter = yes # Piety bonus for female consorts.
+		}
+	}
+
+	wcss_doctrine_lesbian_divinity = { # Reveres lesbian marriage, with emphasis on traditional exclusive marriage values. Still respects polyamory if selected.
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						has_doctrine = doctrine_homosexuality_accepted
+						has_doctrine = wcss_doctrine_homosexuality_embraced
+						has_doctrine = wcss_doctrine_lesbian_marriage
+					}
+				}
+				value = faith_tenet_cost_low				
+			}
+			else_if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+						religion_tag = hinduism_religion
+					}
+				}
+				value = faith_tenet_cost_high
+			}
+			else_if = {
+				limit = {
+					has_doctrine = abrahamic_hostility_doctrine
+				}
+				value = faith_tenet_cost_massive
+			}
+			else = {
+				value = faith_tenet_cost_mid
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = wcss_doctrine_lesbian_divinity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			custom_description = {
+				text = wcss_incompatible_doctrine_clerical_gender_male_only_trigger
+				NOT = { doctrine:doctrine_clerical_gender_male_only = { is_in_list = selected_doctrines } }
+			}
+			custom_description = { 
+				text = wcss_requires_doctrine_female_dominated_trigger
+				doctrine:doctrine_gender_female_dominated = { is_in_list = selected_doctrines }
+			}			
+		}	
+
+		parameters = {
+			wcss_lesbian_marriage_parameter = yes
+			wcss_lesbian_consorts_parameter = yes
+			wcss_lesbian_dlc2gw_parameter = yes # Piety boost for Lesbian grand weddings.
+		}	
+		
+		traits = {
+
+		}
+	}
+
+	wcss_doctrine_sapphic_exaltation = { # Allows for lesbian marriage but celebrates lesbian debauchery. Sexual relations between women are emphasized.
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						has_doctrine = tenet_carnal_exaltation
+						has_doctrine = tenet_polyamory
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					OR = {
+						religion_tag = hinduism_religion		
+					}
+				}
+				value = faith_tenet_cost_mid				
+			}
+			else_if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+						has_doctrine = abrahamic_hostility_doctrine
+					}
+				}
+				value = faith_tenet_cost_massive
+			}	
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = wcss_doctrine_sapphic_exaltation }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}		
+
+		can_pick = {
+			custom_description = {
+				text = wcss_incompatible_doctrine_clerical_gender_male_only_trigger
+				NOT = { doctrine:doctrine_clerical_gender_male_only = { is_in_list = selected_doctrines } }
+			}
+			custom_description = { 
+				text = wcss_requires_doctrine_female_dominated_trigger
+				doctrine:doctrine_gender_female_dominated = { is_in_list = selected_doctrines }
+			}			
+			custom_description = {
+				text = wcss_requires_tenet_carnal_exaltation_or_hedonistic_trigger
+				OR = { 
+					doctrine:tenet_carnal_exaltation = { is_in_list = selected_doctrines }
+					doctrine:tenet_hedonistic = { is_in_list = selected_doctrines } 
+				}
+			}
+			custom_description = { 
+				text = wcss_requires_doctrine_female_adultery_accepted_trigger
+				NOR = {
+					doctrine:doctrine_adultery_women_crime = { is_in_list = selected_doctrines }
+					doctrine:doctrine_adultery_women_shunned = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			wcss_lesbian_marriage_parameter = yes
+			wcss_lesbian_consorts_parameter = yes
+			no_unfaithfulness_penalty_active = yes
+			wcss_piety_gain_for_conversions = yes # Piety gain for lesbian conversion, seduction, and romance schemes.
+			wcss_harem_piety_gain_or_loss = yes # Piety gain for Sapphic debauche.
+			wcss_harem_fervor_gain = yes # Fervor gain for Sapphic debauche.
+		}
+
+		traits = {
+			virtues = { 
+				lustful 
+			}
+			sins = { 
+				chaste
+				celibate
+			}
+		}
+	}	
+}
+

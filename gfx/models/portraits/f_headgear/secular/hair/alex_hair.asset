@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "alex_hair_mesh"
+	file = "alex_hair.mesh"
+
+	meshsettings = {
+		name = "alex_hairShape"
+		index = 0
+		texture_diffuse = "alex_hair_diff.dds"
+		texture_normal = "default_yellow_normal.dds"
+		texture_specular = "dress_properties.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "alex_hair_entity"
+	pdxmesh = "alex_hair_mesh"
+	
+}

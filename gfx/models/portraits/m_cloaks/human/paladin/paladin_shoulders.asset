@@ -1,0 +1,28 @@
+pdxmesh = {
+	name = "paladin_shoulders_mesh"
+	file = "paladin_shoulders.mesh"
+
+	meshsettings = {
+		name = "paladin_shouldersShape"
+		index = 0
+		texture_diffuse = "arthas_diff.dds"
+		texture_normal = "arthas_norm.dds"
+		texture_specular = "dress_properties.dds"
+		shader = "portrait_attachment_pattern"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "paladin_shoulders_entity"
+	pdxmesh = "paladin_shoulders_mesh"
+	
+	game_data = {
+		portrait_entity_user_data = {	
+			portrait_accessory = {
+				pattern_mask = "gfx/models/portraits/attachments/female_clothes/secular/demon/succubus/dress_mask.dds"	#Any 4-channel texture. Each channel will be used to mask a pattern from the variation object
+				variation = "succubus_pattern_01"	#A "variation" object in gfx/portraits/accessory_variations/
+			}
+		}
+	}
+}

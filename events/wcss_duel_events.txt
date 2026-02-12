@@ -1,0 +1,24 @@
+﻿namespace = wcss_duel
+
+
+wcss_duel.0001  = {
+	hidden = yes
+	immediate = {
+		trigger_event = {
+			id = LIANNE.0006
+		}
+		send_interface_toast = {
+			title = perk_interaction.0101.victor_toast.t
+			left_icon = scope:sc_loser
+			right_icon = scope:target
+		}
+		if = {
+			limit = {
+				scope:sc_loser = character:450004
+			}
+			death = {
+				death_reason = death_assassinated_by_soldiers
+			}
+		}
+	}
+}

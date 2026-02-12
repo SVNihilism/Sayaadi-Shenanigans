@@ -1,0 +1,24 @@
+﻿## Opinion modifiers related to heterosexual female concubines of female rulers
+wcss_hetero_lesbian_concubine_opinion = {
+	opinion = -50
+	stacking = no
+}
+
+wcss_heretical_concubine_opinion = {
+	opinion = -30
+	stacking = no
+}
+
+wcss_hetero_lesbian_concubine_opinion_decaying = {
+	opinion = -50
+	decaying = yes
+	years = 20
+	stacking = yes
+}
+
+wcss_heretical_concubine_opinion_decaying = {
+	opinion = -30
+	decaying = yes
+	years = 20
+	stacking = yes
+}

@@ -1,0 +1,31 @@
+﻿l_english:
+  #New Traditions
+  wcss_tradition_samesex_marriage_name:0 "Same-Sex Marriage"
+  wcss_tradition_samesex_marriage_desc:1 "In this culture, members of the same gender are permitted to marry."
+  culture_parameter_wcss_samesex_marriage_tradition_parameter:0 "Same-sex [marriage|E] is allowed"
+
+  wcss_tradition_lilith_matriarchy_name:0 "Lilith's Matriarchy"
+  wcss_tradition_lilith_matriarchy_desc:1 "This culture dictates that only the strongest women may rule."
+  wcss_has_dynasty_matriarchy_desc:0 "You must be a member of a Matriarchal [dynasty|E]"
+  wcss_tradition_lilith_matriarchy_requirement:0 "You must have the $martial_custom_female_only_name$ [culture_pillar|E]"
+
+  wcss_tradition_female_only_inheritance_requirements:0 "You must follow a [GetFaithDoctrine('doctrine_gender_female_dominated').GetBaseName] [faith|E], be a member of a [dynasty|E] with the $wcss_matriarchy_modifier$ dynasty modifier, or your culture must have the #V $heritage_akan_name$#!, #V $heritage_west_african_name$#!, #V $heritage_senegambian_name$#!, or #V $heritage_yoruba_name$#! [heritage|E]"
+  wcss_five_female_rulers_or_divine_matriachs_desc:1 "The [culture|E] does not have at least #V 5#! female [rulers|E] of rank [count|E] or above, nor does your [dynasty|E] have the [GetDynastyPerk('wcss_sappho_legacy_1').GetName] [dynasty_perk|E]"
+  wcss_three_gender_rulers_or_matriarchal_dynasty_desc:0 "The [culture|E] does not have #V 3#! or more female [rulers|E] and #V 3#! or more male [rulers|E], nor does your [dynasty|E] have the $wcss_matriarchy_modifier$ dynasty modifier"
+
+  wcss_female_preference_law_faith_or_culture_trigger:0 "Your [faith|E] does not have the [GetFaithDoctrine('doctrine_gender_equal').GetBaseName] or the [GetFaithDoctrine('doctrine_gender_female_dominated').GetBaseName] [doctrines|E] and your [culture|E] does not have a [culture_tradition|E] that allow [GetLaw('female_preference_law').GetName]\nYou may also bypass the above requirements if your [dynasty|E] has the $wcss_matriarchy_modifier$ dynasty modifier"
+  wcss_female_only_law_faith_or_culture_trigger:0 "Your [faith|E] does not have the [GetFaithDoctrine('doctrine_gender_female_dominated').GetBaseName] [doctrine|E] and your [culture|E] does not have a [culture_tradition|E] that allow [GetLaw('female_only_law').GetName]\nYou may also bypass the above requirements if your [dynasty|E] has the $wcss_matriarchy_modifier$ dynasty modifier"
+  wcss_amazon_culture_block_tt:0 "The $wcss_tradition_amazonian_matriarchy$ tradition does #bold not#! allow [rulers] to grant [titles] to men"
+
+  wcss_tradition_hedonists_name:0 "Hedonists"
+  wcss_tradition_hedonists_desc:0 "This culture believes that revelry and debauchery are the highest forms of cultural expression, and keep communal ties strong and healthy."
+
+  wcss_rulers_with_reveler_or_debauchess_lifestyle_desc:0 "The [culture|E] does not have #V 5#! [rulers|E] with [GetTrait('reveler_2').GetName( GetNullCharacter )] or [GetTrait('witch').GetName( GetNullCharacter )] [traits|E]"
+  wcss_faith_has_reveler_sin_desc:0 "Your [faith|E] considiers the [GetTrait('reveler_1').GetName( GetNullCharacter )] [trait|E] to be @sin_icon! [sinful|E]"
+  wcss_has_hedonist_culture_tt:0 "Has the $wcss_tradition_hedonists_name$ [culture_tradition|E]"
+
+sayaadi_1_collective_noun: "Sayaadi"
+sayaadi_2_collective_noun: "Sayaadi"
+sayaadi_3_collective_noun: "Sayaadi"
+sayaadi_4_collective_noun: "Sayaadi"
+sayaadi_5_collective_noun: "Sayaadi"

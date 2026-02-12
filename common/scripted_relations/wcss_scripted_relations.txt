@@ -1,0 +1,24 @@
+﻿
+twin_sister = {
+	title_grant_target = yes
+	corresponding = twin_sister
+	#hidden = yes
+	opinion = 40
+}
+
+wcss_gene_father = {
+	title_grant_target = yes
+	corresponding = wcss_gene_child
+	#hidden = yes
+	opinion = 40
+}
+wcss_gene_child = {
+	title_grant_target = yes
+	corresponding = wcss_gene_father
+	#hidden = yes
+	opinion = 20
+}
+
+harem_member = {
+	corresponding = harem_member
+}

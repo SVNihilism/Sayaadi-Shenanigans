@@ -1,0 +1,242 @@
+﻿namespace = sally
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+
+# Starts the Intro
+sally.0001 = {
+	hidden = yes
+
+	immediate = {
+		character:60021 = {
+			add_courtier= character:60572 #Sally
+		}
+		set_age = 17
+		set_variable = { 
+			name = wc_light_magic_lifestyle_additional_perks_variable 
+			value = wc_perks_needed_for_level_3_magic_trait_value 
+		}
+		set_character_faith_with_conversion = faith:scarletism
+		trigger_event = {
+			id = sally.0002
+			years = 1
+		}
+	}
+}
+
+sally.0002 = {
+	type = character_event
+	title = WCSS_sally_2_TITLE
+	desc = WCSS_sally_2_DESC
+	theme = crown
+
+	left_portrait = {
+		character = character:48081 #jaina
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = ecstasy
+	}
+	option = {
+		set_a
+		}
+		trigger_event = sally.0003
+		name = {
+			text = {
+				desc = WCSS_sally_2_OPT
+			}
+		}
+	}
+}
+
+sally.0003 = {
+	type = character_event
+	title = WCSS_sally_3_TITLE
+	desc = WCSS_sally_3_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = character:60003 #arthas
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = ecstasy
+	}
+	option = {
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_3_OPT
+			}
+		}
+	}
+}
+
+sally.0004 = {
+	type = character_event
+	title = WCSS_sally_4_TITLE
+	desc = WCSS_sally_4_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_4_OPT
+			}
+		}
+	}
+}
+
+sally.0005 = {
+	type = character_event
+	title = WCSS_sally_5_TITLE
+	desc = WCSS_sally_5_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_5_OPT
+			}
+		}
+	}
+}
+
+sally.0006 = {
+	type = character_event
+	title = WCSS_sally_6_TITLE
+	desc = WCSS_sally_6_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_6_OPT
+			}
+		}
+	}
+}
+
+sally.0007 = {
+	type = character_event
+	title = WCSS_sally_7_TITLE
+	desc = WCSS_sally_7_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_7_OPT
+			}
+		}
+	}
+}
+
+sally.0008 = {
+	type = character_event
+	title = WCSS_sally_8_TITLE
+	desc = WCSS_sally_8_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_8_OPT
+			}
+		}
+	}
+}
+
+sally.0009 = {
+	type = character_event
+	title = WCSS_sally_9_TITLE
+	desc = WCSS_sally_9_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_sally_9_OPT
+			}
+		}
+	}
+}

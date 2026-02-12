@@ -1,0 +1,45 @@
+﻿fel_corruption = {
+	icon = health_negative
+	life_expectancy = -50
+}
+
+health_stone = {
+	icon = health_positive
+	stacking = yes
+}
+
+pact_bound = {
+	icon = magic_positive
+}
+
+heroine = {
+	icon = magic_positive
+	hide_effects = yes
+	fertility = -200
+}
+
+soul_link = {
+	icon = health_positive
+	life_expectancy = 2500
+	hide_effects = yes
+}
+
+soulshard = {
+	icon = soulshard
+	stacking = yes
+}
+
+infernal_luck = {
+	icon = cat_negative
+	enemy_hostile_scheme_success_chance_add = 69
+}
+
+charmed = {
+	icon = health_negative
+	opinion_of_liege = 150
+	diplomacy = -5
+	martial = -5
+	stewardship = -5
+	intrigue = -5
+	learning = -5
+}

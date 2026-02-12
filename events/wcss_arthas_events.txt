@@ -1,0 +1,245 @@
+﻿namespace = arthas
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+
+# Starts the Intro
+arthas.001 = {
+	hidden = yes
+
+	immediate = {
+		set_variable = { name = wc_endurance_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		set_variable = { name = wc_strength_physical_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_3_physical_trait_value }
+		set_variable = { name = wc_light_magic_lifestyle_additional_perks_variable value = wc_perks_needed_for_level_1_magic_trait_value }
+		add_opinion = { modifier = mentored_me_opinion target = character:60036 }	# Uther
+		add_opinion = { modifier = mentored_me_opinion target = character:17002 }	# Muradin
+		add_trait = strong
+		add_trait = education_martial_prowess_3
+		trigger_event = {
+			id = arthas.002
+			years = 8
+		}
+	}
+}
+
+arthas.002 = {
+	type = character_event
+	title = WCSS_arthas_2_TITLE
+	desc = WCSS_arthas_2_DESC
+	theme = crown
+
+	left_portrait = {
+		character = character:48081 #jaina
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:6004 #calia
+		animation = ecstasy
+	}
+	option = {
+		character:48081 = {
+			set_relation_best_friend = character:6004
+			set_relation_crush = character:48081
+		}
+		character:6004 = {
+			set_sexuality = homosexual
+		}
+		trigger_event = arthas.003
+		name = {
+			text = {
+				desc = WCSS_arthas_2_OPT
+			}
+		}
+	}
+}
+
+arthas.003 = {
+	type = character_event
+	title = WCSS_arthas_3_TITLE
+	desc = WCSS_arthas_3_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = character:6003 #arthas
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:6004 #calia
+		animation = ecstasy
+	}
+	option = {
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_3_OPT
+			}
+		}
+	}
+}
+
+arthas.004 = {
+	type = character_event
+	title = WCSS_arthas_4_TITLE
+	desc = WCSS_arthas_4_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_4_OPT
+			}
+		}
+	}
+}
+
+arthas.005 = {
+	type = character_event
+	title = WCSS_arthas_5_TITLE
+	desc = WCSS_arthas_5_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_5_OPT
+			}
+		}
+	}
+}
+
+arthas.006 = {
+	type = character_event
+	title = WCSS_arthas_6_TITLE
+	desc = WCSS_arthas_6_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_6_OPT
+			}
+		}
+	}
+}
+
+arthas.007 = {
+	type = character_event
+	title = WCSS_arthas_7_TITLE
+	desc = WCSS_arthas_7_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_7_OPT
+			}
+		}
+	}
+}
+
+arthas.008 = {
+	type = character_event
+	title = WCSS_arthas_8_TITLE
+	desc = WCSS_arthas_8_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_8_OPT
+			}
+		}
+	}
+}
+
+arthas.009 = {
+	type = character_event
+	title = WCSS_arthas_9_TITLE
+	desc = WCSS_arthas_9_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		add_character_flag = draka_exists_flag
+		set_characters_effect = yes
+		name = {
+			text = {
+				desc = WCSS_arthas_9_OPT
+			}
+		}
+	}
+}

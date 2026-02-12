@@ -1,0 +1,653 @@
+﻿namespace = princess
+
+#########################################
+#
+#	Sayaadi Shenanigan events - CK3 Edition
+#
+#########################################
+
+# Starts the Intro
+princess.0001 = {
+	type = character_event
+	title = WCSS_PRINCESS_1_TITLE
+	desc = WCSS_PRINCESS_1_DESC
+	theme = witchcraft
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+
+	left_portrait = {
+		character = root 
+		animation = throne_room_conversation_4
+	}
+	right_portrait = {
+		character = character:60002 #lianne
+		animation = stayback
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = princess.0002
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_1_OPT
+			}
+		}
+	}
+}
+
+princess.0002 = {
+	type = character_event
+	title = WCSS_PRINCESS_2_TITLE
+	desc = WCSS_PRINCESS_2_DESC
+	theme = crown
+	override_background = {
+		reference = bp2_courtyard
+	}
+
+	left_portrait = {
+		character = character:48081 #jaina
+		animation = stayback
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = ecstasy
+	}
+	option = {
+		character:48081 = {
+			set_relation_best_friend = character:60004
+		}
+		character:60004 = {
+			set_relation_crush = character:48081
+			set_sexuality = bisexual
+		}
+		trigger_event = princess.0003
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_2_OPT
+			}
+		}
+	}
+}
+
+princess.0003 = {
+	type = character_event
+	title = WCSS_PRINCESS_3_TITLE
+	desc = WCSS_PRINCESS_3_DESC
+	theme = crown
+	override_background = {
+		reference = bp2_courtyard
+	}
+
+	left_portrait = {
+		character = character:60003 #arthas
+		animation = flirtation
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = war_defender
+	}
+	lower_center_portrait = {
+		character = character:48081 #jaina
+	}
+	option = {
+		trigger_event = princess.0004
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_3_OPT
+			}
+		}
+	}
+}
+
+princess.0004 = {
+	type = character_event
+	title = WCSS_PRINCESS_4_TITLE
+	desc = WCSS_PRINCESS_4_DESC
+	theme = crown
+	override_background = {
+		reference = wcss_background_corridor
+	}
+
+	left_portrait = {
+		character = character:60003 #arthas
+		animation = personality_content
+	}
+	right_portrait = {
+		character = character:60004 #calia
+		animation = personality_forgiving
+	}
+	option = {
+		trigger_event = princess.0005
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_4_OPT
+			}
+		}
+	}
+}
+
+princess.0005 = {
+	type = character_event
+	title = WCSS_PRINCESS_5_TITLE
+	desc = WCSS_PRINCESS_5_DESC
+	theme = witchcraft
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+
+	left_portrait = {
+		character = root 
+		animation = flirtation
+	}
+	right_portrait = {
+		character = character:60002 #lianne
+		animation = crying
+	}
+	option = {
+		trigger_event = {
+			id = princess.0006
+			years = 2
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_5_OPT
+			}
+		}
+	}
+}
+
+princess.0006 = {
+	type = character_event
+	title = WCSS_PRINCESS_6_TITLE
+	desc = WCSS_PRINCESS_6_DESC
+	theme = crown
+	override_background = {
+		reference = wcss_background_councilchamber
+	}
+
+	left_portrait = {
+		character = character:58012
+		animation = personality_content
+	}
+	right_portrait = {
+		character = character:60001
+	}
+	option = {
+		trigger_event = {
+			id = princess.0007
+		}
+		character:58012 = {
+			create_betrothal = character:60004
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_6_OPT
+			}
+		}
+	}
+}
+
+princess.0007 = {
+	type = character_event
+	title = WCSS_PRINCESS_7_TITLE
+	desc = WCSS_PRINCESS_7_DESC
+	theme = crown
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	left_portrait = {
+		character = root
+		animation = interested
+	}
+	right_portrait = {
+		character = character:60002
+		animation = worry
+	}
+	option = {
+		trigger_event = {
+			id = princess.0008
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_7_OPT
+			}
+		}
+	}
+}
+
+princess.0008 = {
+	type = character_event
+	title = WCSS_PRINCESS_8_TITLE
+	desc = WCSS_PRINCESS_8_DESC
+	theme = crown
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	left_portrait = {
+		character = root
+		animation = eyeroll
+	}
+	right_portrait = {
+		character = character:60002
+		animation = disbelief
+	}
+	lower_center_portrait = {
+		character = character:450004
+	}
+	option = {
+		set_characters_effect = yes
+		trigger_event = {
+			id = princess.0009
+			days = 90
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_8_OPT
+			}
+		}
+	}
+}
+
+princess.0009 = {
+	type = character_event
+	title = WCSS_PRINCESS_9_TITLE
+	desc = WCSS_PRINCESS_9_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = character:60004
+		animation = lunatic
+		outfit_tags = { nightgown }
+	}
+
+	option = {
+		trigger_event = {
+			id = princess.0010
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_9_OPT
+			}
+		}
+	}
+}
+
+princess.0010 = {
+	type = character_event
+	title = WCSS_PRINCESS_10_TITLE
+	desc = WCSS_PRINCESS_10_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = character:60004
+		animation = shock
+		outfit_tags = { nightgown }
+	}
+	right_portrait = {
+		character = character:60002
+		animation = admiration
+	}
+
+	option = {
+		trigger_event = {
+			id = princess.0011
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_10_OPT
+			}
+		}
+	}
+}
+
+princess.0011 = {
+	type = character_event
+	title = WCSS_PRINCESS_11_TITLE
+	desc = WCSS_PRINCESS_11_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = character:60004
+		animation = disbelief
+		outfit_tags = { nightgown }
+	}
+	right_portrait = {
+		character = root
+		animation = flirtation_left
+	}
+	lower_center_portrait = {
+		character = character:60002
+	}
+
+	option = {
+		trigger_event = {
+			id = princess.0012
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_11_OPT
+			}
+		}
+	}
+}
+
+princess.0012 = {
+	type = character_event
+	title = WCSS_PRINCESS_12_TITLE
+	desc = WCSS_PRINCESS_12_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = character:60004
+		animation = disbelief
+		outfit_tags = { nightgown }
+	}
+	right_portrait = {
+		character = root
+		animation = flirtation_left
+	}
+	lower_center_portrait = {
+		character = character:60002
+	}
+
+	option = {
+		trigger_event = {
+			id = princess.0013
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_12_OPT
+			}
+		}
+	}
+}
+
+princess.0013 = {
+	type = character_event
+	title = WCSS_PRINCESS_13_TITLE
+	desc = WCSS_PRINCESS_13_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom
+	}
+	left_portrait = {
+		character = character:60004
+		animation = disbelief
+		outfit_tags = { nightgown }
+	}
+	right_portrait = {
+		character = root
+		animation = flirtation_left
+	}
+	lower_center_portrait = {
+		character = character:60002
+	}
+
+	option = {
+		calia_complete_effect = yes
+		trigger_event = {
+			id = princess.0014
+			days = 7
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_13_OPT
+			}
+		}
+	}
+}
+
+princess.0014 = {
+	type = character_event
+	title = WCSS_PRINCESS_14_TITLE
+	desc = WCSS_PRINCESS_14_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	left_portrait = {
+		character = character:60004
+		animation = personality_compassionate
+	}
+	right_portrait = {
+		character = root
+		animation = personality_cynical
+	}
+
+
+	option = {
+		trigger_event = {
+			id = princess.0015
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_14_OPT
+			}
+		}
+	}
+}
+
+princess.0015 = {
+	type = character_event
+	title = WCSS_PRINCESS_15_TITLE
+	desc = WCSS_PRINCESS_15_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	left_portrait = {
+		character = character:60004
+		animation = personality_compassionate
+	}
+	right_portrait = {
+		character = character:60002
+		animation = personality_cynical
+	}
+	lower_center_portrait = {
+		character = root
+	}
+
+
+	option = {
+		trigger_event = {
+			id = princess.0016
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_15_OPT
+			}
+		}
+	}
+}
+
+princess.0016 = {
+	type = character_event
+	title = WCSS_PRINCESS_16_TITLE
+	desc = WCSS_PRINCESS_16_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_corridor
+	}
+	left_portrait = {
+		character = character:48081 
+		animation = shock
+	}
+	right_portrait = {
+		character = character:60003
+		animation = crying
+	}
+
+
+	option = {
+		trigger_event = {
+			id = princess.0017
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_16_OPT
+			}
+		}
+	}
+}
+
+princess.0017 = {
+	type = character_event
+	title = WCSS_PRINCESS_17_TITLE
+	desc = WCSS_PRINCESS_17_DESC
+	theme = intrigue
+	override_background = {
+		reference = garden
+	}
+	left_portrait = {
+		character = character:48081 
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = character:60004
+		animation = personality_forgiving
+	}
+
+
+	option = {
+		trigger_event = {
+			id = princess.0018
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_17_OPT
+			}
+		}
+	}
+}
+
+princess.0018 = {
+	type = character_event
+	title = WCSS_PRINCESS_18_TITLE
+	desc = WCSS_PRINCESS_18_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	left_portrait = {
+		character = character:48081 
+		animation = holding_staff
+	}
+	right_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+
+	option = {
+		trigger_event = {
+			id = princess.0019
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_18_OPT
+			}
+		}
+	}
+}
+
+princess.0019 = {
+	type = character_event
+	title = WCSS_PRINCESS_19_TITLE
+	desc = WCSS_PRINCESS_19_DESC
+	theme = intrigue
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	right_portrait = {
+		character = character:48081 
+		animation = personality_forgiving
+	}
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+	lower_center_portrait = { 
+		character = character:60002
+	}
+	lower_right_portrait = {
+		character = character:60004
+	}
+
+
+	option = {
+		jaina_complete_effect = yes
+		
+		trigger_event = {
+			id = princess.0020
+			days = 180
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_19_OPT
+			}
+		}
+	}
+}
+
+princess.0020 = {
+	type = character_event
+	title = WCSS_PRINCESS_20_TITLE
+	desc = WCSS_PRINCESS_20_DESC
+	theme = learning
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	right_portrait = {
+		character = character:48081 
+		animation = personality_forgiving
+	}
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+
+	option = {
+		trigger_event = {
+			id = princess.0021
+		}
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_20_OPT
+			}
+		}
+	}
+}
+
+princess.0021 = {
+	type = character_event
+	title = WCSS_PRINCESS_21_TITLE
+	desc = WCSS_PRINCESS_21_DESC
+	theme = learning
+	override_background = {
+		reference = wcss_background_bedroom_sayaadi
+	}
+	right_portrait = {
+		character = character:48081 
+		animation = personality_forgiving
+	}
+	left_portrait = {
+		character = root
+		animation = flirtation
+	}
+
+	option = {
+		name = {
+			text = {
+				desc = WCSS_PRINCESS_21_OPT
+			}
+		}
+	}
+}
