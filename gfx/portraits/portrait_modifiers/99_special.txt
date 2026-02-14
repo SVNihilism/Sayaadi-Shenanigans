@@ -677,3 +677,29 @@ gene_succubus_thighs = {
 		}
 	}
 }
+
+gene_orc_bust = {
+	usage = game
+	orc_shrink_body = {
+		dna_modifiers = {
+			morph = {
+				mode = add
+				gene = gene_orc_bust
+				template = orc_cleavage
+				value = 1.0
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				exists = this
+				is_female = yes
+				has_gene = {
+					category = gene_orc_bust
+					template = orc_cleavage
+				}
+			}
+		}
+	}
+}

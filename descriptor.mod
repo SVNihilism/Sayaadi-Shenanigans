@@ -1,0 +1,17 @@
+name="Warcraft: Sayaadi Shenanigans"
+version="0.1"
+picture="thumbnail.png"
+tags={
+	"Total Conversion"
+	"Balance"
+	"Map"
+	"Bookmarks"
+	"Portraits"
+	"Religion"
+	"Culture"
+	"Decisions"
+	"Events"
+	"Graphics"
+}
+
+supported_version="1.18.3"
