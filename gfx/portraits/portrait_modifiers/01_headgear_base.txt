@@ -5456,6 +5456,23 @@ fp3_turkic_high_nobles = {
             }
         }
     }
+	tophat = {
+        dna_modifiers = {
+            accessory = {
+				mode = add
+				gene = headgear
+				template = m_gilnean_tophat
+				range = { 0 1 }
+			}
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 5000
+                is_genn_trigger = yes
+            }
+        }
+    }
 
 
 }

@@ -2324,4 +2324,14 @@
 		}
 	}
 
+	add_accessory_modifiers = {
+		gene = headgear
+		template = m_gilnean_tophat
+		
+		is_valid_custom = {
+			# Warcraft
+			has_no_portrait_trigger = no
+		}
+	}
+
 }

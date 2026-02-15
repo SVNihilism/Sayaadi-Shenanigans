@@ -379,7 +379,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_troll
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_troll
 						NOT = { has_character_modifier = charmed }
 					}
@@ -387,7 +387,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:troll 
-				change_first_name = scope:troll
+				change_first_name = { template_character = scope:troll }
 				add_character_flag = exists
 			}
 		}
@@ -408,7 +408,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_troll
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_troll
 						NOT = { has_character_modifier = charmed }
 					}
@@ -416,7 +416,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:troll 
-				change_first_name = scope:troll
+				change_first_name = { template_character = scope:troll }
 				add_character_flag = exists
 
 			}
@@ -426,7 +426,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_orc
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_orc
 						NOT = { has_character_modifier = charmed }
 					}
@@ -434,7 +434,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:orc
-				change_first_name = scope:orc
+				change_first_name = { template_character = scope:orc }
 				add_character_flag = exists
 			}
 		}
@@ -455,7 +455,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_troll
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_troll
 						NOT = { has_character_modifier = charmed }
 					}
@@ -463,7 +463,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:troll 
-				change_first_name = scope:troll
+				change_first_name = { template_character = scope:troll }
 				add_character_flag = exists
 
 			}
@@ -473,7 +473,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_orc
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_orc
 						NOT = { has_character_modifier = charmed }
 					}
@@ -481,7 +481,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:orc
-				change_first_name = scope:orc
+				change_first_name = { template_character = scope:orc }
 				add_character_flag = exists
 			}
 			33 = { 
@@ -490,7 +490,7 @@ sayaadi_creation_effect = {
 				add_trait = creature_human
 				random_living_character = {
 					limit = { 
-						gender = scope:original
+						sex_same_as = scope:original
 						has_trait = creature_human
 						NOT = { has_character_modifier = charmed }
 					}
@@ -498,7 +498,7 @@ sayaadi_creation_effect = {
 				}
 				set_age = { 20 30 }
 				copy_inheritable_appearance_from = scope:human
-				change_first_name = scope:human
+				change_first_name = { template_character = scope:human }
 				add_character_flag = exists
 			}
 		}

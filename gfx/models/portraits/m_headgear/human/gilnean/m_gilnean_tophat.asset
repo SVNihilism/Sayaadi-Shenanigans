@@ -1,0 +1,20 @@
+pdxmesh = {
+	name = "m_gilnean_tophat_mesh"
+	file = "m_gilnean_tophat.mesh"
+
+	meshsettings = {
+		name = "m_gilnean_tophatShape"
+		index = 0
+		texture_diffuse = "noble.dds"
+		texture_normal = "noble_norm.dds"
+		texture_specular = "noble_prop.dds"
+		shader = "portrait_attachment"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "m_gilnean_tophat_entity"
+	pdxmesh = "m_gilnean_tophat_mesh"
+	
+}
