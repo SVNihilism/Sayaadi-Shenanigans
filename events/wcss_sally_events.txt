@@ -42,8 +42,6 @@ sally.0002 = {
 		animation = ecstasy
 	}
 	option = {
-		set_a
-		}
 		trigger_event = sally.0003
 		name = {
 			text = {

@@ -1,0 +1,569 @@
+﻿## Court Consort
+
+wcss_consort_gained_position_effect = {
+	if = {
+		limit = {
+			scope:liege = {
+				NOT = { has_character_flag = breeder }
+			}
+		}
+		scope:liege = { add_character_flag = breeder }
+	}
+	basic_gained_court_position_effect = yes
+	if = {
+		limit = {
+			scope:liege = { is_alive = yes }
+		}
+		if = {
+			limit = {
+				scope:liege = { 
+					is_ai = yes 
+					wcss_recommends_more_children_decision_trigger = yes # Only if we actually want more children.
+				}
+			}
+			scope:liege = { trigger_event = wcss_court_consort.2001 } # For the AI, let's not waste time. Let's get right to it.
+		}
+	}
+	if = { # Consorts don't get upset if faith is monogamous
+		limit = {
+			scope:employee = {
+				has_opinion_modifier = {
+					modifier = concubine_with_monogamous_faith_opinion
+					target = scope:liege
+				}
+			}			
+		}
+		scope:employee = {
+			remove_opinion = {
+				modifier = concubine_with_monogamous_faith_opinion
+				target = scope:liege
+			}
+		}		
+	}
+	else_if = {
+		limit = {
+			scope:employee = {
+				has_opinion_modifier = {
+					modifier = concubine_with_polygamous_faith_opinion
+					target = scope:liege
+				}
+			}			
+		}
+		scope:employee = {
+			remove_opinion = {
+				modifier = concubine_with_polygamous_faith_opinion
+				target = scope:liege
+			}
+		}	
+	}
+}
+
+wcss_ai_create_a_consort_effect = { # We create a consort for an AI ruler, if none of their spouses/concubines are eligible.
+	if = {
+		limit = {
+			exists = dynasty
+			dynasty = { dynasty_prestige_level >= 7 }
+		}
+		wcss_find_or_create_hightier_consort = yes
+		add_courtier = scope:wcss_hightier_consort_option
+		wcss_consort_marriage_or_concubine_effect = { CHARACTER = scope:wcss_hightier_consort_option }
+		appoint_court_position = {
+			recipient = scope:wcss_hightier_consort_option
+			court_position = wcss_court_consort_court_position
+		}
+		scope:wcss_hightier_consort_option = { add_gold = major_gold_value }
+		add_character_modifier = {
+			modifier = wcss_hired_consort_ai_modifier
+			years = 10
+		}
+	}
+	else_if = {
+		limit = {
+			exists = dynasty
+			dynasty = { dynasty_prestige_level >= 3 }
+		}
+		wcss_find_or_create_midtier_consort = yes
+		add_courtier = scope:wcss_midtier_consort_option
+		wcss_consort_marriage_or_concubine_effect = { CHARACTER = scope:wcss_midtier_consort_option }
+		appoint_court_position = {
+			recipient = scope:wcss_midtier_consort_option
+			court_position = wcss_court_consort_court_position
+		}
+		scope:wcss_midtier_consort_option = { add_gold = medium_gold_value }
+		add_character_modifier = {
+			modifier = wcss_hired_consort_ai_modifier
+			years = 5
+		}
+	}
+	else = {
+		wcss_find_or_create_lowtier_consort = yes
+		add_courtier = scope:wcss_lowtier_consort_option
+		wcss_consort_marriage_or_concubine_effect = { CHARACTER = scope:wcss_lowtier_consort_option }
+		appoint_court_position = {
+			recipient = scope:wcss_lowtier_consort_option
+			court_position = wcss_court_consort_court_position
+		}
+		scope:wcss_lowtier_consort_option = { add_gold = minor_gold_value }
+		add_character_modifier = {
+			modifier = wcss_hired_consort_ai_modifier
+			years = 3
+		}
+	}	
+}
+
+wcss_find_or_create_lowtier_consort = {
+	save_temporary_scope_as = wcss_ruler
+	#Set up a list of provinces, one per duchy in the realm
+	every_realm_province = {
+		if = {
+			limit = {
+				save_temporary_scope_as = wcss_potential_province
+				NOT = {
+					any_in_list = {
+						list = wcss_pool_provinces
+						county.duchy = scope:wcss_potential_province.county.duchy
+					}
+				}
+			}
+			add_to_temporary_list = wcss_pool_provinces
+		}
+	}
+	#Search the list for potential consorts
+	every_in_list = {
+		list = wcss_pool_provinces
+		save_temporary_scope_as = wcss_pool_province
+		every_pool_character = {
+			province = scope:wcss_pool_province
+			limit = {
+				sex_opposite_of = scope:wcss_ruler
+				wcss_consort_lowtier_trigger = yes
+				NOR = {
+					is_close_or_extended_family_of = scope:wcss_ruler
+					has_trait = pure_blooded
+				}
+			}
+			add_to_temporary_list = wcss_potential_consorts
+		}
+	}
+	#Check if list was populated and one
+	random_in_list = {
+		list = wcss_potential_consorts
+		limit = { is_alive = yes }
+		weight = {
+			base = 1
+			modifier = {
+				add = {
+					value = fertility
+					multiply = 5
+				}
+			}
+		}
+		save_scope_as = wcss_lowtier_consort_option
+	}
+	#If no one was found, make one
+	if = {
+		limit = { 
+			NOT = { exists = scope:wcss_lowtier_consort_option } 
+		}
+		create_character = {
+			location = root.capital_province
+			gender_female_chance = {
+				if = { 
+					limit = { 
+						root = { is_female = yes }
+					}
+					add = 0					
+				}
+				else = { add = 100 }
+			}
+			template = wcss_consort_lusty_lowborn
+			save_scope_as = wcss_lowtier_consort_option
+		}
+		scope:wcss_lowtier_consort_option = {
+			add_character_flag = {
+				flag = wcss_created_consort
+				days = 30
+			}
+		}
+	}
+}
+
+wcss_find_or_create_midtier_consort = {
+	save_temporary_scope_as = wcss_ruler
+	#Set up a list of provinces, one per duchy in the realm
+	every_realm_province = {
+		if = {
+			limit = {
+				save_temporary_scope_as = wcss_potential_province
+				NOT = {
+					any_in_list = {
+						list = wcss_pool_provinces
+						county.duchy = scope:wcss_potential_province.county.duchy
+					}
+				}
+			}
+			add_to_temporary_list = wcss_pool_provinces
+		}
+	}
+	#Search the list for potential consorts
+	every_in_list = {
+		list = wcss_pool_provinces
+		save_temporary_scope_as = wcss_pool_province
+		every_pool_character = {
+			province = scope:wcss_pool_province
+			limit = {
+				sex_opposite_of = scope:wcss_ruler
+				wcss_consort_midtier_trigger = yes
+				NOR = {
+					is_close_or_extended_family_of = scope:wcss_ruler
+					has_trait = pure_blooded
+				}
+			}
+			add_to_temporary_list = wcss_potential_consorts
+		}
+	}
+	#Check if list was populated and grab good ones
+	random_in_list = {
+		list = wcss_potential_consorts
+		limit = { is_alive = yes }
+		weight = {
+			base = 1
+			modifier = {
+				add = {
+					value = fertility
+					multiply = 5
+				}
+			}
+		}
+		save_scope_as = wcss_midtier_consort_option
+	}
+	#If no one was found, make one
+	if = {
+		limit = { 
+			NOT = { exists = scope:wcss_midtier_consort_option } 
+		}
+		create_character = {
+			location = root.capital_province
+			gender_female_chance = {
+				if = { 
+					limit = { 
+						root = { is_female = yes }
+					}
+					add = 0					
+				}
+				else = { add = 100 }
+			}
+			template = wcss_consort_fine_specimen
+			save_scope_as = wcss_midtier_consort_option
+		}
+		scope:wcss_midtier_consort_option = {
+			add_character_flag = {
+				flag = wcss_created_consort
+				days = 30
+			}
+		}
+	}
+}
+
+wcss_find_or_create_hightier_consort = {
+	save_temporary_scope_as = wcss_ruler
+	#Set up a list of provinces, one per duchy in the realm
+	every_realm_province = {
+		if = {
+			limit = {
+				save_temporary_scope_as = wcss_potential_province
+				NOT = {
+					any_in_list = {
+						list = wcss_pool_provinces
+						county.duchy = scope:wcss_potential_province.county.duchy
+					}
+				}
+			}
+			add_to_temporary_list = wcss_pool_provinces
+		}
+	}
+	#Search the list for potential consorts
+	every_in_list = {
+		list = wcss_pool_provinces
+		save_temporary_scope_as = wcss_pool_province
+		every_pool_character = {
+			province = scope:wcss_pool_province
+			limit = {
+				sex_opposite_of = scope:wcss_ruler
+				wcss_consort_hightier_trigger = yes
+				NOR = {
+					is_close_or_extended_family_of = scope:wcss_ruler
+					has_trait = pure_blooded
+				}
+			}
+			add_to_temporary_list = wcss_potential_consorts
+		}
+	}
+	#Check if list was populated and grab good ones
+	random_in_list = {
+		list = wcss_potential_consorts
+		limit = { is_alive = yes }
+		weight = {
+			base = 1
+			modifier = {
+				add = {
+					value = fertility
+					multiply = 5
+				}
+			}
+		}
+		save_scope_as = wcss_hightier_consort_option
+	}
+	#If no one was found, make one
+	if = {
+		limit = { 
+			NOT = { exists = scope:wcss_hightier_consort_option } 
+		}
+		create_character = {
+			location = root.capital_province
+			gender_female_chance = {
+				if = { 
+					limit = { 
+						root = { is_female = yes }
+					}
+					add = 0					
+				}
+				else = { add = 100 }
+			}
+			template = wcss_consort_best_option
+			save_scope_as = wcss_hightier_consort_option
+		}
+		scope:wcss_hightier_consort_option = {
+			add_character_flag = {
+				flag = wcss_created_consort
+				days = 30
+			}
+		}
+	}
+}
+
+wcss_consort_revoked_court_position_effect = {
+	basic_revoked_court_position_effect = yes
+	wcss_former_consort_effect = yes
+}
+
+wcss_consort_invalidated_court_position_effect = {
+	basic_invalidated_court_position_effect = yes
+	wcss_former_consort_effect = yes
+}
+
+wcss_former_consort_effect = {
+	if = {
+		# Characters who do not believe in concubinage, but are forced into it, have the harshest opinion penalties.
+		limit = {
+			scope:employee = { is_concubine_of = scope:liege }
+			NOR = { 
+				scope:employee.faith = { has_doctrine = doctrine_concubines }
+				scope:employee.culture = { has_cultural_tradition = tradition_concubines }
+				scope:employee = {
+					has_opinion_modifier = {
+						modifier = concubine_with_monogamous_faith_opinion
+						target = scope:liege
+					}
+				}
+				scope:employee = {
+					has_opinion_modifier = {
+						modifier = concubine_with_polygamous_faith_opinion
+						target = scope:liege
+					}
+				}
+			}
+		}
+		if = {
+			# Harshest opinion penalty if they are a concubine but believe in monogamy
+			limit = { scope:employee.faith = { has_doctrine = doctrine_monogamy }}
+			scope:employee = {
+				add_opinion = {
+					target = scope:liege
+					modifier = concubine_with_monogamous_faith_opinion
+				}
+			}
+		}
+		else_if = {
+			# Lesser-but-still-harsh opinion penalty if they are a concubine but believe in polygamy
+			limit = {
+				OR = {
+					scope:employee.culture = { has_cultural_tradition = tradition_polygamous }
+					scope:employee.faith = { has_doctrine = doctrine_polygamy }
+				}
+			}
+			scope:employee = {
+				add_opinion = {
+					target = scope:liege
+					modifier = concubine_with_polygamous_faith_opinion
+				}
+			}
+		}
+	}	
+}
+
+wcss_consort_marriage_or_concubine_effect = {
+	if = {
+		limit = { wcss_has_polygamy_trigger = yes }
+		if = {
+			limit = { is_female = yes }
+			marry_matrilineal = $CHARACTER$
+		}
+		else = {
+			marry = $CHARACTER$
+		}
+	}
+	else = {
+		make_concubine = $CHARACTER$
+	}
+}
+
+
+
+wcss_had_sex_with_consort_effect = { # Modified version of had_sex_with, does not trigger adultery suspicion
+	save_temporary_scope_as = had_sex_root_character
+	save_temporary_scope_as = root_character
+	$CHARACTER$ = { save_scope_as = had_sex_with_effect_partner }
+
+	if = { # for loc
+		limit = { 
+			NOT = { this = root }
+		}
+		save_scope_as = wcss_had_sex_third_person
+	}	
+
+
+	#Stress
+	$CHARACTER$ = {
+		if = {
+			limit = { this = root }
+			stress_impact = {
+				lustful = minor_stress_impact_loss
+				rakish = minor_stress_impact_loss
+			}
+		}
+		else = {
+			hidden_effect = {
+				stress_impact = {
+					lustful = minor_stress_impact_loss
+					rakish = minor_stress_impact_loss
+				}
+			}
+		}
+	}
+	if = {
+		limit = { this = root }
+		stress_impact = {
+			lustful = minor_stress_impact_loss
+			rakish = minor_stress_impact_loss
+		}
+	}
+	else = {
+		hidden_effect = {
+			stress_impact = {
+				lustful = minor_stress_impact_loss
+				rakish = minor_stress_impact_loss
+			}
+		}
+	}	
+
+	#Pregnancy & story cycles
+	hidden_effect = {
+		if = {
+			limit = {
+				is_female = yes
+				$CHARACTER$ = { is_male = yes }
+				possible_pregnancy_after_sex_with_character_trigger = { CHARACTER = scope:had_sex_with_effect_partner }
+			}
+			root = {
+				set_variable = {
+					name = wcss_consort_pregnancy_m_consort
+					value = 1
+				}
+			}
+			add_to_variable_list = {
+				name = potential_father_variable_list
+				target = $CHARACTER$
+			}
+			make_pregnant = {
+				father = $CHARACTER$
+			}
+		}
+		else_if = {
+			limit = {
+				is_male = yes
+				$CHARACTER$ = { is_female = yes }
+				possible_pregnancy_after_sex_with_character_trigger = { CHARACTER = scope:had_sex_with_effect_partner }
+			}
+			$CHARACTER$ = {
+				add_to_variable_list = {
+					name = potential_father_variable_list
+					target = scope:had_sex_with_effect_partner
+				}
+				make_pregnant = {
+					father = scope:had_sex_root_character
+				}
+			}
+		}
+		
+		#STD transmission
+		risk_of_std_from_effect = { PARTNER = $CHARACTER$ }
+		hidden_effect = {
+			$CHARACTER$ = { risk_of_std_from_effect = { PARTNER = scope:had_sex_root_character } }
+		}
+	
+		#Adultery suspicion removed
+
+		#Incestuous Relations
+		give_incest_secret_or_nothing_with_target_effect = { CHARACTER = $CHARACTER$ }
+		hidden_effect = {
+			$CHARACTER$ = { give_incest_secret_or_nothing_with_target_effect = { CHARACTER = scope:had_sex_root_character } }
+		}
+
+		#Homosexuality removed (consort is opposite sex always)
+	}
+}
+
+basic_revoked_court_position_effect = {
+	scope:employee = {
+		if = {
+			limit = {
+				has_opinion_modifier = {
+					modifier = courtly_court_position_opinion
+					target = scope:liege
+				}
+			}
+			remove_opinion = {
+				modifier = courtly_court_position_opinion
+				target = scope:liege
+			}
+		}
+		if = {
+			limit = {
+				has_opinion_modifier = {
+					modifier = hired_me_opinion
+					target = scope:liege
+				}
+			}
+			remove_opinion = {
+				modifier = hired_me_opinion
+				target = scope:liege
+			}
+		}
+		add_opinion = {
+			modifier = revoked_court_position_opinion
+			target = scope:liege
+			opinion = -30
+		}
+
+		# Unity impact
+		#add_clan_unity_interaction_effect = {
+		#	CHARACTER = scope:liege
+		#	TARGET = this
+		#	VALUE = 0 #minor_unity_loss
+		#	DESC = clan_unity_assigned_to_court_position.desc
+		#	REVERSE_NON_HOUSE_TARGET = no
+		#}
+	}
+	employed_booner_invalidation_effect = { EMPLOYEE = scope:employee LIEGE = scope:liege }
+}

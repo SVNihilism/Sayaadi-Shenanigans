@@ -48,13 +48,14 @@ thrall.02 = {
 	theme = prison
 
 	left_portrait = {
-		character = character:10021 #Thrall
-		animation = content
+		character = root
+		animation = stayback
 	}
 	right_portrait = {
-		character = character:53005 #Taretha
-		animation = throne_room_conversation_4
+		character = character:10020 #Draka
+		animation = anger
 	}
+
 	option = {
 		trigger_event = thrall.03
 		name = {
@@ -74,15 +75,15 @@ thrall.03 = {
 		reference = wc_background_stranglethorn
 	}
 	left_portrait = {
-		character = character:60003 #arthas
+		character = root
 		animation = stayback
 	}
 	right_portrait = {
-		character = character:60004 #calia
-		animation = ecstasy
+		character = character:53005 #Taretha
+		animation = throne_room_conversation_4
 	}
 	option = {
-		set_characters_effect = yes
+		trigger_event = thrall.04
 		name = {
 			text = {
 				desc = WCSS_thrall_03_OPT
@@ -100,16 +101,15 @@ thrall.04 = {
 		reference = wc_background_stranglethorn
 	}
 	left_portrait = {
-		character = root
+		character = scope:thrall
 		animation = stress
 	}
 	right_portrait = {
-		character = scope:sister
+		character = scope:soldier
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.05
 		name = {
 			text = {
 				desc = WCSS_thrall_04_OPT
@@ -135,8 +135,7 @@ thrall.05 = {
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.06
 		name = {
 			text = {
 				desc = WCSS_thrall_05_OPT
@@ -162,8 +161,7 @@ thrall.06 = {
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.07
 		name = {
 			text = {
 				desc = WCSS_thrall_06_OPT
@@ -189,8 +187,7 @@ thrall.07 = {
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.08
 		name = {
 			text = {
 				desc = WCSS_thrall_07_OPT
@@ -216,8 +213,7 @@ thrall.08 = {
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.09
 		name = {
 			text = {
 				desc = WCSS_thrall_08_OPT
@@ -243,11 +239,95 @@ thrall.09 = {
 		animation = throne_room_conversation_3
 	}
 	option = {
-		add_character_flag = draka_exists_flag
-		set_characters_effect = yes
+		trigger_event = thrall.10
 		name = {
 			text = {
 				desc = WCSS_thrall_09_OPT
+			}
+		}
+	}
+	option = {
+		trigger_event = thrall.11
+		name = {
+			text = {
+				desc = WCSS_thrall_09_OPT_2
+			}
+		}
+	}
+}
+
+thrall.10 = {
+	type = character_event
+	title = WCSS_thrall_10_TITLE
+	desc = WCSS_thrall_10_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		
+		name = {
+			text = {
+				desc = WCSS_thrall_10_OPT
+			}
+		}
+	}
+}
+
+thrall.11 = {
+	type = character_event
+	title = WCSS_thrall_11_TITLE
+	desc = WCSS_thrall_11_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		trigger_event = thrall.12
+		name = {
+			text = {
+				desc = WCSS_thrall_11_OPT
+			}
+		}
+	}
+}
+
+thrall.12 = {
+	type = character_event
+	title = WCSS_thrall_12_TITLE
+	desc = WCSS_thrall_12_DESC
+	theme = intrigue
+	override_background = {
+		reference = wc_background_stranglethorn
+	}
+	left_portrait = {
+		character = root
+		animation = stress
+	}
+	right_portrait = {
+		character = scope:sister
+		animation = throne_room_conversation_3
+	}
+	option = {
+		name = {
+			text = {
+				desc = WCSS_thrall_12_OPT
 			}
 		}
 	}

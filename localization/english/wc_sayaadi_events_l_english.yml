@@ -193,31 +193,31 @@ WCSS_thrall_01_DESC: "Lianne found Draka training. "Draka, I have good news!"\n\
 WCSS_thrall_01_OPT: "Show Me!"
 
 WCSS_thrall_02_TITLE: "Thrall"
-WCSS_thrall_02_DESC: "Spy on thrall and his friend"   
+WCSS_thrall_02_DESC: "Spy on thrall reading a letter from his friend"   
 WCSS_thrall_02_OPT: ""
 
 WCSS_thrall_03_TITLE: ""
-WCSS_thrall_03_DESC: "Draka wants to go grab him, you want to save the girl. Jaina says she's made progress on her spell, could change thrall's gender"   
+WCSS_thrall_03_DESC: "Draka wants to go grab him, you want to investigate the girl. Jaina says she's made progress on her spell, could change thrall's gender"   
 WCSS_thrall_03_OPT: ""
 
 WCSS_thrall_04_TITLE: ""
-WCSS_thrall_04_DESC: "Visit Gladiator matches"   
+WCSS_thrall_04_DESC: "Visit the girl, find out she's a mistress and how thrall has been mistreated"   
 WCSS_thrall_04_OPT: ""
 
 WCSS_thrall_05_TITLE: ""
-WCSS_thrall_05_DESC: "watch thrall kill another slave"   
+WCSS_thrall_05_DESC: "watch thrall fight 9 people, only beat eight"   
 WCSS_thrall_05_OPT: ""
 
 WCSS_thrall_06_TITLE: ""
-WCSS_thrall_06_DESC: "thrall and friend talk about an escape, nazri appears"   
+WCSS_thrall_06_DESC: "thrall get beaten by guards, healers come in and nazri charms the guards as they take him back"   
 WCSS_thrall_06_OPT: ""
 
 WCSS_thrall_07_TITLE: ""
-WCSS_thrall_07_DESC: "talk about how she'll help them escape, focus on foxtra, add some check here, she's nonessential"   
+WCSS_thrall_07_DESC: "thrall wakes up, talks to both about leaving "   
 WCSS_thrall_07_OPT: ""
 
 WCSS_thrall_08_TITLE: ""
-WCSS_thrall_08_DESC: "continues to talk about escape, give thrall the terms"   
+WCSS_thrall_08_DESC: "summon back to base, reunion between mother and son"    
 WCSS_thrall_08_OPT: ""
 
 WCSS_thrall_09_TITLE: ""
@@ -225,13 +225,20 @@ WCSS_thrall_09_DESC: "summon back to base, reunion between mother and son"
 WCSS_thrall_09_OPT: ""
 
 WCSS_thrall_10_TITLE: ""
-WCSS_thrall_10_DESC: "jaina "   
+WCSS_thrall_10_DESC: "thrall's choice. He can either join an expedition to the other continent by himself, or join them "   
 WCSS_thrall_10_OPT: ""
 
 WCSS_thrall_11_TITLE: ""
-WCSS_thrall_11_DESC: "jaina "   
+WCSS_thrall_11_DESC: "choice result one, thrall is on docks leaving, draka upset but respects choice"   
 WCSS_thrall_11_OPT: ""
 
+WCSS_thrall_12_TITLE: ""
+WCSS_thrall_12_DESC: "choice result two, jaina talks more about the changes, he accepts them."   
+WCSS_thrall_12_OPT: ""
+
+WCSS_thrall_12_TITLE: ""
+WCSS_thrall_12_DESC: "result of transformation, take a new name, Draka said she was going to call him Geya'rah."   
+WCSS_thrall_12_OPT: ""
 
 #THIGHMANE
 
@@ -274,3 +281,23 @@ WCSS_WHITEMANE_09_OPT: ""
 WCSS_WHITEMANE_10_TITLE: ""
 WCSS_WHITEMANE_10_DESC: ""   
 WCSS_WHITEMANE_10_OPT: ""
+
+
+###INTERACTION EVENTS
+
+wcss_harem_spells.01.t: "The Transformation"
+wcss_harem_spells.01.intro: "Arcane light starts to dance in Jaina's hand as she start to channel the spell.\n\n"NEED HELP WRITING THIS EVENT!""
+wcss_harem_spells.01.a: "The Spell is Complete!"
+
+wcss_harem_spells.02.t: "A Whole New You!"
+wcss_harem_spells.02.intro: "NEED HELP WRITING THIS EVENT!"
+wcss_harem_spells.02.a: "It'll Take a Bit to Get Used To!"
+
+
+wcss_harem_spells.03.t: "PLACEHOLDER"
+wcss_harem_spells.03.intro: "NEED HELP WRITING THIS EVENT!"
+wcss_harem_spells.03.a: "PLACEHOLDER"
+
+wcss_harem_spells.04.t: "PLACEHOLDER"
+wcss_harem_spells.04.intro: "NEED HELP WRITING THIS EVENT!"
+wcss_harem_spells.04.a: "PLACEHOLDER"

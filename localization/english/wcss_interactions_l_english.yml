@@ -5,5 +5,19 @@
   wcss_fel_infusion_interaction:0 "Fel Infusion"
   wcss_fel_infusion:0 "Revitalize her life force with a Health Stone"
 
+  wcss_true_polymorph_interaction: "True Polymorph"
+  wcss_true_polymorph: "Permanently transform him into a woman"
+
+  wcss_create_life_interaction: "Create Life"
+  wcss_create_life: "Create a child between one of your lovers"
+
 RACIAL_ACTIONS: "Racial Abilities"
 CLASS_ACTIONS: "Class Abilities"
+
+ 	wcss_had_sex_with_consort_effect.third_person.tt: ""
+
+ SET_PREGNANCY_ASSUMED_FATHER_EFFECT:0 "[TARGET_CHARACTER.GetShortUIName|U] becomes the "father" of [CHARACTER.GetShortUINamePossessive] pregnancy"
+ SET_PREGNANCY_ASSUMED_FATHER_PAST_EFFECT:0 "[TARGET_CHARACTER.GetShortUIName|U] became the "father" of [CHARACTER.GetShortUINamePossessive] pregnancy"
+
+lesbirth_self_interaction: "You bear the child"
+lesbirth_interaction: "She bears the child"

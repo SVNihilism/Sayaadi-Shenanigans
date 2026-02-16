@@ -1,0 +1,161 @@
+﻿namespace = wcss_harem_spells
+
+wcss_harem_spells.01 = { #True Polymorph
+	type = character_event
+	title = wcss_harem_spells.01.t
+	theme = seduction
+	left_portrait = {
+		character = character:48081
+		animation = stayback
+	}
+	right_portrait = {
+		character = scope:recipient
+		animation = stress
+	}
+
+	desc = {
+		desc = wcss_harem_spells.01.intro
+	}
+
+	immediate = {
+		hidden_effect = {
+			create_character = {
+				age = scope:recipient.age
+				gender = female
+				location = root.location
+				faith = faith:wc_dummy
+				culture = culture:wc_dummy
+				random_traits = no
+				father = scope:recipient.father
+				mother = scope:recipient.mother
+				real_father = scope:recipient.real_father
+				dynasty = none
+				save_scope_as = poly_character
+				after_creation = {
+					copy_traits = scope:recipient
+
+					copy_inheritable_appearance_from = scope:recipient
+					change_first_name = { template_character = scope:recipient }
+					if = {
+						limit = {
+							exists = scope:recipient.house
+						}
+						set_house = scope:recipient.house
+					}
+				}
+			}
+			scope:poly_character ?= {
+				scope:recipient = {
+					faith = { save_scope_as = new_faith }
+					culture = { save_scope_as = new_culture }
+					set_character_faith = faith:wc_dummy
+					set_culture = culture:wc_dummy
+				}
+
+				# Copy stats
+				add_diplomacy_skill = 	{ subtract = diplomacy 		add = scope:recipient.diplomacy }
+				add_martial_skill = 	{ subtract = martial 		add = scope:recipient.martial }
+				add_stewardship_skill = { subtract = stewardship 	add = scope:recipient.stewardship }
+				add_intrigue_skill = 	{ subtract = intrigue 		add = scope:recipient.intrigue }
+				add_learning_skill = 	{ subtract = learning 		add = scope:recipient.learning }
+				add_prowess_skill = 	{ subtract = prowess 		add = scope:recipient.prowess }
+
+				set_character_faith = scope:new_faith
+				set_culture = scope:new_culture
+
+				trigger_race_giving_no_gene_effect = yes
+			}
+		}
+	}
+	option = {
+		name = wcss_harem_spells.01.a
+		trigger_event = wcss_harem_spells.02 
+		hidden_effect = {
+			scope:recipient = { 
+				purge_historical_character_effect = yes
+			}
+		}
+	}
+}
+
+wcss_harem_spells.02 = { #True Polymorph Conclusion
+	type = character_event
+	title = wcss_harem_spells.02.t
+	theme = seduction
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:poly_character
+		animation = happiness
+	}
+
+	desc = {
+		desc = wcss_harem_spells.02.intro
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = wcss_harem_spells.02.a
+		add_courtier = scope:poly_character
+	}
+}
+
+wcss_harem_spells.03 = { #Create Life
+	type = character_event
+	title = wcss_harem_spells.03.t
+	theme = seduction
+	left_portrait = {
+		character = character:62400 #alexstrasza
+		animation = stayback
+	}
+	right_portrait = {
+		character = scope:recipient
+		animation = happiness
+	}
+	lower_right_portrait = {
+		character = scope:actor
+	}
+
+	desc = {
+		desc = wcss_harem_spells.03.intro
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = wcss_harem_spells.03.a
+	}
+}
+
+wcss_harem_spells.04 = { #Create Life
+	type = character_event
+	title = wcss_harem_spells.04.t
+	theme = seduction
+	left_portrait = {
+		character = character:62400 #alexstrasza
+		animation = stayback
+	}
+	right_portrait = {
+		character = scope:actor
+		animation = happiness
+	}
+	lower_right_portrait = {
+		character = scope:recipient
+	}
+
+	desc = {
+		desc = wcss_harem_spells.04.intro
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = wcss_harem_spells.04.a
+	}
+}

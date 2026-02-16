@@ -112,3 +112,186 @@ wcss_summon_interaction = {
 	}
 	auto_accept = yes
 }
+
+wcss_true_polymorph_interaction = {
+	icon = mage
+	category = interaction_category_class
+	interface_priority = 120
+	common_interaction = yes
+
+	ai_will_do = {
+		base = 0
+	}
+
+	is_shown = {
+		scope:recipient = { 
+			is_male = yes
+			is_adult = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+
+	}
+
+	desc = wcss_true_polymorph
+
+	on_accept = {
+		scope:actor = {
+			trigger_event = { id = wcss_harem_spells.01 }
+		}
+	}
+	auto_accept = yes
+}
+
+
+wcss_create_life_interaction = {
+	icon = invoker
+	category = interaction_category_class
+	interface_priority = 120
+	common_interaction = yes
+
+	ai_will_do = {
+		base = 0
+	}
+
+	is_shown = {
+		scope:recipient = {
+			OR = {
+				is_consort_of = scope:actor
+				is_spouse_of = scope:actor
+				has_relation_lover = scope:actor
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+
+	}
+
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				OR = {
+					is_ai = no
+					AND = {
+						NOT = {
+							any_child = {
+								is_alive = yes
+								count >= 20
+							}
+						}
+					}
+				}
+				is_female = yes
+				OR = {
+					is_ai = no
+					can_have_children = yes
+					is_spouse_of = scope:recipient
+				}
+			}
+			scope:recipient = {
+				is_female = yes
+			}
+		}
+		is_valid = {
+			scope:actor = {
+				is_pregnant = no
+				NOT = { has_trait = pregnant }
+			}
+		}
+		flag = lesbirth_sinteraction_1
+		localization = lesbirth_self_interaction
+	}
+	send_option = {
+		is_shown = {
+			scope:recipient = {
+				is_female = yes
+			}
+			scope:actor = {
+				is_ai = no
+				is_female = yes
+			}
+		}
+		is_valid = {
+			scope:recipient = {
+				is_pregnant = no
+				NOT = { has_trait = pregnant }
+			}
+		}
+		flag = lesbirth_sinteraction_2
+		localization = lesbirth_interaction
+	}
+	on_accept = {
+		if = {
+			limit = { scope:lesbirth_sinteraction_1 = yes }
+			scope:actor = {
+				save_scope_as = mother
+				set_variable = lesbian_magic 
+				trigger_event = {
+					id = wcss_harem_spells.04
+				}
+			}
+			scope:recipient = {
+				save_scope_as = fake_father
+				set_relation_wcss_gene_partner = scope:actor
+			}
+			create_character = {
+				template = breeding_stock
+				save_scope_as = breeding_stock
+				after_creation = {
+					copy_traits = scope:fake_father
+					copy_inheritable_appearance_from = scope:fake_father
+				}
+			}
+			scope:actor = {
+				wcss_had_sex_with_consort_effect = {
+					CHARACTER = scope:breeding_stock
+				}
+			}
+			show_as_tooltip = {
+				scope:actor = {
+					set_pregnancy_assumed_father = scope:recipient
+				}
+			}
+		}
+		if = {
+			limit = { scope:lesbirth_sinteraction_2 = yes }
+			scope:recipient = {
+				set_variable = lesbian_magic
+				save_scope_as = mother
+			}
+			scope:actor = {
+				save_scope_as = fake_father
+				set_relation_wcss_gene_partner = scope:recipient
+				trigger_event = {
+					id = wcss_harem_spells.04
+					days = 1
+				}
+			}
+			create_character = {
+				template = breeding_stock
+				save_scope_as = breeding_stock
+				after_creation = {
+					copy_traits = scope:fake_father
+					copy_inheritable_appearance_from = scope:fake_father
+				}
+			}
+			scope:recipient = {
+				wcss_had_sex_with_consort_effect = {
+					CHARACTER = scope:breeding_stock
+				}
+			}
+			show_as_tooltip = {
+				scope:recipient = {
+					set_pregnancy_assumed_father = scope:actor
+				}
+			}
+		}
+	}
+
+	auto_accept = yes
+	ai_will_do = {
+		base = 0
+	}
+}
